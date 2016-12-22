@@ -10,20 +10,29 @@ import {loadCourses} from './actions/courseActions';
 import {loadAuthors} from './actions/authorActions';
 import {loadNavbar} from './actions/navbarActions';
 import {loadBlog} from './actions/blogActions';
+import MuiThemeProvider from '../node_modules/material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
+import '../node_modules/material-design-lite/material.js';
+import '../node_modules/material-design-lite/material.css';
 import './styles/styles.scss';
 
+injectTapEventPlugin();
 
 const store = configureStore();
 store.dispatch(loadCourses());
 store.dispatch(loadAuthors());
 store.dispatch(loadNavbar());
 store.dispatch(loadBlog());
+store.dispatch(loadCourses());
+
 render(
-  <Provider store={store}>
-    <Router history={browserHistory} routes={routes} />
-  </Provider>,
+    <MuiThemeProvider>
+        <Provider store={store}>
+            <Router history={browserHistory} routes={routes} />
+        </Provider>
+   </MuiThemeProvider>,
   document.getElementById('app')
 
 );
