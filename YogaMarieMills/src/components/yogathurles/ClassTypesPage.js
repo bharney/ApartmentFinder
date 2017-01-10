@@ -17,28 +17,28 @@ class ClassTypesPage extends React.Component {
         let alternateTileSides = function (classType) {
             if (classType.id % 2 == 0) {
                 return (
-                    <div className="row vertical-center">
+                    <div key={classType.id} className="row vertical-center">
                         <div className="half">
                             <img className="img-responsive" src={landing} />
                         </div>
                         <div className="half">
-                            <Link key={classType.route} to={'/' + classType.route + '/' + classType.id} className="color">
+                            <Link to={'/' + classType.route + '/' + classType.id} className="color">
                                 <div className="row">
                                     <div className="col-xs-offset-1 col-xs-10 tile m-t--5-percent">
                                         <h2 className="page-header banner">{classType.name}</h2>
-                                        <p>{classType.description}</p>
+                                        <p >{classType.description}</p>
                                     </div>
                                 </div>
                             </Link>
                         </div>
                     </div>
-                )
+                );
             }
             else {
                 return (
-                    <div className="row vertical-center">
+                    <div key={classType.id} className="row vertical-center">
                         <div className="half">
-                            <Link key={classType.route} to={'/' + classType.route + '/' + classType.id} className="color">
+                            <Link to={'/' + classType.route + '/' + classType.id} className="color">
                                 <div className="row">
                                     <div className="col-xs-offset-1 col-xs-10 tile m-t--5-percent">
                                         <h2 className="page-header banner">{classType.name}</h2>
@@ -51,9 +51,9 @@ class ClassTypesPage extends React.Component {
                             <img className="img-responsive" src={landing} />
                         </div>
                     </div>
-                )
+                );
             }
-        }
+        };
 
         return (
             <div className="container-fluid">
@@ -72,7 +72,7 @@ class ClassTypesPage extends React.Component {
 ClassTypesPage.propTypes = {
     classTypes: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
-}
+};
 
 
 function mapStateToProps(state, ownProps) {

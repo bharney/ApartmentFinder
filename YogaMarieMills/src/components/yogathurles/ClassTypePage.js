@@ -8,7 +8,6 @@ import * as classTypesActions from '../../actions/classTypesActions';
 class ClassTypePage extends React.Component {
     constructor(props, context) {
         super(props, context);
-        debugger;
     }
 
     render() {
@@ -17,8 +16,10 @@ class ClassTypePage extends React.Component {
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-xs-offset-1 col-xs-10">
-                        <h1 className="text-center">{classType.name}</h1>
+                    <div className="col-xs-offset-1 col-xs-10 text-center">
+                        <h1>{classType.name}</h1>
+                        <img src={classType.image} />
+                        <p>{classType.class_details}</p>
                     </div>
                 </div>
             </div>
@@ -27,9 +28,9 @@ class ClassTypePage extends React.Component {
 }
 
 ClassTypePage.propTypes = {
-    classType: PropTypes.array.isRequired,
+    classType: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
-}
+};
 
 
 function getClassTypeById(classTypes, id) {
@@ -45,7 +46,7 @@ function mapStateToProps(state, ownProps) {
     const classTypeId = ownProps.params.id;
     let classType = { id: '', name: '', image: '', description: '', href: '', route: '', component: '' };
     if (classTypeId && state.classTypes.length > 0) {
-        classType = getClassTypeById(state.classType, classTypeId);
+        classType = getClassTypeById(state.classTypes, classTypeId);
     }
 
     return {
