@@ -398,9 +398,14 @@ section.section {
     float: left;
 }
 
-.tile {
+.row .half .tile {
     max-height: 400px;
 }
+
+.m-t--5-percent {
+    margin-top: -5%;
+}
+
 
 /* ========================================
 Media queries
@@ -447,7 +452,7 @@ Media queries
     padding-top: 25px;
 }
 
-.pad-top30 {
+.p-t-30 {
     padding-top: 30px;
 }
 

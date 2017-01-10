@@ -5,6 +5,7 @@ import navbar_items from './navbarReducer';
 import blogs from './blogReducer';
 import schedules from './scheduleReducer'
 import costs from './costReducer'
+import classTypes from './classTypesReducer'
 
 const rootReducer = combineReducers({
   courses,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   navbar_items,
   blogs,
   schedules,
-  costs
+  costs,
+  classTypes,
 });
 
 export default rootReducer;

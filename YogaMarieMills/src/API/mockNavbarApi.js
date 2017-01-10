@@ -32,10 +32,10 @@ const navbar_items = [
         },
         {
           id: 3,
-          name: "Classes",
+          name: "ClassTypes",
           href: "http://www.yogamariemills/YogaThurles/",
-          route: "YogaThurles/Classes",
-          component: "ClassesPage"
+          route: "YogaThurles/ClassTypes",
+          component: "ClassTypesPage"
         },
         {
           id: 4,

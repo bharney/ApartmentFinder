@@ -5,4 +5,5 @@ export default {
   blogs: [],
   schedules: [],
   costs: [],
+  classTypes: [],
 }

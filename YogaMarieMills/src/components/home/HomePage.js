@@ -3,7 +3,7 @@ import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as blogActions from '../../actions/blogActions';
-import Blog from '../blog/Blog';
+import BlogTile from '../blog/BlogTile';
 import SocialMediaBar from '../common/SocialMediaBar';
 import landing from '../../images/landing.jpg';
 import yogaImg1 from '../../images/yogaImg1.jpg';
@@ -149,7 +149,7 @@ class HomePage extends React.Component {
                             <div className="col-xs-offset-1 col-xs-10">
                                 <h2 className="text-center">My Blog</h2>
                                 {blogs.map(blog =>
-                                    <Blog blog={blog} />)
+                                    <BlogTile blog={blog} />)
                                 }
                             </div>
                         </div>
