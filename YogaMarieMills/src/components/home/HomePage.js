@@ -14,7 +14,8 @@ import yogaImg3 from '../../images/yogaImg3.jpg';
 const landingImg = {
     backgroundImage: 'url(' + landing + ')',
     backgroundSize: 'cover',
-    backgroundPosition: "center"
+    backgroundPosition: "center",
+    height: "100%"
 };
 
 const divider = {
@@ -40,16 +41,14 @@ class HomePage extends React.Component {
             <div>
                 <section style={landingImg} className="featured">
                     <div className="container-fluid">
-                        <div className="row m-b-30">
-                            <div className="col-md-6 col-md-offset-3 text-center bright-color anchor">
+                        <div className="row p-b-40 m-b-40 m-t-40">
+                            <div className="col-md-6 col-md-offset-3 text-center bright-color anchor ">
                                 <h1 className="page-header banner">Yoga with Marie Mills</h1>
+                                <h2 banner>
+                                    Stress Reduction Specialist
+                                    </h2>
                                 <h3>Bakers street, Thurles, Co. Tipperary<br />
                                     086 – 1778369 | <a className="color-white" href="mailto:marie@yogamariemills.com">marie@yogamariemills.com</a></h3>
-                                <h4>
-                                    Marie Mills is a Stress Reduction Specialist and Yoga practitioner in Thurles.
-                                        Yoga and Ayurveda are integral to Traditional Indian Medicine and easily adapted
-                                        to the modern life. Learn Yoga, Ayeruveda and more.
-                                    </h4>
                                 <div className="row text-center">
                                     <Link to="YogaThurles/Schedule">
                                         <button className="btn btn-default btn-lg btn-round-lg color-black">Find Yoga Classes</button>
@@ -60,7 +59,23 @@ class HomePage extends React.Component {
                     </div>
                 </section>
                 <section>
-                    <div className="container-fluid bg-color">
+                    <div className="container-fluid light-bg-color t-border">
+                        <div className="container">
+                            <div className="row text-center p-t-30 p-b-30 m-b-30 m-t-30">
+                                <div className="col-xs-offset-1 col-xs-10">
+                                    <h2>Marie is a Yoga practitioner in Thurles.</h2>
+                                    <div className="line-thru"><span>
+                                        <img src={require('../../images/greenlotus.png')} className="light-bg-color img-thru p-l-10 p-r-10" width="65" /></span>
+                                    </div>
+                                    <h3>Yoga and Ayurveda are integral to Traditional Indian Medicine and easily adapted
+                                        to the modern life. Learn Yoga, Ayeruveda and more.</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div className="container-fluid bg-color t-border">
                         <div className="container">
                             <div className="row text-center">
                                 <div className="col-xs-4 p-t-40 p-b-40 p-l-15 p-r-15">
@@ -123,7 +138,7 @@ class HomePage extends React.Component {
                     </div>
                 </section>
                 <section>
-                    <div className="container-fluid light-bg-color">
+                    <div className="container-fluid dark-bg-color t-border">
                         <div className="row p-b-40 p-t-40">
                             <div className="col-md-6 col-md-offset-3">
                                 <div className="text-center">

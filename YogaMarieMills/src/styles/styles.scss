@@ -215,6 +215,10 @@ h1, h2, h3, h4, h5, h6 {
           flex-shrink: 0;
 }
 
+.banner {
+    font-weight: 700;
+}
+
 .opacity {
     opacity: .4
 }
@@ -334,6 +338,20 @@ section.section {
     padding: 0;
 }
 
+.t-border {
+    border-top: .5px solid #ffffff;
+}
+
+.line-thru {
+    border-bottom: 1px solid #ffffff;
+    height:0;
+}
+
+.img-thru {
+    position: relative;
+    top: -25px;
+}
+
 /*=========================
     Cost
 =========================*/
@@ -405,6 +423,7 @@ section.section {
 .m-t--5-percent {
     margin-top: -5%;
 }
+
 
 
 /* ========================================
@@ -567,6 +586,9 @@ Media queries
 }
 
 /* top */
+.m-t--50 {
+     margin-top: -50;
+}
 .m-t-0 {
     margin-top: 0;
 }
@@ -601,6 +623,10 @@ Media queries
 
 .m-t-40 {
     margin-top: 40px;
+}
+
+.m-t-50 {
+    margin-top: 50px;
 }
 
 
@@ -639,4 +665,8 @@ Media queries
 
 .m-b-40 {
     margin-bottom: 40px;
+}
+
+.m-b-50 {
+    margin-bottom: 50px;
 }
