@@ -6,4 +6,5 @@ export default {
   schedules: [],
   costs: [],
   classTypes: [],
+  dietConsultations: [],
 }

@@ -61,7 +61,7 @@ class HomePage extends React.Component {
                 <section>
                     <div className="container-fluid light-bg-color t-border">
                         <div className="container">
-                            <div className="row text-center p-t-20 p-b-30 m-b-30 m-t-20">
+                            <div className="row text-center p-t-20 p-b-30 m-t-20">
                                 <div className="col-xs-offset-1 col-xs-10">
                                     <h2>Marie is a Yoga practitioner in Thurles.</h2>
                                     <div className="line-thru"><span>
@@ -134,7 +134,10 @@ class HomePage extends React.Component {
                         </div>
                     </div>
                 </section>
-
+                <div className="container-fluid p-l-0 p-r-0">
+                    <div className="row" style={divider}>
+                    </div>
+                </div>
                 <section>
                     <div className="container-fluid dark-bg-color t-border">
                         <div className="row p-b-40 p-t-40">
@@ -152,14 +155,13 @@ class HomePage extends React.Component {
                         </div>
                     </div>
                 </section>
-                <div className="container-fluid p-l-0 p-r-0">
-                    <div className="row" style={divider}>
-                    </div>
-                </div>
                 <section>
                     <div className="container-fluid bg-color t-border">
                         <div className="container">
+                            <h2 className="text-center">Specialties</h2>
+                            <p className="text-center">I offer a wide range of specialties that improve your health and well-being.</p>
                             <div className="row m-t-30 p-t-40 p-b-40 text-center">
+
                                 <div className="col-xs-4 p-l-15 p-r-15">
                                     <img className="img-circle img-responsive" src={yogaImg1} />
                                     <div className="row">
@@ -224,6 +226,7 @@ class HomePage extends React.Component {
                         <div className="row p-t-40">
                             <div className="col-xs-offset-1 col-xs-10">
                                 <h2 className="text-center">My Blog</h2>
+                                <p className="text-center">Read useful information on Yoga and Ayurveda</p>
                                 {blogs.map(blog =>
                                     <BlogTile blog={blog} />)
                                 }

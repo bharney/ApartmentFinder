@@ -64,7 +64,7 @@ const navbar_items = [
           id: 2,
           name: "Ayurvedic Diet Consultation",
           href: "http://www.yogamariemills/Contemporary/",
-          route: "contemporaryDiet",
+          route: "Ayurvedic/DietConsultation",
           component: "contemporaryDietPage"
         },
         {

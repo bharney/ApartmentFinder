@@ -3,9 +3,10 @@ import courses from './courseReducer';
 import authors from './authorReducer';
 import navbar_items from './navbarReducer';
 import blogs from './blogReducer';
-import schedules from './scheduleReducer'
-import costs from './costReducer'
-import classTypes from './classTypesReducer'
+import schedules from './scheduleReducer';
+import costs from './costReducer';
+import classTypes from './classTypesReducer';
+import dietConsultations from './dietConsultationReducer';
 
 const rootReducer = combineReducers({
   courses,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   schedules,
   costs,
   classTypes,
+  dietConsultations,
 });
 
 export default rootReducer;
