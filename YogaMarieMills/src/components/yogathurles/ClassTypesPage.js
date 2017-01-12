@@ -57,12 +57,12 @@ class ClassTypesPage extends React.Component {
 
         return (
             <div className="container-fluid">
-                <div className="row">
+                <div className="row bg-color">
                     <div className="col-xs-offset-1 col-xs-10">
                         <h1 className="text-center">Yoga Thurles Classes Types</h1>
                     </div>
                 </div>
-                <hr className="m-b-0" />
+                <hr className="m-b-0 m-t-0" />
                 {classTypes.map(classType => alternateTileSides(classType))}
             </div>
         );

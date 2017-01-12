@@ -41,7 +41,7 @@ class HomePage extends React.Component {
             <div>
                 <section style={landingImg} className="featured">
                     <div className="container-fluid">
-                        <div className="row p-b-40 m-b-40 m-t-40">
+                        <div className="row p-b-30 m-b-30 m-t-20">
                             <div className="col-md-6 col-md-offset-3 text-center bright-color anchor ">
                                 <h1 className="page-header banner">Yoga with Marie Mills</h1>
                                 <h2 banner>
@@ -61,7 +61,7 @@ class HomePage extends React.Component {
                 <section>
                     <div className="container-fluid light-bg-color t-border">
                         <div className="container">
-                            <div className="row text-center p-t-30 p-b-30 m-b-30 m-t-30">
+                            <div className="row text-center p-t-20 p-b-30 m-b-30 m-t-20">
                                 <div className="col-xs-offset-1 col-xs-10">
                                     <h2>Marie is a Yoga practitioner in Thurles.</h2>
                                     <div className="line-thru"><span>
@@ -69,74 +69,72 @@ class HomePage extends React.Component {
                                     </div>
                                     <h3>Yoga and Ayurveda are integral to Traditional Indian Medicine and easily adapted
                                         to the modern life. Learn Yoga, Ayeruveda and more.</h3>
+                                    <div className="col-xs-4 p-t-5 p-b-40 p-l-15 p-r-15">
+                                        <Link to="">
+                                            <div className="icon-circle lotus-flower bg-color-purple"></div>
+                                        </Link>
+                                        <div className="row">
+                                            <div className="col-xs-12">
+                                                <h4>Contemporary Ayeruveda</h4>
+                                            </div>
+                                        </div>
+                                        <div className="col-xs-offset-2 col-xs-8">
+                                            <hr className="dark-bg-color" />
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-xs-12">
+                                                <Link className="color" to="YogaThurlesSchedule">
+                                                    <p>Learn More</p>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-xs-4 p-t-5 p-b-40 p-l-15 p-r-15">
+                                        <Link to="">
+                                            <div className="icon-circle om bright-bg-color"></div>
+                                        </Link>
+                                        <div className="row">
+                                            <div className="col-xs-12">
+                                                <h4>Yoga Workshops and Bespoke Yoga</h4>
+                                            </div>
+                                        </div>
+                                        <div className="col-xs-offset-2 col-xs-8">
+                                            <hr className="dark-bg-color" />
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-xs-12">
+                                                <Link className="color" to="yogathurlescost">
+                                                    <p>Learn More</p>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-xs-4 p-t-5 p-b-40 p-l-15 p-r-15">
+                                        <Link to="">
+                                            <div className="icon-circle yoga-mat bg-color-green"></div>
+                                        </Link>
+                                        <div className="row">
+                                            <div className="col-xs-12">
+                                                <h4>Dietary Consultation</h4>
+                                            </div>
+                                        </div>
+                                        <div className="col-xs-offset-2 col-xs-8">
+                                            <hr className="dark-bg-color" />
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-xs-12">
+                                                <Link className="color" to="Contemporary">
+                                                    <p>Learn More</p>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-                <section>
-                    <div className="container-fluid bg-color t-border">
-                        <div className="container">
-                            <div className="row text-center">
-                                <div className="col-xs-4 p-t-40 p-b-40 p-l-15 p-r-15">
-                                    <img className="img-circle img-responsive" src={yogaImg1} />
-                                    <div className="row">
-                                        <div className="col-xs-12">
-                                            <h4>Contemporary Ayeruveda</h4>
-                                        </div>
-                                    </div>
-                                    <div className="col-xs-offset-2 col-xs-8">
-                                        <hr />
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-xs-12">
 
-                                            <Link className="color" to="YogaThurlesSchedule">
-                                                <p>Learn More</p>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-xs-4 p-t-40 p-b-40 p-l-15 p-r-15">
-                                    <img className="img-circle img-responsive" src={yogaImg2} />
-                                    <div className="row">
-                                        <div className="col-xs-12">
-                                            <h4>Yoga Workshops and Bespoke Yoga</h4>
-                                        </div>
-                                    </div>
-                                    <div className="col-xs-offset-2 col-xs-8">
-                                        <hr />
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-xs-12">
-                                            <Link className="color" to="yogathurlescost">
-                                                <p>Learn More</p>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-xs-4 p-t-40 p-b-40 p-l-15 p-r-15">
-                                    <img className="img-circle img-responsive" src={yogaImg3} />
-                                    <div className="row">
-                                        <div className="col-xs-12">
-                                            <h4>Dietary Consultation</h4>
-                                        </div>
-                                    </div>
-                                    <div className="col-xs-offset-2 col-xs-8">
-                                        <hr />
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-xs-12">
-                                            <Link className="color" to="Contemporary">
-                                                <p>Learn More</p>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
                 <section>
                     <div className="container-fluid dark-bg-color t-border">
                         <div className="row p-b-40 p-t-40">
@@ -158,6 +156,69 @@ class HomePage extends React.Component {
                     <div className="row" style={divider}>
                     </div>
                 </div>
+                <section>
+                    <div className="container-fluid bg-color t-border">
+                        <div className="container">
+                            <div className="row m-t-30 p-t-40 p-b-40 text-center">
+                                <div className="col-xs-4 p-l-15 p-r-15">
+                                    <img className="img-circle img-responsive" src={yogaImg1} />
+                                    <div className="row">
+                                        <div className="col-xs-12">
+                                            <h4>Contemporary Ayeruveda</h4>
+                                        </div>
+                                    </div>
+                                    <div className="col-xs-offset-2 col-xs-8">
+                                        <hr />
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-xs-12">
+
+                                            <Link className="color" to="YogaThurlesSchedule">
+                                                <p>Learn More</p>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-xs-4 p-l-15 p-r-15">
+                                    <img className="img-circle img-responsive" src={yogaImg2} />
+                                    <div className="row">
+                                        <div className="col-xs-12">
+                                            <h4>Yoga Workshops and Bespoke Yoga</h4>
+                                        </div>
+                                    </div>
+                                    <div className="col-xs-offset-2 col-xs-8">
+                                        <hr />
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-xs-12">
+                                            <Link className="color" to="yogathurlescost">
+                                                <p>Learn More</p>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-xs-4 p-l-15 p-r-15">
+                                    <img className="img-circle img-responsive" src={yogaImg3} />
+                                    <div className="row">
+                                        <div className="col-xs-12">
+                                            <h4>Dietary Consultation</h4>
+                                        </div>
+                                    </div>
+                                    <div className="col-xs-offset-2 col-xs-8">
+                                        <hr />
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-xs-12">
+                                            <Link className="color" to="Contemporary">
+                                                <p>Learn More</p>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 <section>
                     <div className="container-fluid light-bg-color">
                         <div className="row p-t-40">

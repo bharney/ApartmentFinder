@@ -7,17 +7,6 @@
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 }
 
-/*$color: #ffffff;
-$bgColor: #ff7701;
-
-$lightColor: #ffffff;
-$lightBgColor: #0079c3;
-
-$darkColor: #292928;
-$darkBgColor: #059396;
-
-*/
-
 $color: #212121;
 $bgColor: #607D8B;
 
@@ -29,6 +18,10 @@ $darkBgColor:#455A64;
 
 $brightColor: #ffffff;
 $brightBgColor: #03A9F4;
+
+$greenBgColor: #00796B;
+
+$purpleBgColor: #512dA8;
 
 $hoverColor: #ffffff;
 $hoverBgColor: rgba(0, 0, 0, 0.0980392);
@@ -147,6 +140,13 @@ body {
     background: #ffffff;
 }
 
+.bg-color-green {
+    background: $greenBgColor;
+}
+
+.bg-color-purple {
+    background: $purpleBgColor;
+}
 
 h1, h2, h3, h4, h5, h6 {
     font-family:'Open Sans', sans-serif;
@@ -352,6 +352,91 @@ section.section {
     top: -25px;
 }
 
+.icon-circle {
+    display: block;
+    width: 7.8em;
+    height: 7.8em;
+    line-height: 7.8em;
+    margin: 0 auto;
+    text-align: center;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+
+
+    -webkit-transition: background 0.5s;
+    -moz-transition: background 0.5s;
+    transition: background 0.5s;
+}
+
+.icon-circle:hover {
+    background-color: $lightBgColor;
+    -webkit-transition: background 0.5s;
+    -moz-transition: background 0.5s;
+    transition: background 0.5s;
+}
+
+.om {
+    background-image: url('../images/whiteom.png');
+    background-size: 5em 5em;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-transition: background 0.5s;
+    -moz-transition: background 0.5s;
+    transition: background 0.5s;
+}
+
+.yoga-mat {
+    background-image: url('../images/whiteyogamat.png');
+    background-size: 6em 6em;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-transition: background 0.5s;
+    -moz-transition: background 0.5s;
+    transition: background 0.5s;
+}
+
+.lotus-flower {
+    
+    background-image: url('../images/whitelotusflower.png');
+    background-size: 7em 4em;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-transition: background 0.5s;
+    -moz-transition: background 0.5s;
+    transition: background 0.5s;
+}
+
+.om:hover {
+    background-image: url('../images/blackom.png');
+    background-size: 5em 5em;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-transition: background 0.5s;
+    -moz-transition: background 0.5s;
+    transition: background 0.5s;
+}
+
+.yoga-mat:hover {
+    
+    background-image: url('../images/blackyogamat.png');
+    background-size: 6em 6em;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-transition: background 0.5s;
+    -moz-transition: background 0.5s;
+    transition: background 0.5s;
+}
+
+.lotus-flower:hover {
+    background-image: url('../images/blacklotusflower.png');
+    background-size: 7em 4em;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-transition: background 0.5s;
+    -moz-transition: background 0.5s;
+    transition: background 0.5s;
+}
 /*=========================
     Cost
 =========================*/
