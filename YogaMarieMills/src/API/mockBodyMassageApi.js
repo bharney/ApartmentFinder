@@ -1,4 +1,4 @@
-const dietConsultations = [
+const bodyMassageTypes = [
   {
     id: 1,
     consultation_header: "Ayurvedic Diet Consultation",
@@ -51,12 +51,12 @@ const dietConsultations = [
   }
 ];
 
-class DietConsultationApi {
+class BodyMassageApi {
   static getAllItems() {
     return new Promise((resolve, reject) => {
-      resolve(Object.assign([], dietConsultations));
+      resolve(Object.assign([], bodyMassageTypes));
     });
   }
 }
 
-export default DietConsultationApi;
+export default BodyMassageApi;

@@ -17,30 +17,35 @@ class DietConsultationPage extends React.Component {
                 <div className="ribbon bright-bg-color">
                     <div id="about" div className="mdl-card container m-t-30 m-b-30 mdl-shadow--4dp">
                         <div className="featured clearfix text-center">
-                            <h1>Yoga Thurles</h1>
-                            <div className="row">
+                            <div className="row m-b-30">
                                 <div className="col-xs-offset-1 col-xs-10">
-                                    <div className="col-xs-12 text-left">
-                                          <h3>Studio: Bakers street, Thurles, Co. Tipperary</h3>
-                                            {dietConsultations.map(dietConsultation =>
-                                                {dietConsultations.consultation_header}
+                                    <h1>Aryuvedic Diet Consultation</h1>
+                                    <hr />
+                                    {dietConsultations.map(dietConsultation =>
+                                        <div>
+                                            <h3>{dietConsultation.description}</h3>
+                                            <h3>Venue: {dietConsultation.venue}</h3>
+                                            {dietConsultation.consultation_details.map(consultation_details =>
+                                                <div className="row text-left">
+                                                    <div className="col-xs-12">
+                                                        <h3>{consultation_details.consultation} - {consultation_details.cost}</h3>
+                                                        <h4>{consultation_details.session_time}</h4>
+                                                        {consultation_details.consultation_specifics.map(consultation_specifics =>
+                                                            <ul>
+                                                                <li>
+                                                                    {consultation_specifics.detail}
+                                                                </li>
+                                                            </ul>
+                                                        )}
+                                                        <p>{consultation_details.details}</p>
+                                                    </div>
+                                                </div>
                                             )}
-                                    </div>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
-                        <h3>Inquiries are welcome. Please contact Marie at 086-1778369</h3>
-
-
-                        <h3>If you desire a class at a different time or day, six students will make it viable. If a class time is not listed, you can either <a title="Bespoke Yoga courses" href="http://yogamariemills.com/yoga-thurles/class-types/bespoke-yoga-courses/" target="_blank">build a Bespoke class</a> using the Angel shop Yoga room or a venue you provide.</h3>
-                        <ul>
-                            <li>
-                                <h3>Phone Marie on 086 &#8211; 1778369 </h3>
-                            </li>
-                            <li>
-                                <h3>email marie@yogamariemills.com</h3>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>

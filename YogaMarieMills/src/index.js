@@ -14,6 +14,7 @@ import {loadSchedule} from './actions/scheduleActions';
 import {loadCost} from './actions/costActions';
 import {loadClassTypes} from './actions/classTypesActions';
 import {loadDietConsultation} from './actions/dietConsultationActions';
+import {loadBodyMassage} from './actions/bodyMassageActions';
 import MuiThemeProvider from '../node_modules/material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -33,6 +34,7 @@ store.dispatch(loadSchedule());
 store.dispatch(loadCost());
 store.dispatch(loadClassTypes());
 store.dispatch(loadDietConsultation());
+store.dispatch(loadBodyMassage());
 store.dispatch(loadCourses());
 
 render(

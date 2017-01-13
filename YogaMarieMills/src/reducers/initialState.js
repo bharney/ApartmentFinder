@@ -7,4 +7,5 @@ export default {
   costs: [],
   classTypes: [],
   dietConsultations: [],
+  bodyMassageTypes: [],
 }

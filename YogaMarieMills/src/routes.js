@@ -10,9 +10,9 @@ import YogaThurlesPage from './components/yogathurles/YogaThurlesPage';
 import WhatToBringPage from './components/yogathurles/WhatToBringPage';
 import ClassTypesPage from './components/yogathurles/ClassTypesPage';
 import ClassTypePage from './components/yogathurles/ClassTypePage';
-import DietConsultationPage from './components/contemporary/DietConsultationPage';
 import CostPage from './components/cost/CostPage';
-import ContemporaryPage from './components/contemporary/ContemporaryPage';
+import DietConsultationPage from './components/contemporary/DietConsultationPage';
+import BodyMassagePage from './components/contemporary/BodyMassagePage';
 import ManageCoursePage from './components/course/ManageCoursePage';
 
 export default (
@@ -23,7 +23,7 @@ export default (
         <Route path="YogaThurles/WhatToBring" component={WhatToBringPage} />
         <Route path="YogaThurles/ClassTypes" component={ClassTypesPage} />
         <Route path="YogaThurles/ClassType/:id" component={ClassTypePage} />
-        <Route path="Ayurveda" component={ContemporaryPage} />
+        <Route path="Ayurveda/BodyMassage" component={BodyMassagePage} />
         <Route path="Ayurveda/DietConsultation" component={DietConsultationPage} />
         <Route path="About" component={AboutPage} />
         <Route path="Blogs" component={BlogsPage} />

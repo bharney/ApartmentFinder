@@ -26,26 +26,20 @@ class YogaThurlesPage extends React.Component {
                             <div className="row">
                                 <div className="col-xs-offset-1 col-xs-10">
                                     <div className="col-xs-12 text-left">
-                                          <h3>Studio: Bakers street, Thurles, Co. Tipperary</h3>
-                                            {schedules.map(schedule =>
-                                                <Schedule schedule={schedule} />)
-                                            }
+                                        <h3>Studio: Bakers street, Thurles, Co. Tipperary</h3>
+                                        {schedules.map(schedule =>
+                                            <Schedule schedule={schedule} />)
+                                        }
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <h3>Inquiries are welcome. Please contact Marie at 086-1778369</h3>
-
-
-                        <h3>If you desire a class at a different time or day, six students will make it viable. If a class time is not listed, you can either <a title="Bespoke Yoga courses" href="http://yogamariemills.com/yoga-thurles/class-types/bespoke-yoga-courses/" target="_blank">build a Bespoke class</a> using the Angel shop Yoga room or a venue you provide.</h3>
-                        <ul>
-                            <li>
-                                <h3>Phone Marie on 086 &#8211; 1778369 </h3>
-                            </li>
-                            <li>
-                                <h3>email marie@yogamariemills.com</h3>
-                            </li>
-                        </ul>
+                        <div className="row m-b-30">
+                            <div className="col-xs-offset-1 col-xs-10">
+                                <h3>Inquiries are welcome. Please contact Marie at 086-1778369 or email <a href="mailto:marie@yogamariemills.com">marie@yogamariemills.com</a></h3>
+                                <h3>If you desire a class at a different time or day, six students will make it viable. If a class time is not listed, you can either <a title="Bespoke Yoga courses" href="http://yogamariemills.com/yoga-thurles/class-types/bespoke-yoga-courses/" target="_blank">build a Bespoke class</a> using the Angel shop Yoga room or a venue you provide.</h3>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

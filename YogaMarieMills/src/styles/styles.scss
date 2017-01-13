@@ -283,6 +283,14 @@ section.section {
 .indent {
     padding-left:15px;
 }
+
+
+ul > a:last-child > li.b-border-last {
+    border-bottom: .5px solid lightgray;
+}
+ul .t-border {
+    border-top: .5px solid lightgray;
+}
 /*=========================
   Footer
  ================= */
@@ -341,6 +349,7 @@ section.section {
 .t-border {
     border-top: .5px solid #ffffff;
 }
+
 
 .line-thru {
     border-bottom: 1px solid #ffffff;

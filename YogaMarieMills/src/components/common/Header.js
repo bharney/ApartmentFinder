@@ -79,7 +79,7 @@ class Header extends React.Component {
         let subMenuItems = function (item) {
             return (
                 <Link key={item.route} to={'/' + item.route} >
-                    <li className="mdl-menu__item">{item.name}</li>
+                    <li className="mdl-menu__item t-border b-border-last">{item.name}</li>
                 </Link>
             );
         };
@@ -90,7 +90,7 @@ class Header extends React.Component {
                         <Link id={item.name} key={item.route} to="" onClick={that.preventRedirect} className="mdl-tabs__tab nav-links p-l-10 p-r-10">
                             {item.name} &nbsp;<span className="caret" aria-hidden="true"></span>
                         </Link>
-                        <ul className="mdl-menu mdl-js-menu mdl-js-ripple-effect" htmlFor={item.name}>
+                        <ul className="mdl-menu mdl-js-menu mdl-js-ripple-effect p-t-0 p-b-0" htmlFor={item.name}>
                             {item.subMenu.map(subMenu => subMenuItems(subMenu))}
                         </ul>
                     </div>

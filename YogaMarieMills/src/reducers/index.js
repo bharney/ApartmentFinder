@@ -7,6 +7,7 @@ import schedules from './scheduleReducer';
 import costs from './costReducer';
 import classTypes from './classTypesReducer';
 import dietConsultations from './dietConsultationReducer';
+import bodyMassageTypes from './bodyMassageReducer';
 
 const rootReducer = combineReducers({
   courses,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   costs,
   classTypes,
   dietConsultations,
+  bodyMassageTypes,
 });
 
 export default rootReducer;

@@ -55,23 +55,30 @@ const navbar_items = [
     subMenu: [
         {
           id: 1,
-          name: "Head, Hands, Feet or Abdominal Massage",
-          href: "http://www.yogamariemills/Contemporary/",
-          route: "contemporaryMassage",
-          component: "contemporaryMassagePage"
-        },
-        {
-          id: 2,
           name: "Ayurvedic Diet Consultation",
           href: "http://www.yogamariemills/Contemporary/",
-          route: "Ayurvedic/DietConsultation",
+          route: "Ayurveda/DietConsultation",
           component: "contemporaryDietPage"
         },
         {
+          id: 2,
+          name: "Ayurvedic Body Massage Treatments",
+          href: "http://www.yogamariemills/Contemporary/",
+          route: "Ayurveda/BodyMassage",
+          component: "contemporaryMassagePage"
+        },
+        {
           id: 3,
+          name: "Head, Hands, Feet or Abdominal Massage",
+          href: "http://www.yogamariemills/Contemporary/",
+          route: "Ayurveda/HeadHandsFeedAbMassage",
+          component: "contemporaryMassagePage"
+        },
+        {
+          id: 4,
           name: "Ayurveda Testimonials",
           href: "http://www.yogamariemills/Contemporary/",
-          route: "contemporaryTestimonials",
+          route: "Ayurveda/Testimonials",
           component: "contemporaryTestimonialsPage"
         }
     ]  
