@@ -19,12 +19,26 @@ class BodyMassagePage extends React.Component {
                         <div className="featured clearfix text-center">
                             <div className="row m-b-30">
                                 <div className="col-xs-offset-1 col-xs-10">
-                                    <h1>Ayurvedic Body Massage</h1>
-                                    <hr />
-                                     {bodyMassageTypes.map(bodyMassageType =>
-                                        <div>
-                                            <h3>{bodyMassageType.description}</h3>
-                                            <h3>Venue: {bodyMassageType.venue}</h3>
+                                    {bodyMassageTypes.map(bodyMassageType =>
+                                        <div className="row m-t-30">
+                                            <div className="col-xs-12">
+                                                <Link to="">
+                                                    <div className="icon-circle aroma-oil bg-color-green"></div>
+                                                </Link>
+                                                <h1 className="text-center">{bodyMassageType.consultation_header}</h1>
+                                                <h2 className="text-center">{bodyMassageType.description}</h2>
+                                                <h3>Venue: {bodyMassageType.venue}</h3>
+                                                <div className="row">
+                                                    {bodyMassageType.consultation_details.map(consultation_details =>
+                                                        <div className="col-xs-6">
+
+                                                            <h3>{consultation_details.consultation} - {consultation_details.cost}</h3>
+                                                            <h4>{consultation_details.session_time}</h4>
+                                                            <p>{consultation_details.details}</p>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
                                         </div>
                                     )}
                                 </div>
