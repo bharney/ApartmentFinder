@@ -134,10 +134,12 @@ class HomePage extends React.Component {
                         </div>
                     </div>
                 </section>
-                <div className="container-fluid p-l-0 p-r-0">
+                <section>
+                <div className="container-fluid">
                     <div className="row" style={divider}>
                     </div>
                 </div>
+                </section>
                 <section>
                     <div className="container-fluid dark-bg-color t-border">
                         <div className="row p-b-40 p-t-40">
@@ -234,6 +236,7 @@ class HomePage extends React.Component {
                         </div>
                     </div>
                 </section>
+                <p className="footer text-center">Share, Like, and Heart my Story!</p>
                 <SocialMediaBar />
             </div >
         );

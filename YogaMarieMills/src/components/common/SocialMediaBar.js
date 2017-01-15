@@ -6,7 +6,7 @@ class SocialMediaBar extends React.Component {
     render() {
         return (
             <div className="container-fluid">
-                <p className="footer text-center">Share, Like, and Heart my Story!</p>
+                
                 <ul className="list-unstyled text-center list-inline alignleft">
                     <li className="social-email">
                         <Link to="mailto:marie@yogamariemills.com" className="fa fa-envelope-open fa-2x" activeClassName="active" target="_blank"></Link>
