@@ -20,19 +20,17 @@ class YogaThurlesPage extends React.Component {
         return (
             <div className="mdl-grid dark-color bg-color">
                 <div className="ribbon bright-bg-color">
-                    <div id="about" div className="mdl-card container m-t-30 m-b-30 mdl-shadow--4dp">
-                        <div className="featured clearfix text-center">
-                            <h1>Yoga Thurles</h1>
-                            <div className="row">
-                                <div className="col-xs-offset-1 col-xs-10">
-                                    <div className="col-xs-12 text-left">
-                                        <h3>Studio: Bakers street, Thurles, Co. Tipperary</h3>
-                                        {schedules.map(schedule =>
-                                            <Schedule schedule={schedule} />)
-                                        }
+                    <div className="container">
+                        <div className="row m-b-30">
+                            <h1 className="text-center">Yoga Thurles</h1>
+                            <h3>Studio: Bakers street, Thurles, Co. Tipperary</h3>
+                            {schedules.map(schedule =>
+                                <div className="col-xs-6">
+                                    <div className="mdl-card mdl-shadow--4dp p-20">
+                                        <Schedule schedule={schedule} />
                                     </div>
-                                </div>
-                            </div>
+                                </div>)
+                            }
                         </div>
                         <div className="row m-b-30">
                             <div className="col-xs-offset-1 col-xs-10">

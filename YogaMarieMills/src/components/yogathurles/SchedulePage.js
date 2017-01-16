@@ -12,18 +12,14 @@ const SchedulePage = ({schedule}) => {
               <h4><strong>{schedule.session_date}</strong></h4>
             </th>
             <th>
-              <h4><strong>{schedule.session_time}</strong></h4>
             </th>
             <th>
-              <h4><strong>{schedule.class}</strong></h4>
             </th>
           </tr>
         </thead>
         {schedule.session_details.map(session_details =>
           <tbody>
             <tr className="text-left">
-              <td>
-              </td>
               <td>
                 <h4>{session_details.session_time}</h4>
               </td>

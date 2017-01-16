@@ -34,9 +34,9 @@ class AboutPage extends React.Component {
                             <div className="m-t-30 col-xs-12 col-sm-5">
                                 <div className="pull-right">
                                     <SocialMediaBar />
-                                     <h4 className="m-b-30 m-t-0 p-t-0 p-r-15 text-right">+086 1778369</h4>
+                                    <h4 className="m-b-30 m-t-0 p-t-0 p-r-15 text-right">+086 1778369</h4>
                                 </div>
-                               
+
                             </div>
 
                         </div>
@@ -56,84 +56,60 @@ class AboutPage extends React.Component {
                             </div>
                             <div className="col-xs-12 text-center pull-right">
                                 <h4 className="text-left p-l-30 p-r-30 m-t-5">
-                                    As time moves on, some things change, and some stay the same, I am now:
-                                    Twelve years teaching Hatha Yoga, meditation, mindfulness techniques and
+                                    <strong>About Marie:</strong>
+                                    <hr />
+                                    <div className="text-center">Twelve years teaching Hatha Yoga, meditation, mindfulness techniques and
                                     stress relief for all ages. And also nine years using Ayurveda medicine
-                                    with clients and students to find balance in these unbalancing times.
+                                    with clients and students to find balance in these unbalancing times.</div>
                                 </h4>
                             </div>
                         </div>
                     </div>
 
-                    <div id="work" div className="mdl-card container m-t-30 m-b-30 mdl-shadow--4dp">
-                        <div className="featured clearfix text-center">
+                    <div className="section-header">
+                        <h2 className="section-heading text-center"><strong>Current Work</strong></h2>
+                        <hr />
+                    </div>
+                    
+                    <section>
+                        <div className="container m-t-30 m-b-30">
                             <div className="row dark-color">
-                                <div className="col-xs-12 m-b-30 m-t-30">
-                                    <div className="col-xs-12">
-                                        <section>
-                                            <div className="row m-b-30">
-                                                <div className="col-xs-12">
-                                                    <div className="section-header">
-                                                        <h2 className="section-heading text-center">Current Work</h2>
-                                                        <hr />
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-md-12 m-b-40 text-center">
-                                                        <div className="portfolio-items" id="3">
-                                                            <section className="section">
-                                                                <div className="row">
-                                                                    <div className="col-lg-offset-2 col-lg-8">
-
-                                                                        <div className="text-center p-t-40 p-b-40">
-                                                                            <blockquote className="bigquote color-white">
-                                                                                All of life is an individual manifestation and
-                                        combination of the five elements. It really doesn't get
-                                        any easier! As a wise friend of mine once said, 'If it's not fun,
-                                        it's not Yoga, and if it's not simple, it's not Ayurveda.
-                                    </blockquote>
-                                                                            <p className="col-lg-offset-6 color-white">
-                                                                                Marie Mills
-                                    </p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </section>
-                                                            {navbar_items.map(item =>
-                                                                <Link key={item.route} to={'/' + item.route} className="dark-color text-center">
-                                                                    <div className="col-xs-3">{item.name}</div>
-                                                                    <div className="portfolio-item">
-                                                                        <img src="img/portfolio/img1.jpg" alt="" />
-                                                                        <div className="portfolio-desc align-center">
-                                                                            <div className="folio-info">
-                                                                                <h5><a href="#">Portfolio name</a></h5>
-                                                                                <a href="img/portfolio/img1.jpg" className="fancybox"><i className="fa fa-plus fa-2x"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </Link>
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                        <section>
-                                            <div className="row">
-                                                <div className="col-lg-12">
-                                                    <div className="text-center p-t-40 p-b-40">
-                                                        <blockquote className="bigquote color-white">There are only two choices, to be the Candle or the Mirror which reflects it</blockquote>
-                                                        <p className="col-lg-offset-6 color-white">Edith Wharton</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
+                                <div className="mdl-card mdl-shadow--4dp col-lg-8">
+                                    <div className="text-center p-t-40 p-b-40">
+                                        <blockquote className="bigquote">
+                                            All of life is an individual manifestation and
+                                    combination of the five elements. It really doesn't get
+                                    any easier! As a wise friend of mine once said, 'If it's not fun,
+                                    it's not Yoga, and if it's not simple, it's not Ayurveda.
+                                                        </blockquote>
+                                        <p className="col-lg-offset-6">
+                                            Marie Mills
+                                                    </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </section>
+                    
+                    <div className="container">
+                        <div className="row dark-color row-centered">
+                            {navbar_items.map(item =>
+                                <div className="m-t-15 m-b-15 col-xs-6 col-centered">
+                                    <div className="mdl-card mdl-shadow--4dp text-center">
+                                        <Link key={item.route} to={'/' + item.route} className="dark-color text-center"><img className="img-responsive" src={require("../../images/landing.jpg")} alt="" /></Link>
+                                        
+                                        <h3>{item.name}</h3>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
+                    
 
+                    <div className="section-header">
+                        <h2 className="text-center">Contact Marie Mills</h2>
+                    </div>
+                    <hr />
                     <div id="questions" className="mdl-card container m-t-30 m-b-30 mdl-shadow--4dp">
                         <div className="featured clearfix text-center">
                             <div className="row dark-color">
@@ -141,10 +117,7 @@ class AboutPage extends React.Component {
                                     <div className="col-xs-12 m-b-30 m-t-30">
                                         <section>
                                             <fieldset>
-                                                <div className="section-header">
-                                                    <h2 className="text-center">Contact Marie Mills</h2>
-                                                </div>
-                                                <hr />
+
                                                 <div className="row">
                                                     <div className="col-lg-12 col-md-12 col-xs-12 text-center">
                                                         <p>

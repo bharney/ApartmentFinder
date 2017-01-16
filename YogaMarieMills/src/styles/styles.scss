@@ -20,8 +20,9 @@ $brightColor: #ffffff;
 $brightBgColor: #03A9F4;
 
 $greenBgColor: #00796B;
-
 $purpleBgColor: #512dA8;
+$pinkBgColor: #E91E63;
+$yellowBgColor: #FFC107;
 
 $hoverColor: #ffffff;
 $hoverBgColor: rgba(0, 0, 0, 0.0980392);
@@ -65,7 +66,7 @@ $p-font-sizes: ( null : 14px, small : 14px, 727px : 16px, medium: 16px, 980px : 
 
 $h1-font-sizes: ( null : 42px, small : 46px, medium: 54px, 980px : 58px, large : 62px, 1440px: 62px, );
 
-$h2-font-sizes: ( null : 24px, small : 24px, medium: 32px, 980px: 34px, large : 38px, 1440px: 42px, );
+$h2-font-sizes: ( null : 24px, small : 24px, medium: 28px, 980px: 34px, large : 38px, 1440px: 42px, );
 
 $h3-font-sizes: ( null : 18px, small : 18px, medium: 18px, 980px: 20px, large : 24px, 1440px: 28px, );
 
@@ -145,6 +146,13 @@ body {
     background: $purpleBgColor;
 }
 
+.bg-color-pink {
+    background: $pinkBgColor;
+}
+
+.bg-color-yellow {
+    background: $yellowBgColor;
+}
 
 .color {
     color: $color;
@@ -456,6 +464,69 @@ section.section {
     -moz-transition: background 0.5s;
     transition: background 0.5s;
 }
+
+/*=========================
+    What to Bring
+=========================*/
+
+.algin-top {
+    vertical-align: text-top;
+}
+
+.icon-contain {
+    display: block;
+    width: 6em;
+    height: 6em;
+    line-height: 6em;
+    margin: 15px;
+    text-align: center;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+} 
+
+.yogamat {
+    background-image: url('../images/blackyogamat.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 4em 4em;
+}
+
+.clothing {
+    background-image: url('../images/blackclothing.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 4em 4em;
+}
+
+.waterbottle {
+    background-image: url('../images/blackwaterbottle.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 3em 4em;
+}
+
+.towel {
+    background-image: url('../images/blacktowel.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 4em 3em;
+}
+
+.mind {
+    background-image: url('../images/blackmind.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 4em 3.7em;
+}
+
+.bg-image-landing {
+    background-image: url('../images/landing.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+}
+
 /*=========================
     Cost
 =========================*/
@@ -661,6 +732,9 @@ Media queries
 }
 
 /* ---- padding ---- */
+.p-20 {
+    padding: 20px;
+}
 /* top */
 .p-t--50 {
      margin-top: -50px;

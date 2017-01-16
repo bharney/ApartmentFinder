@@ -17,7 +17,7 @@ class BlogPage extends React.Component {
                 <div className="row">
                     <div className="col-xs-offset-1 col-xs-10">
                         <h2>{blog.name}</h2>
-                        <div className="col-xs-offset-3 col-xs-7 p-t-20 p-b-20">
+                        <div className="col-xs-offset-3 col-xs-7 p-t-20 p-b-20 bg-color">
                             <img width="200" className="img-circle" src={blog.image} />
                             <p className="dark-color">{blog.description}</p>
                         </div>

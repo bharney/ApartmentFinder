@@ -13,7 +13,7 @@ const Blog = ({blog}) => {
                     </section>
                 </div>
             </div>
-            <div className="mdl-card__media bg-black">
+            <div className="mdl-card__media bright-bg-color">
                 <div className="col-xs-offset-3 col-xs-7 p-t-20 p-b-20">
                     <img width="200" className="img-circle" src={blog.image} />
                 </div>
