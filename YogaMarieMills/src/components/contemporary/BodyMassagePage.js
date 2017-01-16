@@ -15,34 +15,35 @@ class BodyMassagePage extends React.Component {
         return (
             <div className="mdl-grid dark-color bg-color">
                 <div className="ribbon bright-bg-color">
-                    <div id="about" div className="mdl-card container m-t-30 m-b-30 mdl-shadow--4dp">
-                        <div className="featured clearfix text-center">
-                            <div className="row m-b-30">
-                                <div className="col-xs-offset-1 col-xs-10">
-                                    {bodyMassageTypes.map(bodyMassageType =>
-                                        <div className="row m-t-30">
-                                            <div className="col-xs-12">
-                                                <Link to="">
-                                                    <div className="icon-circle aroma-oil bg-color-green"></div>
-                                                </Link>
-                                                <h1 className="text-center">{bodyMassageType.consultation_header}</h1>
-                                                <h2 className="text-center">{bodyMassageType.description}</h2>
-                                                <h3>Venue: {bodyMassageType.venue}</h3>
-                                                <div className="row">
-                                                    {bodyMassageType.consultation_details.map(consultation_details =>
-                                                        <div className="col-xs-6">
+                    <div className="container m-t-30 m-b-30">
+                        <div className="row m-b-30">
 
-                                                            <h3>{consultation_details.consultation} - {consultation_details.cost}</h3>
-                                                            <h4>{consultation_details.session_time}</h4>
-                                                            <p>{consultation_details.details}</p>
-                                                        </div>
-                                                    )}
-                                                </div>
+                            {bodyMassageTypes.map(bodyMassageType =>
+
+                                <div className="col-xs-12">
+                                    <h1 className="text-center color-white">{bodyMassageType.consultation_header}</h1>
+                                    <hr />
+                                    <div className="col-xs-12 m-b-30">
+                                        <div className="mdl-card mdl-shadow--4dp p-20 text-center">
+                                            <h3>{bodyMassageType.description}</h3>
+                                            <h3>Venue: {bodyMassageType.venue}</h3>
+                                        </div>
+                                    </div>
+                                    {bodyMassageType.consultation_details.map(consultation_details =>
+                                        <div className="col-xs-12 col-md-6 m-b-30">
+                                            <div className="mdl-card mdl-shadow--4dp p-20">
+                                                <div className="icon-circle aroma-oil bg-color-green"></div>
+                                                <h4 className="text-center">{consultation_details.consultation}<br />
+                                                    {consultation_details.cost}</h4>
+                                                <p className="text-center">{consultation_details.session_time}</p>
+                                                <p>{consultation_details.details}</p>
                                             </div>
                                         </div>
-                                    )}
+                                    )
+                                    }
                                 </div>
-                            </div>
+                            )}
+
                         </div>
                     </div>
                 </div>
