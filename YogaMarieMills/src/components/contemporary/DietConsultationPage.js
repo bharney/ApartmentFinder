@@ -15,40 +15,41 @@ class DietConsultationPage extends React.Component {
         return (
             <div className="mdl-grid dark-color">
                 <div className="ribbon bright-bg-color">
-                    <div className="container">
+                    <div className="container-fluid">
                         <div className="row m-t-30 m-b-30 text-center">
-                            <h1 className="color-white">Aryuvedic Diet Consultation</h1>
-                            <hr />
+                            <div className="col-xs-offset-1 col-xs-10 m-b-30">
+                                <h1 className="color-white">Aryuvedic Diet Consultation</h1>
+                                <hr />
 
-                            {dietConsultations.map(dietConsultation =>
-                                <div>
-                                    <div className="col-xs-12 m-b-30">
-                                        <div className="mdl-card mdl-shadow--4dp p-20">
-                                            <h3>{dietConsultation.description}</h3>
-                                            <h3>Venue: {dietConsultation.venue}</h3>
-                                        </div>
-                                    </div>
-                                    {dietConsultation.consultation_details.map(consultation_details =>
-                                        <div className="col-xs-12 col-md-6 m-b-30">
+                                {dietConsultations.map(dietConsultation =>
+                                    <div>
+                                        <div className="col-xs-12 m-b-30">
                                             <div className="mdl-card mdl-shadow--4dp p-20">
-                                                <h3>{consultation_details.consultation}<br />
-                                                    {consultation_details.cost}</h3>
-                                                <p>{consultation_details.session_time}</p>
-                                                {consultation_details.consultation_specifics.map(consultation_specifics =>
-                                                    <ul className="mdl-list">
-                                                        <li>
-                                                            <p>{consultation_specifics.detail}</p>
-                                                        </li>
-                                                    </ul>
-                                                )}
-                                                <p>{consultation_details.details}</p>
+                                                <h3>{dietConsultation.description}</h3>
+                                                <h3>Venue: {dietConsultation.venue}</h3>
                                             </div>
                                         </div>
-                                    )}
-                                </div>
-                            )}
+                                        {dietConsultation.consultation_details.map(consultation_details =>
+                                            <div className="col-xs-12 col-md-6 m-b-30">
+                                                <div className="mdl-card mdl-shadow--4dp p-20">
+                                                    <h3>{consultation_details.consultation}<br />
+                                                        {consultation_details.cost}</h3>
+                                                    <p>{consultation_details.session_time}</p>
+                                                    {consultation_details.consultation_specifics.map(consultation_specifics =>
+                                                        <ul className="mdl-list">
+                                                            <li>
+                                                                <p>{consultation_specifics.detail}</p>
+                                                            </li>
+                                                        </ul>
+                                                    )}
+                                                    <p>{consultation_details.details}</p>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
                         </div>
-
                     </div>
                 </div>
             </div>

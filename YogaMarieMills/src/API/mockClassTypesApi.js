@@ -71,15 +71,6 @@ const classTypes = [
     }
 ];
 
-function replaceAll(str, find, replace) {
-  return str.replace(new RegExp(find, 'g'), replace);
-}
-
-//This would be performed on the server in a real app. Just stubbing in.
-const generateId = (classType) => {
-  return replaceAll(classType.name, ' ', '-');
-};
-
 class ClassTypesApi {
   static getAllClassTypes() {
     return new Promise((resolve, reject) => {

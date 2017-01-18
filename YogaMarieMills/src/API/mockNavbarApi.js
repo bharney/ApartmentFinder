@@ -64,14 +64,14 @@ const navbar_items = [
           id: 2,
           name: "Ayurvedic Body Massage Treatments",
           href: "http://www.yogamariemills/Contemporary/",
-          route: "Ayurveda/BodyMassage",
+          route: "Ayurveda/Massage/Body",
           component: "contemporaryMassagePage"
         },
         {
           id: 3,
           name: "Head, Hands, Feet or Abdominal Massage",
           href: "http://www.yogamariemills/Contemporary/",
-          route: "Ayurveda/HeadHandsFeedAbMassage",
+          route: "Ayurveda/Massage/HeadHandsFeetAb",
           component: "contemporaryMassagePage"
         },
         {
@@ -87,7 +87,7 @@ const navbar_items = [
     id: 4,
     name: "My Blog",
     href: "http://www.yogamariemills/Blog/",
-    route: "blog",
+    route: "blogs",
     component: "BlogPage"  
   },
   {

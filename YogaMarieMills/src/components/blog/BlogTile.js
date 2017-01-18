@@ -4,9 +4,9 @@ import { Link } from 'react-router';
 
 const Blog = ({blog}) => {
     return (
-    <div className="col-xs-12 col-md-4">
-        <div div className="mdl-card mdl-shadow--4dp m-l-30 m-r-30 m-t-15 m-b-15 bg-white tile">
-            <div className="mdl-card__title ">
+    <div className="col-xs-12 col-md-4 m-b-30">
+        <div div className="mdl-card mdl-shadow--4dp bg-white tile">
+            <div className="mdl-card__title">
                 <div className="mdl-card__title-text">  
                     <section className="text-center">
                         <h2>{blog.name}</h2>

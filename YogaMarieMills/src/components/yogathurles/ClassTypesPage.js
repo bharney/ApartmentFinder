@@ -57,7 +57,7 @@ class ClassTypesPage extends React.Component {
 
         return (
             <div className="container-fluid">
-                <div className="row bg-color">
+                <div className="row bright-bg-color">
                     <div className="col-xs-offset-1 col-xs-10">
                         <h1 className="text-center color-white">Yoga Thurles Class Types</h1>
                     </div>

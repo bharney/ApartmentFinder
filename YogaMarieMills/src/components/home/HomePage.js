@@ -225,7 +225,7 @@ class HomePage extends React.Component {
                 </section>
                 <section>
                     <div className="container-fluid light-bg-color">
-                        <div className="row p-t-40">
+                        <div className="row p-t-40 row-center">
                             <div className="col-xs-offset-1 col-xs-10">
                                 <h2 className="text-center">My Blog</h2>
                                 <p className="text-center">Read useful information on Yoga and Ayurveda</p>

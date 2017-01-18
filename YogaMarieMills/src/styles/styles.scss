@@ -624,7 +624,20 @@ section.section {
     -moz-transition: background 0.5s;
     transition: background 0.5s;
 }
+/* ========================================
+    Testimonials
+========================================= */
+.masonry {
+    column-count: 2;
+    column-gap: 1em;
+}
 
+.tile-masonry {
+    background-color: #eee;
+    display: inline-block;
+    margin: 0 0 1em;
+    width: 100%;
+}
 
 /* ========================================
 Media queries
