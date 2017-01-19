@@ -89,11 +89,11 @@ class Header extends React.Component {
         let navItems = function (item) {
             if (item.subMenu) {
                 return (
-                    <div>
-                        <Link id={item.name} key={item.route} to="" onClick={that.preventRedirect} className="mdl-tabs__tab nav-links p-l-10 p-r-10">
+                    <div id={item.name}>
+                        <Link key={item.route} to="" onClick={that.preventRedirect} className="mdl-tabs__tab nav-links p-l-10 p-r-10">
                             {item.name} &nbsp;<span className="caret" aria-hidden="true"></span>
                         </Link>
-                        <ul className="mdl-menu mdl-js-menu mdl-js-ripple-effect" htmlFor={item.name}>
+                        <ul className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" htmlFor={item.name}>
                             {item.subMenu.map(subMenu => subMenuItems(subMenu))}
                         </ul>
                     </div>
@@ -116,11 +116,9 @@ class Header extends React.Component {
                             </IndexLink>
                         </div>
                     </div>
-                    <nav className="nav mdl-navigation mdl-layout--large-screen-only">
-                        {navbar_items.map(item =>
-                            navItems(item)
-                        )}
-                    </nav>
+                    {navbar_items.map(item =>
+                        navItems(item)
+                    )}
                 </div>
                 <Drawer
                     docked={false}
