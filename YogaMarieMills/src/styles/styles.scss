@@ -624,27 +624,29 @@ section.section {
     -moz-transition: background 0.5s;
     transition: background 0.5s;
 }
-/* ========================================
-    Testimonials
-========================================= */
-.masonry {
-    column-count: 2;
-    column-gap: 1em;
-}
-
-.tile-masonry {
-    background-color: #eee;
-    display: inline-block;
-    margin: 0 0 1em;
-    width: 100%;
-}
 
 /* ========================================
 Media queries
 ========================================= */
 
-@media (min-width: 959px) and (max-width: 1199px) {
-    
+@media (min-width: 1000px){
+    /* ========================================
+    Testimonials
+========================================= */
+.masonry {
+    column-count: 2;
+    column-gap: 30px;
+    width: 100%;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.tile-masonry {
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
 }
 
 @media only screen and (min-device-width : 979px) and (max-device-width : 1024px) {
