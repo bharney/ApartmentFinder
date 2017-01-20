@@ -101,14 +101,21 @@ const navbar_items = [
           id: 1,
           name: "Bandon Yoga, Co. Cork",
           href: "http://www.yogamariemills/Contemporary/",
-          route: "Ayurveda/DietConsultation",
+          route: "Events/Bandon",
           component: "contemporaryDietPage"
         },
         {
           id: 2,
           name: "Yoga Workshop for Sport and Flexibility",
           href: "http://www.yogamariemills/Contemporary/",
-          route: "Ayurveda/Massage/Body",
+          route: "Events/Thurles",
+          component: "contemporaryMassagePage"
+        },
+        {
+          id: 3,
+          name: "Holiday Yoga Workshops",
+          href: "http://www.yogamariemills/Contemporary/",
+          route: "Events/Holiday",
           component: "contemporaryMassagePage"
         }
     ]    

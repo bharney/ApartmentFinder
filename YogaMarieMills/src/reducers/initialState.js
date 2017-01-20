@@ -9,4 +9,5 @@ export default {
   dietConsultations: [],
   massageTypes: [],
   testimonials: [],
+  eventTypes: [],
 }
