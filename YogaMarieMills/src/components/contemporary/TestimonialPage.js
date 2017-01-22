@@ -16,7 +16,7 @@ class TestimonialPage extends React.Component {
 
         return (
             <div className="mdl-grid dark-color">
-                <div className="ribbon bright-bg-color">
+                <div className="ribbon bg-image-landing">
                     <div className="container-fluid">
                         {testimonials.map(testimonial =>
                             <div className="row m-t-30 m-b-30 text-center">

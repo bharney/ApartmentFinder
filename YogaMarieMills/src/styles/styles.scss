@@ -371,6 +371,9 @@ section.section {
     border-top: .5px solid #ffffff;
 }
 
+.b-border {
+    border-bottom: .5px solid #ffffff;
+}
 
 .line-thru {
     border-bottom: 1px solid #ffffff;
@@ -438,7 +441,7 @@ section.section {
 }
 
 .om:hover {
-    background-image: url('../images/blackom.png');
+    background-image: url('../images/blueom.png');
     background-size: 5em 5em;
     background-repeat: no-repeat;
     background-position: center;
@@ -449,7 +452,7 @@ section.section {
 
 .yoga-mat:hover {
     
-    background-image: url('../images/blackyogamat.png');
+    background-image: url('../images/greenyogamat.png');
     background-size: 6em 6em;
     background-repeat: no-repeat;
     background-position: center;
@@ -459,7 +462,7 @@ section.section {
 }
 
 .lotus-flower:hover {
-    background-image: url('../images/blacklotusflower.png');
+    background-image: url('../images/purplelotusflower.png');
     background-size: 7em 4em;
     background-repeat: no-repeat;
     background-position: center;
@@ -529,6 +532,7 @@ section.section {
     background-position: center;
     background-size:cover;
 }
+
 
 /*=========================
     Cost
@@ -627,6 +631,17 @@ section.section {
     -moz-transition: background 0.5s;
     transition: background 0.5s;
 }
+
+/* ========================================
+    Events
+========================================= */
+
+.color-blur {
+    background-image: url('../images/color-blur.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 
 /* ========================================
 Media queries

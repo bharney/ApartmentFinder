@@ -10,7 +10,7 @@ class WhatToBringPage extends React.Component {
 
         return (
             <div className="mdl-grid dark-color bg-color">
-                <div className="ribbon bg-image-landing">
+                <div className="ribbon bg-image-landing b-border">
                     <div className="container m-t-30 m-b-30">
                         <h1 className="text-center color-white">What to Bring?</h1>
                         <div className="row p-b-15 m-b-30">

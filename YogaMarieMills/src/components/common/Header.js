@@ -106,7 +106,7 @@ class Header extends React.Component {
             }
         };
         return (
-            <header className="dark-bg-color mdl-layout__header">
+            <header className="dark-bg-color color-blur mdl-layout__header">
                 <div className="mdl-layout__header-row nav-element-left anchor">
                     <a className="navbar-brand mdl-layout-title mdl-layout__header-row drawer-header nav-menu-left font-style" onTouchTap={this.handleToggle}><span><i className="glyphicon glyphicon-option-vertical" aria-hidden="true"></i>Menu</span></a>
                     <div className="mdl-layout-spacer nav-vertical-divider">
@@ -126,7 +126,7 @@ class Header extends React.Component {
                     onRequestChange={this.handleToggle}>
                     <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
                         <header className="mdl-layout__header">
-                            <div className="mdl-layout__header-row drawer-header dark-bg-color anchor">
+                            <div className="mdl-layout__header-row drawer-header color-blur anchor">
                                 <IndexLink to="/"><span onTouchTap={this.handleToggle}
                                     className="mdl-layout-title font-style">
                                     Yoga with Marie Mills

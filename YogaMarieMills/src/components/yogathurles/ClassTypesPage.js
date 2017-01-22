@@ -17,35 +17,41 @@ class ClassTypesPage extends React.Component {
         let alternateTileSides = function (classType) {
             if (classType.id % 2 == 0) {
                 return (
-                    <div key={classType.id} className="row vertical-center">
+                    <div key={classType.id} className="row vertical-center bg-color-white">
                         <div className="half">
                             <img className="img-responsive" src={landing} />
                         </div>
                         <div className="half">
-                            <Link to={'/' + classType.route + '/' + classType.id} className="color">
-                                <div className="row">
-                                    <div className="col-xs-offset-1 col-xs-10 tile m-t--5-percent">
+
+                            <div className="row">
+                                <div className="col-xs-offset-1 col-xs-10 tile m-t--5-percent">
+                                    <Link to={'/' + classType.route + '/' + classType.id} className="color">
                                         <h2 className="page-header banner">{classType.name}</h2>
-                                        <p >{classType.description}</p>
-                                    </div>
+                                    </Link>
+                                    <p >{classType.description}</p>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Read More<span className="mdl-button__ripple-container"><span className="mdl-ripple"></span></span></button>
                                 </div>
-                            </Link>
+                            </div>
+
                         </div>
                     </div>
                 );
             }
             else {
                 return (
-                    <div key={classType.id} className="row vertical-center">
+                    <div key={classType.id} className="row vertical-center bg-color-white">
                         <div className="half">
-                            <Link to={'/' + classType.route + '/' + classType.id} className="color">
-                                <div className="row">
-                                    <div className="col-xs-offset-1 col-xs-10 tile m-t--5-percent">
+
+                            <div className="row">
+                                <div className="col-xs-offset-1 col-xs-10 tile m-t--5-percent">
+                                    <Link to={'/' + classType.route + '/' + classType.id} className="color">
                                         <h2 className="page-header banner">{classType.name}</h2>
-                                        <p>{classType.description}</p>
-                                    </div>
+                                    </Link>
+                                    <p>{classType.description}</p>
+                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Read More<span className="mdl-button__ripple-container"><span className="mdl-ripple"></span></span></button>
                                 </div>
-                            </Link>
+                            </div>
+
                         </div>
                         <div className="half">
                             <img className="img-responsive" src={landing} />
@@ -56,14 +62,17 @@ class ClassTypesPage extends React.Component {
         };
 
         return (
-            <div className="container-fluid">
-                <div className="row bright-bg-color">
-                    <div className="col-xs-offset-1 col-xs-10">
-                        <h1 className="text-center color-white">Yoga Thurles Class Types</h1>
+            <div className="mdl-grid dark-color bg-color">
+                <div className="ribbon bg-image-landing">
+                    <div className="container-fluid">
+                        <div className="row p-t-40 p-b-40 b-border">
+                            <div className="col-xs-offset-1 col-xs-10">
+                                <h1 className="text-center color-white">Yoga Thurles Class Types</h1>
+                            </div>
+                        </div>
+                        {classTypes.map(classType => alternateTileSides(classType))}
                     </div>
                 </div>
-                <hr className="m-b-0 m-t-0" />
-                {classTypes.map(classType => alternateTileSides(classType))}
             </div>
         );
     }

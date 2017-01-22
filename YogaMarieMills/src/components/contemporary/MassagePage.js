@@ -14,7 +14,7 @@ class MassagePage extends React.Component {
 
         return (
             <div className="mdl-grid dark-color bg-color">
-                <div className="ribbon bright-bg-color">
+                <div className="ribbon bg-image-landing">
                     <div className="container-fluid m-t-30 m-b-30">
                         <div className="row m-b-30">
                             <div className="col-xs-offset-1 col-xs-10">
@@ -29,7 +29,7 @@ class MassagePage extends React.Component {
                                 {massageType.consultation_details.map(consultation_details =>
                                     <div className="col-xs-12 col-md-6 m-b-30">
                                         <div className="mdl-card mdl-shadow--4dp p-20">
-                                            <div className="icon-circle aroma-oil bg-color-green"></div>
+                                            <div className="icon-circle aroma-oil bg-color-green mdl-shadow--4dp"></div>
                                             <h4 className="text-center">{consultation_details.consultation}<br />
                                                 {consultation_details.cost}</h4>
                                             <p className="text-center">{consultation_details.session_time}</p>

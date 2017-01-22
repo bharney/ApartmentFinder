@@ -13,30 +13,31 @@ class EventPage extends React.Component {
         const {eventType} = this.props;
 
         return (
-            <div className="mdl-grid dark-color bg-color">
-                <div className="ribbon bright-bg-color">
-                    <div className="container-fluid m-t-30 m-b-30">
+            <div className="mdl-grid dark-color">
+                <div className="ribbon bg-image-landing b-border">
+                    <div className="container">
                         <div className="row m-b-30">
-                            <div className="col-xs-offset-1 col-xs-10">
-                                <h1 className="text-center color-white">{eventType.consultation_header}</h1>
+                            <div className="col-xs-12">
+                                <h1 className="color-white text-center">{eventType.consultation_header}</h1>
                                 <hr />
                                 <div className="col-xs-12 m-b-30">
-                                    <div className="mdl-card mdl-shadow--4dp p-20 text-center">
-                                        <h3>{eventType.description}</h3>
-                                        <h3>Venue: {eventType.venue}</h3>
+                                    <div className="mdl-card mdl-shadow--4dp">
+                                        <div className="mdl-card__media bg-image-landing v-h-30 p-20">
+                                            <header className="color-white">
+                                                <h3>{eventType.description}  </h3>
+                                                <h4>Venue: {eventType.venue}</h4>
+                                            </header>
+                                        </div>
+                                        {eventType.consultation_details.map(consultation_details =>
+                                            <div className="mdl-card__supporting-text dark-color">
+                                                <h4>{consultation_details.consultation}<br />
+                                                    {consultation_details.cost}</h4>
+                                                <p>{consultation_details.session_time}</p>
+                                                <p>{consultation_details.details}</p>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
-                                {eventType.consultation_details.map(consultation_details =>
-                                    <div className="col-xs-12 col-md-6 m-b-30">
-                                        <div className="mdl-card mdl-shadow--4dp p-20">
-                                            <div className="icon-circle aroma-oil bg-color-green"></div>
-                                            <h4 className="text-center">{consultation_details.consultation}<br />
-                                                {consultation_details.cost}</h4>
-                                            <p className="text-center">{consultation_details.session_time}</p>
-                                            <p>{consultation_details.details}</p>
-                                        </div>
-                                    </div>
-                                )}
                             </div>
                         </div>
                     </div>

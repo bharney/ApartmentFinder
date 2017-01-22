@@ -59,19 +59,19 @@ class HomePage extends React.Component {
                     </div>
                 </section>
                 <section>
-                    <div className="container-fluid light-bg-color t-border">
+                    <div className="container-fluid light-bg-color color-blur t-border">
                         <div className="container">
                             <div className="row text-center p-t-20 p-b-30 m-t-20">
                                 <div className="col-xs-offset-1 col-xs-10">
                                     <h2>Marie is a Yoga practitioner in Thurles.</h2>
                                     <div className="line-thru"><span>
-                                        <img src={require('../../images/greenlotus.png')} className="light-bg-color img-thru p-l-10 p-r-10" width="65" /></span>
+                                        <img src={require('../../images/greenlotus.png')} className="bg-color-transparent img-thru p-l-10 p-r-10" width="65" /></span>
                                     </div>
                                     <h3>Yoga and Ayurveda are integral to Traditional Indian Medicine and easily adapted
                                         to the modern life. Learn Yoga, Ayeruveda and more.</h3>
                                     <div className="col-xs-4 p-t-5 p-b-40 p-l-15 p-r-15">
                                         <Link to="">
-                                            <div className="icon-circle lotus-flower bg-color-purple"></div>
+                                            <div className="icon-circle mdl-shadow--4dp lotus-flower bg-color-purple"></div>
                                         </Link>
                                         <div className="row">
                                             <div className="col-xs-12">
@@ -79,7 +79,7 @@ class HomePage extends React.Component {
                                             </div>
                                         </div>
                                         <div className="col-xs-offset-2 col-xs-8">
-                                            <hr className="dark-bg-color" />
+                                            <hr />
                                         </div>
                                         <div className="row">
                                             <div className="col-xs-12">
@@ -91,7 +91,7 @@ class HomePage extends React.Component {
                                     </div>
                                     <div className="col-xs-4 p-t-5 p-b-40 p-l-15 p-r-15">
                                         <Link to="">
-                                            <div className="icon-circle om bright-bg-color"></div>
+                                            <div className="icon-circle mdl-shadow--4dp om bright-bg-color"></div>
                                         </Link>
                                         <div className="row">
                                             <div className="col-xs-12">
@@ -99,7 +99,7 @@ class HomePage extends React.Component {
                                             </div>
                                         </div>
                                         <div className="col-xs-offset-2 col-xs-8">
-                                            <hr className="dark-bg-color" />
+                                            <hr />
                                         </div>
                                         <div className="row">
                                             <div className="col-xs-12">
@@ -111,7 +111,7 @@ class HomePage extends React.Component {
                                     </div>
                                     <div className="col-xs-4 p-t-5 p-b-40 p-l-15 p-r-15">
                                         <Link to="">
-                                            <div className="icon-circle yoga-mat bg-color-green"></div>
+                                            <div className="icon-circle mdl-shadow--4dp yoga-mat bg-color-green"></div>
                                         </Link>
                                         <div className="row">
                                             <div className="col-xs-12">
@@ -119,7 +119,7 @@ class HomePage extends React.Component {
                                             </div>
                                         </div>
                                         <div className="col-xs-offset-2 col-xs-8">
-                                            <hr className="dark-bg-color" />
+                                            <hr />
                                         </div>
                                         <div className="row">
                                             <div className="col-xs-12">
@@ -135,37 +135,27 @@ class HomePage extends React.Component {
                     </div>
                 </section>
                 <section>
-                <div className="container-fluid">
-                    <div className="row" style={divider}>
-                    </div>
-                </div>
-                </section>
-                <section>
-                    <div className="container-fluid dark-bg-color t-border">
-                        <div className="row p-b-40 p-t-40">
-                            <div className="col-md-6 col-md-offset-3">
-                                <div className="text-center">
-                                    <h2>
-                                        Yoga with Marie Mills is a family friendly studio that offers a wide variety of classes and child care.
-                                    </h2>
-                                    <h4>
-                                        No matter what stage of life you are in, Yoga with Marie Mills offers something for everyone.
-                                        Yoga Marie Mills offers Yoga, Ayurveda, and Kids Yoga.
-                                    </h4>
-                                </div>
-                            </div>
+                    <div className="container-fluid t-border">
+                        <div className="row" style={divider}>
                         </div>
                     </div>
                 </section>
                 <section>
-                    <div className="container-fluid bg-color t-border">
+                    <div className="container-fluid bg-color color-blur t-border">
                         <div className="container">
                             <h2 className="text-center">Specialties</h2>
-                            <p className="text-center">I offer a wide range of specialties that improve your health and well-being.</p>
+                            <div className="text-center">
+                                <h4>
+                                    Yoga with Marie Mills is a family friendly studio that offers a wide variety of classes and child care.
+                                        No matter what stage of life you are in, Yoga with Marie Mills offers something for everyone.
+                                        Yoga Marie Mills offers Yoga, Ayurveda, and Kids Yoga.
+                                    </h4>
+                            </div>
+
                             <div className="row m-t-30 p-t-40 p-b-40 text-center">
 
                                 <div className="col-xs-4 p-l-15 p-r-15">
-                                    <img className="img-circle img-responsive" src={yogaImg1} />
+                                    <img className="img-circle img-responsive mdl-shadow--4dp" src={yogaImg1} />
                                     <div className="row">
                                         <div className="col-xs-12">
                                             <h4>Contemporary Ayeruveda</h4>
@@ -184,7 +174,7 @@ class HomePage extends React.Component {
                                     </div>
                                 </div>
                                 <div className="col-xs-4 p-l-15 p-r-15">
-                                    <img className="img-circle img-responsive" src={yogaImg2} />
+                                    <img className="img-circle img-responsive mdl-shadow--4dp" src={yogaImg2} />
                                     <div className="row">
                                         <div className="col-xs-12">
                                             <h4>Yoga Workshops and Bespoke Yoga</h4>
@@ -202,7 +192,7 @@ class HomePage extends React.Component {
                                     </div>
                                 </div>
                                 <div className="col-xs-4 p-l-15 p-r-15">
-                                    <img className="img-circle img-responsive" src={yogaImg3} />
+                                    <img className="img-circle img-responsive mdl-shadow--4dp" src={yogaImg3} />
                                     <div className="row">
                                         <div className="col-xs-12">
                                             <h4>Dietary Consultation</h4>
@@ -224,8 +214,8 @@ class HomePage extends React.Component {
                     </div>
                 </section>
                 <section>
-                    <div className="container-fluid light-bg-color">
-                        <div className="row p-t-40 row-center">
+                    <div className="container-fluid dark-bg-color t-border">
+                        <div className="row p-t-40 row-center color-white">
                             <div className="col-xs-offset-1 col-xs-10">
                                 <h2 className="text-center">My Blog</h2>
                                 <p className="text-center">Read useful information on Yoga and Ayurveda</p>
@@ -236,8 +226,10 @@ class HomePage extends React.Component {
                         </div>
                     </div>
                 </section>
-                <p className="footer text-center">Share, Like, and Heart my Story!</p>
-                <SocialMediaBar />
+                <div className="bg-color-white p-t-30 p-b-30">
+                    <p className="footer text-center">Share, Like, and Heart my Story!</p>
+                    <SocialMediaBar />
+                </div>
             </div >
         );
     }

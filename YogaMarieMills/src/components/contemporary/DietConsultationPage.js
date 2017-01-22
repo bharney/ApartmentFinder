@@ -14,7 +14,7 @@ class DietConsultationPage extends React.Component {
 
         return (
             <div className="mdl-grid dark-color">
-                <div className="ribbon bright-bg-color">
+                <div className="ribbon bg-image-landing">
                     <div className="container-fluid">
                         <div className="row m-t-30 m-b-30 text-center">
                             <div className="col-xs-offset-1 col-xs-10 m-b-30">

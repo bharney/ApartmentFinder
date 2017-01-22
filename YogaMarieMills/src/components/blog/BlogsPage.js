@@ -14,7 +14,7 @@ class BlogPage extends React.Component {
 
         return (
             <div className="mdl-grid dark-color bg-color">
-                <div className="ribbon bright-bg-color">
+                <div className="ribbon bg-image-landing b-border">
                     <div className="container-fluid">
                         <div className="row m-b-30">
                             <div className="col-xs-offset-1 col-xs-10">

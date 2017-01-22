@@ -14,7 +14,7 @@ class CostPage extends React.Component {
 
         return (
             <div className="mdl-grid dark-color bg-color">
-                <div className="ribbon bg-image-landing">
+                <div className="ribbon bg-image-landing b-border">
                     <div className="row">
                         <div className="col-xs-offset-1 col-xs-10 row-centered">
                             <h1 className="color-white">Pricing</h1>

@@ -19,7 +19,7 @@ class YogaThurlesPage extends React.Component {
 
         return (
             <div className="mdl-grid dark-color bg-color">
-                <div className="ribbon bright-bg-color">
+                <div className="ribbon bg-image-landing b-border">
                     <div className="container">
                         <div className="row m-b-30">
                             <div className="col-xs-12">

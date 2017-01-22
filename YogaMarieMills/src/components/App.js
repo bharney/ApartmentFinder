@@ -10,7 +10,7 @@ class App extends React.Component {
         return (
             <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
                 <Header />
-                <main className="mdl-layout__content">
+                <main className="mdl-layout__content color-blur">
                     {this.props.children}
                 </main>
             </div>
