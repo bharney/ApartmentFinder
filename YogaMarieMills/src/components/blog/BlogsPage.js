@@ -13,7 +13,7 @@ class BlogPage extends React.Component {
         const {blogs} = this.props;
 
         return (
-            <div className="mdl-grid dark-color bg-color">
+            <div className="mdl-grid dark-color">
                 <div className="ribbon bg-image-landing b-border">
                     <div className="container-fluid">
                         <div className="row m-b-30">

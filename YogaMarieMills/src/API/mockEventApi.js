@@ -29,88 +29,25 @@ const eventTypes = [
   {
     id: 2,
     type: "Thurles",
-    consultation_header: "Head, Hands, Feet, and Ab Massage",
-    description: "Learning about your personal body type, your diet and lifestyle. And how to improve your overall health with and Ayurvedic Diet",
-    route: "Aryuveda/DietConsultation",
-    venue: "The Angel Shop, Baker street, Thurles",
+    consultation_header: "Yoga Events in Thurles",
+    description: "Yoga workshop for sport and flexibility",
+    route: "Events",
+    venue: "Order of Malta hall,  Boheravroon, Thurles",
     consultation_details: [
       {
         id: 1,
-        session_time: "60 - 90 Minutes",
-        consultation: "Dietary Consultation involving Ayurveda",
-        details: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        cost: "€70",
-        consultation_specifics: [
-          {
-            id: 1,
-            detail: "We identify your Ayurvedic personal body type, prakriti, your dosha as well as identifying your initial imbalance, vikriti.",
-          },
-          {
-            id: 2,
-            detail: "The details of your lifestyle and your diet as it is now, and as it was as a child are detailed.",
-          }, {
-            id: 3,
-            detail: "We combine the first and second to develop the goal, conclusion, recommendations and optional treatments.",
-          }
-        ]
-      },
-      {
-        id: 2,
-        session_time: "50 Minutes",
-        consultation: "Maintenance Consultation and further information",
-        details: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        session_time: "10 AM to 12 PM",
+        consultation: "Christmas Yoga in Bandon, Co. Cork",
+        details: "If you are actively partaking in sports of any kind, have you ever wondered how Yoga can help you go beyond your current limits? This two hour Dynamic Yoga Thurles workshop is enough time to challenge your body and mind on the strengthening and freeing practice of Yoga.",
         cost: "€25",
         consultation_specifics: [
           {
             id: 1,
-            detail: "We identify your Ayurvedic personal body type, prakriti, your dosha as well as identifying your initial imbalance, vikriti.",
+            detail: "Your own bottle of water. A blanket and a Yoga mat and a bolster if possible.",
           },
           {
             id: 2,
-            detail: "The details of your lifestyle and your diet as it is now, and as it was as a child are detailed.",
-          }, {
-            id: 3,
-            detail: "We combine the first and second to develop the goal, conclusion, recommendations and optional treatments.",
-          }
-        ]
-      },
-      {
-        id: 2,
-        session_time: "50 Minutes",
-        consultation: "Maintenance Consultation and further information",
-        details: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        cost: "€25",
-        consultation_specifics: [
-          {
-            id: 1,
-            detail: "We identify your Ayurvedic personal body type, prakriti, your dosha as well as identifying your initial imbalance, vikriti.",
-          },
-          {
-            id: 2,
-            detail: "The details of your lifestyle and your diet as it is now, and as it was as a child are detailed.",
-          }, {
-            id: 3,
-            detail: "We combine the first and second to develop the goal, conclusion, recommendations and optional treatments.",
-          }
-        ]
-      },
-      {
-        id: 2,
-        session_time: "50 Minutes",
-        consultation: "Maintenance Consultation and further information",
-        details: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        cost: "€25",
-        consultation_specifics: [
-          {
-            id: 1,
-            detail: "We identify your Ayurvedic personal body type, prakriti, your dosha as well as identifying your initial imbalance, vikriti.",
-          },
-          {
-            id: 2,
-            detail: "The details of your lifestyle and your diet as it is now, and as it was as a child are detailed.",
-          }, {
-            id: 3,
-            detail: "We combine the first and second to develop the goal, conclusion, recommendations and optional treatments.",
+            detail: "You can borrow a mat from Marie on request.",
           }
         ]
       }
@@ -119,88 +56,25 @@ const eventTypes = [
   {
     id: 3,
     type: "Holiday",
-    consultation_header: "Head, Hands, Feet, and Ab Massage",
-    description: "Learning about your personal body type, your diet and lifestyle. And how to improve your overall health with and Ayurvedic Diet",
-    route: "Aryuveda/DietConsultation",
-    venue: "The Angel Shop, Baker street, Thurles",
+    consultation_header: "Holiday Yoga Events",
+    description: "Yoga workshop the Holiday Season",
+    route: "Events",
+    venue: "",
     consultation_details: [
       {
         id: 1,
-        session_time: "60 - 90 Minutes",
-        consultation: "Dietary Consultation involving Ayurveda",
-        details: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        cost: "€70",
-        consultation_specifics: [
-          {
-            id: 1,
-            detail: "We identify your Ayurvedic personal body type, prakriti, your dosha as well as identifying your initial imbalance, vikriti.",
-          },
-          {
-            id: 2,
-            detail: "The details of your lifestyle and your diet as it is now, and as it was as a child are detailed.",
-          }, {
-            id: 3,
-            detail: "We combine the first and second to develop the goal, conclusion, recommendations and optional treatments.",
-          }
-        ]
-      },
-      {
-        id: 2,
-        session_time: "50 Minutes",
-        consultation: "Maintenance Consultation and further information",
-        details: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        session_time: "10 AM to 12 PM",
+        consultation: "Christmas Yoga",
+        details: "If you are actively partaking in sports of any kind, have you ever wondered how Yoga can help you go beyond your current limits? This two hour Dynamic Yoga Thurles workshop is enough time to challenge your body and mind on the strengthening and freeing practice of Yoga.",
         cost: "€25",
         consultation_specifics: [
           {
             id: 1,
-            detail: "We identify your Ayurvedic personal body type, prakriti, your dosha as well as identifying your initial imbalance, vikriti.",
+            detail: "Your own bottle of water. A blanket and a Yoga mat and a bolster if possible.",
           },
           {
             id: 2,
-            detail: "The details of your lifestyle and your diet as it is now, and as it was as a child are detailed.",
-          }, {
-            id: 3,
-            detail: "We combine the first and second to develop the goal, conclusion, recommendations and optional treatments.",
-          }
-        ]
-      },
-      {
-        id: 2,
-        session_time: "50 Minutes",
-        consultation: "Maintenance Consultation and further information",
-        details: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        cost: "€25",
-        consultation_specifics: [
-          {
-            id: 1,
-            detail: "We identify your Ayurvedic personal body type, prakriti, your dosha as well as identifying your initial imbalance, vikriti.",
-          },
-          {
-            id: 2,
-            detail: "The details of your lifestyle and your diet as it is now, and as it was as a child are detailed.",
-          }, {
-            id: 3,
-            detail: "We combine the first and second to develop the goal, conclusion, recommendations and optional treatments.",
-          }
-        ]
-      },
-      {
-        id: 2,
-        session_time: "50 Minutes",
-        consultation: "Maintenance Consultation and further information",
-        details: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        cost: "€25",
-        consultation_specifics: [
-          {
-            id: 1,
-            detail: "We identify your Ayurvedic personal body type, prakriti, your dosha as well as identifying your initial imbalance, vikriti.",
-          },
-          {
-            id: 2,
-            detail: "The details of your lifestyle and your diet as it is now, and as it was as a child are detailed.",
-          }, {
-            id: 3,
-            detail: "We combine the first and second to develop the goal, conclusion, recommendations and optional treatments.",
+            detail: "You can borrow a mat from Marie on request.",
           }
         ]
       }

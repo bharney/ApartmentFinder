@@ -1,6 +1,7 @@
 /*eslint-disable import/default */
 import 'babel-polyfill';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { render } from 'react-dom';
 import {Provider} from 'react-redux';
 import configureStore from './store/configureStore';
@@ -19,6 +20,7 @@ import {loadEvent} from './actions/eventActions';
 import {loadTestimonial} from './actions/testimonialActions';
 import MuiThemeProvider from '../node_modules/material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import 'medium-draft/lib/index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import '../node_modules/material-design-lite/material.js';

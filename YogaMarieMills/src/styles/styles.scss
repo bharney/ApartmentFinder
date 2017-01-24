@@ -319,6 +319,18 @@ section.section {
     padding-right: 10px;
 }
 
+.edit-icon {
+    position: absolute;
+    top: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.relative {
+    position: relative;
+}
+
 /*=========================
     About
 =========================*/
@@ -642,6 +654,13 @@ section.section {
     background-repeat: no-repeat;
 }
 
+.image-text-container {
+    position: relative;
+}
+
+.t-border-thin {
+    border-top: 1px solid rgba(0,0,0,.1);
+}
 
 /* ========================================
 Media queries
@@ -752,8 +771,21 @@ Media queries
 .v-h-25 {
     height:25vh;
 }
+
 .v-h-30 {
     height:30vh;
+}
+
+.v-h-40 {
+    height:40vh;
+}
+
+.v-h-50 {
+    height:50vh;
+}
+
+.v-h-60 {
+    height:60vh;
 }
 
 .p-h-25 {

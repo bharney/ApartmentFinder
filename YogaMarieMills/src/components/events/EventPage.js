@@ -3,6 +3,7 @@ import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as eventActions from '../../actions/eventActions';
+import landing from '../../images/landing.jpg';
 
 class EventPage extends React.Component {
     constructor(props, context) {
@@ -22,18 +23,26 @@ class EventPage extends React.Component {
                                 <hr />
                                 <div className="col-xs-12 m-b-30">
                                     <div className="mdl-card mdl-shadow--4dp">
-                                        <div className="mdl-card__media bg-image-landing v-h-30 p-20">
-                                            <header className="color-white">
-                                                <h3>{eventType.description}  </h3>
-                                                <h4>Venue: {eventType.venue}</h4>
-                                            </header>
+                                        <div className="mdl-card__media bg-image-landing v-h-40 image-text-container">
+                                            <div className="text-left align-bottom m-l-20 m-b-20">
+                                                <header className="color-white">
+                                                    <h3 className="m-t-0 m-b-0">{eventType.description}  </h3>
+                                                    <h4 className="m-t-0 m-b-0">Venue: {eventType.venue}</h4>
+                                                </header>
+                                            </div>
                                         </div>
                                         {eventType.consultation_details.map(consultation_details =>
-                                            <div className="mdl-card__supporting-text dark-color">
-                                                <h4>{consultation_details.consultation}<br />
-                                                    {consultation_details.cost}</h4>
-                                                <p>{consultation_details.session_time}</p>
-                                                <p>{consultation_details.details}</p>
+                                            <div>
+                                                <div className="col-xs-6 text-left p-l-30">
+                                                    <h4><strong>{consultation_details.consultation}<br />
+                                                        {consultation_details.session_time}</strong></h4>
+                                                </div>
+                                                <div className="col-xs-6 text-right p-r-30">
+                                                    <h4><strong>{consultation_details.cost}</strong></h4>
+                                                </div>
+                                                <div className="col-xs-12 t-border-thin p-20">
+                                                    <p>{consultation_details.details}</p>
+                                                </div>
                                             </div>
                                         )}
                                     </div>

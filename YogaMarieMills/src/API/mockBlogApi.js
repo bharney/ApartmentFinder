@@ -1,10 +1,7 @@
-// This file mocks a web API by working with the hard-coded data below.
-// It uses setTimeout to simulate the delay of an AJAX call.
-// All calls return promises.
 const blogs = [
     {
         id: 1,
-        name: "Blog Post 1",
+        name: "Hey Aunt Marie!",
         image: require("../images/ColetteMillsAfter.jpg"),
         description: "Ut sed ex eget tortor aliquet mollis. Fusce aliquet urna in mi volutpat accumsan. Maecenas consequat ornare vestibulum. Aenean ultricies leo ullamcorper odio bibendum aliquam. Nunc vel justo magna. Cras dignissim sed lorem et ultricies. Nullam elementum vestibulum elit, eget auctor sem finibus nec. Nullam tellus turpis, vehicula non fermentum eu, hendrerit interdum tellus. Praesent id gravida neque. Praesent ut quam ac augue ultrices gravida. Aliquam erat volutpat. Nulla at nunc posuere, vestibulum augue vitae, volutpat lectus. Maecenas felis purus, tincidunt sed rhoncus sit amet, volutpat et diam.",
         href: "http://www.yogamariemills/About/",
@@ -58,10 +55,53 @@ const blogs = [
     }
 ];
 
+
+function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(find, 'g'), replace);
+}
+
+const generateId = (blog) => {
+    return replaceAll(blog.name, ' ', '-');
+};
+
+
 class BlogApi {
     static getAllBlogs() {
         return new Promise((resolve, reject) => {
             resolve(Object.assign([], blogs));
+        });
+    }
+
+    static saveBlog(blog) {
+        blog = Object.assign({}, blog);
+        return new Promise((resolve, reject) => {
+
+            const minBlogTitleLength = 1;
+            if (blog.name.length < minBlogTitleLength) {
+                reject(`Name must be at least ${minBlogTitleLength} characters.`);
+            }
+
+            if (blog.id) {
+                const existingBlogIndex = blogs.findIndex(a => a.id == blog.id);
+                blogs.splice(existingBlogIndex, 1, blog);
+            } else {
+
+                blog.id = generateId(blog);
+                blog.watchHref = `http://www.pluralsight.com/blogs/${blog.id}`;
+                blogs.push(blog);
+            }
+
+            resolve(blog);
+        });
+    }
+
+    static deleteBlog(blogId) {
+        return new Promise((resolve, reject) => {
+            const indexOfBlogToDelete = blogs.findIndex(blog => {
+                blog.blogId == blogId;
+            });
+            blogs.splice(indexOfBlogToDelete, 1);
+            resolve();
         });
     }
 }
