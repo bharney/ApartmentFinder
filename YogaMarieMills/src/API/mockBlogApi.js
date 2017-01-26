@@ -10,7 +10,7 @@ const blogs = [
     },
     {
         id: 2,
-        name: "Blog Post 2",
+        name: "Hey Elizabeth! I love you <3",
         image: require("../images/ChicagoInABoxAfter.jpg"),
         description: "Ut sed ex eget tortor aliquet mollis. Fusce aliquet urna in mi volutpat accumsan. Maecenas consequat ornare vestibulum. Aenean ultricies leo ullamcorper odio bibendum aliquam. Nunc vel justo magna. Cras dignissim sed lorem et ultricies. Nullam elementum vestibulum elit, eget auctor sem finibus nec. Nullam tellus turpis, vehicula non fermentum eu, hendrerit interdum tellus. Praesent id gravida neque. Praesent ut quam ac augue ultrices gravida. Aliquam erat volutpat. Nulla at nunc posuere, vestibulum augue vitae, volutpat lectus. Maecenas felis purus, tincidunt sed rhoncus sit amet, volutpat et diam.",
         href: "http://www.yogamariemills/YogaThurles/",

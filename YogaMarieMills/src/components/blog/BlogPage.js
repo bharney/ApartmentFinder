@@ -22,45 +22,23 @@ class BlogPage extends React.Component {
             {
                 strategy: findLinkEntities,
                 component: Link,
+            },
+            {
+                strategy: findBlogNameEntities,
+                component: BlogName,
             }
         ]);
 
-        const sampleMarkup =
-            `<div className="mdl-card mdl-shadow--4dp tile">
-                        <div className="mdl-card__title">
-                            <div className="mdl-card__title-text">
-                                <section className="text-center">
-                                    <h2 id="name"></h2>
-                                </section>
-                            </div>
-                        </div>
-                        <div className="mdl-card__media bright-bg-color">
-                            <div className="col-xs-offset-3 col-xs-7 p-t-20 p-b-20">
-                                <img width="200" id="image" src="{require('./images/landing.jpg'}" />
-                            </div>
-                        </div>
-                        <div className="mdl-card__supporting-text">
-                            <p className="dark-color" id="description" ></p>
-                            <a href="http://www.facebook.com">Example link</a><br /><br/ >
-                        </div>
-                    </div>`;
-
-        const blocksFromHTML = convertFromHTML(sampleMarkup);
-        const state = ContentState.createFromBlockArray(blocksFromHTML);
-
         this.state = {
             blog: Object.assign({}, props.blog),
-            editorState: EditorState.createWithContent(
-                state,
-                decorator,
-            )
+            editorState: EditorState.createEmpty()
         };
         this.makeBold = this.makeBold.bind(this);
         this.focus = this.focus.bind(this);
         this.onChange = this.onChange.bind(this);
         this.logState = this.logState.bind(this);
-
     }
+    
     focus() {
         this.refs.editor.focus();
     }
@@ -74,12 +52,34 @@ class BlogPage extends React.Component {
         console.log(convertToRaw(content));
     };
 
-
-
-
     componentWillReceiveProps(nextProps) {
         if (this.props.blog.id != nextProps.blog.id) {
             this.setState({ blog: Object.assign({}, nextProps.blog) });
+
+            const sampleMarkup =
+            `<div className="mdl-card mdl-shadow--4dp tile">
+                        <div className="mdl-card__title">
+                            <div className="mdl-card__title-text">
+                                <section className="text-center">
+                                    <div id="name">${nextProps.blog.name}</div>
+                                </section>
+                            </div>
+                        </div>
+                        <div className="mdl-card__media bright-bg-color">
+                            <div className="col-xs-offset-3 col-xs-7 p-t-20 p-b-20">
+                                <img width="200" id="image" src=${nextProps.blog.image} />
+                            </div>
+                        </div>
+                        <div className="mdl-card__supporting-text">
+                            <p className="dark-color" id="description">${nextProps.blog.description}</p>
+                            <a href="http://www.facebook.com">Example link</a><br /><br/ >
+                        </div>
+                    </div>`;
+
+            const blocksFromHTML = convertFromHTML(sampleMarkup);
+            const contentState = ContentState.createFromBlockArray(blocksFromHTML);
+            const editorState = EditorState.push(this.state.editorState, contentState);
+            this.setState({ editorState });  
         }
     }
 
@@ -101,8 +101,7 @@ class BlogPage extends React.Component {
                     <div className="col-xs-offset-1 col-xs-10">
                         <button className="btn btn-primary" onClick={this.makeBold}><strong>B</strong></button>
                     </div>
-                    <div className="col-xs-offset-1 col-xs-10" onClick={this.focus}>
-
+                    <div className="col-xs-offset-1 col-xs-10 m-t-40" onClick={this.focus}>
                         <Editor
                             ref="editor"
                             editorState={editorState}
@@ -110,7 +109,11 @@ class BlogPage extends React.Component {
                             onChange={this.onChange}
                             />
                     </div>
-                    {JSON.stringify(raw)}
+                    <div className="row">
+                    <div className="col-xs-offset-1 col-xs-10">
+                        {JSON.stringify(raw)}
+                    </div>
+                    </div>
                     <input
                         onClick={this.logState}
                         type="button"
@@ -146,6 +149,29 @@ const Link = (props) => {
         <a href={url}>
             {props.children}
         </a>
+    );
+};
+
+function findBlogNameEntities(contentBlock, callback) {
+    contentBlock.findEntityRanges(
+        (character) => {
+            const entityKey = character.getEntity();
+            return (
+                entityKey !== null &&
+                Entity.get(entityKey).getType() === 'BLOGNAME'
+            );
+        },
+        callback
+    );
+}
+
+const BlogName = (props) => {
+    const {blogName} = Entity.get(props.entityKey).getData();
+    debugger;
+    return (
+        <div id={blogName}>
+            {props.children}
+        </div>
     );
 };
 
