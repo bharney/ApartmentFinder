@@ -22,7 +22,7 @@ class BlogPage extends React.Component {
                                 <h2 className="text-center color-white">Read useful information on Yoga and Ayurveda</h2>
                                 {blogs.map(blog =>
                                     <div className="col-xs-12 col-md-4 m-b-40">
-                                        <div div className="mdl-card mdl-shadow--4dp tile">
+                                        <div className="mdl-card mdl-shadow--4dp tile">
                                             <div className="mdl-card__title">
                                                 <div className="mdl-card__title-text">
                                                     <section className="text-center">

@@ -5,6 +5,7 @@ import HomePage from './components/home/HomePage';
 import CoursesPage from './components/course/CoursesPage';
 import ManageCoursePage from './components/course/ManageCoursePage';
 import BlogPage from './components/blog/BlogPage';
+import BlogEditorPage from './components/blog/BlogEditorPage';
 import BlogsPage from './components/blog/BlogsPage';
 import ManageBlogPage from './components/blog/ManageBlogPage';
 import AboutPage from './components/about/AboutPage';
@@ -33,6 +34,7 @@ export default (
         <Route path="Events/:id" component={EventPage} />
         <Route path="About" component={AboutPage} />
         <Route path="Blogs" component={BlogsPage} />
+        <Route path="BlogEditor/:id" component={BlogEditorPage} />
         <Route path="Blog/:id" component={BlogPage} />
         <Route path="CreateBlog" component={ManageBlogPage} />
         <Route path="EditBlog/:id" component={ManageBlogPage} />

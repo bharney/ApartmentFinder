@@ -7,24 +7,22 @@ import {
     CompositeDecorator,
     ContentBlock,
     ContentState,
-    Editor,
     EditorState,
     Entity,
     convertFromHTML,
     convertToRaw,
+    convertFromRaw,
     RichUtils,
 } from 'draft-js';
+import {
+  Editor,
+  createEditorState,
+} from 'medium-draft';
 
-class BlogPage extends React.Component {
+class BlogEditorPage extends React.Component {
     constructor(props, context) {
         super(props, context);
-        const decorator = new CompositeDecorator([
-            {
-                strategy: findLinkEntities,
-                component: Link,
-            }
-        ]);
-
+       
         const sampleMarkup =
             `<div className="mdl-card mdl-shadow--4dp tile">
                         <div className="mdl-card__title">
@@ -44,16 +42,10 @@ class BlogPage extends React.Component {
                             <a href="http://www.facebook.com">Example link</a><br /><br/ >
                         </div>
                     </div>`;
-
-        const blocksFromHTML = convertFromHTML(sampleMarkup);
-        const state = ContentState.createFromBlockArray(blocksFromHTML);
-
+       
         this.state = {
             blog: Object.assign({}, props.blog),
-            editorState: EditorState.createWithContent(
-                state,
-                decorator,
-            )
+            editorState: createEditorState()
         };
         this.makeBold = this.makeBold.bind(this);
         this.focus = this.focus.bind(this);
@@ -74,12 +66,10 @@ class BlogPage extends React.Component {
         console.log(convertToRaw(content));
     };
 
-
-
-
     componentWillReceiveProps(nextProps) {
         if (this.props.blog.id != nextProps.blog.id) {
-            this.setState({ blog: Object.assign({}, nextProps.blog) });
+            debugger;
+            this.setState({ editorState: createEditorState(convertFromRaw(nextProps.blog)) });
         }
     }
 
@@ -122,32 +112,10 @@ class BlogPage extends React.Component {
     }
 }
 
-BlogPage.propTypes = {
+BlogEditorPage.propTypes = {
     editorState: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
 }
-
-function findLinkEntities(contentBlock, callback) {
-    contentBlock.findEntityRanges(
-        (character) => {
-            const entityKey = character.getEntity();
-            return (
-                entityKey !== null &&
-                Entity.get(entityKey).getType() === 'LINK'
-            );
-        },
-        callback
-    );
-}
-
-const Link = (props) => {
-    const {url} = Entity.get(props.entityKey).getData();
-    return (
-        <a href={url}>
-            {props.children}
-        </a>
-    );
-};
 
 function getBlogById(blogs, id) {
     const blog = blogs.filter(blog => blog.id == id);
@@ -176,7 +144,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BlogPage);
+export default connect(mapStateToProps, mapDispatchToProps)(BlogEditorPage);
 
 
 
