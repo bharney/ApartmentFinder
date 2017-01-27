@@ -663,6 +663,21 @@ section.section {
 }
 
 /* ========================================
+Editor
+========================================= */
+
+.editor {
+  box-sizing: border-box;
+  cursor: text;
+  padding: 16px;
+  border-radius: 2px;
+  margin-bottom: 2em;
+}
+
+.editor :global(.public-DraftEditor-content) {
+  min-height: 140px;
+}
+/* ========================================
 Media queries
 ========================================= */
 
@@ -670,20 +685,19 @@ Media queries
     /* ========================================
     Testimonials
 ========================================= */
-.masonry {
-    column-count: 2;
-    column-gap: 30px;
-    width: 100%;
-    margin-left: -5px;
-    margin-right: -5px;
-}
+    .masonry {
+        column-count: 2;
+        column-gap: 30px;
+        width: 100%;
+        margin-left: -5px;
+        margin-right: -5px;
+    }
 
-.tile-masonry {
-    display: inline-block;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
+    .tile-masonry {
+        display: inline-block;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
 }
 
 @media only screen and (min-device-width : 979px) and (max-device-width : 1024px) {

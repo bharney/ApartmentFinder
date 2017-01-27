@@ -3,21 +3,32 @@ import { IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as blogActions from '../../actions/blogActions';
-import {
-    CompositeDecorator,
-    ContentBlock,
-    ContentState,
-    Editor,
-    EditorState,
-    Entity,
-    convertFromHTML,
-    convertToRaw,
-    RichUtils,
-} from 'draft-js';
+import { CompositeDecorator, ContentBlock, ContentState, EditorState, Entity, convertFromHTML, convertToRaw, RichUtils } from 'draft-js';
+import Editor from 'draft-js-plugins-editor';
+import createInlineToolbarPlugin, { Separator } from 'draft-js-inline-toolbar-plugin';
+import { ItalicButton, BoldButton, UnderlineButton, HeadlineTwoButton, HeadlineThreeButton, UnorderedListButton, OrderedListButton, BlockquoteButton } from 'draft-js-buttons';
+
+const inlineToolbarPlugin = createInlineToolbarPlugin({
+    structure: [
+        BoldButton,
+        ItalicButton,
+        UnderlineButton,
+        Separator,
+        HeadlineTwoButton,
+        HeadlineThreeButton,
+        UnorderedListButton,
+        OrderedListButton,
+        BlockquoteButton,
+    ]
+});
+
+const { InlineToolbar } = inlineToolbarPlugin;
+const plugins = [inlineToolbarPlugin];
 
 class BlogPage extends React.Component {
     constructor(props, context) {
         super(props, context);
+
         const decorator = new CompositeDecorator([
             {
                 strategy: findLinkEntities,
@@ -29,27 +40,45 @@ class BlogPage extends React.Component {
             }
         ]);
 
+        const sampleMarkup =
+            `<div id="name" className="mdl-card__title">
+                    <div className="mdl-card__title-text">
+                        <section className="text-center">
+                            <div>${props.blog.name}</div>
+                        </section>
+                    </div>
+                 </div>
+                 <div id="image" className="mdl-card__media bright-bg-color">
+                    <div className="col-xs-offset-3 col-xs-7 p-t-20 p-b-20">
+                        <img width="200"  src={${props.blog.image}} />
+                    </div>
+                 </div>
+                 <div id="description" className="mdl-card__supporting-text">
+                    <p className="dark-color" >${props.blog.description}</p>
+                    <a href="http://www.facebook.com">Example link</a><br /><br/ >
+                 </div>`;
+
+        const blocksFromHTML = convertFromHTML(sampleMarkup);
+        const state = ContentState.createFromBlockArray(blocksFromHTML);
+
         this.state = {
             blog: Object.assign({}, props.blog),
-            editorState: EditorState.createEmpty()
+            editorState: EditorState.createWithContent(
+                state,
+                decorator,
+            ),
         };
-        this.makeBold = this.makeBold.bind(this);
-        this.focus = this.focus.bind(this);
+
         this.onChange = this.onChange.bind(this);
-        this.logState = this.logState.bind(this);
-    }
-    
-    focus() {
-        this.refs.editor.focus();
+        this.focus = this.focus.bind(this);
     }
 
     onChange(editorState) {
         this.setState({ editorState })
     };
 
-    logState() {
-        const content = this.state.editorState.getCurrentContent();
-        console.log(convertToRaw(content));
+    focus() {
+        this.editor.focus();
     };
 
     componentWillReceiveProps(nextProps) {
@@ -57,68 +86,53 @@ class BlogPage extends React.Component {
             this.setState({ blog: Object.assign({}, nextProps.blog) });
 
             const sampleMarkup =
-            `<div className="mdl-card mdl-shadow--4dp tile">
-                        <div className="mdl-card__title">
-                            <div className="mdl-card__title-text">
-                                <section className="text-center">
-                                    <div id="name">${nextProps.blog.name}</div>
-                                </section>
-                            </div>
-                        </div>
-                        <div className="mdl-card__media bright-bg-color">
-                            <div className="col-xs-offset-3 col-xs-7 p-t-20 p-b-20">
-                                <img width="200" id="image" src=${nextProps.blog.image} />
-                            </div>
-                        </div>
-                        <div className="mdl-card__supporting-text">
-                            <p className="dark-color" id="description">${nextProps.blog.description}</p>
-                            <a href="http://www.facebook.com">Example link</a><br /><br/ >
-                        </div>
-                    </div>`;
+                `<div id="name" className="mdl-card__title">
+                    <div className="mdl-card__title-text">
+                        <section className="text-center">
+                            <div>${nextProps.blog.name}</div>
+                        </section>
+                    </div>
+                 </div>
+                 <div id="image" className="mdl-card__media bright-bg-color">
+                    <div className="col-xs-offset-3 col-xs-7 p-t-20 p-b-20">
+                        <img width="200"  src={${nextProps.blog.image}} />
+                    </div>
+                 </div>
+                 <div id="description" className="mdl-card__supporting-text">
+                    <p className="dark-color" >${nextProps.blog.description}</p>
+                    <a href="http://www.facebook.com">Example link</a><br /><br/ >
+                 </div>`;
 
             const blocksFromHTML = convertFromHTML(sampleMarkup);
             const contentState = ContentState.createFromBlockArray(blocksFromHTML);
             const editorState = EditorState.push(this.state.editorState, contentState);
-            this.setState({ editorState });  
+            this.setState({ editorState });
         }
     }
 
-    makeBold() {
-        this.onChange(RichUtils.toggleInlineStyle(
-            this.state.editorState,
-            'BOLD'
-        ));
-    }
 
 
     render() {
         const { editorState } = this.state;
         const { blog } = this.props;
-        const raw = convertToRaw(this.state.editorState.getCurrentContent());
+
         return (
             <div className="container-fluid m-t-40">
                 <div className="row">
-                    <div className="col-xs-offset-1 col-xs-10">
-                        <button className="btn btn-primary" onClick={this.makeBold}><strong>B</strong></button>
+                    <div className="col-xs-offset-1 col-xs-10 m-t-40">
+                        <div className="mdl-card mdl-shadow--4dp tile p-20">
+                            <div className="editor" onClick={this.focus}>
+                                <Editor
+                                    editorState={editorState}
+                                    className="color-blur"
+                                    onChange={this.onChange}
+                                    plugins={plugins}
+                                    ref={(element) => { this.editor = element; } }
+                                    />
+                                <InlineToolbar />
+                            </div>
+                        </div>
                     </div>
-                    <div className="col-xs-offset-1 col-xs-10 m-t-40" onClick={this.focus}>
-                        <Editor
-                            ref="editor"
-                            editorState={editorState}
-                            className="color-blur"
-                            onChange={this.onChange}
-                            />
-                    </div>
-                    <div className="row">
-                    <div className="col-xs-offset-1 col-xs-10">
-                        {JSON.stringify(raw)}
-                    </div>
-                    </div>
-                    <input
-                        onClick={this.logState}
-                        type="button"
-                        value="Log State"
-                        />
                 </div>
             </div>
         );
@@ -158,7 +172,7 @@ function findBlogNameEntities(contentBlock, callback) {
             const entityKey = character.getEntity();
             return (
                 entityKey !== null &&
-                Entity.get(entityKey).getType() === 'BLOGNAME'
+                Entity.get(entityKey).getType() === 'NAME'
             );
         },
         callback
@@ -167,7 +181,7 @@ function findBlogNameEntities(contentBlock, callback) {
 
 const BlogName = (props) => {
     const {blogName} = Entity.get(props.entityKey).getData();
-    debugger;
+
     return (
         <div id={blogName}>
             {props.children}
@@ -210,13 +224,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(BlogPage);
 
 
 
-// import React, { PropTypes } from 'react';
-// import { Link, IndexLink, browserHistory } from 'react-router';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
+// import React, {PropTypes} from 'react';
+// import {Link, IndexLink, browserHistory } from 'react-router';
+// import {connect} from 'react-redux';
+// import {bindActionCreators} from 'redux';
 // import * as blogActions from '../../actions/blogActions';
-// import { ContentState, convertFromRaw } from 'draft-js';
-// import { Editor, createEditorState, EditorState  } from 'medium-draft';
+// import {ContentState, convertFromRaw } from 'draft-js';
+// import {Editor, createEditorState, EditorState  } from 'medium-draft';
 
 // class BlogPage extends React.Component {
 //     constructor(props, context) {

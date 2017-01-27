@@ -20,7 +20,7 @@ import {loadEvent} from './actions/eventActions';
 import {loadTestimonial} from './actions/testimonialActions';
 import MuiThemeProvider from '../node_modules/material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import 'medium-draft/lib/index.css';
+import '../node_modules/draft-js-inline-toolbar-plugin/lib/plugin.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import '../node_modules/material-design-lite/material.js';
