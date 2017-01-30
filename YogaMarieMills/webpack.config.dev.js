@@ -27,14 +27,14 @@ export default {
     module: {
         loaders: [
             { test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel'] },
-            {test: /(\.css|\.scss)$/, loaders: ["style", "css", "postcss", "sass"] },
+            { test: /(\.css|\.scss)$/, loaders: ["style", "css", "postcss", "sass"] },
             { test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'file' },
             { test: /\.(woff|ttf|eot|svg)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/, loader: 'url-loader?limit=100000' },
             { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&minetype=application/font-woff" },
             { test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
             { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
             { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" },
-            { test: /\.(jpe?g|png|gif)$/i, loader: 'file?name=[name].[ext]' },
+            { test: /\.(jpe?g|png|gif)$/i, loader: 'file?name=images/[name].[ext]' },
             { test: /\.ico$/, loader: 'file?name=[name].[ext]' },
             { test: /\.json$/, loader: "json" }
         ]

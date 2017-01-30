@@ -31,7 +31,7 @@ class HomePage extends React.Component {
     }
 
     blogTile(blog, index) {
-        return <div key={index}>{blog.name}</div>
+        return <div key={index}>{blog.title}</div>
     }
 
     render() {

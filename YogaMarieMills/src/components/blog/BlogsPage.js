@@ -26,7 +26,7 @@ class BlogPage extends React.Component {
                                             <div className="mdl-card__title">
                                                 <div className="mdl-card__title-text">
                                                     <section className="text-center">
-                                                        <h2>{blog.name}</h2>
+                                                        <h2>{blog.title}</h2>
                                                     </section>
                                                 </div>
                                             </div>
@@ -39,7 +39,7 @@ class BlogPage extends React.Component {
                                                 <p className="dark-color">{blog.description}</p>
                                             </div>
                                             <div className="mdl-card__actions mdl-card--border">
-                                                <Link key={blog.route} to={'/' + blog.route + '/' + blog.id} className="dark-color btn btn-default btn-block" activeClassName="active">{blog.name}</Link>
+                                                <Link key={blog.route} to={'/' + blog.route + '/' + blog.id} className="dark-color btn btn-default btn-block" activeClassName="active">Read More</Link>
                                             </div>
                                         </div>
                                     </div>

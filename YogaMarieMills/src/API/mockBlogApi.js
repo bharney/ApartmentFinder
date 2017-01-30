@@ -68,7 +68,11 @@ const generateId = (blog) => {
 class BlogApi {
     static getAllBlogs() {
         return new Promise((resolve, reject) => {
-            resolve(Object.assign([], blogs));
+            fetch('http://localhost:3000/api/blog').then(function(response) { 
+            return response.json();
+            }).then(function(blogs) {
+                resolve(Object.assign([], blogs));
+            });
         });
     }
 

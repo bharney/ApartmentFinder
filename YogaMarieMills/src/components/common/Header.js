@@ -46,8 +46,6 @@ class Header extends React.Component {
         e.preventDefault();
     }
 
-
-
     render() {
         const {navbar_items} = this.props;
 
