@@ -62,14 +62,6 @@ const costs = [
     duration: "4 Classes",
     description: "Yoga for Teens.",
     package: "Yoga for Children"
-  },
-  {
-    id: 9,
-    course: "Hey Mom!",
-    cost: "€45",
-    duration: "Hey Mom!",
-    description: "Hey Mom!",
-    package: "Hey Mom!"
   }
 ];
 

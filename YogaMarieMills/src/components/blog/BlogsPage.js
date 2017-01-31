@@ -9,8 +9,24 @@ class BlogPage extends React.Component {
         super(props, context);
     }
 
+    
+
     render() {
         const {blogs} = this.props;
+       
+        let capDescriptionSize = function (blogs) {
+            for(var blog in blogs)
+            {
+                if( blogs.hasOwnProperty(blog) ) {
+                    if (blogs[blog].description.length > 515) {
+                        blogs[blog].description = blogs[blog].description.substring(0, 515);
+                        blogs[blog].description += "..."
+                    }
+                }
+            }
+        } 
+
+         capDescriptionSize(blogs);
 
         return (
             <div className="mdl-grid dark-color">
@@ -22,7 +38,7 @@ class BlogPage extends React.Component {
                                 <h2 className="text-center color-white">Read useful information on Yoga and Ayurveda</h2>
                                 {blogs.map(blog =>
                                     <div className="col-xs-12 col-md-4 m-b-40">
-                                        <div className="mdl-card mdl-shadow--4dp tile">
+                                        <div className="mdl-card mdl-shadow--4dp max-h-725 tile">
                                             <div className="mdl-card__title">
                                                 <div className="mdl-card__title-text">
                                                     <section className="text-center">
