@@ -7,6 +7,7 @@ import * as dietConsultationActions from '../../actions/dietConsultationActions'
 class DietConsultationPage extends React.Component {
     constructor(props, context) {
         super(props, context);
+
     }
 
     render() {
@@ -20,34 +21,23 @@ class DietConsultationPage extends React.Component {
                             <div className="col-xs-offset-1 col-xs-10 m-b-30">
                                 <h1 className="color-white">Aryuvedic Diet Consultation</h1>
                                 <hr />
-
-                                {dietConsultations.map(dietConsultation =>
-                                    <div>
-                                        <div className="col-xs-12 m-b-30">
-                                            <div className="mdl-card mdl-shadow--4dp p-20">
-                                                <h3>{dietConsultation.description}</h3>
-                                                <h3>Venue: {dietConsultation.venue}</h3>
-                                            </div>
-                                        </div>
-                                        {dietConsultation.consultation_details.map(consultation_details =>
-                                            <div className="col-xs-12 col-md-6 m-b-30">
-                                                <div className="mdl-card mdl-shadow--4dp p-20">
-                                                    <h3>{consultation_details.consultation}<br />
-                                                        {consultation_details.cost}</h3>
-                                                    <p>{consultation_details.session_time}</p>
-                                                    {consultation_details.consultation_specifics.map(consultation_specifics =>
-                                                        <ul className="mdl-list">
-                                                            <li>
-                                                                <p>{consultation_specifics.detail}</p>
-                                                            </li>
-                                                        </ul>
-                                                    )}
-                                                    <p>{consultation_details.details}</p>
-                                                </div>
+                                <div className="col-xs-12 m-b-30">
+                                    <div className="mdl-card mdl-shadow--4dp p-20">
+                                        <h3>{dietConsultations.description}</h3>
+                                        <h3>Venue: {dietConsultations.venue}</h3>
+                                    </div>
+                                    <div className="col-2-masonry">
+                                        {dietConsultations.consultationDetails.map(consultationDetails =>
+                                            <div className="mdl-card mdl-shadow--4dp p-20 m-t-30 tile-masonry bg-color-white">
+                                                <h3>{consultationDetails.title}<br />
+                                                    {consultationDetails.cost}</h3>
+                                                <p>{consultationDetails.session_time}</p>
+                                                <p>{consultationDetails.consultation}</p>
+                                                <p>{consultationDetails.consultation_desc}</p>
                                             </div>
                                         )}
                                     </div>
-                                )}
+                                </div>
                             </div>
                         </div>
                     </div>

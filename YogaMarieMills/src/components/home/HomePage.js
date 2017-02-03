@@ -215,13 +215,15 @@ class HomePage extends React.Component {
                 </section>
                 <section>
                     <div className="container-fluid dark-bg-color t-border">
-                        <div className="row p-t-40 row-center color-white">
+                        <div className="row p-t-40 p-b-40 row-center color-white">
                             <div className="col-xs-offset-1 col-xs-10">
                                 <h2 className="text-center">My Blog</h2>
                                 <p className="text-center">Read useful information on Yoga and Ayurveda</p>
+                                <div className="col-3-masonry">
                                 {blogs.map(blog =>
                                     <BlogTile blog={blog} />)
                                 }
+                                </div>
                             </div>
                         </div>
                     </div>

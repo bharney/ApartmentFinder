@@ -29,7 +29,7 @@ class TestimonialPage extends React.Component {
                                             <p>{testimonial.details}</p>
                                         </div>
 
-                                        <div className="masonry">
+                                        <div className="col-2-masonry">
                                             {testimonial.quotes.map(quotes =>
                                                 <div className="mdl-card mdl-shadow--4dp p-20 m-t-30 tile-masonry bg-color-white">
                                                     <ul className="mdl-list">

@@ -4,8 +4,7 @@ import { Link } from 'react-router';
 
 const Blog = ({blog}) => {
     return (
-    <div className="col-xs-12 col-md-4 m-b-30">
-        <div div className="mdl-card mdl-shadow--4dp bg-white tile">
+        <div div className="mdl-card mdl-shadow--4dp bg-white m-t-30 tile-masonry p-20">
             <div className="mdl-card__title">
                 <div className="mdl-card__title-text">  
                     <section className="text-center">
@@ -25,7 +24,6 @@ const Blog = ({blog}) => {
                     <Link key={blog.route} to={'/' + blog.route + '/'+ blog.id} className="dark-color btn btn-default btn-block" activeClassName="active">Read More</Link>
             </div>
         </div>
-    </div>
     );
 };
 

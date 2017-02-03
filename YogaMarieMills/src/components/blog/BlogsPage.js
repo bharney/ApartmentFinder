@@ -9,57 +9,46 @@ class BlogPage extends React.Component {
         super(props, context);
     }
 
-    
+
 
     render() {
         const {blogs} = this.props;
-       
-        let capDescriptionSize = function (blogs) {
-            for(var blog in blogs)
-            {
-                if( blogs.hasOwnProperty(blog) ) {
-                    if (blogs[blog].description.length > 515) {
-                        blogs[blog].description = blogs[blog].description.substring(0, 515);
-                        blogs[blog].description += "..."
-                    }
-                }
-            }
-        } 
-
-         capDescriptionSize(blogs);
 
         return (
             <div className="mdl-grid dark-color">
-                <div className="ribbon bg-image-landing b-border">
+                <div className="ribbon bg-image-landing">
                     <div className="container-fluid">
-                        <div className="row m-b-30">
-                            <div className="col-xs-offset-1 col-xs-10">
+                        <div className="row m-t-30 m-b-30">
+                            <div className="col-xs-offset-1 col-xs-10 m-b-30">
                                 <h1 className="text-center color-white">My Blog</h1>
                                 <h2 className="text-center color-white">Read useful information on Yoga and Ayurveda</h2>
-                                {blogs.map(blog =>
-                                    <div className="col-xs-12 col-md-4 m-b-40">
-                                        <div className="mdl-card mdl-shadow--4dp max-h-725 tile">
-                                            <div className="mdl-card__title">
-                                                <div className="mdl-card__title-text">
-                                                    <section className="text-center">
-                                                        <h2>{blog.title}</h2>
-                                                    </section>
+                                <hr />
+                                <div className="col-xs-12 m-b-30">
+                                    <div className="col-3-masonry">
+                                        {blogs.map(blog =>
+                                            <div className="mdl-card mdl-shadow--4dp p-20 m-t-30 tile-masonry bg-color-white">
+                                                <div className="mdl-card__title">
+                                                    <div className="mdl-card__title-text">
+                                                        <section className="text-center">
+                                                            <h2>{blog.title}</h2>
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                                <div className="mdl-card__media bright-bg-color">
+                                                    <div className="col-xs-offset-3 col-xs-7 p-t-20 p-b-20">
+                                                        <img width="200" className="img-circle" src={blog.image} />
+                                                    </div>
+                                                </div>
+                                                <div className="mdl-card__supporting-text">
+                                                    <p className="dark-color">{blog.description}</p>
+                                                </div>
+                                                <div className="mdl-card__actions mdl-card--border">
+                                                    <Link key={blog.route} to={'/' + blog.route + '/' + blog.id} className="dark-color btn btn-default btn-block" activeClassName="active">Read More</Link>
                                                 </div>
                                             </div>
-                                            <div className="mdl-card__media bright-bg-color">
-                                                <div className="col-xs-offset-3 col-xs-7 p-t-20 p-b-20">
-                                                    <img width="200" className="img-circle" src={blog.image} />
-                                                </div>
-                                            </div>
-                                            <div className="mdl-card__supporting-text">
-                                                <p className="dark-color">{blog.description}</p>
-                                            </div>
-                                            <div className="mdl-card__actions mdl-card--border">
-                                                <Link key={blog.route} to={'/' + blog.route + '/' + blog.id} className="dark-color btn btn-default btn-block" activeClassName="active">Read More</Link>
-                                            </div>
-                                        </div>
+                                        )}
                                     </div>
-                                )}
+                                </div>
                             </div>
                         </div>
                     </div>

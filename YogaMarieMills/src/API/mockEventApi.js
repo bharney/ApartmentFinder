@@ -85,7 +85,12 @@ const eventTypes = [
 class EventApi {
   static getAllItems() {
     return new Promise((resolve, reject) => {
-      resolve(Object.assign([], eventTypes));
+      fetch('http://localhost:3000/api/events').then(function (response) {
+        return response.json();
+      }).then(function (consultations) {
+        
+        resolve(Object.assign([], consultations));
+      });
     });
   }
 }

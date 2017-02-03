@@ -19,32 +19,29 @@ class EventPage extends React.Component {
                     <div className="container">
                         <div className="row m-b-30">
                             <div className="col-xs-12">
-                                <h1 className="color-white text-center">{eventType.consultation_header}</h1>
+                                <h1 className="color-white text-center">{eventType.header}</h1>
                                 <hr />
                                 <div className="col-xs-12 m-b-30">
                                     <div className="mdl-card mdl-shadow--4dp">
                                         <div className="mdl-card__media bg-image-landing v-h-40 image-text-container">
                                             <div className="text-left align-bottom m-l-20 m-b-20">
                                                 <header className="color-white">
-                                                    <h3 className="m-t-0 m-b-0">{eventType.description}  </h3>
-                                                    <h4 className="m-t-0 m-b-0">Venue: {eventType.venue}</h4>
+                                                    <h4 className="m-t-0 m-b-0"><strong>{eventType.title}</strong></h4>
                                                 </header>
                                             </div>
                                         </div>
-                                        {eventType.consultation_details.map(consultation_details =>
-                                            <div>
-                                                <div className="col-xs-6 text-left p-l-30">
-                                                    <h4><strong>{consultation_details.consultation}<br />
-                                                        {consultation_details.session_time}</strong></h4>
-                                                </div>
-                                                <div className="col-xs-6 text-right p-r-30">
-                                                    <h4><strong>{consultation_details.cost}</strong></h4>
-                                                </div>
-                                                <div className="col-xs-12 t-border-thin p-20">
-                                                    <p>{consultation_details.details}</p>
-                                                </div>
+                                        <div className="col-xs-12">
+                                            <div className="col-xs-6 text-left p-l-30">
+                                                <h4><strong>Venue: {eventType.venue}<br />
+                                                    {eventType.session_time}</strong></h4>
                                             </div>
-                                        )}
+                                            <div className="col-xs-6 text-right p-r-30">
+                                                <h4><strong>{eventType.cost}</strong></h4>
+                                            </div>
+                                            <div className="col-xs-12 t-border-thin p-20">
+                                                <p>{eventType.description}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +70,7 @@ function getEventByType(eventTypes, type) {
 
 function mapStateToProps(state, ownProps) {
     const eventTypeId = ownProps.params.id;
-    let eventType = { id: '', type: '', consultation_header: '', description: '', route: '', venue: '', consultation_details: [{ id: '', session_time: '', consultation: '', details: '', cost: '', consultation_specifics: [{ id: '', detail: '' }] }] };
+    let eventType = { id: '', type: '', header: '', description: '', route: '', venue: '', eventDetails: [{ id: '', session_time: '', title: '', description: '', cost: '' }] };
     if (eventTypeId && state.eventTypes.length > 0) {
         eventType = getEventByType(state.eventTypes, eventTypeId);
     }

@@ -689,8 +689,16 @@ Media queries
     /* ========================================
     Testimonials
 ========================================= */
-    .masonry {
+    .col-2-masonry {
         column-count: 2;
+        column-gap: 30px;
+        width: 100%;
+        margin-left: -5px;
+        margin-right: -5px;
+    }
+
+    .col-3-masonry {
+        column-count: 3;
         column-gap: 30px;
         width: 100%;
         margin-left: -5px;

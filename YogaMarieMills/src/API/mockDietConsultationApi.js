@@ -54,7 +54,11 @@ const dietConsultations = [
 class DietConsultationApi {
   static getAllItems() {
     return new Promise((resolve, reject) => {
-      resolve(Object.assign([], dietConsultations));
+      fetch('http://localhost:3000/api/consultations').then(function (response) {
+        return response.json();
+      }).then(function (consultations) {
+        resolve(Object.assign([], consultations));
+      });
     });
   }
 }
