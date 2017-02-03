@@ -19,14 +19,14 @@ class ClassTypesPage extends React.Component {
                 return (
                     <div key={classType.id} className="row vertical-center bg-color-white">
                         <div className="half">
-                            <img className="img-responsive" src={landing} />
+                            <img className="img-responsive" src={classType.image} />
                         </div>
                         <div className="half">
 
                             <div className="row">
                                 <div className="col-xs-offset-1 col-xs-10 tile m-t--5-percent">
                                     <Link to={'/' + classType.route + '/' + classType.id} className="color">
-                                        <h2 className="page-header banner">{classType.name}</h2>
+                                        <h2 className="page-header banner">{classType.title}</h2>
                                     </Link>
                                     <p >{classType.description}</p>
                                     <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Read More<span className="mdl-button__ripple-container"><span className="mdl-ripple"></span></span></button>
@@ -45,7 +45,7 @@ class ClassTypesPage extends React.Component {
                             <div className="row">
                                 <div className="col-xs-offset-1 col-xs-10 tile m-t--5-percent">
                                     <Link to={'/' + classType.route + '/' + classType.id} className="color">
-                                        <h2 className="page-header banner">{classType.name}</h2>
+                                        <h2 className="page-header banner">{classType.title}</h2>
                                     </Link>
                                     <p>{classType.description}</p>
                                     <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Read More<span className="mdl-button__ripple-container"><span className="mdl-ripple"></span></span></button>
@@ -54,7 +54,7 @@ class ClassTypesPage extends React.Component {
 
                         </div>
                         <div className="half">
-                            <img className="img-responsive" src={landing} />
+                            <img className="img-responsive" src={classType.image} />
                         </div>
                     </div>
                 );

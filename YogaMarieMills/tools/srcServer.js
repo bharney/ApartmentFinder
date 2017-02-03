@@ -76,77 +76,74 @@ apiRouter.get('/blogs',function (req, res) {
         })
     });
 
+
+
+apiRouter.route('/classTypes')
+    .get(function (req, res) {
+        const sqlClassTypes = new sql.Connection(dbconfig, function(err) {
+        let request = new sql.Request(sqlClassTypes);
+        request.query('select * from ClassTypes').then(function (recordset) {
+                res.json(recordset);
+            }).catch(function (err) {
+            });
+        })
+    });
+
+
+apiRouter.route('/costs')
+    .get(function (req, res) {
+        const sqlCosts = new sql.Connection(dbconfig, function(err) {
+        let request = new sql.Request(sqlCosts);
+        request.query('select * from Costs').then(function (recordset) {
+                res.json(recordset);
+            }).catch(function (err) {
+            });
+        })
+    });
+
+
+apiRouter.route('/events')
+    .get(function (req, res) {
+       const sqlEvents = new sql.Connection(dbconfig, function(err) {
+        let request = new sql.Request(sqlEvents);
+        request.query(
+                `select E.id AS id
+                ,E.type AS type
+                ,H.header AS header
+                ,H.short AS short
+                ,H.description AS description 
+                ,H.venue AS venue
+                ,E.time AS session_time
+                ,E.title AS title
+                ,E.description AS description
+                ,E.cost AS cost
+                FROM Headers H
+                JOIN EventTypes E
+                ON H.type = E.type`
+            ).then(function (recordset) {
+                let eventTypes = [];
+                for (let eventProp in recordset) {
+                    if (recordset.hasOwnProperty(eventProp)) {
+                        eventTypes.push({
+                            header: recordset[eventProp].header,
+                            type: recordset[eventProp].type,
+                            short: recordset[eventProp].short,
+                            description: recordset[eventProp].description,
+                            venue: recordset[eventProp].venue,
+                            session_time: recordset[eventProp].session_time,
+                            title: recordset[eventProp].title,
+                            consultation: recordset[eventProp].description,
+                            cost: recordset[eventProp].cost
+                        });
+                    }
+                }
+                res.json(eventTypes);
+            }).catch(function (err) {
+            });
+        })
+    });
+
 app.use('/api', apiRouter);
-
-
-// apiRouter.route('/classTypes')
-//     .get(function (req, res) {
-//         sql.connect(dbconfig).then(function () {
-//             new sql.Request().query('select * from ClassTypes').then(function (recordset) {
-//                 res.json(recordset);
-//             }).catch(function (err) {
-//             });
-//         }).catch(function (err) {
-//         });
-//     });
-
-// app.use('/api', apiRouter);
-
-// apiRouter.route('/costs')
-//     .get(function (req, res) {
-//         sql.connect(dbconfig).then(function () {
-//             new sql.Request().query('select * from Costs').then(function (recordset) {
-//                 res.json(recordset);
-//             }).catch(function (err) {
-//             });
-//         }).catch(function (err) {
-//         });
-//     });
-
-// app.use('/api', apiRouter);
-
-// apiRouter.route('/events')
-//     .get(function (req, res) {
-//         sql.connect(dbconfig).then(function () {
-//             new sql.Request().query(
-//                 `select E.id AS id
-//                 ,E.type AS type
-//                 ,H.header AS header
-//                 ,H.short AS short
-//                 ,H.description AS description 
-//                 ,H.venue AS venue
-//                 ,E.time AS session_time
-//                 ,E.title AS title
-//                 ,E.description AS description
-//                 ,E.cost AS cost
-//                 FROM Headers H
-//                 JOIN EventTypes E
-//                 ON H.type = E.type`
-//             ).then(function (recordset) {
-//                 let eventTypes = [];
-//                 for (let eventProp in recordset) {
-//                     if (recordset.hasOwnProperty(eventProp)) {
-//                         eventTypes.push({
-//                             header: recordset[eventProp].header,
-//                             type: recordset[eventProp].type,
-//                             short: recordset[eventProp].short,
-//                             description: recordset[eventProp].description,
-//                             venue: recordset[eventProp].venue,
-//                             session_time: recordset[eventProp].session_time,
-//                             title: recordset[eventProp].title,
-//                             consultation: recordset[eventProp].description,
-//                             cost: recordset[eventProp].cost
-//                         });
-//                     }
-//                 }
-//                 res.json(eventTypes);
-//             }).catch(function (err) {
-//             });
-//         }).catch(function (err) {
-//         });
-//     });
-
-// app.use('/api', apiRouter);
 
 app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, '../src/index.html'));

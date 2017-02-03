@@ -74,7 +74,11 @@ const classTypes = [
 class ClassTypesApi {
   static getAllClassTypes() {
     return new Promise((resolve, reject) => {
+      fetch('http://localhost:3000/api/classTypes').then(function (response) {
+        return response.json();
+      }).then(function (classTypes) {
         resolve(Object.assign([], classTypes));
+      });
     });
   }
 }

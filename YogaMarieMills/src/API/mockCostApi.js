@@ -68,7 +68,11 @@ const costs = [
 class CostApi {
   static getAllItems() {
     return new Promise((resolve, reject) => {
-      resolve(Object.assign([], costs));
+      fetch('http://localhost:3000/api/costs').then(function (response) {
+        return response.json();
+      }).then(function (costs) {
+        resolve(Object.assign([], costs));
+      });
     });
   }
 }
