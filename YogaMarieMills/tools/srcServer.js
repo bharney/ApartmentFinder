@@ -10,7 +10,7 @@ import sql from 'mssql';
 const port = 3000;
 const app = express();
 const compiler = webpack(config);
-const dbconfig = "mssql://Application:!Testing123@BPHSERVER/YogaMarieMills"
+const dbconfig = "mssql://Application:!Testing123@BPHSERVER/YogaMarieMills";
 
 app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
@@ -60,9 +60,9 @@ apiRouter.get('/consultations', function (req, res) {
             };
             res.json(consultation);
         }).catch(function (err) {
-            console.log("consultations: " + err)
+            console.log("consultations: " + err);
         });
-    })
+    });
 });
 
 apiRouter.get('/blogs', function (req, res) {
@@ -71,9 +71,9 @@ apiRouter.get('/blogs', function (req, res) {
         request.query('SELECT * FROM Blogs').then(function (recordset) {
             res.json(recordset);
         }).catch(function (err) {
-            console.log("blogs: " + err)
+            console.log("blogs: " + err);
         });
-    })
+    });
 });
 
 
@@ -85,8 +85,9 @@ apiRouter.route('/classTypes')
             request.query('select * from ClassTypes').then(function (recordset) {
                 res.json(recordset);
             }).catch(function (err) {
+                console.log("classTypes: " + err);
             });
-        })
+        });
     });
 
 
@@ -97,8 +98,9 @@ apiRouter.route('/costs')
             request.query('SELECT * FROM Costs').then(function (recordset) {
                 res.json(recordset);
             }).catch(function (err) {
+                console.log("costs: " + err);
             });
-        })
+        });
     });
 
 
@@ -139,8 +141,9 @@ apiRouter.route('/events')
                 }
                 res.json(eventTypes);
             }).catch(function (err) {
+                console.log("events: " + err);
             });
-        })
+        });
     });
 
 apiRouter.route('/massageTypes')
@@ -154,7 +157,7 @@ apiRouter.route('/massageTypes')
                 ,H.short AS short
                 ,H.description AS description 
                 ,H.venue AS venue
-                ,M.time AS session_time
+                ,M.session_time AS session_time
                 ,M.title AS title
                 ,M.description AS description
                 ,M.cost AS cost
@@ -165,52 +168,61 @@ apiRouter.route('/massageTypes')
                 let lineItems = [];
                 let massageDetails = [];
                 let massageTypes = [];
-                for (let massageProp in recordset) {
-                    if (recordset.hasOwnProperty(massageProp)) {
-                        switch (recordset[messageProp].type) {
-                            case HeadHandsFeetAb:
-                                for (let prop in recordset) {
-                                    for (let lineItem in recordset) {
-                                        lineItems.push({
-                                            detail: recordset[lineItem].detail,
+                for (let messageType in recordset) {
+                    if (recordset.hasOwnProperty(messageType)) {
+                        switch (recordset[messageType].type) {
+                            case "HeadHandsFeetAb":
+                                for (let messageDetail in recordset) {
+                                    if (recordset.hasOwnProperty(messageDetail)) {
+                                        // for (let lineItem in recordset) {
+                                        //     if (recordset.hasOwnProperty(lineItem)) {
+                                        //         lineItems.push({
+                                        //             detail: recordset[lineItem].detail,
+                                        //         });
+                                        //     }
+                                        // }
+                                        massageDetails.push({
+                                            session_time: recordset[messageDetail].session_time,
+                                            title: recordset[messageDetail].title,
+                                            description: recordset[messageDetail].description,
+                                            cost: recordset[messageDetail].cost
+                                            //,lineItems: lineItems
                                         });
                                     }
-                                    massageDetails.push({
-                                        session_time: recordset[prop].session_time,
-                                        title: recordset[prop].title,
-                                        description: recordset[prop].description,
-                                        cost: recordset[prop].cost,
-                                        lineItems: lineItems
-                                    });
                                 }
                                 massageTypes = {
-                                    header: recordset[massageProp].header,
-                                    short: recordset[massageProp].short,
-                                    description: recordset[massageProp].description,
-                                    venue: recordset[massageProp].venue,
+                                    header: recordset[messageType].header,
+                                    short: recordset[messageType].short,
+                                    description: recordset[messageType].description,
+                                    venue: recordset[messageType].venue,
                                     massageDetails: massageDetails
                                 };
 
                                 break;
-                            case Body:
-                                for (let prop in recordset) {
-                                    for (let lineItem in recordset) {
-                                        lineItems.push({
-                                            detail: recordset[lineItem].detail,
+                            case "Body":
+                                for (let messageDetail in recordset) {
+                                    if (recordset.hasOwnProperty(messageDetail)) {
+                                        // for (let lineItem in recordset) {
+                                        //     if (recordset.hasOwnProperty(lineItem)) {
+                                        //         lineItems.push({
+                                        //             detail: recordset[lineItem].detail,
+                                        //         });
+                                        //     }
+                                        // }
+                                        massageDetails.push({
+                                            session_time: recordset[messageDetail].session_time,
+                                            title: recordset[messageDetail].title,
+                                            description: recordset[messageDetail].description,
+                                            cost: recordset[messageDetail].cost
+                                            //,lineItems: lineItems
                                         });
                                     }
-                                    massageDetails.push({
-                                        session_time: recordset[prop].session_time,
-                                        title: recordset[prop].title,
-                                        description: recordset[prop].description,
-                                        cost: recordset[prop].cost
-                                    });
                                 }
                                 massageTypes.push({
-                                    header: recordset[massageProp].header,
-                                    short: recordset[massageProp].short,
-                                    description: recordset[massageProp].description,
-                                    venue: recordset[massageProp].venue,
+                                    header: recordset[messageType].header,
+                                    short: recordset[messageType].short,
+                                    description: recordset[messageType].description,
+                                    venue: recordset[messageType].venue,
                                     massageDetails: massageDetails
                                 });
                                 break;
@@ -221,41 +233,44 @@ apiRouter.route('/massageTypes')
                 }
                 res.json(massageTypes);
             }).catch(function (err) {
+                console.log("massageTypes: " + err);
             });
-        })
+        });
     });
 
 
 apiRouter.route('/schedules')
     .get(function (req, res) {
-        const sqlSchedule = new sql.Connection(dbconfig, function (err) {
-            let request = new sql.Request(sqlSchedule);
+        const sqlSchedules = new sql.Connection(dbconfig, function (err) {
+            let request = new sql.Request(sqlSchedules);
             request.query(
                 `SELECT S.id AS id
-                ,S.type AS type
-                ,S.venue AS venue
-                ,S.time AS session_time
-                ,S.title AS title
-                ,S.description AS description
-                ,S.cost AS cost
-                ,D.session_time AS session_time
-                ,D.class AS class
-                FROM Schedule S
-                JOIN ScheduleDetails D
-                ON S.id = D.id`
+                 ,S.type AS type
+                 ,H.venue AS venue
+                 ,H.header AS header
+                 ,H.description AS description
+                 ,S.session_date AS session_date
+                 ,D.session_time AS session_time
+                 ,D.class AS class
+                 FROM Schedules S
+                 JOIN ScheduleDetails D
+                 ON S.id = D.id
+                 JOIN Headers H
+                 ON S.type = H.type`
             ).then(function (recordset) {
                 let dates = [];
                 let schedules = [];
                 for (let dateProp in recordset) {
-                    if (recordset.hasOwnProperty(massageProp)) {
+                    if (recordset.hasOwnProperty(dateProp)) {
                         for (let prop in recordset) {
-                            schedules.push({
-                                session_time: recordset[prop].session_time,
-                                title: recordset[prop].title,
-                                description: recordset[prop].description,
-                                cost: recordset[prop].cost,
-                                lineItems: lineItems
-                            });
+                            if (recordset.hasOwnProperty(prop)) {
+                                schedules.push({
+                                    session_time: recordset[prop].session_time,
+                                    title: recordset[prop].title,
+                                    description: recordset[prop].description,
+                                    cost: recordset[prop].cost
+                                });
+                            }
                         }
                         dates.push({
                             session_time: recordset[dateProp].header,
@@ -264,10 +279,11 @@ apiRouter.route('/schedules')
                         });
                     }
                 }
-                res.json(massageTypes);
+                res.json(schedules);
             }).catch(function (err) {
+                console.log("schedules: " + err);
             });
-        })
+        });
     });
 
 
@@ -305,8 +321,9 @@ apiRouter.route('/testimonials')
                 };
                 res.json(testimonials);
             }).catch(function (err) {
+                console.log("testimonials: " + err);
             });
-        })
+        });
     });
 
 apiRouter.route('/navbars')
@@ -315,23 +332,22 @@ apiRouter.route('/navbars')
             let request = new sql.Request(sqlNavbars);
             request.query(
                 `SELECT id
-                ,type
-                ,name
-                ,href
-                ,title
-                ,route
-                ,component
-                ,parentId
-                FROM Navbars`
+                 ,type
+                 ,name
+                 ,href
+                 ,name
+                 ,route
+                 ,parent_id
+                 FROM Navbar_Items`
             ).then(function (recordset) {
-                let navbar_times = [];
+                let navbar_items = [];
                 let submenu_items = [];
-                for (let prop in recordset) {
-                    if (recordset.hasOwnProperty(prop)) {
-                        if (recordset[prop].parentId != "") {
+                for (let navbar_prop in recordset) {
+                    if (recordset.hasOwnProperty(navbar_prop)) {
+                        if (recordset[navbar_prop].parentId != "") {
                             for (let submenu_prop in recordset) {
                                 if (recordset.hasOwnProperty(submenu_prop)) {
-                                    if (recordset[submenu_prop].id == recordset[prop].parentId) {
+                                    if (recordset[submenu_prop].id == recordset[navbar_prop].parentId) {
                                         submenu_items.push({
                                             id: recordset[submenu_prop].id,
                                             name: recordset[submenu_prop].name,
@@ -342,10 +358,10 @@ apiRouter.route('/navbars')
                                 }
                             }
                             navbar_items.push({
-                                id: recordset[prop].id,
-                                name: recordset[prop].name,
-                                href: recordset[prop].href,
-                                route: recordset[prop].route,
+                                id: recordset[navbar_prop].id,
+                                name: recordset[navbar_prop].name,
+                                href: recordset[navbar_prop].href,
+                                route: recordset[navbar_prop].route,
                                 submenu_items: submenu_items
                             });
                         }
@@ -353,8 +369,9 @@ apiRouter.route('/navbars')
                 }
                 res.json(navbar_items);
             }).catch(function (err) {
+                console.log("navbars: " + err);
             });
-        })
+        });
     });
 
 

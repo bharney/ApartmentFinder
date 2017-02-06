@@ -22,7 +22,6 @@ class ClassTypesPage extends React.Component {
                             <img className="img-responsive" src={classType.image} />
                         </div>
                         <div className="half">
-
                             <div className="row">
                                 <div className="col-xs-offset-1 col-xs-10 tile m-t--5-percent">
                                     <Link to={'/' + classType.route + '/' + classType.id} className="color">
