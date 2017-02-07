@@ -58,7 +58,7 @@ class Header extends React.Component {
             );
         };
         let drawerItems = function (item) {
-            if (item.subMenu) {
+            if (item.subMenu.length > 0) {
                 return (
                     <ListItem
                         primaryText={item.name}
@@ -85,7 +85,7 @@ class Header extends React.Component {
             );
         };
         let navItems = function (item) {
-            if (item.subMenu) {
+            if (item.subMenu.length > 0) {
                 return (
                     <div id={item.name}>
                         <Link key={item.route} to="" onClick={that.preventRedirect} className="mdl-tabs__tab nav-links p-l-10 p-r-10">

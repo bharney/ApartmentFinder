@@ -335,38 +335,41 @@ apiRouter.route('/navbars')
                  ,type
                  ,name
                  ,href
-                 ,name
                  ,route
                  ,parent_id
                  FROM Navbar_Items`
             ).then(function (recordset) {
                 let navbar_items = [];
-                let submenu_items = [];
+                
                 for (let navbar_prop in recordset) {
                     if (recordset.hasOwnProperty(navbar_prop)) {
-                        if (recordset[navbar_prop].parentId != "") {
-                            for (let submenu_prop in recordset) {
-                                if (recordset.hasOwnProperty(submenu_prop)) {
-                                    if (recordset[submenu_prop].id == recordset[navbar_prop].parentId) {
-                                        submenu_items.push({
-                                            id: recordset[submenu_prop].id,
-                                            name: recordset[submenu_prop].name,
-                                            href: recordset[submenu_prop].href,
-                                            route: recordset[submenu_prop].route,
-                                        });
-                                    }
-                                }
-                            }
+                        if (recordset[navbar_prop].parent_id == null) {
+                            let submenu_items = [];
                             navbar_items.push({
                                 id: recordset[navbar_prop].id,
                                 name: recordset[navbar_prop].name,
                                 href: recordset[navbar_prop].href,
                                 route: recordset[navbar_prop].route,
-                                submenu_items: submenu_items
+                                subMenu: submenu_items
                             });
+                            for (let submenu_prop in recordset) {
+                                if (recordset.hasOwnProperty(submenu_prop)) {
+                                    if (recordset[submenu_prop].parent_id != null) {
+                                        if (recordset[navbar_prop].id == recordset[submenu_prop].parent_id) {
+                                            submenu_items.push({
+                                                id: recordset[submenu_prop].id,
+                                                name: recordset[submenu_prop].name,
+                                                href: recordset[submenu_prop].href,
+                                                route: recordset[submenu_prop].route,
+                                            });
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
+
                 res.json(navbar_items);
             }).catch(function (err) {
                 console.log("navbars: " + err);

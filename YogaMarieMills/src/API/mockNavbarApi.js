@@ -125,7 +125,11 @@ const navbar_items = [
 class NavbarApi {
   static getAllItems() {
     return new Promise((resolve, reject) => {
-      resolve(Object.assign([], navbar_items));
+      fetch('http://localhost:3000/api/navbars').then(function (response) {
+        return response.json();
+      }).then(function (navbar_items) {
+        resolve(Object.assign([], navbar_items));
+      });
     });
   }
 }

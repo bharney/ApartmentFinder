@@ -36,7 +36,11 @@ const testimonials = [
 class TestimonialApi {
   static getAllItems() {
     return new Promise((resolve, reject) => {
-      resolve(Object.assign([], testimonials));
+      fetch('http://localhost:3000/api/testimonials').then(function (response) {
+        return response.json();
+      }).then(function (testimonials) {
+        resolve(Object.assign([], testimonials));
+      });
     });
   }
 }

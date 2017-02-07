@@ -184,7 +184,11 @@ const massageTypes = [
 class MassageApi {
   static getAllItems() {
     return new Promise((resolve, reject) => {
-      resolve(Object.assign([], massageTypes));
+      fetch('http://localhost:3000/api/massageTypes').then(function (response) {
+        return response.json();
+      }).then(function (massageTypes) {
+        resolve(Object.assign([], massageTypes));
+      });
     });
   }
 }
