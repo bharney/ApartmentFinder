@@ -11,14 +11,22 @@ class MassagePage extends React.Component {
 
     render() {
         const {massageType} = this.props;
-
+// ,M.type AS type
+//                 ,H.header AS header
+//                 ,H.short AS short
+//                 ,H.description AS description 
+//                 ,H.venue AS venue
+//                 ,M.session_time AS session_time
+//                 ,M.title AS title
+//                 ,M.description AS description
+//                 ,M.cost AS cost
         return (
             <div className="mdl-grid dark-color bg-color">
                 <div className="ribbon bg-image-landing">
                     <div className="container-fluid m-t-30 m-b-30">
                         <div className="row m-b-30">
                             <div className="col-xs-offset-1 col-xs-10">
-                                <h1 className="text-center color-white">{massageType.consultation_header}</h1>
+                                <h1 className="text-center color-white">{massageType.header}</h1>
                                 <hr />
                                 <div className="col-xs-12 m-b-30">
                                     <div className="mdl-card mdl-shadow--4dp p-20 text-center">

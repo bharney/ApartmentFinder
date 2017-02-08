@@ -50,7 +50,11 @@ const schedules = [
 class ScheduleApi {
   static getAllItems() {
     return new Promise((resolve, reject) => {
-      resolve(Object.assign([], schedules));
+      fetch('http://localhost:3000/api/schedules').then(function (response) {
+        return response.json();
+      }).then(function (schedules) {
+        resolve(Object.assign([], schedules));
+      });
     });
   }
 }

@@ -123,23 +123,7 @@ apiRouter.route('/events')
                 JOIN EventTypes E
                 ON H.type = E.type`
             ).then(function (recordset) {
-                let eventTypes = [];
-                for (let eventProp in recordset) {
-                    if (recordset.hasOwnProperty(eventProp)) {
-                        eventTypes.push({
-                            header: recordset[eventProp].header,
-                            type: recordset[eventProp].type,
-                            short: recordset[eventProp].short,
-                            description: recordset[eventProp].description,
-                            venue: recordset[eventProp].venue,
-                            session_time: recordset[eventProp].session_time,
-                            title: recordset[eventProp].title,
-                            consultation: recordset[eventProp].description,
-                            cost: recordset[eventProp].cost
-                        });
-                    }
-                }
-                res.json(eventTypes);
+                res.json(recordset);
             }).catch(function (err) {
                 console.log("events: " + err);
             });
@@ -159,79 +143,13 @@ apiRouter.route('/massageTypes')
                 ,H.venue AS venue
                 ,M.session_time AS session_time
                 ,M.title AS title
-                ,M.description AS description
+                ,M.description AS details
                 ,M.cost AS cost
                 FROM Headers H
                 JOIN MassageTypes M
                 ON H.type = M.type`
             ).then(function (recordset) {
-                let lineItems = [];
-                let massageDetails = [];
-                let massageTypes = [];
-                for (let messageType in recordset) {
-                    if (recordset.hasOwnProperty(messageType)) {
-                        switch (recordset[messageType].type) {
-                            case "HeadHandsFeetAb":
-                                for (let messageDetail in recordset) {
-                                    if (recordset.hasOwnProperty(messageDetail)) {
-                                        // for (let lineItem in recordset) {
-                                        //     if (recordset.hasOwnProperty(lineItem)) {
-                                        //         lineItems.push({
-                                        //             detail: recordset[lineItem].detail,
-                                        //         });
-                                        //     }
-                                        // }
-                                        massageDetails.push({
-                                            session_time: recordset[messageDetail].session_time,
-                                            title: recordset[messageDetail].title,
-                                            description: recordset[messageDetail].description,
-                                            cost: recordset[messageDetail].cost
-                                            //,lineItems: lineItems
-                                        });
-                                    }
-                                }
-                                massageTypes = {
-                                    header: recordset[messageType].header,
-                                    short: recordset[messageType].short,
-                                    description: recordset[messageType].description,
-                                    venue: recordset[messageType].venue,
-                                    massageDetails: massageDetails
-                                };
-
-                                break;
-                            case "Body":
-                                for (let messageDetail in recordset) {
-                                    if (recordset.hasOwnProperty(messageDetail)) {
-                                        // for (let lineItem in recordset) {
-                                        //     if (recordset.hasOwnProperty(lineItem)) {
-                                        //         lineItems.push({
-                                        //             detail: recordset[lineItem].detail,
-                                        //         });
-                                        //     }
-                                        // }
-                                        massageDetails.push({
-                                            session_time: recordset[messageDetail].session_time,
-                                            title: recordset[messageDetail].title,
-                                            description: recordset[messageDetail].description,
-                                            cost: recordset[messageDetail].cost
-                                            //,lineItems: lineItems
-                                        });
-                                    }
-                                }
-                                massageTypes.push({
-                                    header: recordset[messageType].header,
-                                    short: recordset[messageType].short,
-                                    description: recordset[messageType].description,
-                                    venue: recordset[messageType].venue,
-                                    massageDetails: massageDetails
-                                });
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-                res.json(massageTypes);
+                res.json(recordset);
             }).catch(function (err) {
                 console.log("massageTypes: " + err);
             });
@@ -244,42 +162,81 @@ apiRouter.route('/schedules')
         const sqlSchedules = new sql.Connection(dbconfig, function (err) {
             let request = new sql.Request(sqlSchedules);
             request.query(
-                `SELECT S.id AS id
-                 ,S.type AS type
-                 ,H.venue AS venue
+                `SELECT
+				  H.id
+				 ,H.type
+				 ,H.venue AS venue
                  ,H.header AS header
                  ,H.description AS description
+                 ,NULL AS session_date
+                 ,NULL AS session_time
+                 ,NULL AS class
+				 ,NULL AS parent_id
+				 FROM Headers H
+				 WHERE H.type IN (SELECT SC.type FROM Schedules SC)
+
+				 UNION ALL
+
+				SELECT 
+				  S.id
+                 ,S.type AS type
+				 ,NULL as venue
+				 ,NULL as header
+				 ,NULL as description
                  ,S.session_date AS session_date
+                 ,NULL AS session_time
+                 ,NULL AS class
+				 ,NULL AS parent_id
+                 FROM Schedules S
+
+				 UNION ALL
+
+				 SELECT 
+				  D.id
+                 ,D.type AS type
+				 ,NULL as venue
+				 ,NULL as header
+				 ,NULL as description
+                 ,NULL AS session_date
                  ,D.session_time AS session_time
                  ,D.class AS class
-                 FROM Schedules S
-                 JOIN ScheduleDetails D
-                 ON S.id = D.id
-                 JOIN Headers H
-                 ON S.type = H.type`
+				 ,D.parent_id AS parent_id
+                 FROM ScheduleDetails D`
             ).then(function (recordset) {
-                let dates = [];
-                let schedules = [];
-                for (let dateProp in recordset) {
-                    if (recordset.hasOwnProperty(dateProp)) {
-                        for (let prop in recordset) {
-                            if (recordset.hasOwnProperty(prop)) {
-                                schedules.push({
-                                    session_time: recordset[prop].session_time,
-                                    title: recordset[prop].title,
-                                    description: recordset[prop].description,
-                                    cost: recordset[prop].cost
-                                });
+                let schedulePage = {
+                    header: recordset[0].header,
+                    venue: recordset[0].venue,
+                    description: recordset[0].description,
+                    session_dates: []
+                };
+                let counter = 0;
+                for (let date_prop in recordset) {
+                    if (recordset.hasOwnProperty(date_prop)) {
+                        if (recordset[date_prop].session_date != null) {
+                            let session_dates = {
+                                session_date: recordset[date_prop].session_date,
+                                session_details: []
+                            };
+                            schedulePage.session_dates.push(session_dates);
+
+                            for (let time_prop in recordset) {
+                                if (recordset.hasOwnProperty(time_prop)) {
+                                    if (recordset[time_prop].session_time != null) {
+                                        if (recordset[date_prop].id == recordset[time_prop].parent_id) {
+                                            let session_details = {
+                                                session_time: recordset[time_prop].session_time,
+                                                class: recordset[time_prop].class
+                                            };
+                                            schedulePage.session_dates[counter].session_details.push(session_details);
+                                        }
+                                    }
+                                }
                             }
+                            counter++;
                         }
-                        dates.push({
-                            session_time: recordset[dateProp].header,
-                            class: recordset[dateProp].class,
-                            schedules: schedules
-                        });
                     }
                 }
-                res.json(schedules);
+                res.json(schedulePage);
             }).catch(function (err) {
                 console.log("schedules: " + err);
             });
@@ -340,7 +297,7 @@ apiRouter.route('/navbars')
                  FROM Navbar_Items`
             ).then(function (recordset) {
                 let navbar_items = [];
-                
+
                 for (let navbar_prop in recordset) {
                     if (recordset.hasOwnProperty(navbar_prop)) {
                         if (recordset[navbar_prop].parent_id == null) {

@@ -87,7 +87,7 @@ class Header extends React.Component {
         let navItems = function (item) {
             if (item.subMenu.length > 0) {
                 return (
-                    <div id={item.name}>
+                    <div className="hover" id={item.name}>
                         <Link key={item.route} to="" onClick={that.preventRedirect} className="mdl-tabs__tab nav-links p-l-10 p-r-10">
                             {item.name} &nbsp;<span className="caret" aria-hidden="true"></span>
                         </Link>
