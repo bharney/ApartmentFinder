@@ -135,21 +135,66 @@ apiRouter.route('/massageTypes')
         const sqlMassageTypes = new sql.Connection(dbconfig, function (err) {
             let request = new sql.Request(sqlMassageTypes);
             request.query(
-                `SELECT M.id AS id
+                `SELECT
+				  H.id
+				 ,H.type
+				 ,H.venue AS venue
+                 ,H.header AS header
+                 ,H.description AS description
+                 ,NULL AS session_time
+                 ,NULL AS title
+				 ,NULL AS details
+				 ,NULL AS cost
+				 FROM Headers H
+				 WHERE H.type IN (SELECT M.type FROM MassageTypes M)
+
+				 UNION ALL
+
+				 SELECT M.id AS id
                 ,M.type AS type
-                ,H.header AS header
-                ,H.short AS short
-                ,H.description AS description 
-                ,H.venue AS venue
+				,NULL as venue
+				,NULL as header
+				,NULL as description
                 ,M.session_time AS session_time
                 ,M.title AS title
                 ,M.description AS details
                 ,M.cost AS cost
-                FROM Headers H
-                JOIN MassageTypes M
-                ON H.type = M.type`
+                FROM MassageTypes M`
             ).then(function (recordset) {
-                res.json(recordset);
+                let massagePage = [];
+                let counter = 0;
+                for (let header_prop in recordset) {
+                    if (recordset.hasOwnProperty(header_prop)) {
+                        if (recordset[header_prop].header != null) {
+                            let massage_header = {
+                                header: recordset[header_prop].header,
+                                venue: recordset[header_prop].venue,
+                                description: recordset[header_prop].description,
+                                type: recordset[header_prop].type,
+                                massage_details: []
+                            };
+                            massagePage.push(massage_header);
+                            for (let massage_prop in recordset) {
+                                if (recordset.hasOwnProperty(massage_prop)) {
+                                    if (recordset[massage_prop].session_time != null) {
+                                        if (recordset[header_prop].type == recordset[massage_prop].type) {
+                                            let massage_details = {
+                                                session_time: recordset[massage_prop].session_time,
+                                                title: recordset[massage_prop].title,
+                                                details: recordset[massage_prop].details,
+                                                cost: recordset[massage_prop].cost
+                                            };
+                                            massagePage[counter].massage_details.push(massage_details);
+                                        }
+                                    }
+                                }
+                            }
+                            counter++;
+                        }
+                    }
+                }
+
+                res.json(massagePage);
             }).catch(function (err) {
                 console.log("massageTypes: " + err);
             });
@@ -249,33 +294,45 @@ apiRouter.route('/testimonials')
         const sqlTestimonials = new sql.Connection(dbconfig, function (err) {
             let request = new sql.Request(sqlTestimonials);
             request.query(
-                `SELECT T.id AS id
+                `SELECT
+				  H.id
+				 ,H.type
+				 ,H.venue AS venue
+                 ,H.header AS header
+                 ,H.description AS description
+                 ,NULL AS testimonial
+                 ,NULL AS name
+				 FROM Headers H
+				 WHERE H.type IN (SELECT T.type FROM Testimonials T)
+
+				 UNION ALL
+
+				 SELECT T.id AS id
                 ,T.type AS type
-                ,H.header AS header
-                ,H.short AS short
-                ,H.description AS description 
+				,NULL as venue
+				,NULL as header
+				,NULL as description
                 ,T.testimonial AS testimonial
                 ,T.name AS name
-                FROM Headers H
-                JOIN Testimonials T
-                ON H.type = T.type`
+                FROM Testimonials T`
             ).then(function (recordset) {
-                let testimonialDetails = [];
-                for (let testimonialProp in recordset) {
-                    if (recordset.hasOwnProperty(testimonialProp)) {
-                        testimonialDetails.push({
-                            testimonial: recordset[testimonialProp].testimonial,
-                            name: recordset[testimonialProp].name,
-                        });
-                    }
-                }
-
                 let testimonials = {
                     header: recordset[0].header,
-                    short: recordset[0].short,
+                    venue: recordset[0].venue,
                     description: recordset[0].description,
-                    testimonialDetails: testimonialDetails
+                    testimonial_details: []
                 };
+                for (let testimonialProp in recordset) {
+                    if (recordset.hasOwnProperty(testimonialProp)) {
+                        if (recordset[testimonialProp].testimonial != null) {
+                            let testimonial = {
+                                testimonial: recordset[testimonialProp].testimonial,
+                                name: recordset[testimonialProp].name
+                            };
+                            testimonials.testimonial_details.push(testimonial);
+                        }
+                    }
+                }
                 res.json(testimonials);
             }).catch(function (err) {
                 console.log("testimonials: " + err);

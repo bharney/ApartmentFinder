@@ -11,15 +11,6 @@ class MassagePage extends React.Component {
 
     render() {
         const {massageType} = this.props;
-// ,M.type AS type
-//                 ,H.header AS header
-//                 ,H.short AS short
-//                 ,H.description AS description 
-//                 ,H.venue AS venue
-//                 ,M.session_time AS session_time
-//                 ,M.title AS title
-//                 ,M.description AS description
-//                 ,M.cost AS cost
         return (
             <div className="mdl-grid dark-color bg-color">
                 <div className="ribbon bg-image-landing">
@@ -34,14 +25,14 @@ class MassagePage extends React.Component {
                                         <h3>Venue: {massageType.venue}</h3>
                                     </div>
                                 </div>
-                                {massageType.consultation_details.map(consultation_details =>
+                                {massageType.massage_details.map(massage_details =>
                                     <div className="col-xs-12 col-md-6 m-b-30">
                                         <div className="mdl-card mdl-shadow--4dp p-20">
                                             <div className="icon-circle aroma-oil bg-color-green mdl-shadow--4dp"></div>
-                                            <h4 className="text-center">{consultation_details.consultation}<br />
-                                                {consultation_details.cost}</h4>
-                                            <p className="text-center">{consultation_details.session_time}</p>
-                                            <p>{consultation_details.details}</p>
+                                            <h4 className="text-center">{massage_details.title}<br />
+                                                {massage_details.cost}</h4>
+                                            <p className="text-center">{massage_details.session_time}</p>
+                                            <p>{massage_details.details}</p>
                                         </div>
                                     </div>
                                 )}
@@ -71,7 +62,7 @@ function getMassageByType(massageTypes, type) {
 
 function mapStateToProps(state, ownProps) {
     const massageTypeId = ownProps.params.id;
-    let massageType = { id: '', type: '', consultation_header: '', description: '', route: '', venue: '', consultation_details: [{ id: '', session_time: '', consultation: '', details: '', cost: '', consultation_specifics: [{ id: '', detail: '' }] }] };
+    let massageType = { type: '', header: '', description: '', venue: '', massage_details: [{ session_time: '', title: '', details: '', cost: ''}]};
     if (massageTypeId && state.massageTypes.length > 0) {
         massageType = getMassageByType(state.massageTypes, massageTypeId);
     }
