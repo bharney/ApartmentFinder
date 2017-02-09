@@ -21,11 +21,65 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 const apiRouter = express.Router();
 
-apiRouter.get('/consultations', function (req, res) {
-    const sqlConsultations = new sql.Connection(dbconfig, function (err) {
-        let request = new sql.Request(sqlConsultations);
-        request.query(
-            `SELECT C.id AS id
+apiRouter.route('/blogs')
+    .post(function (req, res) {
+        let blog = {
+               id : 0, 
+               title: "",
+               short: "", 
+               description: "", 
+               image: "", 
+               href: "", 
+               type: "", 
+               component: ""
+        };
+        const sqlInsertBlog = new sql.Connection(dbconfig, function (err) {
+            let request = new sql.Request(sqlInsertBlog);
+            request.input('id', sql.Int, blog.id);
+            request.input('title', sql.VarChar, blog.title);
+            request.input('short', sql.VarChar, blog.short);
+            request.input('description', sql.VarChar, blog.description);
+            request.input('image', sql.VarChar, blog.image);
+            request.input('href', sql.VarChar, blog.href);
+            request.input('type', sql.VarChar, blog.type);
+            request.input('component', sql.VarChar, blog.component);
+            request.query(
+               `INSERT INTO Blogs (id, title, short, description, image, href, type, component)
+                VALUES (@id, @title, @short, @description, @image, @href, @type, @component)`
+            ).then(function (recordset) {
+                console.log(recordset);
+                res.json(recordset);
+            }).catch(function (err) {
+                console.log("insert schedules: " + err);
+            });
+        });
+    })
+    .get(function (req, res) {
+        const sqlBlogs = new sql.Connection(dbconfig, function (err) {
+            let request = new sql.Request(sqlBlogs);
+            request.query(`SELECT id
+                            ,title
+                            ,short
+                            ,description
+                            ,image
+                            ,href
+                            ,type
+                            ,component
+                            FROM Blogs`
+            ).then(function (recordset) {
+                res.json(recordset);
+            }).catch(function (err) {
+                console.log("blogs: " + err);
+            });
+        });
+    });
+
+apiRouter.route('/consultations')
+    .get(function (req, res) {
+        const sqlConsultations = new sql.Connection(dbconfig, function (err) {
+            let request = new sql.Request(sqlConsultations);
+            request.query(
+                `SELECT C.id AS id
                 ,H.header AS header
                 ,H.short AS short
                 ,H.description AS description 
@@ -38,45 +92,32 @@ apiRouter.get('/consultations', function (req, res) {
                 FROM Headers H
                 JOIN Consultations C
                 ON H.type = C.type`
-        ).then(function (recordset) {
-            let consultationDetails = [];
-            for (let consultationProp in recordset) {
-                if (recordset.hasOwnProperty(consultationProp)) {
-                    consultationDetails.push({
-                        session_time: recordset[consultationProp].session_time,
-                        title: recordset[consultationProp].title,
-                        consultation: recordset[consultationProp].consultation,
-                        consultation_desc: recordset[consultationProp].consultation_desc,
-                        cost: recordset[consultationProp].cost
-                    });
+            ).then(function (recordset) {
+                let consultationDetails = [];
+                for (let consultationProp in recordset) {
+                    if (recordset.hasOwnProperty(consultationProp)) {
+                        consultationDetails.push({
+                            session_time: recordset[consultationProp].session_time,
+                            title: recordset[consultationProp].title,
+                            consultation: recordset[consultationProp].consultation,
+                            consultation_desc: recordset[consultationProp].consultation_desc,
+                            cost: recordset[consultationProp].cost
+                        });
+                    }
                 }
-            }
-            let consultation = {
-                header: recordset[0].header,
-                short: recordset[0].short,
-                description: recordset[0].description,
-                venue: recordset[0].venue,
-                consultationDetails: consultationDetails
-            };
-            res.json(consultation);
-        }).catch(function (err) {
-            console.log("consultations: " + err);
+                let consultation = {
+                    header: recordset[0].header,
+                    short: recordset[0].short,
+                    description: recordset[0].description,
+                    venue: recordset[0].venue,
+                    consultationDetails: consultationDetails
+                };
+                res.json(consultation);
+            }).catch(function (err) {
+                console.log("consultations: " + err);
+            });
         });
     });
-});
-
-apiRouter.get('/blogs', function (req, res) {
-    const sqlBlogs = new sql.Connection(dbconfig, function (err) {
-        let request = new sql.Request(sqlBlogs);
-        request.query('SELECT * FROM Blogs').then(function (recordset) {
-            res.json(recordset);
-        }).catch(function (err) {
-            console.log("blogs: " + err);
-        });
-    });
-});
-
-
 
 apiRouter.route('/classTypes')
     .get(function (req, res) {
