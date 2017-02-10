@@ -80,22 +80,39 @@ class BlogApi {
         blog = Object.assign({}, blog);
         return new Promise((resolve, reject) => {
 
-            const minBlogTitleLength = 1;
-            if (blog.name.length < minBlogTitleLength) {
-                reject(`Name must be at least ${minBlogTitleLength} characters.`);
-            }
+            // const minBlogTitleLength = 1;
+            // if (blog.name.length < minBlogTitleLength) {
+            //     reject(`Name must be at least ${minBlogTitleLength} characters.`);
+            // }
 
-            if (blog.id) {
-                const existingBlogIndex = blogs.findIndex(a => a.id == blog.id);
-                blogs.splice(existingBlogIndex, 1, blog);
-            } else {
+            // if (blog.id) {
+            //     const existingBlogIndex = blogs.findIndex(a => a.id == blog.id);
+            //     blogs.splice(existingBlogIndex, 1, blog);
+            // } else {
 
-                blog.id = generateId(blog);
-                blog.watchHref = `http://www.pluralsight.com/blogs/${blog.id}`;
-                blogs.push(blog);
-            }
+            //     blog.id = generateId(blog);
+            //     blog.watchHref = `http://www.pluralsight.com/blogs/${blog.id}`;
+            //     blogs.push(blog);
+            // }
+            fetch('/api/blogs', {
+                    method: 'post',
+                    headers: {
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-Type': 'application/json'
+                    },
+                    body: encodeURI(JSON.stringify(blog))
+            })
+            .then(function (response) {
+                response.json();
+            })
+            .then(function (blog) {
+                resolve(blog)
+            })
+            .catch (function (error) {
+                console.log('Request failed', error);
+            });
 
-            resolve(blog);
+            //resolve(blog);
         });
     }
 
