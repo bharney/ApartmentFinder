@@ -40,16 +40,28 @@ let blogRoutes = function () {
                 request.input('component', sql.VarChar, blog.component);
                 request.query(
                     `UPDATE Blogs
-                SET title = @title
-                ,short = @short
-                ,description = @description
-                ,image = @image
-                ,href = @href
-                ,type = @type
-                ,component = @component
-                WHERE id = @id`
+                    SET title = @title
+                    ,short = @short
+                    ,description = @description
+                    ,image = @image
+                    ,href = @href
+                    ,type = @type
+                    ,component = @component
+                    WHERE id = @id`
                 ).then(res.status(201).send(blog)).catch(function (err) {
                     console.log("update blog: " + err);
+                });
+            });
+        })
+        .delete(function (req, res) {
+            const sqlDeleteBlog = new sql.Connection(dbconfig, function (err) {
+                let request = new sql.Request(sqlDeleteBlog);
+                request.input('id', sql.Int, req.body.id);
+                request.query(
+                    `DELETE FROM Blogs
+                     WHERE id = @id`
+                ).then(res.status(201).send("Blog has been deleted.")).catch(function (err) {
+                    console.log("delete blog: " + err);
                 });
             });
         })
@@ -99,11 +111,23 @@ let blogRoutes = function () {
                     console.log("blog: " + err);
                 });
             });
+        })
+        .delete(function (req, res) {
+            const sqlDeleteBlog = new sql.Connection(dbconfig, function (err) {
+                let request = new sql.Request(sqlDeleteBlog);
+                request.input('id', sql.Int, req.params.blogId);
+                request.query(
+                    `DELETE FROM Blogs
+                     WHERE id = @id`
+                ).then(res.status(201).send("Blog has been deleted.")).catch(function (err) {
+                    console.log("delete blog: " + err);
+                });
+            });
         });
 
-    return blogRouter
+    return blogRouter;
 };
 
 module.exports = blogRoutes;
 
-export default blogRoutes
+export default blogRoutes;
