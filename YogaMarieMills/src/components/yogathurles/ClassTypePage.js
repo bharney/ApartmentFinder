@@ -14,12 +14,29 @@ class ClassTypePage extends React.Component {
         const {classType} = this.props;
 
         return (
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-xs-offset-1 col-xs-10 text-center">
-                        <h1>{classType.name}</h1>
-                        <img src={classType.image} />
-                        <p>{classType.class_details}</p>
+            <div className="mdl-grid dark-color">
+                <div className="ribbon bg-image-landing b-border">
+                    <div className="container">
+                        <div className="row m-b-30">
+                            <div key={classType.id} className="col-xs-12">
+                                <h1 className="color-white text-center">{classType.title}</h1>
+                                <hr />
+                                <div className="col-xs-12 m-b-30">
+                                    <div className="mdl-card mdl-shadow--4dp">
+                                        <div className="mdl-card__media bg-image-landing v-h-40 image-text-container">
+                                            <div className="text-left align-bottom m-l-20 m-b-20">
+                                                <header className="color-white">
+                                                    <h4 className="m-t-0 m-b-0"><strong>{classType.title}</strong></h4>
+                                                </header>
+                                            </div>
+                                        </div>
+                                        <div className="col-xs-12 t-border-thin p-20">
+                                            <p>{classType.description}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

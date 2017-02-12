@@ -24,14 +24,19 @@ class ClassTypesPage extends React.Component {
                         <div className="half">
                             <div className="row">
                                 <div className="col-xs-offset-1 col-xs-10 tile m-t--5-percent">
-                                    <Link to={'/' + classType.route + '/' + classType.id} className="color">
-                                        <h2 className="page-header banner">{classType.title}</h2>
-                                    </Link>
+                                    <h2 className="page-header banner">{classType.title}</h2>
                                     <p >{classType.description}</p>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Read More<span className="mdl-button__ripple-container"><span className="mdl-ripple"></span></span></button>
+                                    <Link to={'/' + classType.route + '/' + classType.id}>
+                                        <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                                            Read More
+                                    <span className="mdl-button__ripple-container">
+                                                <span className="mdl-ripple">
+                                                </span>
+                                            </span>
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 );
@@ -43,11 +48,19 @@ class ClassTypesPage extends React.Component {
 
                             <div className="row">
                                 <div className="col-xs-offset-1 col-xs-10 tile m-t--5-percent">
-                                    <Link to={'/' + classType.route + '/' + classType.id} className="color">
-                                        <h2 className="page-header banner">{classType.title}</h2>
-                                    </Link>
+
+                                    <h2 className="page-header banner">{classType.title}</h2>
+
                                     <p>{classType.description}</p>
-                                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Read More<span className="mdl-button__ripple-container"><span className="mdl-ripple"></span></span></button>
+                                    <Link to={'/' + classType.route + '/' + classType.id}>
+                                        <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                                            Read More
+                                    <span className="mdl-button__ripple-container">
+                                                <span className="mdl-ripple">
+                                                </span>
+                                            </span>
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
 

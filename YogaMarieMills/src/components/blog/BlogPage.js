@@ -63,21 +63,14 @@ class BlogPage extends React.Component {
             blog: Object.assign({}, props.blog),
             editorState: EditorState.createWithContent(
                 state,
-                decorator,
+                decorator
             ),
         };
 
         this.onChange = this.onChange.bind(this);
         this.focus = this.focus.bind(this);
+        this.saveBlog = this.saveBlog.bind(this);
     }
-
-    onChange(editorState) {
-        this.setState({ editorState })
-    };
-
-    focus() {
-        this.editor.focus();
-    };
 
     componentWillReceiveProps(nextProps) {
         if (this.props.blog.id != nextProps.blog.id) {
@@ -109,6 +102,20 @@ class BlogPage extends React.Component {
     }
 
 
+    onChange(editorState) {
+        this.setState({ editorState });
+    }
+
+    focus() {
+        this.editor.focus();
+    }
+
+    saveBlog(event) {
+        debugger;
+        event.preventDefault();
+        this.props.actions.saveBlog(this.state.blog);
+        this.context.router.push('/blogs');
+    }
 
     render() {
         const { editorState } = this.state;
@@ -129,6 +136,18 @@ class BlogPage extends React.Component {
                                     />
                                 <InlineToolbar />
                             </div>
+                            <div className="col-xs-12">
+                                <div className="col-xs-offset-8 col-xs-2 col-lg-offset-8 col-lg-1">
+                                    <button onClick={this.saveBlog} className="btn btn-success">
+                                        <span>Save &nbsp;<i className="glyphicon glyphicon-ok" aria-hidden="true"></i></span>
+                                    </button>
+                                </div>
+                                <div className="col-xs-2 col-lg-1">
+                                    <button className="btn btn-danger">
+                                        <span>Delete &nbsp;<i className="glyphicon glyphicon-remove" aria-hidden="true"></i></span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -138,9 +157,15 @@ class BlogPage extends React.Component {
 }
 
 BlogPage.propTypes = {
+    blog: PropTypes.object.isRequired,
     editorState: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired
-}
+    actions: PropTypes.object.isRequired,
+    entityKey: PropTypes.object.isRequired,
+};
+
+BlogPage.contextTypes = {
+  router: PropTypes.object
+};
 
 function findLinkEntities(contentBlock, callback) {
     contentBlock.findEntityRanges(
