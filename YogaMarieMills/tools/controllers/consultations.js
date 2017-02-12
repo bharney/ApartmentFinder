@@ -12,25 +12,14 @@ let consultationRoutes = function () {
             const sqlInsertConsultation = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlInsertConsultation);
                 request.input('type', sql.VarChar, consultation.type);
-                request.input('header', sql.VarChar, consultation.header);
-                request.input('short', sql.VarChar, consultation.short);
-                request.input('description', sql.VarChar, consultation.description);
-                request.input('venue', sql.VarChar, consultation.venue);
-                request.input('title', sql.VarChar, consultation.consultationDetails.title);
-                request.input('session_time', sql.VarChar, consultation.consultationDetails.session_time);
-                request.input('consultation', sql.VarChar, consultation.consultationDetails.consultation);
-                request.input('consultation_desc', sql.VarChar, consultation.consultationDetails.consultation_desc);
-                request.input('cost', sql.VarChar, consultation.consultationDetails.cost);
+                request.input('title', sql.VarChar, consultation.title);
+                request.input('session_time', sql.VarChar, consultation.session_time);
+                request.input('consultation', sql.VarChar, consultation.consultation);
+                request.input('consultation_desc', sql.VarChar, consultation.consultation_desc);
+                request.input('cost', sql.VarChar, consultation.cost);
                 request.query(
-                    `INSERT INTO Consultations (title, session_time, short, description, cost)
-                    VALUES (@title, @session_time, @consultation, @consultation_desc, @cost); 
-
-                    UPDATE header 
-                    SET header = @header
-                    ,short = @short
-                    ,description = @description
-                    ,venue = @venue
-                    WHERE type = @type`
+                    `INSERT INTO Consultations (type, title, session_time, short, description, cost)
+                    VALUES (@type, @title, @session_time, @consultation, @consultation_desc, @cost);`
                 ).then(res.status(201).send(consultation)).catch(function (err) {
                     console.log("insert Consultations: " + err);
                 });
@@ -40,16 +29,12 @@ let consultationRoutes = function () {
             let consultation = (req.body);
             const sqlUpdateConsultation = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlUpdateConsultation);
-                request.input('header', sql.VarChar, consultation.header);
-                request.input('short', sql.VarChar, consultation.short);
-                request.input('description', sql.VarChar, consultation.description);
-                request.input('venue', sql.VarChar, consultation.venue);
-                request.input('ID', sql.Int, consultation.consultationDetails.id);
-                request.input('title', sql.VarChar, consultation.consultationDetails.title);
-                request.input('session_time', sql.VarChar, consultation.consultationDetails.session_time);
-                request.input('consultation', sql.VarChar, consultation.consultationDetails.consultation);
-                request.input('consultation_desc', sql.VarChar, consultation.consultationDetails.consultation_desc);
-                request.input('cost', sql.VarChar, consultation.consultationDetails.cost);
+                request.input('id', sql.Int, consultation.id);
+                request.input('title', sql.VarChar, consultation.title);
+                request.input('session_time', sql.VarChar, consultation.session_time);
+                request.input('consultation', sql.VarChar, consultation.consultation);
+                request.input('consultation_desc', sql.VarChar, consultation.consultation_desc);
+                request.input('cost', sql.VarChar, consultation.cost);
                 request.query(
                     `UPDATE Consultations 
                      SET title = @title
@@ -57,14 +42,7 @@ let consultationRoutes = function () {
                      , short = @consultation
                      , description = @consultation_desc
                      , cost = @cost
-                     WHERE id = @id; 
-
-                    UPDATE header 
-                    SET header = @header
-                    ,short = @short
-                    ,description = @description
-                    ,venue = @venue
-                    WHERE type = @type`
+                     WHERE id = @id;`
                 ).then(res.status(201).send(consultation)).catch(function (err) {
                     console.log("update Consultations: " + err);
                 });
@@ -164,9 +142,9 @@ let consultationRoutes = function () {
                     console.log("delete Consultation: " + err);
                 });
             });
-        })
+        });
 
-    return consultationRouter
+    return consultationRouter;
 };
 
 module.exports = consultationRoutes;

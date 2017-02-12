@@ -21,8 +21,8 @@ let classTypeRoutes = function () {
                 request.input('detail', sql.VarChar, classType.detail);
                 request.input('route', sql.VarChar, classType.route);
                 request.query(
-                    `INSERT INTO ClassTypes (title, short, description, image, href, type, component, detail, route)
-                     VALUES (@title, @short, @description, @image, @href, @type, @component, @detail, @route)`
+                    `INSERT INTO ClassTypes (type, title, short, description, image, href, type, component, detail, route)
+                     VALUES (@type, @title, @short, @description, @image, @href, @type, @component, @detail, @route)`
                 ).then(res.status(201).send(classType)).catch(function (err) {
                     console.log("insert ClassTypes: " + err);
                 });

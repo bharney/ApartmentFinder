@@ -7,17 +7,68 @@ let navbarRoutes = function () {
     const dbconfig = "mssql://Application:!Testing123@BPHSERVER/YogaMarieMills";
 
     navbarRouter.route('/navbars')
+        .post(function (req, res) {
+            let navbar_item = (req.body);
+            const sqlInsertNavbar = new sql.Connection(dbconfig, function (err) {
+                let request = new sql.Request(sqlInsertNavbar);
+                request.input('type', sql.VarChar, navbar_item.type);
+                request.input('name', sql.VarChar, navbar_item.name);
+                request.input('route', sql.VarChar, navbar_item.route);
+                request.input('href', sql.VarChar, navbar_item.href);
+                request.input('parent_id', sql.Int, navbar_item.parent_id);
+                request.query(
+                    `INSERT INTO Navbar_Items (type, name, route, href, parent_id)
+                    VALUES (@type, @name, @route, @href, @parent_id);`
+                ).then(res.status(201).send(navbar_item)).catch(function (err) {
+                    console.log("insert Navbar: " + err);
+                });
+            });
+        })
+        .put(function (req, res) {
+            let navbar_item = (req.body);
+            const sqlUpdateNavbar = new sql.Connection(dbconfig, function (err) {
+                let request = new sql.Request(sqlUpdateNavbar);
+                request.input('id', sql.Int, navbar_item.id);
+                request.input('type', sql.VarChar, navbar_item.type);
+                request.input('name', sql.VarChar, navbar_item.name);
+                request.input('route', sql.VarChar, navbar_item.route);
+                request.input('href', sql.VarChar, navbar_item.href);
+                request.input('parent_id', sql.Int, navbar_item.parent_id);
+                request.query(
+                    `UPDATE Navbar_Items 
+                     SET type = @type
+                     , name = @name
+                     , route = @route
+                     , href = @href
+                     WHERE id = @id;`
+                ).then(res.status(201).send(navbar_item)).catch(function (err) {
+                    console.log("update Navbars: " + err);
+                });
+            });
+        })
+        .delete(function (req, res) {
+            const sqlDeleteNavbar = new sql.Connection(dbconfig, function (err) {
+                let request = new sql.Request(sqlDeleteNavbar);
+                request.input('id', sql.Int, req.body.id);
+                request.query(
+                    `DELETE FROM Navbar_Items
+                     WHERE id = @id`
+                ).then(res.status(201).send("Navbar has been deleted.")).catch(function (err) {
+                    console.log("delete Navbar: " + err);
+                });
+            });
+        })
         .get(function (req, res) {
             const sqlNavbars = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlNavbars);
                 request.query(
                     `SELECT id
-                 ,type
-                 ,name
-                 ,href
-                 ,route
-                 ,parent_id
-                 FROM Navbar_Items`
+                    ,type
+                    ,name
+                    ,href
+                    ,route
+                    ,parent_id
+                    FROM Navbar_Items`
                 ).then(function (recordset) {
                     let navbar_items = [];
 
@@ -56,6 +107,48 @@ let navbarRoutes = function () {
                 });
             });
         });
+
+    navbarRouter.route('/navbars/:navbarId')
+        .get(function (req, res) {
+            const sqlNavbar = new sql.Connection(dbconfig, function (err) {
+                let request = new sql.Request(sqlNavbar);
+                request.input('id', sql.Int, req.params.navbarId);
+                request.query(`SELECT id
+                                ,type
+                                ,venue
+                                ,header
+                                ,description
+                                ,session_time
+                                ,title
+                                ,details
+                                ,cost
+                                FROM Navbar_Items
+                                WHERE id = @id`
+                ).then(function (recordset) {
+                    if (recordset.length > 0) {
+                        res.json(recordset);
+                    }
+                    else {
+                        res.status(500).send("No Navbar found with this ID.");
+                    }
+                }).catch(function (err) {
+                    console.log("Navbar: " + err);
+                });
+            });
+        })
+        .delete(function (req, res) {
+            const sqlDeleteNavbar = new sql.Connection(dbconfig, function (err) {
+                let request = new sql.Request(sqlDeleteNavbar);
+                request.input('id', sql.Int, req.params.navbarId);
+                request.query(
+                    `DELETE FROM Navbar_Items
+                     WHERE id = @id`
+                ).then(res.status(201).send("Navbar has been deleted.")).catch(function (err) {
+                    console.log("delete Navbar: " + err);
+                });
+            });
+        });
+
     return navbarRouter
 };
 
