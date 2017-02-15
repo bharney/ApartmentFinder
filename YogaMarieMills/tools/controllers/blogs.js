@@ -47,6 +47,7 @@ let blogRoutes = function () {
                     ,href = @href
                     ,type = @type
                     ,component = @component
+                    ,postDate = sysdatetimeoffset()
                     WHERE id = @id`
                 ).then(res.status(201).send(blog)).catch(function (err) {
                     console.log("update blog: " + err);
@@ -76,7 +77,9 @@ let blogRoutes = function () {
                             ,href
                             ,type
                             ,component
-                            FROM Blogs`
+                            ,CONVERT(VARCHAR, postDate, 107) as postDate
+                            FROM Blogs
+                            ORDER BY postDate DESC`
                 ).then(function (recordset) {
                     res.json(recordset);
                 }).catch(function (err) {
@@ -98,6 +101,7 @@ let blogRoutes = function () {
                             ,href
                             ,type
                             ,component
+                            ,CONVERT(VARCHAR, postDate, 107) as postDate
                             FROM Blogs
                             WHERE id = @id`
                 ).then(function (recordset) {

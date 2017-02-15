@@ -28,8 +28,6 @@ class BlogApi {
             }
 
             if (blog.id) {
-                const existingBlogIndex = blogs.findIndex(a => a.id == blog.id);
-                blogs.splice(existingBlogIndex, 1, blog);
                 fetch('http://localhost:3000/api/blogs', {
                     method: 'put',
                     headers: {

@@ -20,44 +20,9 @@ class BlogEditorPage extends React.Component {
     constructor(props, context) {
         super(props, context);
        
-        const decorator = new CompositeDecorator([
-            {
-                strategy: findLinkEntities,
-                component: Link,
-            },
-            {
-                strategy: findBlogNameEntities,
-                component: BlogName,
-            }
-        ]);
-
-        const sampleMarkup =
-            `<div id="name" className="mdl-card__title">
-                    <div className="mdl-card__title-text">
-                        <section className="text-center">
-                            <div>${props.blog.name}</div>
-                        </section>
-                    </div>
-                 </div>
-                 <div id="image" className="mdl-card__media bright-bg-color">
-                    <div className="col-xs-offset-3 col-xs-7 p-t-20 p-b-20">
-                        <img width="200"  src={${props.blog.image}} />
-                    </div>
-                 </div>
-                 <div id="description" className="mdl-card__supporting-text">
-                    <p className="dark-color" >${props.blog.description}</p>
-                    <a href="http://www.facebook.com">Example link</a><br /><br/ >
-                 </div>`;
-
-        const blocksFromHTML = convertFromHTML(sampleMarkup);
-        const state = ContentState.createFromBlockArray(blocksFromHTML);
-
         this.state = {
             blog: Object.assign({}, props.blog),
-            editorState: EditorState.createWithContent(
-                state,
-                decorator,
-            ),
+            editorState: EditorState.createEmpty(),
         };
         this.makeBold = this.makeBold.bind(this);
         this.focus = this.focus.bind(this);
@@ -81,29 +46,6 @@ class BlogEditorPage extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (this.props.blog.id != nextProps.blog.id) {
             this.setState({ blog: Object.assign({}, nextProps.blog) });
-
-            const sampleMarkup =
-                `<div id="name" className="mdl-card__title">
-                    <div className="mdl-card__title-text">
-                        <section className="text-center">
-                            <div>${nextProps.blog.name}</div>
-                        </section>
-                    </div>
-                 </div>
-                 <div id="image" className="mdl-card__media bright-bg-color">
-                    <div className="col-xs-offset-3 col-xs-7 p-t-20 p-b-20">
-                        <img width="200"  src={${nextProps.blog.image}} />
-                    </div>
-                 </div>
-                 <div id="description" className="mdl-card__supporting-text">
-                    <p className="dark-color" >${nextProps.blog.description}</p>
-                    <a href="http://www.facebook.com">Example link</a><br /><br/ >
-                 </div>`;
-
-             const blocksFromHTML = convertFromHTML(sampleMarkup);
-            const contentState = ContentState.createFromBlockArray(blocksFromHTML);
-            const editorState = EditorState.push(this.state.editorState, contentState);
-            this.setState({ editorState });
         }
     }
 
@@ -152,50 +94,6 @@ BlogEditorPage.propTypes = {
 }
 
 
-function findLinkEntities(contentBlock, callback) {
-    contentBlock.findEntityRanges(
-        (character) => {
-            const entityKey = character.getEntity();
-            return (
-                entityKey !== null &&
-                Entity.get(entityKey).getType() === 'LINK'
-            );
-        },
-        callback
-    );
-}
-
-const Link = (props) => {
-    const {url} = Entity.get(props.entityKey).getData();
-    return (
-        <a href={url}>
-            {props.children}
-        </a>
-    );
-};
-
-function findBlogNameEntities(contentBlock, callback) {
-    contentBlock.findEntityRanges(
-        (character) => {
-            const entityKey = character.getEntity();
-            return (
-                entityKey !== null &&
-                Entity.get(entityKey).getType() === 'NAME'
-            );
-        },
-        callback
-    );
-}
-
-const BlogName = (props) => {
-    const {blogName} = Entity.get(props.entityKey).getData();
-    
-    return (
-        <div id={blogName}>
-            {props.children}
-        </div>
-    );
-};
 
 function getBlogById(blogs, id) {
     const blog = blogs.filter(blog => blog.id == id);
