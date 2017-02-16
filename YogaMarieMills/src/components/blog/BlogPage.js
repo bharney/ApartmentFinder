@@ -34,9 +34,6 @@ const plugins = [inlineToolbarPlugin];
 
 const { InlineToolbar } = inlineToolbarPlugin;
 
-
-
-
 class BlogPage extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -48,7 +45,26 @@ class BlogPage extends React.Component {
             },
         ]);
 
-        const blocks = convertFromRaw(JSON.parse(props.blog.description));
+        let blocks = {};
+        if (props.blog.description != "") {
+            blocks = convertFromRaw(JSON.parse(props.blog.description));
+        } else {
+            blocks = {
+                blocks: [
+                    {
+                        text: '',
+                        type: 'unstyled',
+                    },
+                ],
+                entityMap: {
+                    first: {
+                        type: 'TOKEN',
+                        mutability: 'MUTABLE',
+                    },
+                },
+            };
+            blocks = convertFromRaw(blocks)
+        }
 
         this.state = {
             blog: Object.assign({}, props.blog),
@@ -67,10 +83,11 @@ class BlogPage extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (this.props.blog.id != nextProps.blog.id) {
             this.setState({ blog: Object.assign({}, nextProps.blog) });
+            debugger;
             const blocks = convertFromRaw(JSON.parse(nextProps.blog.description));
             const editorState = EditorState.push(this.state.editorState, blocks);
             this.setState({ editorState });
-            
+
         }
     }
 
@@ -85,8 +102,7 @@ class BlogPage extends React.Component {
     getTextFromEntity(editorObj) {
         debugger;
         let descriptionBlocks = [];
-        for(let prop in editorObj.blocks)
-        {
+        for (let prop in editorObj.blocks) {
             if (editorObj.blocks.hasOwnProperty(prop)) {
                 if (editorObj.blocks[prop].text == "") {
                     descriptionBlocks.push("\\n \\n");
@@ -100,7 +116,7 @@ class BlogPage extends React.Component {
     }
 
     saveBlog(event) {
-        
+
         event.preventDefault();
         this.state.blog.short = this.getTextFromEntity(convertToRaw(this.state.editorState.getCurrentContent()));
         this.state.blog.description = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
@@ -108,11 +124,18 @@ class BlogPage extends React.Component {
         this.context.router.push('/blogs');
     }
 
-    
+
 
     render() {
         const { editorState } = this.state;
         const { blog } = this.props;
+
+        const blogImage = {
+            backgroundImage: "url(../" + blog.image + ")",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundSize: "cover"
+        }
 
         return (
             <div className="mdl-grid dark-color">
@@ -124,10 +147,10 @@ class BlogPage extends React.Component {
                                 <hr />
                                 <div className="col-xs-12 m-b-30">
                                     <div className="mdl-card mdl-shadow--4dp">
-                                        <div className="mdl-card__media v-h-40 image-text-container">
+                                        <div className="mdl-card__media v-h-40 image-text-container" style={blogImage}>
                                             <div className="text-left align-bottom m-l-20 m-b-20">
                                                 <header className="color-white">
-                                                    <h4 className="m-t-0 m-b-0"><strong>{blog.short}</strong></h4>
+                                                    <h4 className="m-t-0 m-b-0"><strong>{blog.title}</strong></h4>
                                                 </header>
                                             </div>
                                         </div>
@@ -250,6 +273,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogPage);
-
-
-

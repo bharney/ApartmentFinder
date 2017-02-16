@@ -10,22 +10,12 @@ class BlogPage extends React.Component {
         super(props, context);
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     if (this.props.blog.id != nextProps.blog.id) {
-
-    //         for (let prop in nextProps.blogs) {
-    //             if (nextProps.blog.hasOwnProperty(prop)) {
-    //                 nextProps.blog[prop].short = nextProps.blog[prop].short.substring(0, 400);
-    //             }
-    //         }
-
-    //         this.setState({ blog: Object.assign({}, nextProps.blog) });
-                       
-    //     }
-    // }
-
     render() {
         const {blogs} = this.props;
+        
+        let previewText = function (short) {
+            return short.substring(0, 500) + "...";
+        }
 
         return (
             <div className="mdl-grid dark-color">
@@ -67,7 +57,7 @@ class BlogPage extends React.Component {
                                                     </div>
                                                     <div className="mdl-card__supporting-text">
                                                         <p className="dark-color">
-                                                            <MultilineText multilineText={blog.short} />
+                                                            <MultilineText multilineText={previewText(blog.short)} />
                                                         </p>
                                                     </div>
                                                 </div>
