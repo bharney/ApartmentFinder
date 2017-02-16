@@ -61,6 +61,7 @@ class BlogPage extends React.Component {
         this.onChange = this.onChange.bind(this);
         this.focus = this.focus.bind(this);
         this.saveBlog = this.saveBlog.bind(this);
+        this.getTextFromEntity = this.getTextFromEntity.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -81,13 +82,33 @@ class BlogPage extends React.Component {
         this.refs.editor.focus();
     }
 
-    saveBlog(event) {
+    getTextFromEntity(editorObj) {
         debugger;
+        let descriptionBlocks = [];
+        for(let prop in editorObj.blocks)
+        {
+            if (editorObj.blocks.hasOwnProperty(prop)) {
+                if (editorObj.blocks[prop].text == "") {
+                    descriptionBlocks.push("\\n \\n");
+                }
+                else {
+                    descriptionBlocks.push(editorObj.blocks[prop].text)
+                }
+            }
+        }
+        return descriptionBlocks.join(" ");
+    }
+
+    saveBlog(event) {
+        
         event.preventDefault();
+        this.state.blog.short = this.getTextFromEntity(convertToRaw(this.state.editorState.getCurrentContent()));
         this.state.blog.description = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
         this.props.actions.saveBlog(this.state.blog);
         this.context.router.push('/blogs');
     }
+
+    
 
     render() {
         const { editorState } = this.state;

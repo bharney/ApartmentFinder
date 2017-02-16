@@ -1,6 +1,7 @@
 ﻿import React, { PropTypes } from 'react';
 import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
+import MultilineText from '../common/MultilineText';
 import { bindActionCreators } from 'redux';
 import * as blogActions from '../../actions/blogActions';
 
@@ -9,7 +10,19 @@ class BlogPage extends React.Component {
         super(props, context);
     }
 
+    // componentWillReceiveProps(nextProps) {
+    //     if (this.props.blog.id != nextProps.blog.id) {
 
+    //         for (let prop in nextProps.blogs) {
+    //             if (nextProps.blog.hasOwnProperty(prop)) {
+    //                 nextProps.blog[prop].short = nextProps.blog[prop].short.substring(0, 400);
+    //             }
+    //         }
+
+    //         this.setState({ blog: Object.assign({}, nextProps.blog) });
+                       
+    //     }
+    // }
 
     render() {
         const {blogs} = this.props;
@@ -53,7 +66,9 @@ class BlogPage extends React.Component {
                                                         </div>
                                                     </div>
                                                     <div className="mdl-card__supporting-text">
-                                                        <p className="dark-color">{blog.description}</p>
+                                                        <p className="dark-color">
+                                                            <MultilineText multilineText={blog.short} />
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div className="mdl-card__actions mdl-card--border">
@@ -90,8 +105,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogPage);
-
-
-
-
-
