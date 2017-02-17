@@ -1,12 +1,17 @@
-﻿import React, {PropTypes} from 'react';
+﻿import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-
+import MultilineText from '../common/MultilineText';
 
 const Blog = ({blog}) => {
+
+    let previewText = function (short) {
+        return short.substring(0, 500) + "...";
+    };
+
     return (
-        <div div className="mdl-card mdl-shadow--4dp bg-white m-t-30 tile-masonry p-20">
+        <div className="mdl-card mdl-shadow--4dp p-20 m-t-30 tile-masonry bg-color-white">
             <div className="mdl-card__title">
-                <div className="mdl-card__title-text">  
+                <div className="mdl-card__title-text">
                     <section className="text-center">
                         <h2>{blog.title}</h2>
                     </section>
@@ -17,11 +22,27 @@ const Blog = ({blog}) => {
                     <img width="200" className="img-circle" src={blog.image} />
                 </div>
             </div>
-            <div className="mdl-card__supporting-text">
-                <p className="dark-color">{blog.description}</p>
+            <div className="row p-20">
+                <div className="mdl-card__supporting-text">
+                    <div className="mdl-color-text--grey-700">
+                        <div className="pull-left">
+                            <p><strong>{blog.postDate} by <Link to="/about">Marie Mills</Link></strong></p>
+                        </div>
+                        <div className="pull-right">
+                            <i className="glyphicon glyphicon-heart fa-lg" aria-hidden="true"></i> &nbsp;
+                                                        <i className="glyphicon glyphicon-bookmark fa-lg" aria-hidden="true"></i> &nbsp;
+                                                        <i className="fa fa-share-alt fa-lg" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+                <div className="mdl-card__supporting-text">
+                    <p className="dark-color">
+                        <MultilineText multilineText={previewText(blog.short)} />
+                    </p>
+                </div>
             </div>
             <div className="mdl-card__actions mdl-card--border">
-                    <Link key={blog.route} to={'/' + blog.type + '/'+ blog.id} className="dark-color btn btn-default btn-block" activeClassName="active">Read More</Link>
+                <Link key={blog.route} to={'/' + blog.type + '/' + blog.id} className="dark-color btn btn-default btn-block" activeClassName="active">Read More</Link>
             </div>
         </div>
     );

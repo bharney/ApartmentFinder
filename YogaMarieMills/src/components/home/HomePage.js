@@ -51,7 +51,7 @@ class HomePage extends React.Component {
                                     086 – 1778369 | <a className="color-white" href="mailto:marie@yogamariemills.com">marie@yogamariemills.com</a></h3>
                                 <div className="row text-center">
                                     <Link to="YogaThurles/Schedule">
-                                        <button className="btn btn-default btn-lg btn-round-lg color-black">Find Yoga Classes</button>
+                                        <button className="btn btn-default btn-lg btn-round color-black">Find Yoga Classes</button>
                                     </Link>
                                 </div>
                             </div>

@@ -21,23 +21,23 @@ class WhatToBringPage extends React.Component {
                                     <hr />
                                     <ul className="mdl-list p-20">
                                         <li className="vertical-center">
-                                            <span><i className="icon-contain clothing bright-bg-color"></i></span>
+                                            <span><i className="icon-contain mdl-shadow--4dp clothing bright-bg-color"></i></span>
                                             <p>You will need to wear comfortable loose clothing, such as track suit pants and t-shirt.</p>
                                         </li>
                                         <li className="vertical-center">
-                                            <span><i className="icon-contain yogamat bg-color-purple"></i></span>
+                                            <span><i className="icon-contain mdl-shadow--4dp yogamat bg-color-purple"></i></span>
                                             <p>We strongly suggest you bring your own Yoga mat.</p>
                                         </li>
                                         <li className="vertical-center">
-                                            <span><i className="icon-contain waterbottle bg-color-pink"></i></span>
+                                            <span><i className="icon-contain mdl-shadow--4dp waterbottle bg-color-pink"></i></span>
                                             <p>Its recommended that you bring small bottle of water.</p>
                                         </li>
                                         <li className="vertical-center">
-                                            <span><i className="icon-contain towel bg-color-yellow"></i></span>
+                                            <span><i className="icon-contain mdl-shadow--4dp towel bg-color-yellow"></i></span>
                                             <p>If you sweat we suggest a towel. Or in the winter, a blanket to provide warmth for the relaxation and meditation.</p>
                                         </li>
                                         <li className="vertical-center">
-                                            <span><i className="icon-contain mind bg-color-green"></i></span>
+                                            <span><i className="icon-contain mdl-shadow--4dp mind bg-color-green"></i></span>
                                             <p>An open mind and awareness to just this moment.</p>
                                         </li>
                                     </ul>

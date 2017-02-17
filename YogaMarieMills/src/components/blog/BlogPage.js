@@ -3,6 +3,7 @@ import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as blogActions from '../../actions/blogActions';
+import Admin from '../common/Admin';
 import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
 import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
@@ -83,7 +84,6 @@ class BlogPage extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (this.props.blog.id != nextProps.blog.id) {
             this.setState({ blog: Object.assign({}, nextProps.blog) });
-            debugger;
             const blocks = convertFromRaw(JSON.parse(nextProps.blog.description));
             const editorState = EditorState.push(this.state.editorState, blocks);
             this.setState({ editorState });
@@ -100,19 +100,13 @@ class BlogPage extends React.Component {
     }
 
     getTextFromEntity(editorObj) {
-        debugger;
         let descriptionBlocks = [];
         for (let prop in editorObj.blocks) {
             if (editorObj.blocks.hasOwnProperty(prop)) {
-                if (editorObj.blocks[prop].text == "") {
-                    descriptionBlocks.push("\\n \\n");
-                }
-                else {
-                    descriptionBlocks.push(editorObj.blocks[prop].text)
-                }
+                descriptionBlocks.push(editorObj.blocks[prop].text)
             }
         }
-        return descriptionBlocks.join(" ");
+        return descriptionBlocks.join("\\n ");
     }
 
     saveBlog(event) {
@@ -145,6 +139,7 @@ class BlogPage extends React.Component {
                             <div className="col-xs-12">
                                 <h1 className="color-white text-center">{blog.title}</h1>
                                 <hr />
+                                <Admin />
                                 <div className="col-xs-12 m-b-30">
                                     <div className="mdl-card mdl-shadow--4dp">
                                         <div className="mdl-card__media v-h-40 image-text-container" style={blogImage}>
@@ -165,28 +160,16 @@ class BlogPage extends React.Component {
                                                         <i className="fa fa-share-alt fa-lg" aria-hidden="true"></i>
                                                 </div>
                                             </div>
-                                            <div className="col-xs-offset-1 col-xs-10">
-                                                <div id="editor" className="editor" onClick={this.focus}>
-                                                    <p>
-                                                        <Editor
-                                                            editorState={this.state.editorState}
-                                                            onChange={this.onChange}
-                                                            ref="editor"
-                                                            plugins={plugins}
-                                                            />
-                                                        <InlineToolbar />
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div className="col-xs-offset-8 col-xs-2 col-lg-offset-8 col-lg-1">
-                                                <button onClick={this.saveBlog} className="btn btn-success">
-                                                    <span>Save &nbsp;<i className="glyphicon glyphicon-ok" aria-hidden="true"></i></span>
-                                                </button>
-                                            </div>
-                                            <div className="col-xs-2 col-lg-1">
-                                                <button className="btn btn-danger">
-                                                    <span>Delete &nbsp;<i className="glyphicon glyphicon-remove" aria-hidden="true"></i></span>
-                                                </button>
+                                            <div id="editor" className="editor" onClick={this.focus}>
+                                                <p>
+                                                    <Editor
+                                                        editorState={this.state.editorState}
+                                                        onChange={this.onChange}
+                                                        ref="editor"
+                                                        plugins={plugins}
+                                                        />
+                                                    <InlineToolbar />
+                                                </p>
                                             </div>
                                         </div>
                                     </div>

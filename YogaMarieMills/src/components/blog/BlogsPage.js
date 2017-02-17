@@ -15,7 +15,7 @@ class BlogPage extends React.Component {
         
         let previewText = function (short) {
             return short.substring(0, 500) + "...";
-        }
+        };
 
         return (
             <div className="mdl-grid dark-color">
