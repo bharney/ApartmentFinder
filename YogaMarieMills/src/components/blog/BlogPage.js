@@ -46,26 +46,9 @@ class BlogPage extends React.Component {
             },
         ]);
 
-        let blocks = {};
-        if (props.blog.description != "") {
+        let blocks = convertFromRaw(blocks = { blocks: [ { text: '',  type: 'unstyled', }, ], entityMap: { first: { type: 'TOKEN', mutability: 'MUTABLE', }, }});
+        if (props.blog.description != "")
             blocks = convertFromRaw(JSON.parse(props.blog.description));
-        } else {
-            blocks = {
-                blocks: [
-                    {
-                        text: '',
-                        type: 'unstyled',
-                    },
-                ],
-                entityMap: {
-                    first: {
-                        type: 'TOKEN',
-                        mutability: 'MUTABLE',
-                    },
-                },
-            };
-            blocks = convertFromRaw(blocks)
-        }
 
         this.state = {
             blog: Object.assign({}, props.blog),
@@ -79,6 +62,8 @@ class BlogPage extends React.Component {
         this.focus = this.focus.bind(this);
         this.saveBlog = this.saveBlog.bind(this);
         this.getTextFromEntity = this.getTextFromEntity.bind(this);
+        this.getTextFromEntity = this.getTextFromEntity.bind(this);
+        this.uploadImage = this.uploadImage.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -110,14 +95,32 @@ class BlogPage extends React.Component {
     }
 
     saveBlog(event) {
-
         event.preventDefault();
-        this.state.blog.short = this.getTextFromEntity(convertToRaw(this.state.editorState.getCurrentContent()));
-        this.state.blog.description = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
+        let blog = this.state.blog;
+        blog.short = this.getTextFromEntity(convertToRaw(this.state.editorState.getCurrentContent()));
+        blog.description = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
+        this.setState({ blog: blog });
         this.props.actions.saveBlog(this.state.blog);
         this.context.router.push('/blogs');
     }
 
+    uploadImage(e) {
+        debugger;
+        e.preventDefault();
+
+        let reader = new FileReader();
+        let file = e.target.files[0];
+
+        reader.onloadend = () => {
+
+            let blog = this.state.blog;
+            //file
+            blog.image = reader.result
+            return this.setState({ blog: blog });
+        }
+
+        reader.readAsDataURL(file)
+    }
 
 
     render() {
@@ -139,7 +142,7 @@ class BlogPage extends React.Component {
                             <div className="col-xs-12">
                                 <h1 className="color-white text-center">{blog.title}</h1>
                                 <hr />
-                                <Admin />
+                                <Admin uploadImage={this.uploadImage} blog={this.state.blog} />
                                 <div className="col-xs-12 m-b-30">
                                     <div className="mdl-card mdl-shadow--4dp">
                                         <div className="mdl-card__media v-h-40 image-text-container" style={blogImage}>
