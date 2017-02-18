@@ -17,6 +17,9 @@ export default function blogReducer(state = initialState.blogs, action) {
                 Object.assign({}, action.blog)
             ];
 
+        case 'DELETE_BLOG_SUCCESS':
+            return action.blogs;
+
         default:
             return state;
     }

@@ -63,11 +63,17 @@ class BlogApi {
 
     static deleteBlog(blogId) {
         return new Promise((resolve, reject) => {
-            const indexOfBlogToDelete = blogs.findIndex(blog => {
-                blog.blogId == blogId;
-            });
-            blogs.splice(indexOfBlogToDelete, 1);
-            resolve();
+            if (confirm("Are you sure you want to delete this blog forever?")) {
+                if (blogId) {
+                    fetch('http://localhost:3000/api/blogs/' + blogId, {
+                        method: 'delete'
+                    }).then(function (response) {
+                        resolve(console.log("blog deleted."));
+                    }).catch(function (error) {
+                        console.log('Delete failed', error);
+                    });
+                }
+            }
         });
     }
 }

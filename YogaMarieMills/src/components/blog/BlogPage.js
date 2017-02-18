@@ -62,6 +62,7 @@ class BlogPage extends React.Component {
         this.onChange = this.onChange.bind(this);
         this.focus = this.focus.bind(this);
         this.saveBlog = this.saveBlog.bind(this);
+        this.deleteBlog = this.deleteBlog.bind(this);
         this.getTextFromEntity = this.getTextFromEntity.bind(this);
         this.getTextFromEntity = this.getTextFromEntity.bind(this);
         this.uploadImage = this.uploadImage.bind(this);
@@ -105,6 +106,14 @@ class BlogPage extends React.Component {
         this.context.router.push('/blogs');
     }
 
+    deleteBlog(event) {
+        debugger;
+        this.props.actions.deleteBlog(this.state.blog.id);
+        this.props.actions.loadBlog();
+        debugger;
+        this.context.router.push('/blogs');
+    }
+
     uploadImage(e) {
         debugger;
         e.preventDefault();
@@ -126,9 +135,8 @@ class BlogPage extends React.Component {
     render() {
         const { editorState } = this.state;
         const { blog } = this.props;
-
         const blogImage = {
-            backgroundImage: "url(../" + blog.image + ")",
+            backgroundImage: 'url('+ require(`../../images/${blog.image}`) + ')',
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: "cover"
@@ -142,7 +150,7 @@ class BlogPage extends React.Component {
                             <div className="col-xs-12">
                                 <h1 className="color-white text-center">{blog.title}</h1>
                                 <hr />
-                                <Admin uploadImage={this.uploadImage} blog={this.state.blog} saveBlog={this.saveBlog} />
+                                <Admin uploadImage={this.uploadImage} blog={this.state.blog} saveBlog={this.saveBlog} deleteBlog={this.deleteBlog}/>
                                 <div className="col-xs-12 m-b-30">
                                     <div className="mdl-card mdl-shadow--4dp">
                                         <div className="mdl-card__media v-h-40 image-text-container" style={blogImage}>

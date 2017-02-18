@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import ImageUpload from './ImageUpload';
 import * as blogActions from '../../actions/blogActions';
 
-const Admin = ({uploadImage, blog, saveBlog}) => {
+const Admin = ({uploadImage, blog, saveBlog, deleteBlog}) => {
 
     return (
         <div className="absolute pull-right">
@@ -13,13 +13,13 @@ const Admin = ({uploadImage, blog, saveBlog}) => {
                 <button type="button" className="btn btn-primary btn-circle-lg" title="Edit Record"><i className="glyphicon glyphicon-pencil"></i></button>
             </div>
             <div className="relative m-t-5">
-                <button type="button" className="btn btn-success btn-circle-lg" onClick={saveBlog} title="Add Record"><i className="glyphicon glyphicon-ok"></i></button>
+                <button type="button" className="btn btn-success btn-circle-lg" onClick={saveBlog} title="Save"><i className="glyphicon glyphicon-ok"></i></button>
             </div>
             <div className="relative m-t-5">
                 <ImageUpload uploadImage={uploadImage} />
             </div>
             <div className="relative m-t-5">
-                <button type="button" className="btn btn-danger btn-circle-lg" title="Delete Record"><i className="glyphicon glyphicon-remove"></i></button>
+                <button type="button" className="btn btn-danger btn-circle-lg" onClick={deleteBlog} title="Delete Record"><i className="glyphicon glyphicon-remove"></i></button>
             </div>
 
         </div>
