@@ -134,13 +134,16 @@ class BlogPage extends React.Component {
     render() {
         const { editorState } = this.state;
         const { blog } = this.props;
-        const blogImage = {
-            backgroundImage: 'url(' + require(`../../images/${blog.image}`) + ')',
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-            backgroundSize: "cover"
-        }
+        if (blog.image != "") {
+            const blogImage = {
+                        backgroundImage: 'url(' + require(`../../images/${blog.image}`) + ')',
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
+                        backgroundSize: "cover"
+                    }
 
+        }
+        
         return (
             <div className="mdl-grid dark-color">
                 <div className="ribbon bg-image-landing b-border">

@@ -15,14 +15,17 @@ let blogRoutes = function () {
                 request.input('short', sql.VarChar, blog.short);
                 request.input('description', sql.VarChar, blog.description);
                 request.input('image', sql.VarChar, blog.image);
-                request.input('href', sql.VarChar, blog.href);
-                request.input('type', sql.VarChar, blog.type);
-                request.input('component', sql.VarChar, blog.component);
                 request.query(
                     `INSERT INTO Blogs (title, short, description, image, href, type, component)
-                     VALUES (@title, @short, @description, @image, @href, @type, @component)`
-                ).then(res.status(201).send(blog)).catch(function (err) {
-                    console.log("insert blog: " + err);
+                     VALUES (@title, @short, @description, @image, '', 'blog', 'BlogPage');
+                     SELECT SCOPE_IDENTITY() as id`
+                ).then(function (recordset) {
+                    blog.id = recordset[0].id;
+                    blog.type = 'blog'
+                    blog.component = 'BlogPage'
+                    res.status(201).send(blog)
+                }).catch(function (err) {
+                    console.log("blogs: " + err);
                 });
             });
         })
