@@ -52,6 +52,7 @@ class ManageBlogPage extends React.Component {
   }
 
   saveBlog(event) {
+    debugger;
     event.preventDefault();
     let blog = this.state.blog;
     blog.short = this.getTextFromEntity(convertToRaw(this.state.editorState.getCurrentContent()));
@@ -70,7 +71,6 @@ class ManageBlogPage extends React.Component {
     let file = e.target.files[0];
 
     reader.onloadend = () => {
-      debugger;
       let blog = this.state.blog;
       blog.image = file.name
       this.props.upload.uploadFile(file);

@@ -53,7 +53,7 @@ const BlogForm = ({updateBlogState, onChange, saveBlog, blog, editorState, focus
                           name="title"
                           label="Title"
                           value={blog.title}
-                          updateBlogState={updateBlogState}
+                          onChange={updateBlogState}
                           error={errors.title} />
                       </div>
                     </div>
