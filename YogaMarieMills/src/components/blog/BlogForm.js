@@ -1,77 +1,79 @@
 import React from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
+import Admin from '../common/Admin';
 import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
 import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
 import {
-    ItalicButton,
+  ItalicButton,
+  BoldButton,
+  UnderlineButton,
+  HeadlineTwoButton,
+  HeadlineThreeButton,
+  UnorderedListButton,
+  OrderedListButton,
+  BlockquoteButton,
+} from 'draft-js-buttons';
+
+const inlineToolbarPlugin = createInlineToolbarPlugin({
+  structure: [
     BoldButton,
+    ItalicButton,
     UnderlineButton,
     HeadlineTwoButton,
     HeadlineThreeButton,
     UnorderedListButton,
     OrderedListButton,
     BlockquoteButton,
-} from 'draft-js-buttons';
-
-const inlineToolbarPlugin = createInlineToolbarPlugin({
-    structure: [
-        BoldButton,
-        ItalicButton,
-        UnderlineButton,
-        HeadlineTwoButton,
-        HeadlineThreeButton,
-        UnorderedListButton,
-        OrderedListButton,
-        BlockquoteButton,
-    ]
+  ]
 });
 
 const plugins = [inlineToolbarPlugin];
 
 const { InlineToolbar } = inlineToolbarPlugin;
 
-
-const BlogForm = ({blog, onSave, onChange, loading, errors}) => {
-  let loggedIn = false;
+const BlogForm = ({updateBlogState, onChange, saveBlog, blog, editorState, focus, errors, saving, uploadImage}) => {
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-xs-offset-1 col-xs-10">
-          <div className="col-xs-offset-3 col-xs-7 p-t-20 p-b-20">
-            <form>
-
-              <TextInput
-                name="title"
-                label="Title"
-                value={blog.title}
-                onChange={onChange}
-                error={errors.title} />
-
-              <img width="200" id="image" className="img-circle" src={"../" + blog.image} />
-
-
-              <div id="editor" className="editor" onClick={this.focus}>
-                <p>
-                  <Editor
-                    editorState={this.state.editorState}
-                    onChange={this.onChange}
-                    ref="editor"
-                    plugins={plugins}
-                    />
-                  <InlineToolbar />
-                </p>
-              </div>
-
-              <input
-                type="submit"
-                disabled={loading}
-                value={loading ? 'Saving...' : 'Save'}
-                className="btn btn-primary"
-                onClick={onSave} />
-            </form>
+    <div className="mdl-grid dark-color">
+      <div className="ribbon bg-image-landing b-border">
+        <div className="container">
+          <div className="row m-b-30">
+            <div className="col-xs-12">
+              <h1 className="color-white text-center">{blog.title}</h1>
+              <hr />
+              <form>
+                <Admin uploadImage={uploadImage} blog={blog} saveBlog={saveBlog} />
+                <div className="col-xs-12 m-b-30">
+                  <div className="mdl-card mdl-shadow--4dp">
+                    <div className="mdl-card__media v-h-40 image-text-container">
+                      <div className="col-xs-7 text-left align-bottom m-l-20 m-b-20">
+                        <TextInput
+                          name="title"
+                          label="Title"
+                          value={blog.title}
+                          updateBlogState={updateBlogState}
+                          error={errors.title} />
+                      </div>
+                    </div>
+                    <div className="col-xs-12 t-border-thin p-20">
+                      <div id="editor" className="editor" onClick={focus}>
+                        <p>
+                          <Editor
+                            editorState={editorState}
+                            onChange={onChange}
+                            ref="editor"
+                            plugins={plugins}
+                            />
+                          <InlineToolbar />
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -81,9 +83,13 @@ const BlogForm = ({blog, onSave, onChange, loading, errors}) => {
 
 BlogForm.propTypes = {
   blog: React.PropTypes.object.isRequired,
-  onSave: React.PropTypes.func.isRequired,
+  editorState: React.PropTypes.object.isRequired,
+  updateBlogState: React.PropTypes.object.isRequired,
+  focus: React.PropTypes.object.isRequired,
+  saving: React.PropTypes.object.isRequired,
+  uploadImage: React.PropTypes.object.isRequired,
+  saveBlog: React.PropTypes.func.isRequired,
   onChange: React.PropTypes.func.isRequired,
-  loading: React.PropTypes.bool,
   errors: React.PropTypes.object
 };
 

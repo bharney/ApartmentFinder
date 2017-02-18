@@ -1,9 +1,12 @@
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import React, { PropTypes } from 'react';
+import { Link, IndexLink, browserHistory } from 'react-router';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as blogActions from '../../actions/blogActions';
+import * as uploadActions from '../../actions/uploadActions';
 import BlogForm from './BlogForm';
-
+import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
+import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
 
 class ManageBlogPage extends React.Component {
   constructor(props, context) {
@@ -11,42 +14,85 @@ class ManageBlogPage extends React.Component {
 
     this.state = {
       blog: Object.assign({}, props.blog),
+      editorState: EditorState.createEmpty(),
       errors: {},
       saving: false
     };
-    this.updateBlogState = this.updateBlogState.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.focus = this.focus.bind(this);
     this.saveBlog = this.saveBlog.bind(this);
+    this.updateBlogState = this.updateBlogState.bind(this);
+    this.getTextFromEntity = this.getTextFromEntity.bind(this);
+    this.uploadImage = this.uploadImage.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.blog.id != nextProps.blog.id)
-    {
-      this.setState({blog: Object.assign({}, nextProps.blog)});
+  onChange(editorState) {
+    this.setState({ editorState });
+  }
+
+  focus() {
+    this.refs.editor.focus();
+  }
+
+  getTextFromEntity(editorObj) {
+        let descriptionBlocks = [];
+        for (let prop in editorObj.blocks) {
+            if (editorObj.blocks.hasOwnProperty(prop)) {
+                descriptionBlocks.push(editorObj.blocks[prop].text)
+            }
+        }
+        return descriptionBlocks.join("\\n ");
     }
-  }
 
-  updateBlogState(event){
+  updateBlogState(event) {
     const field = event.target.name;
     let blog = this.state.blog;
     blog[field] = event.target.value;
-    return this.setState({blog: blog});
+    return this.setState({ blog: blog });
   }
 
-  saveBlog(event){
+  saveBlog(event) {
     event.preventDefault();
+    let blog = this.state.blog;
+    blog.short = this.getTextFromEntity(convertToRaw(this.state.editorState.getCurrentContent()));
+    blog.description = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
+    this.setState({ blog: blog });
     this.props.actions.saveBlog(this.state.blog);
     this.context.router.push('/blogs');
   }
 
+
+  uploadImage(e) {
+    debugger;
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      debugger;
+      let blog = this.state.blog;
+      blog.image = file.name
+      this.props.upload.uploadFile(file);
+      return this.setState({ blog: blog });
+    }
+    reader.readAsDataURL(file)
+  }
+
+
   render() {
     return (
       <BlogForm
-        onChange={this.updateBlogState}
-        onSave={this.saveBlog}
+        updateBlogState={this.updateBlogState}
+        onChange={this.onChange}
+        saveBlog={this.saveBlog}
         blog={this.state.blog}
+        editorState={this.state.editorState}
+        focus={this.focus}
         errors={this.state.errors}
         saving={this.state.saving}
-      />
+        uploadImage={this.uploadImage}
+        />
     );
   }
 }
@@ -60,23 +106,8 @@ ManageBlogPage.contextTypes = {
   router: PropTypes.object
 };
 
-function getBlogById(blogs, id) {
-  const blog = blogs.filter(blog => blog.id == id);
-  if (blog.length){
-    return blog[0];
-  }
-
-  return null;
-}
-
-
 function mapStateToProps(state, ownProps) {
-  const blogId = ownProps.params.id;
-  let blog = {id: '', name: '', image: '', description: '', href: '', route: '', component: ''};
-  if(blogId && state.blogs.length > 0){
-    blog = getBlogById(state.blogs, blogId);
-  }
-
+  let blog = { id: '', name: '', image: '', short: '', description: '', href: '', route: '', component: '' };
   return {
     blog: blog
   };
@@ -84,7 +115,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(blogActions, dispatch)
+    actions: bindActionCreators(blogActions, dispatch),
+    upload: bindActionCreators(uploadActions, dispatch)
   };
 }
 
