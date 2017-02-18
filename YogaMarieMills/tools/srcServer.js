@@ -32,6 +32,7 @@ import massageTypeRouter from './controllers/massageTypes';
 import scheduleRouter from './controllers/schedules';
 import testimonialRouter from './controllers/testimonials';
 import navbarRouter from './controllers/navbars';
+import uploadRouter from './controllers/uploads';
 
 app.use('/api', blogRouter(),
     consultationRouter(),
@@ -41,12 +42,13 @@ app.use('/api', blogRouter(),
     massageTypeRouter(),
     scheduleRouter(),
     testimonialRouter(),
-    navbarRouter());
+    navbarRouter(),
+    uploadRouter());
 
 app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, '../src/index.html'));
 });
-
+ 
 app.listen(port, function (err) {
     if (err) {
         console.log(err);

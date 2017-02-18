@@ -10,4 +10,5 @@ export default {
   massageTypes: [],
   testimonials: [],
   eventTypes: [],
+  upload: [],
 }

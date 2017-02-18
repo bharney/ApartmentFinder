@@ -3,6 +3,7 @@ import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as blogActions from '../../actions/blogActions';
+import * as uploadActions from '../../actions/uploadActions';
 import Admin from '../common/Admin';
 import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
 import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
@@ -46,7 +47,7 @@ class BlogPage extends React.Component {
             },
         ]);
 
-        let blocks = convertFromRaw(blocks = { blocks: [ { text: '',  type: 'unstyled', }, ], entityMap: { first: { type: 'TOKEN', mutability: 'MUTABLE', }, }});
+        let blocks = convertFromRaw(blocks = { blocks: [{ text: '', type: 'unstyled', },], entityMap: { first: { type: 'TOKEN', mutability: 'MUTABLE', }, } });
         if (props.blog.description != "")
             blocks = convertFromRaw(JSON.parse(props.blog.description));
 
@@ -112,13 +113,12 @@ class BlogPage extends React.Component {
         let file = e.target.files[0];
 
         reader.onloadend = () => {
-
+            debugger;
             let blog = this.state.blog;
-            //file
-            blog.image = reader.result
+            blog.image = file.name
+            this.props.upload.uploadFile(file);
             return this.setState({ blog: blog });
         }
-
         reader.readAsDataURL(file)
     }
 
@@ -142,7 +142,7 @@ class BlogPage extends React.Component {
                             <div className="col-xs-12">
                                 <h1 className="color-white text-center">{blog.title}</h1>
                                 <hr />
-                                <Admin uploadImage={this.uploadImage} blog={this.state.blog} />
+                                <Admin uploadImage={this.uploadImage} blog={this.state.blog} saveBlog={this.saveBlog} />
                                 <div className="col-xs-12 m-b-30">
                                     <div className="mdl-card mdl-shadow--4dp">
                                         <div className="mdl-card__media v-h-40 image-text-container" style={blogImage}>
@@ -190,6 +190,7 @@ BlogPage.propTypes = {
     blog: PropTypes.object.isRequired,
     editorState: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired,
+    upload: PropTypes.object.isRequired,
     entityKey: PropTypes.object.isRequired,
 };
 
@@ -254,7 +255,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(blogActions, dispatch)
+        actions: bindActionCreators(blogActions, dispatch),
+        upload: bindActionCreators(uploadActions, dispatch)
     };
 }
 
