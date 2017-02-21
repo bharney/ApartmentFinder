@@ -33,7 +33,7 @@ const plugins = [inlineToolbarPlugin];
 
 const { InlineToolbar } = inlineToolbarPlugin;
 
-const BlogForm = ({updateBlogState, onChange, saveBlog, blog, editorState, focus, errors, saving, uploadImage}) => {
+const BlogForm = ({updateBlogState, onChange, saveBlog, blog, editorState, ref, focus, errors, saving, uploadImage}) => {
 
   return (
     <div className="mdl-grid dark-color">
@@ -63,7 +63,7 @@ const BlogForm = ({updateBlogState, onChange, saveBlog, blog, editorState, focus
                           <Editor
                             editorState={editorState}
                             onChange={onChange}
-                            ref="editor"
+                            ref={ref}
                             plugins={plugins}
                             />
                           <InlineToolbar />

@@ -19,30 +19,26 @@ class ManageBlogPage extends React.Component {
       saving: false
     };
     this.onChange = this.onChange.bind(this);
-    this.focus = this.focus.bind(this);
     this.saveBlog = this.saveBlog.bind(this);
     this.updateBlogState = this.updateBlogState.bind(this);
     this.getTextFromEntity = this.getTextFromEntity.bind(this);
     this.uploadImage = this.uploadImage.bind(this);
+    this.focus = this.focus.bind(this);
   }
 
   onChange(editorState) {
     this.setState({ editorState });
   }
 
-  focus() {
-    this.refs.editor.focus();
-  }
-
   getTextFromEntity(editorObj) {
-        let descriptionBlocks = [];
-        for (let prop in editorObj.blocks) {
-            if (editorObj.blocks.hasOwnProperty(prop)) {
-                descriptionBlocks.push(editorObj.blocks[prop].text)
-            }
-        }
-        return descriptionBlocks.join("\\n ");
+    let descriptionBlocks = [];
+    for (let prop in editorObj.blocks) {
+      if (editorObj.blocks.hasOwnProperty(prop)) {
+        descriptionBlocks.push(editorObj.blocks[prop].text)
+      }
     }
+    return descriptionBlocks.join("\\n ");
+  }
 
   updateBlogState(event) {
     const field = event.target.name;
@@ -62,7 +58,6 @@ class ManageBlogPage extends React.Component {
     this.context.router.push('/blogs');
   }
 
-
   uploadImage(e) {
     debugger;
     e.preventDefault();
@@ -79,6 +74,10 @@ class ManageBlogPage extends React.Component {
     reader.readAsDataURL(file)
   }
 
+  focus() {
+    this.refs.editor.focus();
+  }
+
 
   render() {
     return (
@@ -88,7 +87,8 @@ class ManageBlogPage extends React.Component {
         saveBlog={this.saveBlog}
         blog={this.state.blog}
         editorState={this.state.editorState}
-        focus={this.focus}
+        ref="editor"
+        focus={focus}
         errors={this.state.errors}
         saving={this.state.saving}
         uploadImage={this.uploadImage}

@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as blogActions from '../../actions/blogActions';
 import * as uploadActions from '../../actions/uploadActions';
 import Admin from '../common/Admin';
+import TextInput from '../common/TextInput';
 import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
 import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
@@ -64,6 +65,7 @@ class BlogPage extends React.Component {
         this.saveBlog = this.saveBlog.bind(this);
         this.deleteBlog = this.deleteBlog.bind(this);
         this.getTextFromEntity = this.getTextFromEntity.bind(this);
+        this.updateBlogState = this.updateBlogState.bind(this);
         this.uploadImage = this.uploadImage.bind(this);
     }
 
@@ -130,20 +132,25 @@ class BlogPage extends React.Component {
         reader.readAsDataURL(file)
     }
 
+    updateBlogState(event) {
+    const field = event.target.name;
+    let blog = this.state.blog;
+    blog[field] = event.target.value;
+    return this.setState({ blog: blog });
+  }
+
 
     render() {
         const { editorState } = this.state;
         const { blog } = this.props;
-        if (blog.image != "") {
-            const blogImage = {
-                        backgroundImage: 'url(' + require(`../../images/${blog.image}`) + ')',
-                        backgroundRepeat: "no-repeat",
-                        backgroundPosition: "center",
-                        backgroundSize: "cover"
-                    }
-
+        let blogImg = blog.image != "" ? require(`../../images/${blog.image}`) : ""
+        const blogImage = {
+            backgroundImage: 'url(' + blogImg + ')',
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundSize: "cover"
         }
-        
+
         return (
             <div className="mdl-grid dark-color">
                 <div className="ribbon bg-image-landing b-border">
@@ -156,10 +163,12 @@ class BlogPage extends React.Component {
                                 <div className="col-xs-12 m-b-30">
                                     <div className="mdl-card mdl-shadow--4dp">
                                         <div className="mdl-card__media v-h-40 image-text-container" style={blogImage}>
-                                            <div className="text-left align-bottom m-l-20 m-b-20">
-                                                <header className="color-white">
-                                                    <h4 className="m-t-0 m-b-0"><strong>{blog.title}</strong></h4>
-                                                </header>
+                                            <div className="col-xs-7 text-left align-bottom m-l-20 m-b-20">
+                                                <TextInput
+                                                name="title"
+                                                label="Title"
+                                                value={blog.title}
+                                                onChange={this.updateBlogState} />
                                             </div>
                                         </div>
                                         <div className="col-xs-12 t-border-thin p-20">

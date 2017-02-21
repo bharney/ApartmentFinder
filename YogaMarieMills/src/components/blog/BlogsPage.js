@@ -12,10 +12,25 @@ class BlogPage extends React.Component {
 
     render() {
         const {blogs} = this.props;
-        
-        let previewText = function (short) {
+
+        function blogImage (image) {
+             let blogImg = image != "" ? require(`../../images/${image}`) : ""
+                const styles = {
+                    blog: {
+                        img: {
+                            backgroundImage: 'url(' + blogImg + ')',
+                            backgroundRepeat: "no-repeat",
+                            backgroundPosition: "center",
+                            backgroundSize: "cover"
+                        }
+                    }
+                }
+            return styles.blog.img
+        }
+
+        function previewText (short) {
             return short.substring(0, 500) + "...";
-        };
+        }
 
         return (
             <div className="mdl-grid dark-color">
@@ -23,13 +38,16 @@ class BlogPage extends React.Component {
                     <div className="container-fluid">
                         <div className="row m-t-30 m-b-30">
                             <div className="col-xs-offset-1 col-xs-10 m-b-30">
+                                <Link to="/blog" className="pull-right" >
+                                    <button type="button" className="relative m-t-5 btn btn-success btn-circle-lg" title="Add Record"><i className="glyphicon glyphicon-plus"></i></button>
+                                </Link>
                                 <h1 className="text-center color-white">My Blog</h1>
                                 <h2 className="text-center color-white">Read useful information on Yoga and Ayurveda</h2>
                                 <hr />
                                 <div className="col-xs-12 m-b-30">
                                     <div className="col-3-masonry">
                                         {blogs.map(blog =>
-                                            <div className="mdl-card mdl-shadow--4dp p-20 m-t-30 tile-masonry bg-color-white">
+                                            <div className="mdl-card mdl-shadow--4dp m-t-30 tile-masonry bg-color-white">
                                                 <div className="mdl-card__title">
                                                     <div className="mdl-card__title-text">
                                                         <section className="text-center">
@@ -37,12 +55,9 @@ class BlogPage extends React.Component {
                                                         </section>
                                                     </div>
                                                 </div>
-                                                <div className="mdl-card__media bright-bg-color">
-                                                    <div className="col-xs-offset-3 col-xs-7 p-t-20 p-b-20">
-                                                        <img width="200" className="img-circle" src={blog.image} />
-                                                    </div>
+                                                <div className="mdl-card__media bright-bg-color v-h-25" style={blogImage(blog.image)}>
                                                 </div>
-                                                <div className="row p-20">
+                                                <div className="row p-2-em">
                                                     <div className="mdl-card__supporting-text">
                                                         <div className="mdl-color-text--grey-700">
                                                             <div className="pull-left">

@@ -687,6 +687,14 @@ section.section {
 Editor
 ========================================= */
 
+.mdl-card__media {
+    background-color: lightgrey;
+}
+
+/* ========================================
+Editor
+========================================= */
+
 .editor {
   box-sizing: border-box;
   cursor: text;
@@ -851,6 +859,21 @@ Media queries
 .p-20 {
     padding: 1em;
 }
+
+.p-1-em {
+    padding: 1em;
+}
+
+.p-1-5-em {
+    padding:1.5em;
+}
+
+.p-2-em {
+    padding: 2em;
+}
+
+
+
 /* top */
 .p-t--50 {
      margin-top: -50px;

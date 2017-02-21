@@ -34,7 +34,7 @@ export default (
         <Route path="About" component={AboutPage} />
         <Route path="Blogs" component={BlogsPage} />
         <Route path="Blog/:id" component={BlogPage} />
-        <Route path="Create/Blog" component={ManageBlogPage} />
+        <Route path="Blog" component={ManageBlogPage} />
         <Route path="course" component={ManageCoursePage} />
         <Route path="course/:id" component={ManageCoursePage} />
         <Route path="courses" component={CoursesPage} />
