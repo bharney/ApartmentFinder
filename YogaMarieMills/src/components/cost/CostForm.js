@@ -1,0 +1,73 @@
+import React from 'react';
+import { Link, IndexLink, browserHistory } from 'react-router';
+import TextInput from '../common/TextInput';
+import SelectInput from '../common/SelectInput';
+import Admin from '../common/Admin';
+
+const CostForm = ({updateCostState, onChange, saveCost, cost, errors, saving, uploadImage}) => {
+
+  return (
+    <div className="mdl-grid dark-color bg-color">
+      <div className="ribbon bg-image-landing b-border">
+        <div className="row">
+          <div className="col-xs-offset-1 col-xs-10 row-centered">
+            <h1 className="color-white">Pricing</h1>
+            <hr />
+            <form>
+              <Admin uploadImage={uploadImage} cost={cost} saveCost={saveCost} />
+              <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-centered">
+                <div className="mdl-card mdl-shadow--4dp m-l-30 m-r-30 m-t-15 m-b-15 bg-white color-black cost-tile text-center">
+                  <div className="inner">
+                    <div className="top">
+                      <span>
+                        <TextInput
+                          name="package"
+                          label="Package"
+                          value={cost.package}
+                          onChange={updateCostState} />
+                      </span>
+                    </div>
+                    <div className="row p-t-40">
+                      <div className="col-xs-12">
+                        <TextInput
+                          name="description"
+                          label="Description"
+                          value={cost.description}
+                          onChange={updateCostState} />
+                        <TextInput
+                          name="cost"
+                          label="Cost"
+                          value={cost.cost}
+                          onChange={updateCostState} />
+                        <TextInput
+                          name="duration"
+                          label="Duration"
+                          value={cost.duration}
+                          onChange={updateCostState} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  );
+};
+
+CostForm.propTypes = {
+  cost: React.PropTypes.object.isRequired,
+  editorState: React.PropTypes.object.isRequired,
+  updateCostState: React.PropTypes.object.isRequired,
+  focus: React.PropTypes.object.isRequired,
+  saving: React.PropTypes.object.isRequired,
+  uploadImage: React.PropTypes.object.isRequired,
+  saveCost: React.PropTypes.func.isRequired,
+  onChange: React.PropTypes.func.isRequired,
+  errors: React.PropTypes.object
+};
+
+export default CostForm;

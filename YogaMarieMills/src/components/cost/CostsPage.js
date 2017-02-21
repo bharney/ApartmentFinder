@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as costActions from '../../actions/costActions';
 
-class CostPage extends React.Component {
+class CostsPage extends React.Component {
     constructor(props, context) {
         super(props, context);
     }
@@ -34,7 +34,7 @@ class CostPage extends React.Component {
                                                 </div>
                                             </div>
                                             <div className="mdl-card__actions mdl-card--border">
-                                                <Link to="YogaThurlesSchedule">
+                                                <Link to="YogaThurles/ClassTypes">
                                                     <button className="btn bright-bg-color btn-lg color btn-block color-black">Course Details</button>
                                                 </Link>
                                             </div>
@@ -84,7 +84,7 @@ class CostPage extends React.Component {
     }
 }
 
-CostPage.propTypes = {
+CostsPage.propTypes = {
     costs: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
 }
@@ -100,6 +100,6 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CostPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CostsPage);
 
 

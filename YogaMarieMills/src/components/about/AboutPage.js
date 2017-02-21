@@ -24,7 +24,7 @@ class AboutPage extends React.Component {
 
         return (
             <div className="mdl-grid dark-color">
-                <div className="container-fluid p-l-0 p-r-0 bg-color">
+                <div className="container-fluid p-l-0 p-r-0">
                     <div className="ribbon bg-image-landing b-border">
 
                         <div className="container">
@@ -107,62 +107,66 @@ class AboutPage extends React.Component {
                         <div className="section-header">
                             <h2 className="text-center">Contact Marie Mills</h2>
                         </div>
-                        <div id="questions" className="mdl-card container m-t-30 m-b-30 mdl-shadow--4dp">
-                            <div className="featured clearfix text-center">
-                                <div className="row dark-color">
-                                    <div className="col-xs-offset-1 col-xs-10">
-                                        <div className="col-xs-12 m-b-30 m-t-30">
-                                            <section>
-                                                <fieldset>
-
-                                                    <div className="row">
-                                                        <div className="col-lg-12 col-md-12 col-xs-12 text-center">
-                                                            <p>
-                                                                <br />
-                                                                <Link title="Yoga" className="schedule dark-color" to="http://yogamariemills.com/thurles-className-schedule/" target="_blank">Yoga</Link> and
-                                                    <Link title="Ayurveda massage treatments" className="ayurveda dark-color" to="http://yogamariemills.com/ayurveda-massage-treatments/" target="_blank">Ayurveda's wisdom is in its simplicity</Link>
-                                                            </p>
-                                                            <ul className="list-unstyled">
-                                                                <li>Contact me for a Yoga className or Ayurvedic consultation or treatment</li>
-                                                                <li>Phone: 086 1778369</li>
-                                                                <li><Link to="mailto:marie@yogamariemills.com">marie@yogamariemills.com</Link></li>
-                                                            </ul>
-                                                            <h3 className="text-center">You can also email me using the form below</h3>
-                                                        </div>
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-xs-offset-1 col-xs-10">
+                                    <div className="mdl-card p-1-em mdl-shadow--4dp">
+                                        <div className="featured clearfix text-center">
+                                            <div className="row dark-color">
+                                                <div className="col-xs-offset-1 col-xs-10">
+                                                    <div className="col-xs-12">
+                                                        <p>
+                                                            <br />
+                                                            <Link title="Yoga" className="schedule dark-color" to="http://yogamariemills.com/thurles-className-schedule/" target="_blank">
+                                                                Yoga
+                                                            </Link> and
+                                                            <Link title="Ayurveda massage treatments" className="ayurveda dark-color" to="http://yogamariemills.com/ayurveda-massage-treatments/" target="_blank">
+                                                                        Ayurveda's wisdom is in its simplicity
+                                                            </Link>
+                                                        </p>
+                                                        <ul className="list-unstyled">
+                                                            <li>Contact me for a Yoga className or Ayurvedic consultation or treatment</li>
+                                                            <li>Phone: 086 1778369</li>
+                                                            <li><Link to="mailto:marie@yogamariemills.com">marie@yogamariemills.com</Link></li>
+                                                        </ul>
                                                     </div>
-                                                    <br />
-                                                    <div className="row">
-                                                        <div className="col-lg-10 col-lg-offset-1 col-xs-12 text-center">
-                                                            <form action="/" method="post">
-                                                                <div className="col-lg-4 col-sm-4 col-xs-12 m-b-10">
-                                                                    <input required type="text" name="Name" className="form-control form-group" placeholder="Name" />
-                                                                </div>
-                                                                <div className="col-lg-4 col-sm-4 col-xs-12">
-                                                                    <input type="email" name="EmailAddress" className="form-control form-group" placeholder="Email" />
-                                                                </div>
-                                                                <div className="col-lg-4 col-sm-4 col-xs-12">
-                                                                    <input type="text" name="Phone" className="form-control form-group" placeholder="Phone" />
-                                                                </div>
-                                                                <div className="col-lg-12 col-xs-12">
-                                                                    <textarea style={styles.Message} name="Message" spellcheck="true" className="form-control form-group" rows="8" placeholder="Your message here..."></textarea>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                    <div className="mdl-card__actions mdl-card--border">
-                                                        <div className="col-xs-offset-4 col-xs-4">
-                                                            <div className="btn btn-success btn-lg btn-block center-block">
-                                                                <Link to="" className="dark-color m-b-30" activeClassName="active"><span>Send <i className="glyphicon glyphicon-send"></i></span></Link>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                            </section>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <br />
+                        <section>
+                            <fieldset className="container m-b-30">
+                                <div className="row">
+                                    <div className="col-lg-10 col-lg-offset-1 col-xs-12 text-center">
+                                        <h3 className="text-center">You can also email me using the form below</h3>
+                                        <hr />
+                                        <form action="/" method="post">
+                                            <div className="col-lg-4 col-sm-4 col-xs-12 m-b-10">
+                                                <input required type="text" name="Name" className="form-control form-group" placeholder="Name" />
+                                            </div>
+                                            <div className="col-lg-4 col-sm-4 col-xs-12">
+                                                <input type="email" name="EmailAddress" className="form-control form-group" placeholder="Email" />
+                                            </div>
+                                            <div className="col-lg-4 col-sm-4 col-xs-12">
+                                                <input type="text" name="Phone" className="form-control form-group" placeholder="Phone" />
+                                            </div>
+                                            <div className="col-lg-12 col-xs-12">
+                                                <textarea style={styles.Message} name="Message" spellcheck="true" className="form-control form-group" rows="8" placeholder="Your message here..."></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div className="col-xs-offset-4 col-xs-4">
+                                    <div className="btn btn-success btn-lg btn-block center-block">
+                                        <Link to="" className="dark-color m-b-30" activeClassName="active"><span>Send <i className="glyphicon glyphicon-send"></i></span></Link>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </section>
                     </div>
                 </div>
             </div >

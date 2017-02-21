@@ -12,7 +12,8 @@ import YogaThurlesPage from './components/yogathurles/YogaThurlesPage';
 import WhatToBringPage from './components/yogathurles/WhatToBringPage';
 import ClassTypesPage from './components/yogathurles/ClassTypesPage';
 import ClassTypePage from './components/yogathurles/ClassTypePage';
-import CostPage from './components/cost/CostPage';
+import ManageCostPage from './components/cost/ManageCostPage';
+import CostsPage from './components/cost/CostsPage';
 import DietConsultationPage from './components/contemporary/DietConsultationPage';
 import MassagePage from './components/contemporary/MassagePage';
 import EventPage from './components/events/EventPage';
@@ -23,7 +24,9 @@ export default (
     <Route path="/" history={browserHistory} component={App}>
         <IndexRoute component={HomePage} />
         <Route path="YogaThurles/Schedule" component={YogaThurlesPage} />
-        <Route path="YogaThurles/Cost" component={CostPage} />
+        <Route path="YogaThurles/Cost/:id" component={ManageCostPage} />
+        <Route path="YogaThurles/Cost" component={ManageCostPage} />
+        <Route path="YogaThurles/Costs" component={CostsPage} />
         <Route path="YogaThurles/WhatToBring" component={WhatToBringPage} />
         <Route path="YogaThurles/ClassTypes" component={ClassTypesPage} />
         <Route path="YogaThurles/ClassType/:id" component={ClassTypePage} />
