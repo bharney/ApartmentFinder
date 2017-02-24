@@ -19,7 +19,7 @@ class ManageBlogPage extends React.Component {
       saving: false
     };
     this.onChange = this.onChange.bind(this);
-    this.saveBlog = this.saveBlog.bind(this);
+    this.saveAction = this.saveAction.bind(this);
     this.updateBlogState = this.updateBlogState.bind(this);
     this.getTextFromEntity = this.getTextFromEntity.bind(this);
     this.uploadImage = this.uploadImage.bind(this);
@@ -47,7 +47,7 @@ class ManageBlogPage extends React.Component {
     return this.setState({ blog: blog });
   }
 
-  saveBlog(event) {
+  saveAction(event) {
     debugger;
     event.preventDefault();
     let blog = this.state.blog;
@@ -84,7 +84,7 @@ class ManageBlogPage extends React.Component {
       <BlogForm
         updateBlogState={this.updateBlogState}
         onChange={this.onChange}
-        saveBlog={this.saveBlog}
+        saveAction={this.saveAction}
         blog={this.state.blog}
         editorState={this.state.editorState}
         ref="editor"

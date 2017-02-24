@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Admin from '../common/Admin';
 import * as costActions from '../../actions/costActions';
 
 class CostsPage extends React.Component {
@@ -11,16 +12,17 @@ class CostsPage extends React.Component {
 
     render() {
         const {costs} = this.props;
-
         return (
             <div className="mdl-grid dark-color bg-color">
                 <div className="ribbon bg-image-landing b-border">
                     <div className="row">
                         <div className="col-xs-offset-1 col-xs-10 row-centered">
                             <h1 className="color-white">Pricing</h1>
+                            <Admin addAction={costs} />
                             <hr/>
                             {costs.map(cost =>
                                 <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-centered">
+                                    <Admin editAction={cost} />
                                     <div className="mdl-card mdl-shadow--4dp m-l-30 m-r-30 m-t-15 m-b-15 bg-white color-black cost-tile text-center">
                                         <div className="inner">
                                             <div className="top">

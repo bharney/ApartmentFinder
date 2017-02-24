@@ -17,9 +17,10 @@ let costRoutes = function () {
                 request.input('duration', sql.VarChar, cost.duration);
                 request.input('description', sql.VarChar, cost.description);
                 request.input('package', sql.VarChar, cost.package);
+                request.input('sequence', sql.Int, cost.sequence);
                 request.query(
-                    `INSERT INTO Costs (type, course, cost, duration, description, package)
-                     VALUES (@type, @course, @cost, @duration, @description, @package)`
+                    `INSERT INTO Costs (type, course, cost, duration, description, package, sequence)
+                     VALUES (@type, @course, @cost, @duration, @description, @package, @sequence)`
                 ).then(res.status(201).send(cost)).catch(function (err) {
                     console.log("insert Costs: " + err);
                 });
@@ -36,6 +37,7 @@ let costRoutes = function () {
                 request.input('duration', sql.VarChar, cost.duration);
                 request.input('description', sql.VarChar, cost.description);
                 request.input('package', sql.VarChar, cost.package);
+                request.input('sequence', sql.Int, cost.sequence);
                 request.query(
                     `UPDATE Costs
                     SET type = @type
@@ -44,6 +46,7 @@ let costRoutes = function () {
                     ,duration = @duration
                     ,description = @description
                     ,package = @package
+                    ,sequence = @sequence
                     WHERE id = @id`
                 ).then(res.status(201).send(cost)).catch(function (err) {
                     console.log("update Costs: " + err);
@@ -72,7 +75,9 @@ let costRoutes = function () {
                                 ,duration
                                 ,description
                                 ,package 
-                                FROM Costs`
+                                ,sequence
+                                FROM Costs
+                                ORDER BY sequence`
                 ).then(function (recordset) {
                     res.json(recordset);
                 }).catch(function (err) {
@@ -93,6 +98,7 @@ let costRoutes = function () {
                                 ,duration
                                 ,description
                                 ,package 
+                                ,sequence
                                 FROM Costs
                                 WHERE id = @id`
                 ).then(function (recordset) {

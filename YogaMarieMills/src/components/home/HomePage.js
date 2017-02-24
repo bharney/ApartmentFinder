@@ -70,7 +70,7 @@ class HomePage extends React.Component {
                                     <h3>Yoga and Ayurveda are integral to Traditional Indian Medicine and easily adapted
                                         to the modern life. Learn Yoga, Ayeruveda and more.</h3>
                                     <div className="col-xs-4 p-t-5 p-b-40 p-l-15 p-r-15">
-                                        <Link to="">
+                                        <Link to="/Ayurveda/Massage/Body">
                                             <div className="icon-circle mdl-shadow--4dp lotus-flower bg-color-purple"></div>
                                         </Link>
                                         <div className="row">
@@ -83,14 +83,14 @@ class HomePage extends React.Component {
                                         </div>
                                         <div className="row">
                                             <div className="col-xs-12">
-                                                <Link className="color" to="YogaThurlesSchedule">
+                                                <Link className="color" to="/Ayurveda/Massage/Body">
                                                     <p>Learn More</p>
                                                 </Link>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="col-xs-4 p-t-5 p-b-40 p-l-15 p-r-15">
-                                        <Link to="">
+                                        <Link to="/YogaThurles/Schedule">
                                             <div className="icon-circle mdl-shadow--4dp om bright-bg-color"></div>
                                         </Link>
                                         <div className="row">
@@ -103,14 +103,14 @@ class HomePage extends React.Component {
                                         </div>
                                         <div className="row">
                                             <div className="col-xs-12">
-                                                <Link className="color" to="yogathurlescost">
+                                                <Link className="color" to="/YogaThurles/Schedule">
                                                     <p>Learn More</p>
                                                 </Link>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="col-xs-4 p-t-5 p-b-40 p-l-15 p-r-15">
-                                        <Link to="">
+                                        <Link to="/Ayurveda/DietConsultation">
                                             <div className="icon-circle mdl-shadow--4dp yoga-mat bg-color-green"></div>
                                         </Link>
                                         <div className="row">
@@ -123,7 +123,7 @@ class HomePage extends React.Component {
                                         </div>
                                         <div className="row">
                                             <div className="col-xs-12">
-                                                <Link className="color" to="Contemporary">
+                                                <Link className="color" to="/Ayurveda/DietConsultation">
                                                     <p>Learn More</p>
                                                 </Link>
                                             </div>
@@ -155,7 +155,9 @@ class HomePage extends React.Component {
                             <div className="row m-t-30 p-t-40 p-b-40 text-center">
 
                                 <div className="col-xs-4 p-l-15 p-r-15">
-                                    <img className="img-circle img-responsive mdl-shadow--4dp" src={yogaImg1} />
+                                    <Link to="/Ayurveda/Massage/Body">
+                                        <img className="img-circle img-responsive mdl-shadow--4dp" src={yogaImg1} />
+                                    </Link>
                                     <div className="row">
                                         <div className="col-xs-12">
                                             <h4>Contemporary Ayeruveda</h4>
@@ -174,7 +176,9 @@ class HomePage extends React.Component {
                                     </div>
                                 </div>
                                 <div className="col-xs-4 p-l-15 p-r-15">
-                                    <img className="img-circle img-responsive mdl-shadow--4dp" src={yogaImg2} />
+                                    <Link to="/YogaThurles/Schedule">
+                                        <img className="img-circle img-responsive mdl-shadow--4dp" src={yogaImg2} />
+                                    </Link>
                                     <div className="row">
                                         <div className="col-xs-12">
                                             <h4>Yoga Workshops and Bespoke Yoga</h4>
@@ -192,7 +196,9 @@ class HomePage extends React.Component {
                                     </div>
                                 </div>
                                 <div className="col-xs-4 p-l-15 p-r-15">
-                                    <img className="img-circle img-responsive mdl-shadow--4dp" src={yogaImg3} />
+                                    <Link to="/Ayurveda/DietConsultation">
+                                        <img className="img-circle img-responsive mdl-shadow--4dp" src={yogaImg3} />
+                                    </Link>
                                     <div className="row">
                                         <div className="col-xs-12">
                                             <h4>Dietary Consultation</h4>
@@ -220,9 +226,9 @@ class HomePage extends React.Component {
                                 <h2 className="text-center">My Blog</h2>
                                 <p className="text-center">Read useful information on Yoga and Ayurveda</p>
                                 <div className="col-3-masonry">
-                                {blogs.map(blog =>
-                                    <BlogTile blog={blog} />)
-                                }
+                                    {blogs.map(blog =>
+                                        <BlogTile blog={blog} />)
+                                    }
                                 </div>
                             </div>
                         </div>

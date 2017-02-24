@@ -4,7 +4,7 @@ import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 import Admin from '../common/Admin';
 
-const CostForm = ({updateCostState, onChange, saveCost, cost, errors, saving, uploadImage}) => {
+const CostForm = ({updateCostState, onChange, saveCost, cost, errors, saving, uploadImage, deleteCost}) => {
 
   return (
     <div className="mdl-grid dark-color bg-color">
@@ -14,21 +14,17 @@ const CostForm = ({updateCostState, onChange, saveCost, cost, errors, saving, up
             <h1 className="color-white">Pricing</h1>
             <hr />
             <form>
-              <Admin uploadImage={uploadImage} cost={cost} saveCost={saveCost} />
+              <Admin saveAction={saveCost} deleteAction={deleteCost} />
               <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-centered">
                 <div className="mdl-card mdl-shadow--4dp m-l-30 m-r-30 m-t-15 m-b-15 bg-white color-black cost-tile text-center">
                   <div className="inner">
-                    <div className="top">
-                      <span>
+                    <div className="row p-t-40">
+                    <div className="col-xs-12">
                         <TextInput
                           name="package"
                           label="Package"
                           value={cost.package}
                           onChange={updateCostState} />
-                      </span>
-                    </div>
-                    <div className="row p-t-40">
-                      <div className="col-xs-12">
                         <TextInput
                           name="description"
                           label="Description"
@@ -43,6 +39,11 @@ const CostForm = ({updateCostState, onChange, saveCost, cost, errors, saving, up
                           name="duration"
                           label="Duration"
                           value={cost.duration}
+                          onChange={updateCostState} />
+                        <TextInput
+                          name="sequence"
+                          label="Display Sequence"
+                          value={cost.sequence}
                           onChange={updateCostState} />
                       </div>
                     </div>

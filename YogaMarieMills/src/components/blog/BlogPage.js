@@ -62,8 +62,8 @@ class BlogPage extends React.Component {
 
         this.onChange = this.onChange.bind(this);
         this.focus = this.focus.bind(this);
-        this.saveBlog = this.saveBlog.bind(this);
-        this.deleteBlog = this.deleteBlog.bind(this);
+        this.saveAction = this.saveAction.bind(this);
+        this.deleteAction = this.deleteAction.bind(this);
         this.getTextFromEntity = this.getTextFromEntity.bind(this);
         this.updateBlogState = this.updateBlogState.bind(this);
         this.uploadImage = this.uploadImage.bind(this);
@@ -97,7 +97,7 @@ class BlogPage extends React.Component {
         return descriptionBlocks.join("\\n ");
     }
 
-    saveBlog(event) {
+    saveAction(event) {
         event.preventDefault();
         let blog = this.state.blog;
         blog.short = this.getTextFromEntity(convertToRaw(this.state.editorState.getCurrentContent()));
@@ -107,7 +107,7 @@ class BlogPage extends React.Component {
         this.context.router.push('/blogs');
     }
 
-    deleteBlog(event) {
+    deleteAction(event) {
         debugger;
         this.props.actions.deleteBlog(this.state.blog.id);
         this.props.actions.loadBlog();
@@ -133,15 +133,14 @@ class BlogPage extends React.Component {
     }
 
     updateBlogState(event) {
-    const field = event.target.name;
-    let blog = this.state.blog;
-    blog[field] = event.target.value;
-    return this.setState({ blog: blog });
-  }
+        const field = event.target.name;
+        let blog = this.state.blog;
+        blog[field] = event.target.value;
+        return this.setState({ blog: blog });
+    }
 
 
     render() {
-        const { editorState } = this.state;
         const { blog } = this.props;
         let blogImg = blog.image != "" ? require(`../../images/${blog.image}`) : ""
         const blogImage = {
@@ -159,16 +158,16 @@ class BlogPage extends React.Component {
                             <div className="col-xs-12">
                                 <h1 className="color-white text-center">{blog.title}</h1>
                                 <hr />
-                                <Admin uploadImage={this.uploadImage} blog={this.state.blog} saveBlog={this.saveBlog} deleteBlog={this.deleteBlog} />
+                                <Admin uploadImage={this.uploadImage} blog={this.state.blog} saveAction={this.saveAction} deleteAction={this.deleteAction} />
                                 <div className="col-xs-12 m-b-30">
                                     <div className="mdl-card mdl-shadow--4dp">
                                         <div className="mdl-card__media v-h-40 image-text-container" style={blogImage}>
                                             <div className="col-xs-7 text-left align-bottom m-l-20 m-b-20">
                                                 <TextInput
-                                                name="title"
-                                                label="Title"
-                                                value={blog.title}
-                                                onChange={this.updateBlogState} />
+                                                    name="title"
+                                                    label="Title"
+                                                    value={blog.title}
+                                                    onChange={this.updateBlogState} />
                                             </div>
                                         </div>
                                         <div className="col-xs-12 t-border-thin p-20">

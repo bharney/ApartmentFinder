@@ -32,7 +32,7 @@ export function deleteBlog(blog) {
       dispatch(deleteBlogSuccess());
       return blogApi.getAllBlogs().then(blogs => {
         dispatch(loadBlogSuccess(blogs));
-      })
+      });
     }).catch(error => {
       throw (error);
     });

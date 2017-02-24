@@ -18,6 +18,7 @@ class ManageCostPage extends React.Component {
       saving: false
     };
     this.saveCost = this.saveCost.bind(this);
+    this.deleteCost = this.deleteCost.bind(this);
     this.updateCostState = this.updateCostState.bind(this);
     this.uploadImage = this.uploadImage.bind(this);
   }
@@ -41,7 +42,14 @@ class ManageCostPage extends React.Component {
     let cost = this.state.cost;
     this.setState({ cost: cost });
     this.props.actions.saveCost(this.state.cost);
-    this.context.router.push('/costs');
+    this.context.router.push('/YogaThurles/Costs');
+  }
+
+  deleteCost(event) {
+        debugger;
+        this.props.actions.deleteCost(this.state.cost.id);
+        this.props.actions.loadCost();
+        this.context.router.push('/YogaThurles/Costs');
   }
 
   uploadImage(e) {
@@ -66,6 +74,7 @@ class ManageCostPage extends React.Component {
       <CostForm
         updateCostState={this.updateCostState}
         saveCost={this.saveCost}
+        deleteCost={this.deleteCost}
         cost={this.state.cost}
         errors={this.state.errors}
         saving={this.state.saving}

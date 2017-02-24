@@ -3,6 +3,7 @@ import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import MultilineText from '../common/MultilineText';
 import { bindActionCreators } from 'redux';
+import Admin from '../common/Admin';
 import * as blogActions from '../../actions/blogActions';
 
 class BlogPage extends React.Component {
@@ -13,22 +14,22 @@ class BlogPage extends React.Component {
     render() {
         const {blogs} = this.props;
 
-        function blogImage (image) {
-             let blogImg = image != "" ? require(`../../images/${image}`) : ""
-                const styles = {
-                    blog: {
-                        img: {
-                            backgroundImage: 'url(' + blogImg + ')',
-                            backgroundRepeat: "no-repeat",
-                            backgroundPosition: "center",
-                            backgroundSize: "cover"
-                        }
+        function blogImage(image) {
+            let blogImg = image != "" ? require(`../../images/${image}`) : ""
+            const styles = {
+                blog: {
+                    img: {
+                        backgroundImage: 'url(' + blogImg + ')',
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
+                        backgroundSize: "cover"
                     }
                 }
+            }
             return styles.blog.img
         }
 
-        function previewText (short) {
+        function previewText(short) {
             return short.substring(0, 500) + "...";
         }
 
@@ -38,10 +39,8 @@ class BlogPage extends React.Component {
                     <div className="container-fluid">
                         <div className="row m-t-30 m-b-30">
                             <div className="col-xs-offset-1 col-xs-10 m-b-30">
-                                <Link to="/blog" className="pull-right" >
-                                    <button type="button" className="relative m-t-5 btn btn-success btn-circle-lg" title="Add Record"><i className="glyphicon glyphicon-plus"></i></button>
-                                </Link>
                                 <h1 className="text-center color-white">My Blog</h1>
+                                <Admin objArr={blogs} />
                                 <h2 className="text-center color-white">Read useful information on Yoga and Ayurveda</h2>
                                 <hr />
                                 <div className="col-xs-12 m-b-30">
@@ -77,7 +76,7 @@ class BlogPage extends React.Component {
                                                     </div>
                                                 </div>
                                                 <div className="mdl-card__actions mdl-card--border">
-                                                    <Link key={blog.route} to={'/' + blog.type + '/' + blog.id} className="dark-color btn btn-default btn-block" activeClassName="active">Read More</Link>
+                                                    <Link key={blog.id} to={'/' + blog.type + '/' + blog.id} className="dark-color btn btn-default btn-block" activeClassName="active">Read More</Link>
                                                 </div>
                                             </div>
                                         )}
