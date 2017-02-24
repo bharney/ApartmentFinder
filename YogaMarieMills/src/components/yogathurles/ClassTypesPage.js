@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as classTypesActions from '../../actions/classTypesActions';
 import Admin from '../common/Admin';
+import MultilineText from '../common/MultilineText';
 import landing from '../../images/landing.jpg';
 
 
@@ -15,19 +16,25 @@ class ClassTypesPage extends React.Component {
     render() {
         const {classTypes} = this.props;
 
+        function previewText(short) {
+            return short.substring(0, 500) + "...";
+        }
+
         let alternateTileSides = function (classType) {
             if (classType.id % 2 == 0) {
                 return (
                     <div key={classType.id} className="row vertical-center bg-color-white">
                         <div className="half">
-                            <img className="img-responsive" src={classType.image} />
+                            <img className="img-responsive" src={'../' + classType.image} />
                         </div>
                         <div className="half">
                             <div className="row">
                                 <div className="col-xs-offset-1 col-xs-10 tile m-t--5-percent">
                                     <Admin editAction={classType} />
                                     <h2 className="page-header banner">{classType.title}</h2>
-                                    <p >{classType.description}</p>
+                                    <p>
+                                        <MultilineText multilineText={previewText(classType.short)} />
+                                    </p>
                                     <Link to={'/' + classType.route + '/' + classType.id}>
                                         <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
                                             Read More
@@ -52,8 +59,9 @@ class ClassTypesPage extends React.Component {
                                 <div className="col-xs-offset-1 col-xs-10 tile m-t--5-percent">
                                     <Admin editAction={classType} />
                                     <h2 className="page-header banner">{classType.title}</h2>
-
-                                    <p>{classType.description}</p>
+                                    <p>
+                                        <MultilineText multilineText={previewText(classType.short)} />
+                                    </p>
                                     <Link to={'/' + classType.route + '/' + classType.id}>
                                         <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
                                             Read More
@@ -68,7 +76,7 @@ class ClassTypesPage extends React.Component {
 
                         </div>
                         <div className="half">
-                            <img className="img-responsive" src={classType.image} />
+                            <img className="img-responsive" src={'../' + classType.image} />
                         </div>
                     </div>
                 );

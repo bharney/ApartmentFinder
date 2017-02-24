@@ -76,7 +76,7 @@ class ManageClassTypePage extends React.Component {
     const field = event.target.name;
     let classType = this.state.classType;
     classType[field] = event.target.value;
-    return this.setState({ classType: classType });
+    return this.setState({ classType });
   }
 
   saveClassType(event) {
@@ -85,7 +85,7 @@ class ManageClassTypePage extends React.Component {
     let classType = this.state.classType;
     classType.short = this.getTextFromEntity(convertToRaw(this.state.editorState.getCurrentContent()));
     classType.description = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
-    this.setState({ classType: classType });
+    this.setState({ classType });
     this.props.actions.saveClassType(this.state.classType);
     this.context.router.push('/YogaThurles/ClassTypes');
   }
@@ -117,19 +117,21 @@ class ManageClassTypePage extends React.Component {
     const {classType} = this.props;
     
     let classTypeImg = classType.image != "" ? require(`../../images/${classType.image}`) : ""
+
     const classTypeImage = {
       backgroundImage: 'url(' + classTypeImg + ')',
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
       backgroundSize: "cover"
     }
+
     return (
       <ClassTypeForm
         updateClassTypeState={this.updateClassTypeState}
         onChange={this.onChange}
-        saveClassType={this.saveAction}
+        saveClassType={this.saveClassType}
         classType={this.state.classType}
-        classType={this.classTypeImage}
+        classTypeImage={classTypeImage}
         editorState={this.state.editorState}
         ref="editor"
         focus={focus}

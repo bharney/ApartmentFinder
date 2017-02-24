@@ -31,7 +31,7 @@ class ClassTypePage extends React.Component {
                                             </div>
                                         </div>
                                         <div className="col-xs-12 t-border-thin p-20">
-                                            <p>{classType.description}</p>
+                                            <p>{classType.short}</p>
                                         </div>
                                     </div>
                                 </div>

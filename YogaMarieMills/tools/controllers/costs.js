@@ -71,7 +71,9 @@ let costRoutes = function () {
                 request.query(`SELECT id
                                 ,type
                                 ,course
-                                ,cost
+                                ,CASE WHEN ISNUMERIC(cost) = 1 
+                                 THEN FORMAT(TRY_PARSE(cost AS decimal), 'C', 'de-de') 
+                                 ELSE cost END 
                                 ,duration
                                 ,description
                                 ,package 
@@ -94,7 +96,9 @@ let costRoutes = function () {
                 request.query(`SELECT id
                                 ,type
                                 ,course
-                                ,cost
+                                ,CASE WHEN ISNUMERIC(cost) = 1 
+                                 THEN FORMAT(TRY_PARSE(cost AS decimal), 'C', 'de-de') 
+                                 ELSE cost END 
                                 ,duration
                                 ,description
                                 ,package 
