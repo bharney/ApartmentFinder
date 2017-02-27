@@ -12,8 +12,6 @@ class CostApi {
   static saveCost(cost) {
     cost = Object.assign({}, cost);
     return new Promise((resolve, reject) => {
-      debugger;
-
       if (cost.id) {
         fetch('http://localhost:3000/api/costs', {
           method: 'put',

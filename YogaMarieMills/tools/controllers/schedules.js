@@ -49,7 +49,7 @@ let scheduleRoutes = function () {
                 let request = new sql.Request(sqlUpdateSchedule);
                 request.input('id', sql.Int, schedule.id);
                 request.input('type', sql.VarChar, schedule.type);
-                request.input('session_date', sql.VarChar, schedule.session_date);
+                request.input('session_date', sql.Date, schedule.session_date);
                 request.query(
                     `UPDATE Schedules
                     SET session_date = @session_date
@@ -99,6 +99,7 @@ let scheduleRoutes = function () {
                         ,H.header AS header
                         ,H.description AS description
                         ,NULL AS session_date
+                        ,NULL AS DateSort
                         ,NULL AS session_time
                         ,NULL AS class
                         ,NULL AS parent_id
@@ -113,11 +114,14 @@ let scheduleRoutes = function () {
                         ,NULL as venue
                         ,NULL as header
                         ,NULL as description
-                        ,S.session_date AS session_date
+                        ,DATENAME(DW, S.session_date) + ' ' + CONVERT(VARCHAR, S.session_date, 107) AS session_date
+                        ,S.session_date as DateSort
                         ,NULL AS session_time
                         ,NULL AS class
                         ,NULL AS parent_id
                         FROM Schedules S
+                        WHERE session_date >= GETDATE()
+                                                
 
                         UNION ALL
 
@@ -128,12 +132,15 @@ let scheduleRoutes = function () {
                         ,NULL as header
                         ,NULL as description
                         ,NULL AS session_date
+                        ,NULL AS DateSort
                         ,D.session_time AS session_time
                         ,D.class AS class
                         ,D.parent_id AS parent_id
-                        FROM ScheduleDetails D`
+                        FROM ScheduleDetails D
+                        ORDER BY header desc, DateSort`
                 ).then(function (recordset) {
                     let schedulePage = {
+                        id: recordset[0].id,
                         header: recordset[0].header,
                         venue: recordset[0].venue,
                         description: recordset[0].description,
@@ -144,6 +151,7 @@ let scheduleRoutes = function () {
                         if (recordset.hasOwnProperty(date_prop)) {
                             if (recordset[date_prop].session_date != null) {
                                 let session_dates = {
+                                    id: recordset[date_prop].id,
                                     session_date: recordset[date_prop].session_date,
                                     session_details: []
                                 };
@@ -154,6 +162,7 @@ let scheduleRoutes = function () {
                                         if (recordset[time_prop].session_time != null) {
                                             if (recordset[date_prop].id == recordset[time_prop].parent_id) {
                                                 let session_details = {
+                                                    id: recordset[time_prop].id,
                                                     session_time: recordset[time_prop].session_time,
                                                     class: recordset[time_prop].class
                                                 };
@@ -178,19 +187,48 @@ let scheduleRoutes = function () {
             const sqlSchedule = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlSchedule);
                 request.input('id', sql.Int, req.params.scheduleId);
-                request.query(`SELECT id
-                            ,title
-                            ,short
-                            ,description
-                            ,image
-                            ,href
-                            ,type
-                            ,component
-                            FROM Schedules
-                            WHERE id = @id`
+                request.query(`SELECT
+                        S.id
+                        ,S.type AS type
+                        ,DATENAME(DW, S.session_date) + ' ' + CONVERT(VARCHAR, S.session_date, 107) AS session_date
+                        ,NULL AS session_time
+                        ,NULL AS class
+                        ,NULL AS parent_id
+                        FROM Schedules S
+                        WHERE id = @id
+
+                        UNION ALL
+
+                        SELECT 
+                        D.id
+                        ,D.type AS type
+                        ,NULL AS session_date
+                        ,D.session_time AS session_time
+                        ,D.class AS class
+                        ,D.parent_id AS parent_id
+                        FROM ScheduleDetails D
+                        WHERE parent_id = @id`
                 ).then(function (recordset) {
                     if (recordset.length > 0) {
-                        res.json(recordset);
+                        let session_dates = {
+                            id: recordset[0].id,
+                            session_date: recordset[0].session_date,
+                            session_details: []
+                        };
+                        for (let time_prop in recordset) {
+                            if (recordset.hasOwnProperty(time_prop)) {
+                                if (recordset[time_prop].session_time != null) {
+                                    let session_details = {
+                                        id: recordset[time_prop].id,
+                                        session_time: recordset[time_prop].session_time,
+                                        class: recordset[time_prop].class
+                                    };
+                                    session_dates.session_details.push(session_details);
+                                }
+                            }
+                        }
+
+                        res.json(session_dates);
                     }
                     else {
                         res.status(500).send("No Schedule found with this ID.");

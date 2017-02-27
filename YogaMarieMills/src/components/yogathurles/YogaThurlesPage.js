@@ -22,12 +22,12 @@ class YogaThurlesPage extends React.Component {
                 <div className="ribbon bg-image-landing b-border">
                     <div className="container-fluid">
                         <div className="row m-b-30">
-                            <div className="col-xs-offset-1 col-xs-10 m-b-30">
+                            <div className="col-xs-12 col-sm-offset-1 col-sm-10 m-b-30">
                                 <h1 className="text-center color-white">{schedules.header}</h1>
                                 <h3 className="color-white">Studio: {schedules.venue}</h3>
                                     {schedules.session_dates.map(session_dates =>
-                                        <div className="col-xs-12 col-md-4 m-b-30">
-                                            <div className="mdl-card mdl-shadow--4dp p-20">
+                                        <div className="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6 m-b-30">
+                                            <div className="mdl-card mdl-shadow--4dp p-t-05-em p-l-1-em p-r-1-em p-b-05-em">
                                                 <Schedule schedule={session_dates} />
                                             </div>
                                         </div>)
@@ -64,5 +64,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(YogaThurlesPage);
-
-

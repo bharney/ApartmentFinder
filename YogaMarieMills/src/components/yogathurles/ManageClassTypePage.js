@@ -80,7 +80,6 @@ class ManageClassTypePage extends React.Component {
   }
 
   saveClassType(event) {
-    debugger;
     event.preventDefault();
     let classType = this.state.classType;
     classType.short = this.getTextFromEntity(convertToRaw(this.state.editorState.getCurrentContent()));
@@ -91,14 +90,12 @@ class ManageClassTypePage extends React.Component {
   }
 
   deleteClassType(event) {
-    debugger;
     this.props.actions.deleteClassType(this.state.classType.id);
     this.props.actions.loadClassType();
     this.context.router.push('/YogaThurles/ClassTypes');
   }
 
   uploadImage(e) {
-    debugger;
     e.preventDefault();
 
     let reader = new FileReader();

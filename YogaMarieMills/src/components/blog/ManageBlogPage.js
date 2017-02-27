@@ -48,7 +48,6 @@ class ManageBlogPage extends React.Component {
   }
 
   saveAction(event) {
-    debugger;
     event.preventDefault();
     let blog = this.state.blog;
     blog.short = this.getTextFromEntity(convertToRaw(this.state.editorState.getCurrentContent()));
@@ -59,7 +58,6 @@ class ManageBlogPage extends React.Component {
   }
 
   uploadImage(e) {
-    debugger;
     e.preventDefault();
 
     let reader = new FileReader();

@@ -21,7 +21,6 @@ class BlogApi {
     static saveBlog(blog) {
         blog = Object.assign({}, blog);
         return new Promise((resolve, reject) => {
-            debugger;
             const minBlogTitleLength = 1;
             if (blog.title.length < minBlogTitleLength) {
                 reject(`Name must be at least ${minBlogTitleLength} characters.`);

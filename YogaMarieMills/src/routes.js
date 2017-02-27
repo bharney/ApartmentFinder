@@ -9,6 +9,7 @@ import BlogsPage from './components/blog/BlogsPage';
 import ManageBlogPage from './components/blog/ManageBlogPage';
 import AboutPage from './components/about/AboutPage';
 import YogaThurlesPage from './components/yogathurles/YogaThurlesPage';
+import ManageSchedulePage from './components/yogathurles/ManageSchedulePage';
 import WhatToBringPage from './components/yogathurles/WhatToBringPage';
 import ClassTypesPage from './components/yogathurles/ClassTypesPage';
 import ClassTypePage from './components/yogathurles/ClassTypePage';
@@ -25,6 +26,8 @@ export default (
     <Route path="/" history={browserHistory} component={App}>
         <IndexRoute component={HomePage} />
         <Route path="YogaThurles/Schedule" component={YogaThurlesPage} />
+        <Route path="Schedule/:id" component={ManageSchedulePage} />
+        <Route path="Schedule" component={ManageSchedulePage} />
         <Route path="Cost/:id" component={ManageCostPage} />
         <Route path="Cost" component={ManageCostPage} />
         <Route path="YogaThurles/Costs" component={CostsPage} />

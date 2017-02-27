@@ -85,8 +85,6 @@ class ClassTypesApi {
   static saveClassType(classType) {
     classType = Object.assign({}, classType);
     return new Promise((resolve, reject) => {
-      debugger;
-
       if (classType.id) {
         fetch('http://localhost:3000/api/classTypes', {
           method: 'put',

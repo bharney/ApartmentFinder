@@ -108,22 +108,18 @@ class BlogPage extends React.Component {
     }
 
     deleteAction(event) {
-        debugger;
         this.props.actions.deleteBlog(this.state.blog.id);
         this.props.actions.loadBlog();
-        debugger;
         this.context.router.push('/blogs');
     }
 
     uploadImage(e) {
-        debugger;
         e.preventDefault();
 
         let reader = new FileReader();
         let file = e.target.files[0];
 
         reader.onloadend = () => {
-            debugger;
             let blog = this.state.blog;
             blog.image = file.name
             this.props.upload.uploadFile(file);

@@ -727,6 +727,20 @@ Editor
 }
 
 /* ========================================
+Schedule
+========================================= */
+
+.relative-top-right {
+    position: relative;
+    top: 40px;
+    left: 85%;
+}
+
+.vert-middle {
+    vertical-align: middle;
+}
+
+/* ========================================
 Media queries
 ========================================= */
 
@@ -878,6 +892,21 @@ Media queries
 .p-20 {
     padding: 1em;
 }
+
+ .p-t-05-em {
+     padding-top: 0.5em;
+ } 
+ 
+ .p-l-1-em {
+     padding-left: 1em;
+ }
+ .p-r-1-em {
+     padding-right: 1em;
+ }
+ 
+ .p-b-05-em {
+    padding-bottom: 0.5em;
+ }
 
 .p-1-em {
     padding: 1em;

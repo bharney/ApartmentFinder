@@ -37,7 +37,6 @@ class ManageCostPage extends React.Component {
   }
 
   saveCost(event) {
-    debugger;
     event.preventDefault();
     let cost = this.state.cost;
     this.setState({ cost: cost });
@@ -46,14 +45,12 @@ class ManageCostPage extends React.Component {
   }
 
   deleteCost(event) {
-        debugger;
         this.props.actions.deleteCost(this.state.cost.id);
         this.props.actions.loadCost();
         this.context.router.push('/YogaThurles/Costs');
   }
 
   uploadImage(e) {
-    debugger;
     e.preventDefault();
 
     let reader = new FileReader();
