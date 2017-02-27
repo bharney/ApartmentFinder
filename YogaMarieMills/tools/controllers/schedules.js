@@ -94,7 +94,7 @@ let scheduleRoutes = function () {
                 request.query(
                     `SELECT
                         H.id
-                        ,H.type
+                        ,H.type AS type
                         ,H.venue AS venue
                         ,H.header AS header
                         ,H.description AS description
@@ -141,6 +141,7 @@ let scheduleRoutes = function () {
                 ).then(function (recordset) {
                     let schedulePage = {
                         id: recordset[0].id,
+                        type: recordset[0].type,
                         header: recordset[0].header,
                         venue: recordset[0].venue,
                         description: recordset[0].description,
@@ -152,6 +153,7 @@ let scheduleRoutes = function () {
                             if (recordset[date_prop].session_date != null) {
                                 let session_dates = {
                                     id: recordset[date_prop].id,
+                                    type: recordset[date_prop].type,
                                     session_date: recordset[date_prop].session_date,
                                     session_details: []
                                 };
@@ -163,6 +165,7 @@ let scheduleRoutes = function () {
                                             if (recordset[date_prop].id == recordset[time_prop].parent_id) {
                                                 let session_details = {
                                                     id: recordset[time_prop].id,
+                                                    type: recordset[time_prop].type,
                                                     session_time: recordset[time_prop].session_time,
                                                     class: recordset[time_prop].class
                                                 };

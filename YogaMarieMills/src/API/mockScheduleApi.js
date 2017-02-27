@@ -25,6 +25,7 @@ class ScheduleApi {
     schedule = Object.assign({}, schedule);
     return new Promise((resolve, reject) => {
       if (schedule.id) {
+        debugger;
         fetch('http://localhost:3000/api/schedules', {
           method: 'put',
           headers: {
@@ -40,6 +41,7 @@ class ScheduleApi {
           console.log('Request failed', error);
         });
       } else {
+        debugger;
         fetch('http://localhost:3000/api/schedules', {
           method: 'post',
           headers: {

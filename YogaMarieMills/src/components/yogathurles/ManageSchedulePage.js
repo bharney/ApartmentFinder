@@ -20,6 +20,7 @@ class ManageSchedulePage extends React.Component {
     this.saveSchedule = this.saveSchedule.bind(this);
     this.deleteSchedule = this.deleteSchedule.bind(this);
     this.updateClassState = this.updateClassState.bind(this);
+    this.removeRow = this.removeRow.bind(this);
     this.addRow = this.addRow.bind(this);
   }
 
@@ -31,7 +32,6 @@ class ManageSchedulePage extends React.Component {
   }
 
   updateClassState(event) {
-    debugger;
     const field = event.target.name;
     let schedule = this.state.schedule;
     schedule.session_details[parseInt(field)].class = event.target.value;
@@ -45,39 +45,38 @@ class ManageSchedulePage extends React.Component {
     return this.setState({ schedule });
   }
 
-   updateDateState(event, date) {
+  updateDateState(event, date) {
     let schedule = this.state.schedule;
     schedule.session_date = date.toISOString();
     return this.setState({ schedule });
   }
 
   saveSchedule(event) {
+    debugger;
     event.preventDefault();
     let schedule = this.state.schedule;
     this.setState({ schedule });
     this.props.actions.saveSchedule(this.state.schedule);
-    this.context.router.push('/YogaThurles/Schedules');
+    this.context.router.push('/YogaThurles/Schedule');
   }
 
   deleteSchedule(event) {
     this.props.actions.deleteSchedule(this.state.schedule.id);
     this.props.actions.loadSchedule();
-    this.context.router.push('/YogaThurles/Schedules');
+    this.context.router.push('/YogaThurles/Schedule');
   }
 
-  addRow () {
-    debugger;
+  addRow() {
     let schedule = this.state.schedule;
     schedule.session_details.push({ id: '', session_time: '', class: '' })
-    this.setState({schedule});
+    this.setState({ schedule });
   }
 
   removeRow(event) {
-    debugger;
     const field = event.target.name;
     let schedule = this.state.schedule;
     schedule.session_details.splice(parseInt(field), 1)
-    this.setState({schedule});
+    this.setState({ schedule });
   }
 
   render() {
@@ -87,21 +86,20 @@ class ManageSchedulePage extends React.Component {
           <div className="container-fluid">
             <div className="row m-b-30">
               <div className="col-xs-12 col-sm-offset-1 col-sm-10 m-b-30">
-              <br/>
-              <br/>
+                <Admin saveAction={this.saveSchedule} deleteAction={this.deleteSchedule} />
+                <br />
+                <br />
                 <div className="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6 m-b-30">
                   <div className="mdl-card mdl-shadow--4dp p-t-05-em p-l-1-em p-r-1-em p-b-05-em">
-                  <button type="button" className="relative-top-right m-t-5 btn btn-success btn-circle-lg" onClick={this.addRow} title="Add Row"><i className="glyphicon glyphicon-plus"></i></button>
+                    <button type="button" className="relative-top-right m-t-5 btn btn-success btn-circle-lg" onClick={this.addRow} title="Add Row"><i className="glyphicon glyphicon-plus"></i></button>
                     <ScheduleForm
                       updateClassState={this.updateClassState}
-                      updateSessionDate={this.updateSessionDate}
+                      updateDateState={this.updateDateState}
                       updateScheduleTimeState={this.updateScheduleTimeState}
-                      saveSchedule={this.saveSchedule}
                       removeRow={this.removeRow}
                       schedule={this.state.schedule}
                       errors={this.state.errors}
                       saving={this.state.saving}
-                      deleteSchedule={this.deleteSchedule}
                       />
                   </div>
                 </div>

@@ -24,6 +24,9 @@ const Admin = ({uploadImage, saveAction, deleteAction, addAction, editAction}) =
         if (obj.length) {
             return obj[0].type
         }
+        else {
+            return obj.type
+        }
     }
 
     function displayAdminButtons(adminButton) {

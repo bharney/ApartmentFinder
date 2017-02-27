@@ -12,54 +12,55 @@ const ScheduleForm = ({updateClassState, updateDateState, updateScheduleTimeStat
   }
 
   return (
-    <table className="table table-hover">
-      <thead>
-        <tr>
-          <th colSpan="2">
-            <DatePicker
-              formatDate={new Intl.DateTimeFormat('en-US', {
-                weekday: 'long',
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-              }).format}
-              hintText="Date"
-              value={schedule.session_date == '' ? new Date() : new Date(schedule.session_date)} name="session_date"
-              onChange={updateDateState} />
-          </th>
-        </tr>
-      </thead>
-      {schedule.session_details.map(session_details =>
-        <tbody>
+    <form>
+      <table className="table table-hover">
+        <thead>
           <tr>
-            <td style={vertAlign} className="text-center"> 
-              <AddRowButton 
-                name={schedule.session_details.findIndex(i => i.id == session_details.id)}
-                onClick={removeRow} />
-            </td>
-            <td className="text-left">
-              <TextInput
-                className="p-t-0 p-b-0"
-                name={schedule.session_details.findIndex(i => i.id == session_details.id)}
-                label="Time"
-                placeholder="Time"
-                value={session_details.session_time}
-                onChange={updateScheduleTimeState} />
-            </td>
-            <td className="text-right">
-              <TextInput
-                className="p-t-0 p-b-0"
-                name={schedule.session_details.findIndex(i => i.id == session_details.id)}
-                label="Class"
-                placeholder="Class"
-                value={session_details.class}
-                onChange={updateClassState} />
-            </td>
+            <th colSpan="2">
+              <DatePicker
+                formatDate={new Intl.DateTimeFormat('en-US', {
+                  weekday: 'long',
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric',
+                }).format}
+                hintText="Date"
+                value={schedule.session_date == '' ? new Date() : new Date(schedule.session_date)} name="session_date"
+                onChange={updateDateState} />
+            </th>
           </tr>
-        </tbody>)
-      }
-    </table>
-
+        </thead>
+        {schedule.session_details.map(session_details =>
+          <tbody>
+            <tr>
+              <td style={vertAlign} className="text-center">
+                <AddRowButton
+                  name={schedule.session_details.findIndex(i => i.id == session_details.id)}
+                  onClick={removeRow} />
+              </td>
+              <td>
+                <TextInput
+                  className="p-t-0 p-b-0"
+                  name={schedule.session_details.findIndex(i => i.id == session_details.id)}
+                  label="Time"
+                  placeholder="Time"
+                  value={session_details.session_time}
+                  onChange={updateScheduleTimeState} />
+              </td>
+              <td>
+                <TextInput
+                  className="p-t-0 p-b-0"
+                  name={schedule.session_details.findIndex(i => i.id == session_details.id)}
+                  label="Class"
+                  placeholder="Class"
+                  value={session_details.class}
+                  onChange={updateClassState} />
+              </td>
+            </tr>
+          </tbody>)
+        }
+      </table>
+    </form>
   );
 };
 
