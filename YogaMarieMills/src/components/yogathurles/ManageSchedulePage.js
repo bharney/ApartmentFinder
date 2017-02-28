@@ -61,6 +61,7 @@ class ManageSchedulePage extends React.Component {
   }
 
   deleteSchedule(event) {
+     debugger;
     this.props.actions.deleteSchedule(this.state.schedule.id);
     this.props.actions.loadSchedule();
     this.context.router.push('/YogaThurles/Schedule');
@@ -68,7 +69,7 @@ class ManageSchedulePage extends React.Component {
 
   addRow() {
     let schedule = this.state.schedule;
-    schedule.session_details.push({ id: '', session_time: '', class: '' })
+    schedule.session_details.push({ id: schedule.session_details.length, session_time: '', class: '' })
     this.setState({ schedule });
   }
 
@@ -132,7 +133,7 @@ function getScheduleById(schedules, id) {
 
 function mapStateToProps(state, ownProps) {
   const scheduleId = ownProps.params.id;
-  let schedule = { id: '', session_date: '', session_details: [{ id: '', session_time: '', class: '' }] };
+  let schedule = { id: '', session_date: new Date(), session_details: [{ id: '', session_time: '', class: '' }] };
   if (scheduleId && state.schedules.id != undefined) {
     schedule = getScheduleById(state.schedules, scheduleId);
   }

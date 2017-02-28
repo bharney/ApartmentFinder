@@ -12,26 +12,26 @@ let scheduleRoutes = function () {
             let schedule = (req.body);
             const sqlInsertSchedule = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlInsertSchedule);
-                request.input('type', sql.VarChar, schedule.type);
-                request.input('session_date', sql.VarChar, schedule.session_date);
+                request.input('type', sql.VarChar, 'Schedule');
+                request.input('session_date', sql.Date, schedule.session_date);
                 request.query(
                     `INSERT INTO Schedules (type, session_date)
                      VALUES (@type, @session_date); 
                      SELECT SCOPE_IDENTITY() AS parent_id;`
                 ).then(function (recordset) {
-                    for (let prop in schedule.times) {
-                        if (recordset.hasOwnProperty(prop)) {
+                    for (let prop in schedule.session_details) {
+                        if (schedule.session_details.hasOwnProperty(prop)) {
                             const sqlInsertScheduleDetails = new sql.Connection(dbconfig, function (err) {
                                 let request = new sql.Request(sqlInsertScheduleDetails);
                                 request.input('parent_id', sql.VarChar, recordset[0].parent_id);
-                                request.input('type', sql.VarChar, schedule.times[prop].type);
-                                request.input('session_time', sql.VarChar, schedule.times[prop].session_time);
-                                request.input('class', sql.VarChar, schedule.times[prop].class);
+                                request.input('type', sql.VarChar, 'ScheduleDetail');
+                                request.input('session_time', sql.VarChar, schedule.session_details[prop].session_time);
+                                request.input('class', sql.VarChar, schedule.session_details[prop].class);
                                 request.query(
                                     `INSERT INTO ScheduleDetails (type, session_time, class, parent_id)
-                                VALUES (@detailType, @session_time, @class, @parent_id);`
+                                     VALUES (@type, @session_time, @class, @parent_id);`
                                 ).then(
-                                    console.log(schedule.times[prop])
+                                    console.log(schedule.session_details[prop])
                                     ).catch(function (err) {
                                         console.log("scheduleDetails: " + err);
                                     });
@@ -45,27 +45,37 @@ let scheduleRoutes = function () {
         })
         .put(function (req, res) {
             let schedule = (req.body);
+            console.log(schedule);
             const sqlUpdateSchedule = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlUpdateSchedule);
                 request.input('id', sql.Int, schedule.id);
-                request.input('type', sql.VarChar, schedule.type);
+                request.input('type', sql.VarChar, 'Schedule');
                 request.input('session_date', sql.Date, schedule.session_date);
                 request.query(
                     `UPDATE Schedules
                     SET session_date = @session_date
+                    ,type = @type
                     WHERE id = @id;`
-                ).then(function (recordset) {
-                    for (let prop in schedule.times) {
-                        if (recordset.hasOwnProperty(prop)) {
+                ).then(function () {
+                    console.log(schedule + "2");
+                    for (let prop in schedule.session_details) {
+                        if (schedule.session_details.hasOwnProperty(prop)) {
+                            console.log(schedule.session_details[prop]);
                             const sqlInsertScheduleDetails = new sql.Connection(dbconfig, function (err) {
                                 let request = new sql.Request(sqlInsertScheduleDetails);
-                                request.input('session_time', sql.VarChar, schedule.times[prop].session_time);
-                                request.input('class', sql.VarChar, schedule.times[prop].class);
+                                request.input('id', sql.Int, schedule.session_details[prop].id);
+                                request.input('session_time', sql.VarChar, schedule.session_details[prop].session_time);
+                                request.input('type', sql.VarChar, 'ScheduleDetail');
+                                request.input('class', sql.VarChar, schedule.session_details[prop].class);
+                                request.input('parent_id', sql.Int, schedule.id);
                                 request.query(
                                     `UPDATE ScheduleDetails
                                      SET session_time = @session_time
-                                     ,class = @class`
-                                ).then(console.log(schedule.times[prop])).catch(function (err) {
+                                     ,type = @type
+                                     ,class = @class
+                                     ,parent_id = @parent_id
+                                     WHERE id = @id;`
+                                ).then(console.log(schedule.session_details[prop])).catch(function (err) {
                                     console.log("scheduleDetails: " + err);
                                 });
                             });

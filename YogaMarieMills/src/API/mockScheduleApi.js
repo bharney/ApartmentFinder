@@ -22,8 +22,10 @@ class ScheduleApi {
   }
 
   static saveSchedule(schedule) {
+    debugger;
     schedule = Object.assign({}, schedule);
     return new Promise((resolve, reject) => {
+      debugger;
       if (schedule.id) {
         debugger;
         fetch('http://localhost:3000/api/schedules', {
