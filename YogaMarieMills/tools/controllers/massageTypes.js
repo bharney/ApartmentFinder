@@ -6,7 +6,7 @@ let massageTypeRoutes = function () {
     const massageTypeRouter = express.Router();
     const dbconfig = "mssql://Application:!Testing123@BPHSERVER/YogaMarieMills";
 
-    massageTypeRouter.route('/massageTypes')
+    massageTypeRouter.route('/massages')
         .post(function (req, res) {
             let massageType = (req.body);
             const sqlInsertMassageType = new sql.Connection(dbconfig, function (err) {
@@ -61,15 +61,18 @@ let massageTypeRoutes = function () {
             const sqlMassageTypes = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlMassageTypes);
                 request.query(
-                    `SELECT H.id
-                    ,H.type
+                    `SELECT H.id AS id
+                    ,H.type AS type
                     ,H.venue AS venue
                     ,H.header AS header
                     ,H.description AS description
                     ,NULL AS session_time
                     ,NULL AS title
-                    ,NULL as parent_id
+                    ,NULL AS parent_id
                     ,NULL AS cost
+                    ,NULL AS icon
+                    ,NULL AS iconHeight
+                    ,NULL AS iconWidth
                     FROM Headers H
                     WHERE H.type IN (SELECT M.type FROM MassageTypes M)
 
@@ -77,13 +80,16 @@ let massageTypeRoutes = function () {
 
                     SELECT M.id AS id
                     ,M.type AS type
-                    ,NULL as venue
-                    ,NULL as header
-                    ,NULL as description
+                    ,NULL AS venue
+                    ,NULL AS header
+                    ,NULL AS description
                     ,M.session_time AS session_time
                     ,M.title AS title
-                    ,NULL as parent_id
+                    ,NULL AS parent_id
                     ,M.cost AS cost
+                    ,M.icon AS icon
+                    ,M.iconHeight AS iconHeight
+                    ,M.iconWidth AS iconWidth
                     FROM MassageTypes M
 
                     UNION ALL
@@ -95,8 +101,11 @@ let massageTypeRoutes = function () {
                     ,D.description as description
                     ,NULL as session_time
                     ,D.title AS title
-                    ,D.parent_id as parent_id
+                    ,D.parent_id AS parent_id
                     ,NULL AS cost
+                    ,NULL AS icon
+                    ,NULL as iconHeight
+                    ,NULL AS iconWidth
                     FROM MassageDetails D`
                 ).then(function (recordset) {
                     let massagePage = [];
@@ -105,6 +114,7 @@ let massageTypeRoutes = function () {
                         if (recordset.hasOwnProperty(header_prop)) {
                             if (recordset[header_prop].header != null) {
                                 let massage_header = {
+                                    id: recordset[header_prop].id,
                                     header: recordset[header_prop].header,
                                     venue: recordset[header_prop].venue,
                                     description: recordset[header_prop].description,
@@ -118,10 +128,14 @@ let massageTypeRoutes = function () {
                                         if (recordset[massage_prop].session_time != null) {
                                             if (recordset[header_prop].type == recordset[massage_prop].type) {
                                                 let massages = {
+                                                    id: recordset[massage_prop].id,
                                                     session_time: recordset[massage_prop].session_time,
                                                     title: recordset[massage_prop].title,
                                                     description: recordset[massage_prop].description,
                                                     cost: recordset[massage_prop].cost,
+                                                    icon: recordset[massage_prop].icon,
+                                                    iconHeight: recordset[massage_prop].iconHeight,
+                                                    iconWidth: recordset[massage_prop].iconWidth,
                                                     massage_details: []
                                                 };
                                                 massagePage[counter].massages.push(massages);
@@ -130,6 +144,7 @@ let massageTypeRoutes = function () {
                                                         if (recordset[detail_prop].parent_id != null) {
                                                             if (recordset[massage_prop].id == recordset[detail_prop].parent_id) {
                                                                 let massage_details = {
+                                                                    id: recordset[detail_prop].id,
                                                                     title: recordset[detail_prop].title,
                                                                     description: recordset[detail_prop].description,
                                                                 };
@@ -154,7 +169,7 @@ let massageTypeRoutes = function () {
             });
         });
 
-    massageTypeRouter.route('/massageTypes/:massageTypeId')
+    massageTypeRouter.route('/massages/:massageTypeId')
         .get(function (req, res) {
             const sqlMassageType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlMassageType);

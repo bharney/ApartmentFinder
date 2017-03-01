@@ -138,7 +138,7 @@ class BlogPage extends React.Component {
 
     render() {
         const { blog } = this.props;
-        let blogImg = blog.image != "" ? require(`../../images/${blog.image}`) : ""
+        let blogImg = blog.image ? require(`../../images/${blog.image}`) : ""
         const blogImage = {
             backgroundImage: 'url(' + blogImg + ')',
             backgroundRepeat: "no-repeat",

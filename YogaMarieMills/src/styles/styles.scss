@@ -905,19 +905,35 @@ Media queries
 }
 
 /* top */
+.p-t-05-em {
+    padding-top: 0.5em;
+} 
+
 .p-t-1-em {
     padding-top: 1em;
 }
 
-.p-t-05-em {
-    padding-top: 0.5em;
-} 
+.p-t-15-em {
+    padding-top: 1.5em;
+}
 
 /* bottom */
 .p-b-05-em {
 padding-bottom: 0.5em;
 }
- 
+
+.p-b-15-em {
+    padding-bottom: 1.5em;
+}
+
+.p-b-2-em {
+    padding-bottom: 2em;
+}
+
+.p-b-3-em {
+    padding-bottom: 3em;
+}
+
  /* left */
 .p-l-1-em {
     padding-left: 1em;

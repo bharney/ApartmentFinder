@@ -13,8 +13,10 @@ class MassagePage extends React.Component {
         const {massageType} = this.props;
 
         let displayIcon = function (icon, iconWidth, iconHeight) {
+            debugger;
+             let requireImg = icon ? require(`../../images/${icon}`) : ""
             const iconImg = {
-                backgroundImage: 'url(../' + icon == '' ? '' : icon + ')',
+                backgroundImage: 'url(' + requireImg + ')',
                 backgroundSize: `${iconWidth} ${iconHeight}`,
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
@@ -37,12 +39,10 @@ class MassagePage extends React.Component {
             else {
                 offset = true;
                 return (
-
                     <div className="col-xs-12 col-sm-offset-2 col-sm-4">
                         <h4><strong>{massage_details.title}</strong></h4>
                         <p>{massage_details.description}</p>
                     </div>
-
                 )
             }
 
@@ -62,21 +62,21 @@ class MassagePage extends React.Component {
                                         <h3>Venue: {massageType.venue}</h3>
                                     </div>
                                 </div>
-                                {massageType.massages.map(massages =>
+                                {massageType.massages.map(massage =>
                                     <div className="col-xs-12 m-b-30">
-                                        <div className="mdl-card mdl-shadow--4dp p-20">
+                                        <div className="mdl-card mdl-shadow--4dp p-t-1-em p-b-3-em">
                                             <div className="row p-t-1-em">
                                                 <div className="col-xs-12 p-t-1-em">
-                                                    {displayIcon(massages.icon, massages.iconWidth, massages.iconHeight)}
-                                                    <h3 className="text-center"><strong>{massages.title}</strong></h3>
+                                                    {displayIcon(massage.icon, massage.iconWidth, massage.iconHeight)}
+                                                    <h3 className="text-center"><strong>{massage.title}</strong></h3>
                                                     <hr width="50%" className="center-block" />
-                                                    <p className="text-center">{massages.cost}</p>
+                                                    <p className="text-center">{massage.cost}</p>
                                                 </div>
                                             </div>
-                                            <p className="text-center">{massages.session_time}</p>
+                                            <p className="text-center">{massage.session_time}</p>
                                             <div className="row">
-                                                <div className="col-xs-12">
-                                                    {massages.massage_details.map(massage_details =>
+                                                <div className="col-xs-12 col-sm-offset-1 col-sm-10">
+                                                    {massage.massage_details.map(massage_details =>
                                                         offsetColumns(massage_details)
                                                     )}
                                                 </div>

@@ -19,9 +19,10 @@ class ClassTypesPage extends React.Component {
         function previewText(short) {
             return short.substring(0, 500) + "...";
         }
-
+        let offset = false;
         let alternateTileSides = function (classType) {
-            if (classType.id % 2 == 0) {
+            if (offset) {
+                offset = false;
                 return (
                     <div key={classType.id} className="row vertical-center bg-color-white">
                         <div className="half">
@@ -51,6 +52,7 @@ class ClassTypesPage extends React.Component {
                 );
             }
             else {
+                offset = true;
                 return (
                     <div key={classType.id} className="row vertical-center bg-color-white">
                         <div className="half">
