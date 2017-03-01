@@ -664,21 +664,18 @@ section.section {
 /* ========================================
     Massage
 ========================================= */
-.aroma-oil {
-    background-image: url('../images/whitearomaoil.png');
-    background-size: 4em 7em;
-    background-repeat: no-repeat;
-    background-position: center;
-    -webkit-transition: background 0.5s;
-    -moz-transition: background 0.5s;
-    transition: background 0.5s;
-}
 
-.aroma-oilom:hover {
-    background-image: url('../images/blackaromaoil.png');
-    background-size: 4em 7em;
-    background-repeat: no-repeat;
-    background-position: center;
+.icon-circle-sm {
+    display: block;
+    width: 4em;
+    height: 4em;
+    line-height: 4em;
+    margin: 0 auto;
+    text-align: center;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+
     -webkit-transition: background 0.5s;
     -moz-transition: background 0.5s;
     transition: background 0.5s;
@@ -889,25 +886,12 @@ Media queries
 }
 
 /* ---- padding ---- */
+///need to remove. Requires refactor of this class.
 .p-20 {
     padding: 1em;
 }
 
- .p-t-05-em {
-     padding-top: 0.5em;
- } 
- 
- .p-l-1-em {
-     padding-left: 1em;
- }
- .p-r-1-em {
-     padding-right: 1em;
- }
- 
- .p-b-05-em {
-    padding-bottom: 0.5em;
- }
-
+/* ---- em ---- */
 .p-1-em {
     padding: 1em;
 }
@@ -920,6 +904,29 @@ Media queries
     padding: 2em;
 }
 
+/* top */
+.p-t-1-em {
+    padding-top: 1em;
+}
+
+.p-t-05-em {
+    padding-top: 0.5em;
+} 
+
+/* bottom */
+.p-b-05-em {
+padding-bottom: 0.5em;
+}
+ 
+ /* left */
+.p-l-1-em {
+    padding-left: 1em;
+}
+
+/* right */
+.p-r-1-em {
+    padding-right: 1em;
+}
 
 
 /* top */

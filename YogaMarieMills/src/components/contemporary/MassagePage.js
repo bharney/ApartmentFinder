@@ -11,6 +11,43 @@ class MassagePage extends React.Component {
 
     render() {
         const {massageType} = this.props;
+
+        let displayIcon = function (icon, iconWidth, iconHeight) {
+            const iconImg = {
+                backgroundImage: 'url(../' + icon == '' ? '' : icon + ')',
+                backgroundSize: `${iconWidth} ${iconHeight}`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+            }
+            return (<div className="icon-circle-sm bg-color-green mdl-shadow--4dp" style={iconImg}></div>)
+        }
+        let offset = false;
+        let offsetColumns = function (massage_details) {
+            if (offset) {
+                offset = false;
+                return (
+                    <div className="row">
+                        <div className="col-xs-12 col-sm-offset-1 col-sm-4">
+                            <h4><strong>{massage_details.title}</strong></h4>
+                            <p>{massage_details.description}</p>
+                        </div>
+                    </div>
+                )
+            }
+            else {
+                offset = true;
+                return (
+
+                    <div className="col-xs-12 col-sm-offset-2 col-sm-4">
+                        <h4><strong>{massage_details.title}</strong></h4>
+                        <p>{massage_details.description}</p>
+                    </div>
+
+                )
+            }
+
+        }
+
         return (
             <div className="mdl-grid dark-color bg-color">
                 <div className="ribbon bg-image-landing">
@@ -25,46 +62,23 @@ class MassagePage extends React.Component {
                                         <h3>Venue: {massageType.venue}</h3>
                                     </div>
                                 </div>
-                                {massageType.massage_details.map(massage_details =>
+                                {massageType.massages.map(massages =>
                                     <div className="col-xs-12 m-b-30">
                                         <div className="mdl-card mdl-shadow--4dp p-20">
+                                            <div className="row p-t-1-em">
+                                                <div className="col-xs-12 p-t-1-em">
+                                                    {displayIcon(massages.icon, massages.iconWidth, massages.iconHeight)}
+                                                    <h3 className="text-center"><strong>{massages.title}</strong></h3>
+                                                    <hr width="50%" className="center-block" />
+                                                    <p className="text-center">{massages.cost}</p>
+                                                </div>
+                                            </div>
+                                            <p className="text-center">{massages.session_time}</p>
                                             <div className="row">
                                                 <div className="col-xs-12">
-                                                    <div className="icon-circle aroma-oil bg-color-green mdl-shadow--4dp"></div>
-                                                    <h3 className="text-center"><strong>{massage_details.title}</strong></h3>
-                                                    <hr width="50%" className="center-block" />
-                                                    <p className="text-center">{massage_details.cost}</p>
-                                                </div>
-                                            </div>
-                                            <p className="text-center">{massage_details.session_time}</p>
-                                            <div className="row">
-                                                <div className="col-xs-12 col-sm-offset-2 col-sm-4">
-                                                    <h4><strong>DETOX</strong></h4>
-                                                    <p>Stimulates lymphatic system to release toxins with an artful blend of lemon, grapefruit and juniper.</p>
-                                                </div>
-                                                <div className="col-xs-12 col-sm-offset-1 col-sm-4">
-                                                    <h4><strong>RELAX</strong></h4>
-                                                    <p>Lavender blend reduces inflammation and promotes tranquility.</p>
-                                                </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col-xs-12 col-sm-offset-2 col-sm-4">
-                                                    <h4><strong>INVIGORATE</strong></h4>
-                                                    <p>Enlivens the body and mind and increases circulation with mix of rosemary, mint and patchouli.</p>
-                                                </div>
-                                                <div className="col-xs-12 col-sm-offset-1 col-sm-4">
-                                                    <h4><strong>SOOTHE</strong></h4>
-                                                    <p>Rosemary, clove and sweet birch combine to alleviate the aches and pains of sore muscles.</p>
-                                                </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col-xs-12 col-sm-offset-2 col-sm-4">
-                                                    <h4><strong>RECHARGE</strong></h4>
-                                                    <p>Energizing citrus blend to awaken the senses.</p>
-                                                </div>
-                                                <div className="col-xs-12 col-sm-offset-1 col-sm-4">
-                                                    <h4><strong>UNWIND</strong></h4>
-                                                    <p>Blends of orange, bergamot, sage and lemon release anxiety, stress and apprehension.</p>
+                                                    {massages.massage_details.map(massage_details =>
+                                                        offsetColumns(massage_details)
+                                                    )}
                                                 </div>
                                             </div>
                                         </div>
@@ -96,7 +110,7 @@ function getMassageByType(massageTypes, type) {
 
 function mapStateToProps(state, ownProps) {
     const massageTypeId = ownProps.params.id;
-    let massageType = { type: '', header: '', description: '', venue: '', massage_details: [{ session_time: '', title: '', details: '', cost: '' }] };
+    let massageType = { type: '', header: '', description: '', venue: '', massages: [{ session_time: '', title: '', details: '', cost: '', massage_details: [{ title: '', description: '' }] }] };
     if (massageTypeId && state.massageTypes.length > 0) {
         massageType = getMassageByType(state.massageTypes, massageTypeId);
     }

@@ -68,7 +68,7 @@ let massageTypeRoutes = function () {
                     ,H.description AS description
                     ,NULL AS session_time
                     ,NULL AS title
-                    ,NULL AS details
+                    ,NULL as parent_id
                     ,NULL AS cost
                     FROM Headers H
                     WHERE H.type IN (SELECT M.type FROM MassageTypes M)
@@ -82,9 +82,22 @@ let massageTypeRoutes = function () {
                     ,NULL as description
                     ,M.session_time AS session_time
                     ,M.title AS title
-                    ,M.description AS details
+                    ,NULL as parent_id
                     ,M.cost AS cost
-                    FROM MassageTypes M`
+                    FROM MassageTypes M
+
+                    UNION ALL
+
+                    SELECT D.id AS id
+                    ,D.type AS type
+                    ,NULL as venue
+                    ,NULL as header
+                    ,D.description as description
+                    ,NULL as session_time
+                    ,D.title AS title
+                    ,D.parent_id as parent_id
+                    ,NULL AS cost
+                    FROM MassageDetails D`
                 ).then(function (recordset) {
                     let massagePage = [];
                     let counter = 0;
@@ -96,20 +109,36 @@ let massageTypeRoutes = function () {
                                     venue: recordset[header_prop].venue,
                                     description: recordset[header_prop].description,
                                     type: recordset[header_prop].type,
-                                    massage_details: []
+                                    massages: []
                                 };
                                 massagePage.push(massage_header);
+                                let counter_detail = 0;
                                 for (let massage_prop in recordset) {
                                     if (recordset.hasOwnProperty(massage_prop)) {
                                         if (recordset[massage_prop].session_time != null) {
                                             if (recordset[header_prop].type == recordset[massage_prop].type) {
-                                                let massage_details = {
+                                                let massages = {
                                                     session_time: recordset[massage_prop].session_time,
                                                     title: recordset[massage_prop].title,
-                                                    details: recordset[massage_prop].details,
-                                                    cost: recordset[massage_prop].cost
+                                                    description: recordset[massage_prop].description,
+                                                    cost: recordset[massage_prop].cost,
+                                                    massage_details: []
                                                 };
-                                                massagePage[counter].massage_details.push(massage_details);
+                                                massagePage[counter].massages.push(massages);
+                                                for (let detail_prop in recordset) {
+                                                    if (recordset.hasOwnProperty(detail_prop)) {
+                                                        if (recordset[detail_prop].parent_id != null) {
+                                                            if (recordset[massage_prop].id == recordset[detail_prop].parent_id) {
+                                                                let massage_details = {
+                                                                    title: recordset[detail_prop].title,
+                                                                    description: recordset[detail_prop].description,
+                                                                };
+                                                                massagePage[counter].massages[counter_detail].massage_details.push(massage_details);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                counter_detail++;
                                             }
                                         }
                                     }
@@ -118,7 +147,6 @@ let massageTypeRoutes = function () {
                             }
                         }
                     }
-
                     res.json(massagePage);
                 }).catch(function (err) {
                     console.log("massageTypes: " + err);

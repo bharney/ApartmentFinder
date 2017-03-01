@@ -185,8 +185,10 @@ class MassageApi {
   static getAllItems() {
     return new Promise((resolve, reject) => {
       fetch('http://localhost:3000/api/massageTypes').then(function (response) {
+        debugger;
         return response.json();
       }).then(function (massageTypes) {
+        debugger;
         resolve(Object.assign([], massageTypes));
       });
     });
