@@ -53,7 +53,6 @@ class ManageMassagePage extends React.Component {
   }
 
   saveMassage(event) {
-    debugger;
     event.preventDefault();
     let massage = this.state.massage;
     this.setState({ massage });
@@ -62,7 +61,6 @@ class ManageMassagePage extends React.Component {
   }
 
   deleteMassage(event) {
-    debugger;
     this.props.actions.deleteMassage(this.state.massage.id);
     this.props.actions.loadMassage();
     this.context.router.push('/Ayurveda/Massage/' + this.state.message.type);
@@ -129,7 +127,6 @@ ManageMassagePage.contextTypes = {
 function getMassageByTypeAndId(massageTypes, type, id) {
     const massageType = massageTypes.filter(massageType => massageType.type == type);
     const massage = massageType[0].massages.filter(massage => massage.id == id);
-debugger;
       if (massage.length) {
         return massage[0];
       }

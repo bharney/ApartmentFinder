@@ -7,39 +7,30 @@ import ImageUpload from './ImageUpload';
 const Admin = ({uploadImage, saveAction, deleteAction, addAction, editAction}) => {
     function setAdminButtons(uploadImage, saveAction, deleteAction, addAction, editAction) {
         let adminButtons = [];
-        if (uploadImage != undefined)
+        if (uploadImage)
             adminButtons.push("uploadImage");
-        if (saveAction != undefined)
+        if (saveAction)
             adminButtons.push("saveAction");
-        if (deleteAction != undefined)
+        if (deleteAction)
             adminButtons.push("deleteAction");
-        if (addAction != undefined)
+        if (addAction)
             adminButtons.push("addAction");
-        if (editAction != undefined)
+        if (editAction)
             adminButtons.push("editAction");
         return adminButtons;
-    }
-
-    function getRoute(obj) {
-        if (obj.length) {
-            return obj[0].type
-        }
-        else {
-            return obj.type
-        }
     }
 
     function displayAdminButtons(adminButton) {
         switch (adminButton) {
             case "addAction":
                 return (
-                    <Link to={'/' + getRoute(addAction)} className="fixed top-10" >
+                    <Link to={'/' + addAction} className="fixed top-10" >
                         <button type="button" className="relative m-t-5 btn btn-success btn-circle-lg" title="Add Record"><i className="glyphicon glyphicon-plus"></i></button>
                     </Link>
                 )
             case "editAction":
                 return (
-                    <Link to={'/' + editAction.type + '/' + editAction.id}>
+                    <Link to={'/' + editAction}>
                         <button type="button" className="btn btn-primary btn-circle-lg" title="Edit"><i className="glyphicon glyphicon-pencil"></i></button>
                     </Link>
                     )

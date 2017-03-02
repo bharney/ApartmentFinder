@@ -2,6 +2,7 @@
 import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Admin from '../common/Admin';
 import * as massageActions from '../../actions/massageActions';
 
 class MassagePage extends React.Component {
@@ -22,29 +23,26 @@ class MassagePage extends React.Component {
             }
             return (<div className="icon-circle-sm bg-color-green mdl-shadow--4dp" style={iconImg}></div>)
         }
-        let offset = false;
-        let offsetColumns = function (massage_details) {
-            if (offset) {
-                offset = false;
-                return (
-                    <div className="row">
-                        <div className="col-xs-12 col-sm-offset-1 col-sm-4">
+        let offsetColumns = function (massage, massage_details) {
+            if (massage_details.title) 
+                if(massage.massage_details.findIndex(i => i.id == massage_details.id)%2 == 0) {
+                    return (
+                        <div className="col-xs-12 col-sm-offset-2 col-sm-4">
                             <h4><strong>{massage_details.title}</strong></h4>
                             <p>{massage_details.description}</p>
                         </div>
-                    </div>
-                )
-            }
-            else {
-                offset = true;
-                return (
-                    <div className="col-xs-12 col-sm-offset-2 col-sm-4">
-                        <h4><strong>{massage_details.title}</strong></h4>
-                        <p>{massage_details.description}</p>
-                    </div>
-                )
-            }
-
+                    )
+                }
+                else {
+                    return (
+                    <div className="row">
+                            <div className="col-xs-12 col-sm-offset-1 col-sm-4">
+                                <h4><strong>{massage_details.title}</strong></h4>
+                                <p>{massage_details.description}</p>
+                            </div>
+                        </div>
+                    )
+                }
         }
 
         return (
@@ -55,6 +53,7 @@ class MassagePage extends React.Component {
                             <div className="col-xs-12">
                                 <h1 className="text-center color-white">{massageType.header}</h1>
                                 <hr />
+                                <Admin addAction={"Massage/"} />
                                 <div className="col-xs-12 m-b-30">
                                     <div className="mdl-card mdl-shadow--4dp p-20 text-center">
                                         <h3>{massageType.description}</h3>
@@ -63,6 +62,7 @@ class MassagePage extends React.Component {
                                 </div>
                                 {massageType.massages.map(massage =>
                                     <div className="col-xs-12 m-b-30">
+                                        <Admin editAction={"Massage/" + massageType.type + "/" + massage.id} />
                                         <div className="mdl-card mdl-shadow--4dp p-t-1-em p-b-3-em">
                                             <div className="row p-t-1-em">
                                                 <div className="col-xs-12 p-t-1-em">
@@ -76,7 +76,7 @@ class MassagePage extends React.Component {
                                             <div className="row">
                                                 <div className="col-xs-12 col-sm-offset-1 col-sm-10">
                                                     {massage.massage_details.map(massage_details =>
-                                                        offsetColumns(massage_details)
+                                                        offsetColumns(massage, massage_details)
                                                     )}
                                                 </div>
                                             </div>

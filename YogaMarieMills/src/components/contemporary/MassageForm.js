@@ -17,30 +17,6 @@ const MassageForm = ({updateDescriptionState, updateTitleState, updateMassageSta
             }
             return (<div className="icon-circle-sm bg-color-green mdl-shadow--4dp" style={iconImg}></div>)
         }
-        let offset = false;
-        let offsetColumns = function (massage_details) {
-            if (offset) {
-                offset = false;
-                return (
-                    <div className="row">
-                        <div className="col-xs-12 col-sm-offset-1 col-sm-4">
-                            <h4><strong>{massage_details.title}</strong></h4>
-                            <p>{massage_details.description}</p>
-                        </div>
-                    </div>
-                )
-            }
-            else {
-                offset = true;
-                return (
-                    <div className="col-xs-12 col-sm-offset-2 col-sm-4">
-                        <h4><strong>{massage_details.title}</strong></h4>
-                        <p>{massage_details.description}</p>
-                    </div>
-                )
-            }
-        }
-
   return (
       <form>
         <div className="row p-t-1-em">

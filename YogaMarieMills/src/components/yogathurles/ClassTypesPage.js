@@ -19,10 +19,9 @@ class ClassTypesPage extends React.Component {
         function previewText(short) {
             return short.substring(0, 500) + "...";
         }
-        let offset = false;
-        let alternateTileSides = function (classType) {
-            if (offset) {
-                offset = false;
+        let alternateTileSides = function (classTypes, classType) {
+            if (classType.title)
+               if(classTypes.findIndex(i => i.id == classType.id)%2 == 0) {
                 return (
                     <div key={classType.id} className="row vertical-center bg-color-white">
                         <div className="half">
@@ -31,7 +30,7 @@ class ClassTypesPage extends React.Component {
                         <div className="half">
                             <div className="row">
                                 <div className="col-xs-offset-1 col-xs-10 tile m-t--5-percent">
-                                    <Admin editAction={classType} />
+                                    <Admin editAction={classType.type + "/" + classType.id} />
                                     <h2 className="page-header banner">{classType.title}</h2>
                                     <p>
                                         <MultilineText multilineText={previewText(classType.short)} />
@@ -52,14 +51,13 @@ class ClassTypesPage extends React.Component {
                 );
             }
             else {
-                offset = true;
                 return (
                     <div key={classType.id} className="row vertical-center bg-color-white">
                         <div className="half">
 
                             <div className="row">
                                 <div className="col-xs-offset-1 col-xs-10 tile m-t--5-percent">
-                                    <Admin editAction={classType} />
+                                    <Admin editAction={classType.type + "/" + classType.id} />
                                     <h2 className="page-header banner">{classType.title}</h2>
                                     <p>
                                         <MultilineText multilineText={previewText(classType.short)} />
@@ -92,10 +90,10 @@ class ClassTypesPage extends React.Component {
                         <div className="row p-t-40 p-b-40 b-border">
                             <div className="col-xs-offset-1 col-xs-10">
                                 <h1 className="text-center color-white">Yoga Thurles Class Types</h1>
-                                <Admin addAction={classTypes} />
+                                <Admin addAction={classTypes.type} />
                             </div>
                         </div>
-                        {classTypes.map(classType => alternateTileSides(classType))}
+                        {classTypes.map(classType => alternateTileSides(classTypes, classType))}
                     </div>
                 </div>
             </div>
