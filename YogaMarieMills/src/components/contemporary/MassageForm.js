@@ -5,11 +5,10 @@ import TextAreaInput from '../common/TextAreaInput';
 import RemoveRowButton from '../common/RemoveRowButton';
 import Admin from '../common/Admin';
 
-const MassageForm = ({updateMassageState, uploadImage, removeRow, saveMassage, massage, errors, saving, deleteMassage}) => {
-  
+const MassageForm = ({updateDescriptionState, updateTitleState, updateMassageState, removeRow, saveMassage, massage, errors, saving, deleteMassage}) => {
+
   let displayIcon = function (icon, iconWidth, iconHeight) {
-            debugger;
-             let requireImg = icon ? require(`../../images/${icon}`) : ""
+            let requireImg = icon ? require(`../../images/${icon}`) : ""
             const iconImg = {
                 backgroundImage: 'url(' + requireImg + ')',
                 backgroundSize: `${iconWidth} ${iconHeight}`,
@@ -40,13 +39,12 @@ const MassageForm = ({updateMassageState, uploadImage, removeRow, saveMassage, m
                     </div>
                 )
             }
-
         }
 
   return (
       <form>
         <div className="row p-t-1-em">
-            <div className="col-xs-10 col-xs-offset-1 p-t-1-em">
+            <div className="col-xs-12 col-sm-10 col-sm-offset-1 p-t-1-em">
                 {displayIcon(massage.icon, massage.iconWidth, massage.iconHeight)}
                 <TextInput
                   className="p-t-0 p-b-0"
@@ -65,7 +63,7 @@ const MassageForm = ({updateMassageState, uploadImage, removeRow, saveMassage, m
                   onChange={updateMassageState} />
                 <TextInput
                   className="p-t-0 p-b-0"
-                  name="time"
+                  name="session_time"
                   label="Time"
                   placeholder="Time"
                   value={massage.session_time}
@@ -78,24 +76,24 @@ const MassageForm = ({updateMassageState, uploadImage, removeRow, saveMassage, m
                   <div className="col-xs-6">
                     <div className="pull-right">
                     <RemoveRowButton
-                      name={massage.massage_details.findIndex(i => i.id == massage.id)}
+                      name={massage.massage_details.findIndex(i => i.id == massage_details.id)}
                       onClick={removeRow} />
                       </div>
                     <TextInput
                       className="p-t-0 p-b-0"
-                      name={massage.massage_details.findIndex(i => i.id == massage.id)}
+                      name={massage.massage_details.findIndex(i => i.id == massage_details.id)}
                       label="Title"
                       placeholder="Title"
                       value={massage_details.title}
-                      onChange={updateMassageState} />
+                      onChange={updateTitleState} />
                     <TextAreaInput
                       className="p-t-0 p-b-0"
-                      name={massage.massage_details.findIndex(i => i.id == massage.id)}
+                      name={massage.massage_details.findIndex(i => i.id == massage_details.id)}
                       label="Description"
                       placeholder="Description"
                       rows="4"
                       value={massage_details.description}
-                      onChange={updateMassageState} />
+                      onChange={updateDescriptionState} />
                   </div>
                 )}
             </div>

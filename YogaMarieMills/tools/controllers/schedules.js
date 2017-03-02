@@ -23,7 +23,7 @@ let scheduleRoutes = function () {
                         if (schedule.session_details.hasOwnProperty(prop)) {
                             const sqlInsertScheduleDetails = new sql.Connection(dbconfig, function (err) {
                                 let request = new sql.Request(sqlInsertScheduleDetails);
-                                request.input('parent_id', sql.VarChar, recordset[0].parent_id);
+                                request.input('parent_id', sql.Int, recordset[0].parent_id);
                                 request.input('type', sql.VarChar, 'ScheduleDetail');
                                 request.input('session_time', sql.VarChar, schedule.session_details[prop].session_time);
                                 request.input('class', sql.VarChar, schedule.session_details[prop].class);

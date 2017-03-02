@@ -16,7 +16,8 @@ class ManageMassagePage extends React.Component {
       saving: false
     };
     this.updateMassageState = this.updateMassageState.bind(this);
-    this.uploadImage = this.uploadImage.bind(this);
+    this.updateDescriptionState = this.updateDescriptionState.bind(this);
+    this.updateTitleState = this.updateTitleState.bind(this);
     this.saveMassage = this.saveMassage.bind(this);
     this.deleteMassage = this.deleteMassage.bind(this);
     this.removeRow = this.removeRow.bind(this);
@@ -25,17 +26,29 @@ class ManageMassagePage extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
-    debugger;
     if (this.props.massage.id != nextProps.massage.id) {
-      debugger;
       this.setState({ massage: Object.assign({}, nextProps.massage) });
     }
+  }
+
+  updateTitleState(event) {
+    const field = event.target.name;
+    let massage = this.state.massage;
+    massage.massage_details[parseInt(field)].title = event.target.value;
+    return this.setState({ massage });
+  }
+
+  updateDescriptionState(event) {
+    const field = event.target.name;
+    let massage = this.state.massage;
+    massage.massage_details[parseInt(field)].description = event.target.value;
+    return this.setState({ massage });
   }
 
   updateMassageState(event) {
     const field = event.target.name;
     let massage = this.state.massage;
-    massage.session_details[parseInt(field)].session_time = event.target.value;
+    massage[field] = event.target.value;
     return this.setState({ massage });
   }
 
@@ -49,10 +62,10 @@ class ManageMassagePage extends React.Component {
   }
 
   deleteMassage(event) {
-     debugger;
+    debugger;
     this.props.actions.deleteMassage(this.state.massage.id);
     this.props.actions.loadMassage();
-    this.context.router.push('/YogaThurles/Massage');
+    this.context.router.push('/Ayurveda/Massage/' + this.state.message.type);
   }
 
   addRow() {
@@ -62,25 +75,10 @@ class ManageMassagePage extends React.Component {
   }
 
   removeRow(event) {
-    const field = event.target.name;
+    const rowNumber = event.target.name;
     let massage = this.state.massage;
-    massage.session_details.splice(parseInt(field), 1)
+    massage.massage_details.splice(parseInt(rowNumber), 1)
     this.setState({ massage });
-  }
-
-  uploadImage(e) {
-    e.preventDefault();
-
-    let reader = new FileReader();
-    let file = e.target.files[0];
-
-    reader.onloadend = () => {
-      let blog = this.state.blog;
-      blog.image = file.name
-      this.props.upload.uploadFile(file);
-      return this.setState({ blog: blog });
-    }
-    reader.readAsDataURL(file)
   }
 
   render() {
@@ -95,15 +93,18 @@ class ManageMassagePage extends React.Component {
                 <br />
                 <div className="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6 m-b-30">
                   <div className="mdl-card mdl-shadow--4dp p-t-05-em p-l-1-em p-r-1-em p-b-05-em">
-                    <button type="button" className="relative-top-right m-t-5 btn btn-success btn-circle-lg" onClick={this.addRow} title="Add Row"><i className="glyphicon glyphicon-plus"></i></button>
                     <MassageForm
+                      updateTitleState={this.updateTitleState}
+                      updateDescriptionState={this.updateDescriptionState}
                       updateMassageState={this.updateMassageState}
-                      uploadImage={this.uploadImage}
                       removeRow={this.removeRow}
                       massage={this.state.massage}
                       errors={this.state.errors}
                       saving={this.state.saving}
                       />
+                      <Link className="text-right" to="" onClick={this.addRow} >
+                        <button type="button" className="btn btn-success btn-circle-lg" title="Add Row"><i className="glyphicon glyphicon-plus"></i></button>
+                      </Link>
                   </div>
                 </div>
               </div>
@@ -125,10 +126,10 @@ ManageMassagePage.contextTypes = {
 };
 
 
-function getMassageByType(massageTypes, type, id) {
+function getMassageByTypeAndId(massageTypes, type, id) {
     const massageType = massageTypes.filter(massageType => massageType.type == type);
     const massage = massageType[0].massages.filter(massage => massage.id == id);
-    debugger;
+debugger;
       if (massage.length) {
         return massage[0];
       }
@@ -142,6 +143,7 @@ function mapStateToProps(state, ownProps) {
 
   let massage = { 
     id: '', 
+    type: massageTypeId,
     session_time: '', 
     title: '', 
     description: '', 
@@ -154,10 +156,9 @@ function mapStateToProps(state, ownProps) {
       title: '', 
       description: '' }] 
     };
-  debugger;
+
   if (massageTypeId && massageId && state.massageTypes.length > 0) {
-    debugger;
-      massage = getMassageByType(state.massageTypes, massageTypeId, massageId);
+      massage = getMassageByTypeAndId(state.massageTypes, massageTypeId, massageId);
   }
 
   return {

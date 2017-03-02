@@ -52,7 +52,6 @@ class ManageSchedulePage extends React.Component {
   }
 
   saveSchedule(event) {
-    debugger;
     event.preventDefault();
     let schedule = this.state.schedule;
     this.setState({ schedule });
@@ -61,7 +60,6 @@ class ManageSchedulePage extends React.Component {
   }
 
   deleteSchedule(event) {
-     debugger;
     this.props.actions.deleteSchedule(this.state.schedule.id);
     this.props.actions.loadSchedule();
     this.context.router.push('/YogaThurles/Schedule');
@@ -92,7 +90,6 @@ class ManageSchedulePage extends React.Component {
                 <br />
                 <div className="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6 m-b-30">
                   <div className="mdl-card mdl-shadow--4dp p-t-05-em p-l-1-em p-r-1-em p-b-05-em">
-                    <button type="button" className="relative-top-right m-t-5 btn btn-success btn-circle-lg" onClick={this.addRow} title="Add Row"><i className="glyphicon glyphicon-plus"></i></button>
                     <ScheduleForm
                       updateClassState={this.updateClassState}
                       updateDateState={this.updateDateState}
@@ -102,6 +99,9 @@ class ManageSchedulePage extends React.Component {
                       errors={this.state.errors}
                       saving={this.state.saving}
                       />
+                      <Link className="text-right" to="" onClick={this.addRow} >
+                        <button type="button" className="btn btn-success btn-circle-lg" title="Add Row"><i className="glyphicon glyphicon-plus"></i></button>
+                      </Link>
                   </div>
                 </div>
               </div>

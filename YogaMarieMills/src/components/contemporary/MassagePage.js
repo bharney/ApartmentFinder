@@ -13,8 +13,7 @@ class MassagePage extends React.Component {
         const {massageType} = this.props;
 
         let displayIcon = function (icon, iconWidth, iconHeight) {
-            debugger;
-             let requireImg = icon ? require(`../../images/${icon}`) : ""
+            let requireImg = icon ? require(`../../images/${icon}`) : ""
             const iconImg = {
                 backgroundImage: 'url(' + requireImg + ')',
                 backgroundSize: `${iconWidth} ${iconHeight}`,
