@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, IndexLink, browserHistory } from 'react-router';
 import DatePicker from 'material-ui/DatePicker';
 import TextInput from '../common/TextInput';
-import AddRowButton from '../common/AddRowButton';
+import RemoveRowButton from '../common/RemoveRowButton';
 import Admin from '../common/Admin';
 
 const ScheduleForm = ({updateClassState, updateDateState, updateScheduleTimeState, removeRow, saveSchedule, schedule, errors, saving, deleteSchedule}) => {
@@ -34,7 +34,7 @@ const ScheduleForm = ({updateClassState, updateDateState, updateScheduleTimeStat
           <tbody>
             <tr>
               <td style={vertAlign} className="text-center">
-                <AddRowButton
+                <RemoveRowButton
                   name={schedule.session_details.findIndex(i => i.id == session_details.id)}
                   onClick={removeRow} />
               </td>

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const AddRowButton = ({name, onClick}) => {
+const RemoveRowButton = ({name, onClick}) => {
   return (
     <button
       type="button"
@@ -12,9 +12,9 @@ const AddRowButton = ({name, onClick}) => {
   );
 };
 
-AddRowButton.propTypes = {
+RemoveRowButton.propTypes = {
   name: PropTypes.string.isRequired,
   removeRow: PropTypes.func.isRequired,
 };
 
-export default AddRowButton;
+export default RemoveRowButton;

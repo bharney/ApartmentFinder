@@ -25,7 +25,9 @@ class ManageMassagePage extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
+    debugger;
     if (this.props.massage.id != nextProps.massage.id) {
+      debugger;
       this.setState({ massage: Object.assign({}, nextProps.massage) });
     }
   }
@@ -55,7 +57,7 @@ class ManageMassagePage extends React.Component {
 
   addRow() {
     let massage = this.state.massage;
-    massage.session_details.push({ id: massage.session_details.length, session_time: '', class: '' })
+    massage.massage_details.push({ id: massage.massage_details.length, session_time: '', class: '' })
     this.setState({ massage });
   }
 
@@ -122,25 +124,14 @@ ManageMassagePage.contextTypes = {
   router: PropTypes.object
 };
 
-function getMassageById(massages, id) {
-  const massage = massages.massage_details.filter(massage_details => massage_details.id == id);
-  if (massage.length) {
-    return massage[0];
-  }
-
-  return null;
-}
 
 function getMassageByType(massageTypes, type, id) {
     const massageType = massageTypes.filter(massageType => massageType.type == type);
-    if (massageType.length) {
-      const massage = massageType.massages.filter(massage => massage.id == id);
+    const massage = massageType[0].massages.filter(massage => massage.id == id);
+    debugger;
       if (massage.length) {
         return massage[0];
       }
-
-      return null;
-    }
 
     return null;
 }
@@ -148,8 +139,24 @@ function getMassageByType(massageTypes, type, id) {
 function mapStateToProps(state, ownProps) {
   const massageTypeId = ownProps.params.type;
   const massageId = ownProps.params.id;
-  let massage = { session_time: '', title: '', details: '', cost: '', massage_details: [{ title: '', description: '' }] };
+
+  let massage = { 
+    id: '', 
+    session_time: '', 
+    title: '', 
+    description: '', 
+    cost: '', 
+    icon: '', 
+    iconHeight: '', 
+    iconWidth: '', 
+    massage_details: [{ 
+      id: '', 
+      title: '', 
+      description: '' }] 
+    };
+  debugger;
   if (massageTypeId && massageId && state.massageTypes.length > 0) {
+    debugger;
       massage = getMassageByType(state.massageTypes, massageTypeId, massageId);
   }
 
