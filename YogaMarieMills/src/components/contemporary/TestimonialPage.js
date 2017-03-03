@@ -37,7 +37,6 @@ class TestimonialPage extends React.Component {
                                                         </li>
                                                     </ul>
                                                 </div>
-
                                             )}
                                         </div>
                                     </div>

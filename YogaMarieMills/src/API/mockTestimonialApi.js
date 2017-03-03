@@ -43,6 +43,59 @@ class TestimonialApi {
       });
     });
   }
+
+  static saveTestimonial(testimonial) {
+    testimonial = Object.assign({}, testimonial);
+    return new Promise((resolve, reject) => {
+      if (testimonial.id) {
+        fetch('http://localhost:3000/api/testimonials', {
+          method: 'put',
+          headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(testimonial)
+        }).then(function (response) {
+          return response.json();
+        }).then(function (testimonial) {
+          resolve(testimonial)
+        }).catch(function (error) {
+          console.log('Request failed', error);
+        });
+      } else {
+        fetch('http://localhost:3000/api/testimonials', {
+          method: 'post',
+          headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(testimonial)
+        }).then(function (response) {
+          return response.json();
+        }).then(function (testimonial) {
+          resolve(testimonial)
+        }).catch(function (error) {
+          console.log('Request failed', error);
+        });
+      }
+    });
+  }
+
+  static deleteTestimonial(testimonialId) {
+    return new Promise((resolve, reject) => {
+      if (confirm("Are you sure you want to delete this testimonial forever?")) {
+        if (testimonialId) {
+          fetch('http://localhost:3000/api/testimonials/' + testimonialId, {
+            method: 'delete'
+          }).then(function (response) {
+            resolve(console.log("testimonial deleted."));
+          }).catch(function (error) {
+            console.log('Delete failed', error);
+          });
+        }
+      }
+    });
+  }
 }
 
 export default TestimonialApi;

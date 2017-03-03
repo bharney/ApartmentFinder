@@ -55,15 +55,21 @@ class ManageMassagePage extends React.Component {
   saveMassage(event) {
     event.preventDefault();
     let massage = this.state.massage;
+    if (!massage.icon)
+    {
+      massage.icon = 'whitearomaoil.png';
+      massage.iconHeight = '3em';
+      massage.iconWidth = '1.8em';
+    }
     this.setState({ massage });
     this.props.actions.saveMassage(this.state.massage);
-    this.context.router.push('/YogaThurles/Massage');
+    this.context.router.push('/Ayurveda/Massage' + massage.type);
   }
 
   deleteMassage(event) {
     this.props.actions.deleteMassage(this.state.massage.id);
     this.props.actions.loadMassage();
-    this.context.router.push('/Ayurveda/Massage/' + this.state.message.type);
+    this.context.router.push('/Ayurveda/Massage/' + this.state.massage.type);
   }
 
   addRow() {
@@ -145,9 +151,9 @@ function mapStateToProps(state, ownProps) {
     title: '', 
     description: '', 
     cost: '', 
-    icon: '', 
-    iconHeight: '', 
-    iconWidth: '', 
+    icon: 'whitearomaoil.png', 
+    iconHeight: '3em', 
+    iconWidth: '1.8em', 
     massage_details: [{ 
       id: '', 
       title: '', 

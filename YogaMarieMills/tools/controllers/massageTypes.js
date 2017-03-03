@@ -17,8 +17,8 @@ let massageTypeRoutes = function () {
                 request.input('description', sql.VarChar, massageType.description);
                 request.input('cost', sql.VarChar, massageType.cost);
                 request.query(
-                    `INSERT INTO MassageTypes (type, title, session_date, description, cost)
-                     VALUES (@type, @title, @session_date, @description, @cost); 
+                    `INSERT INTO MassageTypes (type, title, session_time, description, cost)
+                     VALUES (@type, @title, @session_time, @description, @cost); 
                      SELECT SCOPE_IDENTITY() AS parent_id;`
                 ).then(function (recordset) {
                     for (let prop in massageType.massage_details) {

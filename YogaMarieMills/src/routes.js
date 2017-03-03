@@ -21,7 +21,7 @@ import MassagePage from './components/contemporary/MassagePage';
 import ManageMassagePage from './components/contemporary/ManageMassagePage';
 import EventPage from './components/events/EventPage';
 import TestimonialPage from './components/contemporary/TestimonialPage';
-
+import ManageTestimonialPage from './components/contemporary/ManageTestimonialPage';
 
 export default (
     <Route path="/" history={browserHistory} component={App}>
@@ -38,10 +38,12 @@ export default (
         <Route path="ClassType" component={ManageClassTypePage} />
         <Route path="YogaThurles/ClassTypes" component={ClassTypesPage} />
         <Route path="Massage/:type/:id" component={ManageMassagePage} />
-        <Route path="Massage" component={ManageMassagePage} />
+        <Route path="Massage/:type" component={ManageMassagePage} />
         <Route path="Ayurveda/Massage/:id" component={MassagePage} />
         <Route path="Ayurveda/DietConsultation" component={DietConsultationPage} />
         <Route path="Ayurveda/Testimonials" component={TestimonialPage} />
+        <Route path="Testimonials/:id" component={ManageTestimonialPage} />
+        <Route path="Testimonials" component={ManageTestimonialPage} />
         <Route path="Events/:id" component={EventPage} />
         <Route path="About" component={AboutPage} />
         <Route path="Blog/:id" component={BlogPage} />
