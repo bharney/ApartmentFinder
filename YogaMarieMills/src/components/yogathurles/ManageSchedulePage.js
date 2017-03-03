@@ -72,7 +72,7 @@ class ManageSchedulePage extends React.Component {
   }
 
   removeRow(event) {
-    const field = event.target.name;
+    const field = event.currentTarget.name;
     let schedule = this.state.schedule;
     schedule.session_details.splice(parseInt(field), 1)
     this.setState({ schedule });

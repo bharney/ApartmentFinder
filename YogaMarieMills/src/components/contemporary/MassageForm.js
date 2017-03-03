@@ -50,11 +50,9 @@ const MassageForm = ({updateDescriptionState, updateTitleState, updateMassageSta
             <div className="col-xs-12 col-sm-offset-1 col-sm-10">
                 {massage.massage_details.map(massage_details =>
                   <div className="col-xs-6">
-                    <div className="pull-right">
                     <RemoveRowButton
                       name={massage.massage_details.findIndex(i => i.id == massage_details.id)}
                       onClick={removeRow} />
-                      </div>
                     <TextInput
                       className="p-t-0 p-b-0"
                       name={massage.massage_details.findIndex(i => i.id == massage_details.id)}

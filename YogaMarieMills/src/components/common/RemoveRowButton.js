@@ -5,9 +5,9 @@ const RemoveRowButton = ({name, onClick}) => {
     <button
       type="button"
       name={name}
-      className="btn btn-danger btn-circle"
+      className="btn btn-danger btn-circle pull-right"
       onClick={onClick}>
-      <i className="glyphicon glyphicon-minus"></i>
+      <i aria-hidden="true" className="glyphicon glyphicon-minus"></i>
     </button>
   );
 };
