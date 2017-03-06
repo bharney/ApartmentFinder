@@ -42,6 +42,8 @@ class ManageEventPage extends React.Component {
     this.deleteEvent = this.deleteEvent.bind(this);
     this.updateEventState = this.updateEventState.bind(this);
     this.uploadImage = this.uploadImage.bind(this);
+    this.updateStartDateState = this.updateStartDateState.bind(this);
+    this.updateEndDateState = this.updateEndDateState.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -73,9 +75,24 @@ class ManageEventPage extends React.Component {
   }
 
   updateEventState(event) {
+    debugger;
     const field = event.target.name;
     let eventType = this.state.eventType;
     eventType[field] = event.target.value;
+    return this.setState({ eventType });
+  }
+
+  updateStartDateState(event, date) {
+    debugger;
+    let eventType = this.state.eventType;
+    eventType.start_date = date.toISOString();
+    return this.setState({ eventType });
+  }
+
+  updateEndDateState(event, date) {
+    debugger;
+    let eventType = this.state.eventType;
+    eventType.end_date = date.toISOString();
     return this.setState({ eventType });
   }
 
@@ -136,6 +153,8 @@ class ManageEventPage extends React.Component {
         saving={this.state.saving}
         uploadImage={this.uploadImage}
         deleteEvent={this.deleteEvent}
+        updateStartDateState={this.updateStartDateState}
+        updateEndDateState={this.updateEndDateState}
       />
     );
   }
@@ -200,7 +219,7 @@ function getEventByType(eventTypes, type) {
 
 function mapStateToProps(state, ownProps) {
   const eventTypeId = ownProps.params.id;
-  let eventType = { id: '', type: '', header: '', short: '', description: '', venue: '', session_time: '', title: '', cost: '', image: '' };
+  let eventType = { id: '', type: '', header: '', short: '', description: '', venue: '', session_time: '', start_date: new Date(), end_date: new Date(), title: '', cost: '', image: '' };
 
   if (eventTypeId && state.eventTypes.length > 0) {
     eventType = getEventByType(state.eventTypes, eventTypeId);

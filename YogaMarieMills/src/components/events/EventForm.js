@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, IndexLink, browserHistory } from 'react-router';
 import TextInput from '../common/TextInput';
 import Admin from '../common/Admin';
+import DatePicker from 'material-ui/DatePicker';
 import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
 import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
@@ -33,7 +34,7 @@ const plugins = [inlineToolbarPlugin];
 
 const { InlineToolbar } = inlineToolbarPlugin;
 
-const EventTypeForm = ({ updateEventTypeState, onChange, saveEventType, eventType, eventTypeImage, eventTypeImg, editorState, ref, focus, errors, saving, uploadImage, deleteEventType }) => {
+const EventTypeForm = ({ updateEventTypeState, onChange, saveEvent, eventType, eventTypeImage, eventTypeImg, editorState, ref, focus, errors, saving, uploadImage, deleteEvent, updateStartDateState, updateEndDateState }) => {
 
 
   return (
@@ -46,10 +47,10 @@ const EventTypeForm = ({ updateEventTypeState, onChange, saveEventType, eventTyp
               <hr />
               <div className="col-xs-12 m-b-30">
                 <form>
-                  <Admin saveAction={saveEventType} deleteAction={deleteEventType} uploadImage={uploadImage} />
+                  <Admin saveAction={saveEvent} deleteAction={deleteEvent} uploadImage={uploadImage} />
                   <div className="mdl-card mdl-shadow--4dp">
                     <div className="mdl-card__media image-text-container" style={eventTypeImage}>
-                      <img src={eventTypeImg} className="img-responsive hdn"/>
+                      <img src={eventTypeImg} className="img-responsive hdn" />
                       <div className="col-xs-7 text-left align-bottom m-l-20 m-b-20">
                         <TextInput
                           name="title"
@@ -60,11 +61,41 @@ const EventTypeForm = ({ updateEventTypeState, onChange, saveEventType, eventTyp
                     </div>
                     <div className="col-xs-12">
                       <div className="col-xs-6 text-left p-l-30">
-                        <h4><strong>Venue: {eventType.venue}<br />
-                          {eventType.session_time}</strong></h4>
+                        <TextInput
+                          name="venue"
+                          label="Venue"
+                          value={eventType.venue}
+                          onChange={updateEventTypeState} />
+                        <br />
+                        <TextInput
+                          name="cost"
+                          label="Cost"
+                          value={eventType.cost}
+                          onChange={updateEventTypeState} />
                       </div>
                       <div className="col-xs-6 text-right p-r-30">
-                        <h4><strong>{eventType.cost}</strong></h4>
+                        <DatePicker
+                          formatDate={new Intl.DateTimeFormat('en-US', {
+                            weekday: 'long',
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric',
+                          }).format}
+                          floatingLabelText="Start Date"
+                          value={eventType.start_date ? new Date() : new Date(eventType.start_date)} 
+                          name="start_date"
+                          onChange={updateStartDateState} />
+                        <DatePicker
+                          formatDate={new Intl.DateTimeFormat('en-US', {
+                            weekday: 'long',
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric',
+                          }).format}
+                          floatingLabelText="End Date"
+                          value={eventType.end_date ? new Date() : new Date(eventType.end_date)} 
+                          name="end_date"
+                          onChange={updateEndDateState} />
                       </div>
                       <div className="col-xs-12 t-border-thin p-20">
                         <div id="editor" className="editor" onClick={focus}>

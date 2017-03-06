@@ -11,6 +11,7 @@ let eventRoutes = function () {
             let eventType = (req.body);
             const sqlInsertEventType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlInsertEventType);
+                request.input('id', sql.Int, eventType.id);
                 request.input('type', sql.VarChar, eventType.type);
                 request.input('title', sql.VarChar, eventType.title);
                 request.input('time', sql.VarChar, eventType.time);
@@ -18,8 +19,8 @@ let eventRoutes = function () {
                 request.input('event_desc', sql.VarChar, eventType.event_desc);
                 request.input('cost', sql.VarChar, eventType.cost);
                 request.query(
-                    `INSERT INTO EventTypes (type, title, time, short, description, cost)
-                    VALUES (@type, @title, @time, @event, @event_desc, @cost);`
+                    `INSERT INTO EventTypes (type, title, session_time, description, cost, image, start_date, end_date)
+                    VALUES (@type, @title, @session_time, @description, @cost, @image, @start_date, @end_date);`
                 ).then(res.status(201).send(event)).catch(function (err) {
                     console.log("insert EventTypes: " + err);
                 });
@@ -30,19 +31,39 @@ let eventRoutes = function () {
             const sqlUpdateEventType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlUpdateEventType);
                 request.input('id', sql.Int, eventType.id);
+                request.input('type', sql.VarChar, eventType.type);
+                request.input('header', sql.VarChar, eventType.header);
+                request.input('short', sql.VarChar, eventType.short);
+                request.input('session_time', sql.VarChar, eventType.session_time);
                 request.input('title', sql.VarChar, eventType.title);
-                request.input('time', sql.VarChar, eventType.time);
-                request.input('event', sql.VarChar, eventType.event);
-                request.input('event_desc', sql.VarChar, eventType.event_desc);
+                request.input('description', sql.VarChar, eventType.description);
                 request.input('cost', sql.VarChar, eventType.cost);
+                request.input('image', sql.VarChar, eventType.image);
+                request.input('start_date', sql.VarChar, eventType.start_date);
+                request.input('end_date', sql.VarChar, eventType.end_date);
                 request.query(
-                    `UPDATE EventTypes 
-                     SET title = @title
-                     , time = @time
-                     , short = @event
-                     , description = @event_desc
+
+                    `UPDATE Headers 
+                     SET header = @header
+                     , short = @short
+                     , venue = @venue
+                     , type = @type
+                     FROM Headers H
+                     JOIN EventTypes E
+                     ON H.type = E.type
+                     WHERE E.id = @id;
+                     
+                     UPDATE EventTypes 
+                     SET type = @type
+                     , title = @title
+                     , session_time = @session_time
+                     , short = @short
+                     , description = @description
                      , cost = @cost
-                     WHERE id = @id;`
+                     , image = @image
+                     , start_date = @start_date
+                     , end_date = @end_date
+                     WHERE id = @id`
                 ).then(res.status(201).send(event)).catch(function (err) {
                     console.log("update EventTypes: " + err);
                 });
@@ -76,6 +97,8 @@ let eventRoutes = function () {
                                  THEN FORMAT(TRY_PARSE(E.cost AS decimal), 'C', 'de-de') 
                                  ELSE E.cost END AS cost
                     ,E.image AS image
+                    ,E.start_date AS start_date
+                    ,E.end_date AS end_date
                     FROM Headers H
                     JOIN EventTypes E
                     ON H.type = E.type`
