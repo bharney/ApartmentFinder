@@ -68,12 +68,14 @@ let eventRoutes = function () {
                     ,E.type AS type
                     ,H.header AS header
                     ,H.short AS short
-                    ,H.description AS description 
                     ,H.venue AS venue
-                    ,E.time AS time
+                    ,E.session_time AS session_time
                     ,E.title AS title
                     ,E.description AS description
-                    ,E.cost AS cost
+                    ,CASE WHEN ISNUMERIC(E.cost) = 1 
+                                 THEN FORMAT(TRY_PARSE(E.cost AS decimal), 'C', 'de-de') 
+                                 ELSE E.cost END AS cost
+                    ,E.image AS image
                     FROM Headers H
                     JOIN EventTypes E
                     ON H.type = E.type`

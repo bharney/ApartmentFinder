@@ -19,7 +19,7 @@ import CostsPage from './components/cost/CostsPage';
 import DietConsultationPage from './components/contemporary/DietConsultationPage';
 import MassagePage from './components/contemporary/MassagePage';
 import ManageMassagePage from './components/contemporary/ManageMassagePage';
-import EventPage from './components/events/EventPage';
+import ManageEventPage from './components/events/ManageEventPage';
 import TestimonialPage from './components/contemporary/TestimonialPage';
 import ManageTestimonialPage from './components/contemporary/ManageTestimonialPage';
 
@@ -44,7 +44,8 @@ export default (
         <Route path="Ayurveda/Testimonials" component={TestimonialPage} />
         <Route path="Testimonials/:id" component={ManageTestimonialPage} />
         <Route path="Testimonials" component={ManageTestimonialPage} />
-        <Route path="Events/:id" component={EventPage} />
+        <Route path="Events/:id" component={ManageEventPage} />
+        <Route path="Events" component={ManageEventPage} />
         <Route path="About" component={AboutPage} />
         <Route path="Blog/:id" component={BlogPage} />
         <Route path="Blog" component={ManageBlogPage} />

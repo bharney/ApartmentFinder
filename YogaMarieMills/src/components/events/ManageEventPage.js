@@ -22,11 +22,11 @@ class ManageEventPage extends React.Component {
     ]);
 
     let blocks = convertFromRaw(blocks = { blocks: [{ text: '', type: 'unstyled', },], entityMap: { first: { type: 'TOKEN', mutability: 'MUTABLE', }, } });
-    if (props.event.description != "")
-      blocks = convertFromRaw(JSON.parse(props.event.description));
+    if (props.eventType.description != "")
+      blocks = convertFromRaw(JSON.parse(props.eventType.description));
 
     this.state = {
-      event: Object.assign({}, props.event),
+      eventType: Object.assign({}, props.eventType),
       editorState: EditorState.createWithContent(
         blocks,
         decorator,
@@ -44,11 +44,11 @@ class ManageEventPage extends React.Component {
     this.uploadImage = this.uploadImage.bind(this);
   }
 
-
   componentWillReceiveProps(nextProps) {
-    if (this.props.event.id != nextProps.event.id) {
-      this.setState({ event: Object.assign({}, nextProps.event) });
-      const blocks = convertFromRaw(JSON.parse(nextProps.event.description));
+    if (this.props.eventType.id != nextProps.eventType.id) {
+      debugger;
+      this.setState({ eventType: Object.assign({}, nextProps.eventType) });
+      const blocks = convertFromRaw(JSON.parse(nextProps.eventType.description));
       const editorState = EditorState.push(this.state.editorState, blocks);
       this.setState({ editorState });
     }
@@ -74,23 +74,23 @@ class ManageEventPage extends React.Component {
 
   updateEventState(event) {
     const field = event.target.name;
-    let event = this.state.event;
-    event[field] = event.target.value;
-    return this.setState({ event });
+    let eventType = this.state.eventType;
+    eventType[field] = event.target.value;
+    return this.setState({ eventType });
   }
 
   saveEvent(event) {
     event.preventDefault();
-    let event = this.state.event;
-    event.short = this.getTextFromEntity(convertToRaw(this.state.editorState.getCurrentContent()));
-    event.description = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
-    this.setState({ event });
-    this.props.actions.saveEvent(this.state.event);
-    this.context.router.push('/YogaThurles/Events');
+    let eventType = this.state.eventType;
+    eventType.short = this.getTextFromEntity(convertToRaw(this.state.editorState.getCurrentContent()));
+    eventType.description = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
+    this.setState({ eventType });
+    this.props.actions.saveEvent(this.state.eventType);
+    this.context.router.push('/Events/' + eventType.type);
   }
 
   deleteEvent(event) {
-    this.props.actions.deleteEvent(this.state.event.id);
+    this.props.actions.deleteEvent(this.state.eventType.id);
     this.props.actions.loadEvent();
     this.context.router.push('/YogaThurles/Events');
   }
@@ -102,21 +102,20 @@ class ManageEventPage extends React.Component {
     let file = e.target.files[0];
 
     reader.onloadend = () => {
-      let event = this.state.event;
-      event.image = file.name
+      let eventType = this.state.eventType;
+      eventType.image = file.name
       this.props.upload.uploadFile(file);
-      return this.setState({ event: event });
+      return this.setState({ eventType: eventType });
     }
     reader.readAsDataURL(file)
   }
 
   render() {
-    const {event} = this.props;
-    
-    let eventImg = event.image != "" ? require(`../../images/${event.image}`) : ""
+    const { eventType } = this.props;
+    let eventTypeImg = eventType.image ? require(`../../images/${eventType.image}`) : ""
 
-    const eventImage = {
-      backgroundImage: 'url(' + eventImg + ')',
+    const eventTypeImage = {
+      backgroundImage: 'url(' + eventTypeImg + ')',
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
       backgroundSize: "cover"
@@ -127,8 +126,9 @@ class ManageEventPage extends React.Component {
         updateEventState={this.updateEventState}
         onChange={this.onChange}
         saveEvent={this.saveEvent}
-        event={this.state.event}
-        eventImage={eventImage}
+        eventType={this.state.eventType}
+        eventTypeImage={eventTypeImage}
+        eventTypeImg = {eventTypeImg}
         editorState={this.state.editorState}
         ref="editor"
         focus={focus}
@@ -136,13 +136,13 @@ class ManageEventPage extends React.Component {
         saving={this.state.saving}
         uploadImage={this.uploadImage}
         deleteEvent={this.deleteEvent}
-        />
+      />
     );
   }
 }
 
 ManageEventPage.propTypes = {
-  event: PropTypes.object.isRequired,
+  eventType: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   editorState: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
@@ -188,24 +188,26 @@ const TokenSpan = (props) => {
 };
 
 
-function getEventById(events, id) {
-  const event = events.filter(event => event.id == id);
-  if (event.length) {
-    return event[0];
+function getEventByType(eventTypes, type) {
+  debugger;
+  const eventType = eventTypes.filter(eventType => eventType.type == type);
+  if (eventType.length) {
+    return eventType[0];
   }
 
   return null;
 }
 
 function mapStateToProps(state, ownProps) {
-  const eventId = ownProps.params.id;
-  let event = { id: '', title: '', image: '', short: '', description: '', href: '', route: '', component: '' };
-  if (eventId && state.events.length > 0) {
-    event = getEventById(state.events, eventId);
+  const eventTypeId = ownProps.params.id;
+  let eventType = { id: '', type: '', header: '', short: '', description: '', venue: '', session_time: '', title: '', cost: '', image: '' };
+
+  if (eventTypeId && state.eventTypes.length > 0) {
+    eventType = getEventByType(state.eventTypes, eventTypeId);
   }
 
   return {
-    event: event
+    eventType: eventType
   };
 }
 

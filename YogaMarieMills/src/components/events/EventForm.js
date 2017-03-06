@@ -33,65 +33,74 @@ const plugins = [inlineToolbarPlugin];
 
 const { InlineToolbar } = inlineToolbarPlugin;
 
-const ClassTypeForm = ({updateClassTypeState, onChange, saveClassType, classType, classTypeImage, editorState, ref, focus, errors, saving, uploadImage, deleteClassType}) => {
+const EventTypeForm = ({ updateEventTypeState, onChange, saveEventType, eventType, eventTypeImage, eventTypeImg, editorState, ref, focus, errors, saving, uploadImage, deleteEventType }) => {
 
-    
+
   return (
     <div className="mdl-grid dark-color">
-      <div className="ribbon b-border">
+      <div className="ribbon bg-image-landing b-border">
         <div className="container">
           <div className="row m-b-30">
-            <div key={classType.id} className="col-xs-12">
-              <h1 className="color-white text-center">{classType.title}</h1>
+            <div className="col-xs-12">
+              <h1 className="color-white text-center">{eventType.header}</h1>
               <hr />
-              <form>
-                <Admin saveAction={saveClassType} deleteAction={deleteClassType} uploadImage={uploadImage} />
-                <div className="col-xs-12 m-b-30">
+              <div className="col-xs-12 m-b-30">
+                <form>
+                  <Admin saveAction={saveEventType} deleteAction={deleteEventType} uploadImage={uploadImage} />
                   <div className="mdl-card mdl-shadow--4dp">
-                    <div className="mdl-card__media v-h-40 image-text-container" style={classTypeImage}>
+                    <div className="mdl-card__media image-text-container" style={eventTypeImage}>
+                      <img src={eventTypeImg} className="img-responsive hdn"/>
                       <div className="col-xs-7 text-left align-bottom m-l-20 m-b-20">
-                          <TextInput
-                            name="title"
-                            label="Title"
-                            value={classType.title}
-                            onChange={updateClassTypeState} />
+                        <TextInput
+                          name="title"
+                          label="Title"
+                          value={eventType.title}
+                          onChange={updateEventTypeState} />
                       </div>
                     </div>
-                    <div className="col-xs-12 t-border-thin p-20">
-                      <div id="editor" className="editor" onClick={focus}>
-                        <p>
-                          <Editor
-                            editorState={editorState}
-                            onChange={onChange}
-                            ref={ref}
-                            plugins={plugins}
+                    <div className="col-xs-12">
+                      <div className="col-xs-6 text-left p-l-30">
+                        <h4><strong>Venue: {eventType.venue}<br />
+                          {eventType.session_time}</strong></h4>
+                      </div>
+                      <div className="col-xs-6 text-right p-r-30">
+                        <h4><strong>{eventType.cost}</strong></h4>
+                      </div>
+                      <div className="col-xs-12 t-border-thin p-20">
+                        <div id="editor" className="editor" onClick={focus}>
+                          <p>
+                            <Editor
+                              editorState={editorState}
+                              onChange={onChange}
+                              ref={ref}
+                              plugins={plugins}
                             />
-                          <InlineToolbar />
-                        </p>
+                            <InlineToolbar />
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   );
 };
 
-ClassTypeForm.propTypes = {
-  classType: React.PropTypes.object.isRequired,
+EventTypeForm.propTypes = {
+  eventType: React.PropTypes.object.isRequired,
   editorState: React.PropTypes.object.isRequired,
-  updateClassTypeState: React.PropTypes.object.isRequired,
+  updateEventTypeState: React.PropTypes.object.isRequired,
   focus: React.PropTypes.object.isRequired,
   saving: React.PropTypes.object.isRequired,
   uploadImage: React.PropTypes.object.isRequired,
-  saveClassType: React.PropTypes.func.isRequired,
+  saveEventType: React.PropTypes.func.isRequired,
   onChange: React.PropTypes.func.isRequired,
   errors: React.PropTypes.object
 };
 
-export default ClassTypeForm;
+export default EventTypeForm;

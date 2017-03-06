@@ -136,7 +136,7 @@ let massageTypeRoutes = function () {
                     ,NULL AS parent_id
                     ,CASE WHEN ISNUMERIC(M.cost) = 1 
                                  THEN FORMAT(TRY_PARSE(M.cost AS decimal), 'C', 'de-de') 
-                                 ELSE cost END AS cost
+                                 ELSE M.cost END AS cost
                     ,M.icon AS icon
                     ,M.iconHeight AS iconHeight
                     ,M.iconWidth AS iconWidth
