@@ -34,7 +34,7 @@ const plugins = [inlineToolbarPlugin];
 
 const { InlineToolbar } = inlineToolbarPlugin;
 
-const EventTypeForm = ({ updateEventTypeState, onChange, saveEvent, eventType, eventTypeImage, eventTypeImg, editorState, ref, focus, errors, saving, uploadImage, deleteEvent, updateStartDateState, updateEndDateState }) => {
+const EventTypeForm = ({ updateEventState, onChange, saveEvent, eventType, eventTypeImage, eventTypeImg, editorState, ref, focus, errors, saving, uploadImage, deleteEvent, updateStartDateState, updateEndDateState }) => {
 
 
   return (
@@ -56,7 +56,7 @@ const EventTypeForm = ({ updateEventTypeState, onChange, saveEvent, eventType, e
                           name="title"
                           label="Title"
                           value={eventType.title}
-                          onChange={updateEventTypeState} />
+                          onChange={updateEventState} />
                       </div>
                     </div>
                     <div className="col-xs-12">
@@ -65,13 +65,13 @@ const EventTypeForm = ({ updateEventTypeState, onChange, saveEvent, eventType, e
                           name="venue"
                           label="Venue"
                           value={eventType.venue}
-                          onChange={updateEventTypeState} />
+                          onChange={updateEventState} />
                         <br />
                         <TextInput
                           name="cost"
                           label="Cost"
                           value={eventType.cost}
-                          onChange={updateEventTypeState} />
+                          onChange={updateEventState} />
                       </div>
                       <div className="col-xs-6 text-right p-r-30">
                         <DatePicker
@@ -82,7 +82,7 @@ const EventTypeForm = ({ updateEventTypeState, onChange, saveEvent, eventType, e
                             year: 'numeric',
                           }).format}
                           floatingLabelText="Start Date"
-                          value={eventType.start_date ? new Date() : new Date(eventType.start_date)} 
+                          value={eventType.start_date} 
                           name="start_date"
                           onChange={updateStartDateState} />
                         <DatePicker
@@ -93,7 +93,7 @@ const EventTypeForm = ({ updateEventTypeState, onChange, saveEvent, eventType, e
                             year: 'numeric',
                           }).format}
                           floatingLabelText="End Date"
-                          value={eventType.end_date ? new Date() : new Date(eventType.end_date)} 
+                          value={eventType.end_date} 
                           name="end_date"
                           onChange={updateEndDateState} />
                       </div>
@@ -125,7 +125,7 @@ const EventTypeForm = ({ updateEventTypeState, onChange, saveEvent, eventType, e
 EventTypeForm.propTypes = {
   eventType: React.PropTypes.object.isRequired,
   editorState: React.PropTypes.object.isRequired,
-  updateEventTypeState: React.PropTypes.object.isRequired,
+  updateEventState: React.PropTypes.object.isRequired,
   focus: React.PropTypes.object.isRequired,
   saving: React.PropTypes.object.isRequired,
   uploadImage: React.PropTypes.object.isRequired,

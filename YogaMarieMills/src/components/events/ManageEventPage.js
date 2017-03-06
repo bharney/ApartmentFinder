@@ -49,6 +49,8 @@ class ManageEventPage extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.eventType.id != nextProps.eventType.id) {
       debugger;
+      nextProps.eventType.start_date =  nextProps.eventType.start_date ? new Date(nextProps.eventType.start_date) :  new Date()
+      nextProps.eventType.end_date =  nextProps.eventType.end_date ? new Date(nextProps.eventType.end_date) :  new Date()
       this.setState({ eventType: Object.assign({}, nextProps.eventType) });
       const blocks = convertFromRaw(JSON.parse(nextProps.eventType.description));
       const editorState = EditorState.push(this.state.editorState, blocks);
@@ -97,16 +99,20 @@ class ManageEventPage extends React.Component {
   }
 
   saveEvent(event) {
+    debugger;
     event.preventDefault();
     let eventType = this.state.eventType;
     eventType.short = this.getTextFromEntity(convertToRaw(this.state.editorState.getCurrentContent()));
     eventType.description = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
+    eventType.start_date = new Date(eventType.start_date).toISOString();
+    eventType.end_date = new Date(eventType.end_date).toISOString();
     this.setState({ eventType });
     this.props.actions.saveEvent(this.state.eventType);
     this.context.router.push('/Events/' + eventType.type);
   }
 
   deleteEvent(event) {
+    debugger;
     this.props.actions.deleteEvent(this.state.eventType.id);
     this.props.actions.loadEvent();
     this.context.router.push('/YogaThurles/Events');
@@ -135,7 +141,7 @@ class ManageEventPage extends React.Component {
       backgroundImage: 'url(' + eventTypeImg + ')',
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
-      backgroundSize: "cover"
+      backgroundSize: "contain"
     }
 
     return (
@@ -208,7 +214,6 @@ const TokenSpan = (props) => {
 
 
 function getEventByType(eventTypes, type) {
-  debugger;
   const eventType = eventTypes.filter(eventType => eventType.type == type);
   if (eventType.length) {
     return eventType[0];
