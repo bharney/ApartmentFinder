@@ -32,7 +32,8 @@ class ManageEventPage extends React.Component {
         decorator,
       ),
       errors: {},
-      saving: false
+      saving: false,
+      newRecord: true
     };
 
     this.onChange = this.onChange.bind(this);
@@ -44,17 +45,19 @@ class ManageEventPage extends React.Component {
     this.uploadImage = this.uploadImage.bind(this);
     this.updateStartDateState = this.updateStartDateState.bind(this);
     this.updateEndDateState = this.updateEndDateState.bind(this);
+    this.displayEventType = this.displayEventType.bind(this);
+    this.displayImage = this.displayImage.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.eventType.id != nextProps.eventType.id) {
-      debugger;
       nextProps.eventType.start_date =  nextProps.eventType.start_date ? new Date(nextProps.eventType.start_date) :  new Date()
       nextProps.eventType.end_date =  nextProps.eventType.end_date ? new Date(nextProps.eventType.end_date) :  new Date()
       this.setState({ eventType: Object.assign({}, nextProps.eventType) });
       const blocks = convertFromRaw(JSON.parse(nextProps.eventType.description));
       const editorState = EditorState.push(this.state.editorState, blocks);
       this.setState({ editorState });
+      this.setState(this.state.newRecord = false);
     }
   }
 
@@ -85,14 +88,12 @@ class ManageEventPage extends React.Component {
   }
 
   updateStartDateState(event, date) {
-    debugger;
     let eventType = this.state.eventType;
     eventType.start_date = date.toISOString();
     return this.setState({ eventType });
   }
 
   updateEndDateState(event, date) {
-    debugger;
     let eventType = this.state.eventType;
     eventType.end_date = date.toISOString();
     return this.setState({ eventType });
@@ -133,16 +134,35 @@ class ManageEventPage extends React.Component {
     reader.readAsDataURL(file)
   }
 
-  render() {
-    const { eventType } = this.props;
-    let eventTypeImg = eventType.image ? require(`../../images/${eventType.image}`) : ""
+  displayEventType (header, updateEventState) {
+    if (this.state.newRecord)
+      return (
+        <TextInput
+          name="header"
+          label="Page Title"
+          value={header}
+          onChange={updateEventState} />
+      )
 
-    const eventTypeImage = {
+      return (
+        <h1 className="color-white text-center">{header}</h1>
+      )
+  }
+
+  displayImage (image)
+  {
+    let eventTypeImg = image ? require(`../../images/${image}`) : ""
+
+    return ({
       backgroundImage: 'url(' + eventTypeImg + ')',
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
       backgroundSize: "contain"
-    }
+    })
+  }
+
+  render() {
+    const { eventType } = this.props;
 
     return (
       <EventForm
@@ -150,8 +170,6 @@ class ManageEventPage extends React.Component {
         onChange={this.onChange}
         saveEvent={this.saveEvent}
         eventType={this.state.eventType}
-        eventTypeImage={eventTypeImage}
-        eventTypeImg = {eventTypeImg}
         editorState={this.state.editorState}
         ref="editor"
         focus={focus}
@@ -161,6 +179,8 @@ class ManageEventPage extends React.Component {
         deleteEvent={this.deleteEvent}
         updateStartDateState={this.updateStartDateState}
         updateEndDateState={this.updateEndDateState}
+        displayEventType={this.displayEventType}
+        displayImage={this.displayImage}
       />
     );
   }

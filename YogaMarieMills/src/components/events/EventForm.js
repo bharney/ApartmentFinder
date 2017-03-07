@@ -34,8 +34,22 @@ const plugins = [inlineToolbarPlugin];
 
 const { InlineToolbar } = inlineToolbarPlugin;
 
-const EventTypeForm = ({ updateEventState, onChange, saveEvent, eventType, eventTypeImage, eventTypeImg, editorState, ref, focus, errors, saving, uploadImage, deleteEvent, updateStartDateState, updateEndDateState }) => {
-
+const EventTypeForm = ({ 
+  updateEventState, 
+  onChange, 
+  saveEvent, 
+  eventType, 
+  editorState, 
+  ref, 
+  focus, 
+  errors, 
+  saving, 
+  uploadImage, 
+  deleteEvent, 
+  updateStartDateState, 
+  updateEndDateState,
+  displayEventType,
+  displayImage }) => {
 
   return (
     <div className="mdl-grid dark-color">
@@ -43,15 +57,15 @@ const EventTypeForm = ({ updateEventState, onChange, saveEvent, eventType, event
         <div className="container">
           <div className="row m-b-30">
             <div className="col-xs-12">
-              <h1 className="color-white text-center">{eventType.header}</h1>
+              {displayEventType(eventType.header, updateEventState)}
               <hr />
               <Admin addAction={"Events"} />
               <div className="col-xs-12 m-b-30">
                 <form>
                   <Admin saveAction={saveEvent} deleteAction={deleteEvent} uploadImage={uploadImage} />
                   <div className="mdl-card mdl-shadow--4dp">
-                    <div className="mdl-card__media image-text-container" style={eventTypeImage}>
-                      <img src={eventTypeImg} className="img-responsive hdn" />
+                    <div className="mdl-card__media image-text-container" style={displayImage(eventType.image)}>
+                      <img src={eventType.image = eventType.image ? require(`../../images/${eventType.image}`) : ''} className="img-responsive hdn" />
                       <div className="col-xs-7 text-left align-bottom m-l-20 m-b-20">
                         <TextInput
                           name="title"
