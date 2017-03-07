@@ -45,6 +45,7 @@ const EventTypeForm = ({ updateEventState, onChange, saveEvent, eventType, event
             <div className="col-xs-12">
               <h1 className="color-white text-center">{eventType.header}</h1>
               <hr />
+              <Admin addAction={"Events"} />
               <div className="col-xs-12 m-b-30">
                 <form>
                   <Admin saveAction={saveEvent} deleteAction={deleteEvent} uploadImage={uploadImage} />
@@ -82,7 +83,7 @@ const EventTypeForm = ({ updateEventState, onChange, saveEvent, eventType, event
                             year: 'numeric',
                           }).format}
                           floatingLabelText="Start Date"
-                          value={eventType.start_date} 
+                          value={new Date(eventType.start_date)} 
                           name="start_date"
                           onChange={updateStartDateState} />
                         <DatePicker
@@ -93,7 +94,7 @@ const EventTypeForm = ({ updateEventState, onChange, saveEvent, eventType, event
                             year: 'numeric',
                           }).format}
                           floatingLabelText="End Date"
-                          value={eventType.end_date} 
+                          value={new Date(eventType.end_date)} 
                           name="end_date"
                           onChange={updateEndDateState} />
                       </div>
