@@ -12,6 +12,7 @@ class EventApi {
 
   static saveEvent(eventType) {
     eventType = Object.assign({}, eventType);
+    debugger;
     return new Promise((resolve, reject) => {
       if (eventType.id) {
         fetch('http://localhost:3000/api/events', {
@@ -37,6 +38,7 @@ class EventApi {
           },
           body: JSON.stringify(eventType)
         }).then(function (response) {
+          debugger;
           return response.json();
         }).then(function (eventType) {
           resolve(eventType)

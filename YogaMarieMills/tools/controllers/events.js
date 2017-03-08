@@ -9,6 +9,14 @@ let eventRoutes = function () {
     eventRouter.route('/events')
         .post(function (req, res) {
             let eventType = (req.body);
+            function replaceAll(str, find, replace) {
+                return str.replace(new RegExp(find, 'g'), replace);
+            }
+            const generateType = (eventType) => {
+                return replaceAll(eventType.header, ' ', '-');
+            };
+            eventType.type = generateType(eventType);
+
             const sqlInsertEventType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlInsertEventType);
                 request.input('type', sql.VarChar, eventType.type);

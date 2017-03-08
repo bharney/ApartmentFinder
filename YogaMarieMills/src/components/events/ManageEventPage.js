@@ -51,8 +51,8 @@ class ManageEventPage extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.eventType.id != nextProps.eventType.id) {
-      nextProps.eventType.start_date =  nextProps.eventType.start_date ? new Date(nextProps.eventType.start_date) :  new Date()
-      nextProps.eventType.end_date =  nextProps.eventType.end_date ? new Date(nextProps.eventType.end_date) :  new Date()
+      nextProps.eventType.start_date = nextProps.eventType.start_date ? new Date(nextProps.eventType.start_date) : new Date()
+      nextProps.eventType.end_date = nextProps.eventType.end_date ? new Date(nextProps.eventType.end_date) : new Date()
       this.setState({ eventType: Object.assign({}, nextProps.eventType) });
       const blocks = convertFromRaw(JSON.parse(nextProps.eventType.description));
       const editorState = EditorState.push(this.state.editorState, blocks);
@@ -80,7 +80,6 @@ class ManageEventPage extends React.Component {
   }
 
   updateEventState(event) {
-    debugger;
     const field = event.target.name;
     let eventType = this.state.eventType;
     eventType[field] = event.target.value;
@@ -134,7 +133,7 @@ class ManageEventPage extends React.Component {
     reader.readAsDataURL(file)
   }
 
-  displayEventType (header, updateEventState) {
+  displayEventType(header, updateEventState) {
     if (this.state.newRecord)
       return (
         <TextInput
@@ -144,17 +143,15 @@ class ManageEventPage extends React.Component {
           onChange={updateEventState} />
       )
 
-      return (
-        <h1 className="color-white text-center">{header}</h1>
-      )
+    return (
+      <h1 className="color-white text-center">{header}</h1>
+    )
   }
 
-  displayImage (image)
-  {
-    let eventTypeImg = image ? require(`../../images/${image}`) : ""
-
+  displayImage(image) {
+    image = image ? require(`../../images/${image}`) : '';
     return ({
-      backgroundImage: 'url(' + eventTypeImg + ')',
+      backgroundImage: 'url(' + image + ')',
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
       backgroundSize: "contain"

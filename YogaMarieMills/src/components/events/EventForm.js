@@ -65,7 +65,7 @@ const EventTypeForm = ({
                   <Admin saveAction={saveEvent} deleteAction={deleteEvent} uploadImage={uploadImage} />
                   <div className="mdl-card mdl-shadow--4dp">
                     <div className="mdl-card__media image-text-container" style={displayImage(eventType.image)}>
-                      <img src={eventType.image = eventType.image ? require(`../../images/${eventType.image}`) : ''} className="img-responsive hdn" />
+                      <img src={"../" + eventType.image} className="img-responsive hdn" />
                       <div className="col-xs-7 text-left align-bottom m-l-20 m-b-20">
                         <TextInput
                           name="title"
