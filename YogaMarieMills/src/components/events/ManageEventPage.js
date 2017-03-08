@@ -108,6 +108,15 @@ class ManageEventPage extends React.Component {
     eventType.end_date = new Date(eventType.end_date).toISOString();
     this.setState({ eventType });
     this.props.actions.saveEvent(this.state.eventType);
+    function replaceAll(str, find, replace) {
+                return str.replace(new RegExp(find, 'g'), replace);
+    }
+
+    const generateType = (eventType) => {
+        return replaceAll(eventType.header, ' ', '-');
+    };
+    eventType.type = generateType(eventType);
+
     this.context.router.push('/Events/' + eventType.type);
   }
 
