@@ -62,7 +62,7 @@ class MassagePage extends React.Component {
                                 </div>
                                 {massageType.massages.map(massage =>
                                     <div className="col-xs-12 m-b-5-em">
-                                        <div className="">
+                                        <div>
                                             <Admin editAction={"Massage/" + massageType.type + "/" + massage.id} />
                                         </div>
                                         <div className="mdl-card mdl-shadow--4dp p-b-3-em allow-overflow">

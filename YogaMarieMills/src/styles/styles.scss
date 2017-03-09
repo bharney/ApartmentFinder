@@ -581,6 +581,13 @@ section.section {
     background-size: 4em 3.7em;
 }
 
+.stretch {
+    background-image: url('../images/blackstretch.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 4em 3.7em;
+}
+
 .bg-image-landing {
     background-image: url('../images/landing.jpg');
     background-repeat: no-repeat;
@@ -913,6 +920,10 @@ Media queries
 
 .p-2-em {
     padding: 2em;
+}
+
+.p-3-em {
+     padding: 3em;
 }
 
 /* top */
