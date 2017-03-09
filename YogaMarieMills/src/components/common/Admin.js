@@ -24,9 +24,9 @@ const Admin = ({uploadImage, saveAction, deleteAction, addAction, editAction}) =
         switch (adminButton) {
             case "addAction":
                 return (
-                    <Link to={'/' + addAction} className="fixed top-10" >
+                    <a href={'/' + addAction} className="fixed top-10" >
                         <button type="button" className="relative m-t-5 btn btn-success btn-circle-lg" title="Add Record"><i className="glyphicon glyphicon-plus"></i></button>
-                    </Link>
+                    </a>
                 )
             case "editAction":
                 return (

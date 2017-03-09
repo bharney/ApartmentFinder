@@ -34,19 +34,19 @@ const plugins = [inlineToolbarPlugin];
 
 const { InlineToolbar } = inlineToolbarPlugin;
 
-const EventTypeForm = ({ 
-  updateEventState, 
-  onChange, 
-  saveEvent, 
-  eventType, 
-  editorState, 
-  ref, 
-  focus, 
-  errors, 
-  saving, 
-  uploadImage, 
-  deleteEvent, 
-  updateStartDateState, 
+const EventTypeForm = ({
+  updateEventState,
+  onChange,
+  saveEvent,
+  eventType,
+  editorState,
+  ref,
+  focus,
+  errors,
+  saving,
+  uploadImage,
+  deleteEvent,
+  updateStartDateState,
   updateEndDateState,
   displayEventType,
   displayImage }) => {
@@ -83,6 +83,12 @@ const EventTypeForm = ({
                           onChange={updateEventState} />
                         <br />
                         <TextInput
+                          name="session_time"
+                          label="Event Time"
+                          value={eventType.session_time}
+                          onChange={updateEventState} />
+                        <br />
+                        <TextInput
                           name="cost"
                           label="Cost"
                           value={eventType.cost}
@@ -97,7 +103,7 @@ const EventTypeForm = ({
                             year: 'numeric',
                           }).format}
                           floatingLabelText="Start Date"
-                          value={new Date(eventType.start_date)} 
+                          value={new Date(eventType.start_date)}
                           name="start_date"
                           onChange={updateStartDateState} />
                         <DatePicker
@@ -108,7 +114,7 @@ const EventTypeForm = ({
                             year: 'numeric',
                           }).format}
                           floatingLabelText="End Date"
-                          value={new Date(eventType.end_date)} 
+                          value={new Date(eventType.end_date)}
                           name="end_date"
                           onChange={updateEndDateState} />
                       </div>

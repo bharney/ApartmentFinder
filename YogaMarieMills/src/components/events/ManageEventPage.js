@@ -99,7 +99,6 @@ class ManageEventPage extends React.Component {
   }
 
   saveEvent(event) {
-    debugger;
     event.preventDefault();
     let eventType = this.state.eventType;
     eventType.short = this.getTextFromEntity(convertToRaw(this.state.editorState.getCurrentContent()));
@@ -121,15 +120,13 @@ class ManageEventPage extends React.Component {
   }
 
   deleteEvent(event) {
-    debugger;
-    this.props.actions.deleteEvent(this.state.eventType.id);
+    this.props.actions.deleteEvent(this.state.eventType);
     this.props.actions.loadEvent();
-    this.context.router.push('/YogaThurles/Events');
+    this.context.router.push('/');
   }
 
   uploadImage(e) {
     e.preventDefault();
-
     let reader = new FileReader();
     let file = e.target.files[0];
 

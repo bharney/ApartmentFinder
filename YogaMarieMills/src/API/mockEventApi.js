@@ -12,7 +12,6 @@ class EventApi {
 
   static saveEvent(eventType) {
     eventType = Object.assign({}, eventType);
-    debugger;
     return new Promise((resolve, reject) => {
       if (eventType.id) {
         fetch('http://localhost:3000/api/events', {
@@ -38,7 +37,6 @@ class EventApi {
           },
           body: JSON.stringify(eventType)
         }).then(function (response) {
-          debugger;
           return response.json();
         }).then(function (eventType) {
           resolve(eventType)
@@ -49,12 +47,17 @@ class EventApi {
     });
   }
 
-  static deleteEvent(eventId) {
+  static deleteEvent(eventType) {
     return new Promise((resolve, reject) => {
       if (confirm("Are you sure you want to delete this event forever?")) {
-        if (eventId) {
-          fetch('http://localhost:3000/api/events/' + eventId, {
-            method: 'delete'
+        if (eventType.id && eventType.type) {
+          fetch('http://localhost:3000/api/events/', {
+            method: 'delete',
+          headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(eventType)
           }).then(function (response) {
             resolve(console.log("event deleted."));
           }).catch(function (error) {

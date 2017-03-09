@@ -667,8 +667,8 @@ section.section {
 
 .icon-circle-sm {
     display: block;
-    width: 4em;
-    height: 4em;
+    width: 5em;
+    height: 5em;
     line-height: 4em;
     margin: 0 auto;
     text-align: center;
@@ -679,6 +679,16 @@ section.section {
     -webkit-transition: background 0.5s;
     -moz-transition: background 0.5s;
     transition: background 0.5s;
+}
+
+.mdl-pos-abs-center {
+    position: absolute;
+    top: 0;
+    left: 47%;
+}
+
+.allow-overflow {
+    overflow: visible;
 }
 
 /* ========================================
@@ -947,28 +957,9 @@ padding-bottom: 0.5em;
 
 
 /* top */
-.p-t--50 {
-     margin-top: -50px;
-}
-
-.p-t--40 {
-     margin-top: -40px;
-}
-
-.p-t--30 {
-     margin-top: -30px;
-}
-
-.p-t--20 {
-     margin-top: -20px;
-}
-
-.p-t--10 {
-     margin-top: -10px;
-}
 
 .p-t-0 {
-    margin-top: 0;
+    padding-top: 0;
 }
 
 .p-t-0 {
@@ -1111,6 +1102,36 @@ padding-bottom: 0.5em;
 }
 
 /* ---- margin --- */
+.m-0 {
+    margin: 0;
+}
+
+/* ---- em ---- */
+.m-b-05-em {
+    margin-bottom: .5em;
+}
+
+.m-b-1-em {
+    margin-bottom: 1em;
+}
+
+.m-b-2-em {
+    margin-bottom: 2em;
+}
+
+.m-b-3-em {
+    margin-bottom: 3em;
+}
+
+.m-b-4-em {
+    margin-bottom: 4em;
+}
+
+.m-b-5-em {
+    margin-bottom: 5em;
+}
+
+/*---left--*/
 .m-l-0 {
     margin-left: 0;
 }

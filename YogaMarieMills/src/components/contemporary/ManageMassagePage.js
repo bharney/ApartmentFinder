@@ -79,7 +79,6 @@ class ManageMassagePage extends React.Component {
   }
 
   removeRow(event) {
-    debugger;
     const rowNumber = event.currentTarget.name;
     let massage = this.state.massage;
     massage.massage_details.splice(parseInt(rowNumber), 1)

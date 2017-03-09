@@ -11,7 +11,7 @@ class MassagePage extends React.Component {
     }
 
     render() {
-        const {massageType} = this.props;
+        const { massageType } = this.props;
 
         let displayIcon = function (icon, iconWidth, iconHeight) {
             let requireImg = icon ? require(`../../images/${icon}`) : ""
@@ -21,11 +21,11 @@ class MassagePage extends React.Component {
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
             }
-            return (<div className="icon-circle-sm bg-color-green mdl-shadow--4dp" style={iconImg}></div>)
+            return (<div className="icon-circle-sm mdl-pos-abs-center bg-color-green mdl-shadow--4dp m-t--40" style={iconImg}></div>)
         }
         let offsetColumns = function (massage, massage_details) {
-            if (massage_details.title) 
-                if(massage.massage_details.findIndex(i => i.id == massage_details.id)%2 == 0) {
+            if (massage_details.title)
+                if (massage.massage_details.findIndex(i => i.id == massage_details.id) % 2 == 0) {
                     return (
                         <div className="col-xs-12 col-sm-offset-2 col-sm-4">
                             <h4><strong>{massage_details.title}</strong></h4>
@@ -35,7 +35,7 @@ class MassagePage extends React.Component {
                 }
                 else {
                     return (
-                    <div className="row">
+                        <div className="row">
                             <div className="col-xs-12 col-sm-offset-1 col-sm-4">
                                 <h4><strong>{massage_details.title}</strong></h4>
                                 <p>{massage_details.description}</p>
@@ -48,33 +48,29 @@ class MassagePage extends React.Component {
         return (
             <div className="mdl-grid dark-color bg-color">
                 <div className="ribbon bg-image-landing">
-                    <div className="container m-t-30 m-b-30">
-                        <div className="row m-b-30">
+                    <div className="container m-t-30 m-b-5-em">
+                        <div className="row m-b-5-em">
                             <div className="col-xs-12">
                                 <h1 className="text-center color-white">{massageType.header}</h1>
                                 <hr />
                                 <Admin addAction={"Massage/" + massageType.type} />
-                                <div className="col-xs-12 m-b-30">
+                                <div className="col-xs-12 m-b-5-em">
                                     <div className="mdl-card mdl-shadow--4dp p-20 text-center">
                                         <h3>{massageType.description}</h3>
                                         <h3>Venue: {massageType.venue}</h3>
                                     </div>
                                 </div>
                                 {massageType.massages.map(massage =>
-                                    <div className="col-xs-12 m-b-30">
+                                    <div className="col-xs-12 m-b-5-em">
                                         <div className="">
-                                        <Admin editAction={"Massage/" + massageType.type + "/" + massage.id} />
+                                            <Admin editAction={"Massage/" + massageType.type + "/" + massage.id} />
                                         </div>
-                                        <div className="mdl-card mdl-shadow--4dp p-t-1-em p-b-3-em">
-                                            <div className="row p-t-1-em">
-                                                <div className="col-xs-12 p-t-1-em">
-                                                    {displayIcon(massage.icon, massage.iconWidth, massage.iconHeight)}
-                                                    <h3 className="text-center"><strong>{massage.title}</strong></h3>
-                                                    <hr width="50%" className="center-block" />
-                                                    <p className="text-center">{massage.cost}</p>
-                                                </div>
-                                            </div>
-                                            <p className="text-center">{massage.session_time}</p>
+                                        <div className="mdl-card mdl-shadow--4dp p-b-3-em allow-overflow">
+                                            {displayIcon(massage.icon, massage.iconWidth, massage.iconHeight)}
+                                            <h3 className="p-t-1-em text-center"><strong>{massage.title}</strong></h3>
+                                            <hr width="50%" className="center-block" />
+                                            <h4 className="m-0 text-center"><strong>{massage.session_time}</strong></h4>
+                                            <h4 className="m-0 text-center"><strong>{massage.cost}</strong></h4>
                                             <div className="row">
                                                 <div className="col-xs-12 col-sm-offset-1 col-sm-10">
                                                     {massage.massage_details.map(massage_details =>
