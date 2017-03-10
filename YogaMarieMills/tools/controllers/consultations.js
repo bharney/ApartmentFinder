@@ -11,7 +11,7 @@ let consultationRoutes = function () {
             let consultation = (req.body);
             const sqlInsertConsultation = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlInsertConsultation);
-                request.input('type', sql.VarChar, consultation.type);
+                request.input('type', sql.VarChar, 'diet');
                 request.input('title', sql.VarChar, consultation.title);
                 request.input('session_time', sql.VarChar, consultation.session_time);
                 request.input('consultation', sql.VarChar, consultation.consultation);
@@ -35,6 +35,10 @@ let consultationRoutes = function () {
                 request.input('consultation', sql.VarChar, consultation.consultation);
                 request.input('consultation_desc', sql.VarChar, consultation.consultation_desc);
                 request.input('cost', sql.VarChar, consultation.cost);
+                request.input('venue', sql.VarChar, consultation.venue);
+                request.input('short', sql.VarChar, consultation.short);
+                request.input('description', sql.VarChar, consultation.description);
+                request.input('type', sql.VarChar, 'diet');
                 request.query(
                     `UPDATE Consultations 
                      SET title = @title
@@ -42,7 +46,14 @@ let consultationRoutes = function () {
                      , short = @consultation
                      , description = @consultation_desc
                      , cost = @cost
-                     WHERE id = @id;`
+                     WHERE id = @id;
+
+                     UPDATE Headers 
+                     SET venue = @venue
+                     , short = @short
+                     , description = @description
+                     FROM Headers
+                     WHERE type = @type;`
                 ).then(res.status(201).send(consultation)).catch(function (err) {
                     console.log("update Consultations: " + err);
                 });
@@ -74,7 +85,12 @@ let consultationRoutes = function () {
                     ,C.title AS title
                     ,C.short AS consultation
                     ,C.description AS consultation_desc
-                    ,C.cost AS cost
+                    ,CASE WHEN ISNUMERIC(C.cost) = 1 
+                                 THEN FORMAT(TRY_PARSE(C.cost AS decimal), 'C', 'de-de') 
+                                 ELSE C.cost END AS cost
+                    ,C.icon AS icon
+                    ,C.iconHeight AS iconHeight
+                    ,C.iconWidth AS iconWidth
                     FROM Headers H
                     JOIN Consultations C
                     ON H.type = C.type`
@@ -87,7 +103,10 @@ let consultationRoutes = function () {
                                 title: recordset[consultationProp].title,
                                 consultation: recordset[consultationProp].consultation,
                                 consultation_desc: recordset[consultationProp].consultation_desc,
-                                cost: recordset[consultationProp].cost
+                                cost: recordset[consultationProp].cost,
+                                icon: recordset[consultationProp].icon,
+                                iconWidth: recordset[consultationProp].iconWidth,
+                                iconHeight: recordset[consultationProp].iconHeight
                             });
                         }
                     }

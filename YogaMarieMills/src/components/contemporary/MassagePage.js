@@ -48,18 +48,13 @@ class MassagePage extends React.Component {
         return (
             <div className="mdl-grid dark-color bg-color">
                 <div className="ribbon bg-image-landing">
-                    <div className="container m-t-30 m-b-5-em">
+                    <div className="container m-b-5-em">
                         <div className="row m-b-5-em">
                             <div className="col-xs-12">
-                                <h1 className="text-center color-white">{massageType.header}</h1>
-                                <hr />
+                                <h1 className="text-center color-white m-0">{massageType.header}</h1>
+                                <h3 className="text-center color-white m-0 m-b-2-em">{massageType.description}
+                                    <br/>Venue: {massageType.venue}</h3>
                                 <Admin addAction={"Massage/" + massageType.type} />
-                                <div className="col-xs-12 m-b-5-em">
-                                    <div className="mdl-card mdl-shadow--4dp p-20 text-center">
-                                        <h3>{massageType.description}</h3>
-                                        <h3>Venue: {massageType.venue}</h3>
-                                    </div>
-                                </div>
                                 {massageType.massages.map(massage =>
                                     <div className="col-xs-12 m-b-5-em">
                                         <div>
