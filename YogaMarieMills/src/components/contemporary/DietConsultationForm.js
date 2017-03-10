@@ -36,45 +36,38 @@ const plugins = [inlineToolbarPlugin];
 
 const { InlineToolbar } = inlineToolbarPlugin;
 
-const DietConsultationForm = ({ updateDescriptionState, updateTitleState, updateDietConsultationState, removeRow, saveDietConsultation, dietConsultation, errors, saving, deleteDietConsultation, onChange, editorState, ref, focus }) => {
+const DietConsultationForm = ({ updateDescriptionState, updateTitleState, updateDietConsultationState, addRow, removeRow, saveDietConsultation, dietConsultation, errors, saving, deleteDietConsultation, onChange, editorState, ref, focus }) => {
 
   return (
     <form>
-      <div className="mdl-grid dark-color">
-        <div className="ribbon bg-image-landing">
-          <div className="container-fluid">
-            <div className="row m-t-30 m-b-30 text-center">
-              <div className="col-xs-12 col-sm-offset-1 col-sm-10 m-b-30">
-                <h1 className="color-white">Aryuvedic Diet Consultation</h1>
-                <h3 className="color-white">{dietConsultation.short}</h3>
-                <div className="mdl-card mdl-shadow--4dp p-2-em">
-                  <h3>Venue: {dietConsultation.venue}</h3>
-                  <div id="editor" className="editor" onClick={focus}>
-                    <p>
-                      <Editor
-                        editorState={editorState}
-                        onChange={onChange}
-                        ref={ref}
-                        plugins={plugins}
-                      />
-                      <InlineToolbar />
-                    </p>
-                  </div>
-                  <ConsultationDetailsForm updateDescriptionState={updateDescriptionState}
-                    updateTitleState={updateTitleState}
-                    updateDietConsultationState={updateDietConsultationState}
-                    removeRow={removeRow}
-                    saveDietConsultation={saveDietConsultation}
-                    dietConsultation={dietConsultation}
-                    errors={errors}
-                    saving={saving}
-                    deleteDietConsultationdietConsultation={dietConsultation} />
-                </div>
-              </div>
-            </div>
-          </div>
+      <h1 className="color-white">Aryuvedic Diet Consultation</h1>
+      <h3 className="color-white">{dietConsultation.short}</h3>
+      <div className="mdl-card mdl-shadow--4dp p-2-em">
+        <h3>Venue: {dietConsultation.venue}</h3>
+        <div id="editor" className="editor" onClick={focus}>
+          <p>
+            <Editor
+              editorState={editorState}
+              onChange={onChange}
+              ref={ref}
+              plugins={plugins}
+            />
+            <InlineToolbar />
+          </p>
         </div>
+        <ConsultationDetailsForm updateDescriptionState={updateDescriptionState}
+          updateTitleState={updateTitleState}
+          updateDietConsultationState={updateDietConsultationState}
+          removeRow={removeRow}
+          saveDietConsultation={saveDietConsultation}
+          dietConsultation={dietConsultation}
+          errors={errors}
+          saving={saving}
+          deleteDietConsultationdietConsultation={dietConsultation} />
       </div>
+      <Link className="text-right" to="" onClick={addRow} >
+        <button type="button" className="btn btn-success btn-circle-lg" title="Add Row"><i className="glyphicon glyphicon-plus"></i></button>
+      </Link>
     </form>
   );
 };

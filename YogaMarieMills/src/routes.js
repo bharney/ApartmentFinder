@@ -17,6 +17,7 @@ import ManageClassTypePage from './components/yogathurles/ManageClassTypePage';
 import ManageCostPage from './components/cost/ManageCostPage';
 import CostsPage from './components/cost/CostsPage';
 import DietConsultationPage from './components/contemporary/DietConsultationPage';
+import ManageDietConsultationPage from './components/contemporary/ManageDietConsultationPage';
 import MassagePage from './components/contemporary/MassagePage';
 import ManageMassagePage from './components/contemporary/ManageMassagePage';
 import ManageEventPage from './components/events/ManageEventPage';
@@ -41,6 +42,7 @@ export default (
         <Route path="Massage/:type" component={ManageMassagePage} />
         <Route path="Ayurveda/Massage/:id" component={MassagePage} />
         <Route path="Ayurveda/DietConsultation" component={DietConsultationPage} />
+        <Route path="DietConsultation/:id" component={ManageDietConsultationPage} />
         <Route path="Ayurveda/Testimonials" component={TestimonialPage} />
         <Route path="Testimonials/:id" component={ManageTestimonialPage} />
         <Route path="Testimonials" component={ManageTestimonialPage} />

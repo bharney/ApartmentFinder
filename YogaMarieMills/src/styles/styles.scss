@@ -133,6 +133,10 @@ body {
     background-color: transparent;
 }
 
+.bg-color-light-orange {
+    background: #FFE57F;
+}
+
 .bg-color-black {
     background: #000;
 }
@@ -720,6 +724,13 @@ section.section {
     visibility: hidden;
 }
 
+/* ========================================
+    Consultations
+========================================= */
+
+.mdl-pos-rel {
+    position: relative;
+}
 
 /* ========================================
 Editor
@@ -1200,6 +1211,10 @@ padding-bottom: 0.5em;
 }
 
 /* top */
+.m-t--60 {
+     margin-top: -60px;
+}
+
 .m-t--50 {
      margin-top: -50px;
 }

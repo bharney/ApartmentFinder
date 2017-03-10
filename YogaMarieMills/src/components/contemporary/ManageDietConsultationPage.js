@@ -6,6 +6,8 @@ import * as dietConsultationActions from '../../actions/dietConsultationActions'
 import DietConsultationForm from './DietConsultationForm';
 import Admin from '../common/Admin';
 import TextInput from '../common/TextInput';
+import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
+import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
 
 class ManageDietConsultationPage extends React.Component {
   constructor(props, context) {
@@ -94,8 +96,7 @@ class ManageDietConsultationPage extends React.Component {
   saveDietConsultation(event) {
     event.preventDefault();
     let dietConsultation = this.state.dietConsultation;
-    if (!dietConsultation.icon)
-    {
+    if (!dietConsultation.icon) {
       dietConsultation.icon = 'whitearomaoil.png';
       dietConsultation.iconHeight = '3em';
       dietConsultation.iconWidth = '1.8em';
@@ -126,34 +127,30 @@ class ManageDietConsultationPage extends React.Component {
 
   render() {
     return (
-      <div className="mdl-grid dark-color bg-color">
-        <div className="ribbon bg-image-landing b-border">
+      <div className="mdl-grid dark-color">
+        <div className="ribbon bg-image-landing">
           <div className="container-fluid">
-            <div className="row m-b-30">
+            <div className="row m-t-30 m-b-30 text-center">
               <div className="col-xs-12 col-sm-offset-1 col-sm-10 m-b-30">
                 <Admin saveAction={this.saveDietConsultation} deleteAction={this.deleteDietConsultation} />
                 <br />
                 <br />
-                <div className="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6 m-b-30">
-                  <div className="mdl-card mdl-shadow--4dp p-t-05-em p-l-1-em p-r-1-em p-b-05-em">
-                    <DietConsultationForm
-                      updateTitleState={this.updateTitleState}
-                      updateDescriptionState={this.updateDescriptionState}
-                      updateDietConsultationState={this.updateDietConsultationState}
-                      removeRow={this.removeRow}
-                      dietConsultation={this.state.dietConsultation}
-                      errors={this.state.errors}
-                      saving={this.state.saving}
-                      onChange={this.onChange}
-                      editorState={this.state.editorState}
-                      ref="editor"
-                      focus={focus}
-                      />
-                      <Link className="text-right" to="" onClick={this.addRow} >
-                        <button type="button" className="btn btn-success btn-circle-lg" title="Add Row"><i className="glyphicon glyphicon-plus"></i></button>
-                      </Link>
-                  </div>
-                </div>
+
+                <DietConsultationForm
+                  updateTitleState={this.updateTitleState}
+                  updateDescriptionState={this.updateDescriptionState}
+                  updateDietConsultationState={this.updateDietConsultationState}
+                  removeRow={this.removeRow}
+                  addRow={this.addRow}
+                  dietConsultation={this.state.dietConsultation}
+                  errors={this.state.errors}
+                  saving={this.state.saving}
+                  onChange={this.onChange}
+                  editorState={this.state.editorState}
+                  ref="editor"
+                  focus={focus}
+                />
+
               </div>
             </div>
           </div>
@@ -206,38 +203,41 @@ const TokenSpan = (props) => {
   );
 };
 
-function getDietConsultationByTypeAndId(dietConsultationTypes, type, id) {
-    const dietConsultationType = dietConsultationTypes.filter(dietConsultationType => dietConsultationType.type == type);
-    const dietConsultation = dietConsultationType[0].dietConsultations.filter(dietConsultation => dietConsultation.id == id);
-      if (dietConsultation.length) {
-        return dietConsultation[0];
-      }
+function getDietConsultationById(dietConsultationTypes, id) {
+  const dietConsultation = dietConsultationType[0].dietConsultations.filter(dietConsultation => dietConsultation.id == id);
+  if (dietConsultation.length) {
+    return dietConsultation[0];
+  }
 
-    return null;
+  return null;
 }
 
 function mapStateToProps(state, ownProps) {
-  const dietConsultationTypeId = ownProps.params.type;
   const dietConsultationId = ownProps.params.id;
 
-  let dietConsultation = { 
-    id: '', 
-    type: dietConsultationTypeId,
-    session_time: '', 
-    title: '', 
-    description: '', 
-    cost: '', 
-    icon: 'whitearomaoil.png', 
-    iconHeight: '3em', 
-    iconWidth: '1.8em', 
-    dietConsultation_details: [{ 
-      id: '', 
-      title: '', 
-      description: '' }] 
-    };
+  let dietConsultation = {
+    id: '',
+    type: '',
+    header: '',
+    short: '',
+    description: '',
+    venue: '',
+    consultationDetails: [{
+      id: dietConsultationId,
+      type: 'diet',
+      title: '',
+      consultation: '',
+      consultation_desc: '',
+      session_time: '',
+      cost: '',
+      icon: 'whitearomaoil.png',
+      iconHeight: '3em',
+      iconWidth: '1.8em',
+    }]
+  };
 
-  if (dietConsultationTypeId && dietConsultationId && state.dietConsultationTypes.length > 0) {
-      dietConsultation = getDietConsultationByTypeAndId(state.dietConsultationTypes, dietConsultationTypeId, dietConsultationId);
+  if (dietConsultationId && state.dietConsultationTypes.length > 0) {
+    dietConsultation = getDietConsultationByTypeAndId(state.dietConsultationTypes, dietConsultationId);
   }
 
   return {

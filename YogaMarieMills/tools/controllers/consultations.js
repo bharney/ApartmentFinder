@@ -99,6 +99,8 @@ let consultationRoutes = function () {
                     for (let consultationProp in recordset) {
                         if (recordset.hasOwnProperty(consultationProp)) {
                             consultationDetails.push({
+                                id:  recordset[consultationProp].id,
+                                type:  recordset[consultationProp].type,
                                 session_time: recordset[consultationProp].session_time,
                                 title: recordset[consultationProp].title,
                                 consultation: recordset[consultationProp].consultation,

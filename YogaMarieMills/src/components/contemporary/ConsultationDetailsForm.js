@@ -5,7 +5,7 @@ import TextAreaInput from '../common/TextAreaInput';
 import RemoveRowButton from '../common/RemoveRowButton';
 import Admin from '../common/Admin';
 
-const DietConsultationForm = ({updateTitleState, updateCostState, updateSessionTimeState, updateShortState, updateShortState, updateConsultationDescState, removeRow, saveDietConsultation, dietConsultation, errors, saving, deleteDietConsultation }) => {
+const ConsultationDetailsForm = ({updateTitleState, updateCostState, updateSessionTimeState, updateShortState, updateConsultationDescState, removeRow, saveDietConsultation, dietConsultation, errors, saving, deleteDietConsultation }) => {
 
   let displayIcon = function (icon, iconWidth, iconHeight) {
     let requireImg = icon ? require(`../../images/${icon}`) : ""
@@ -67,7 +67,7 @@ const DietConsultationForm = ({updateTitleState, updateCostState, updateSessionT
   );
 };
 
-DietConsultationForm.propTypes = {
+ConsultationDetailsForm.propTypes = {
   dietConsultation: React.PropTypes.object.isRequired,
   updateDietConsultationState: React.PropTypes.object.isRequired,
   saving: React.PropTypes.object.isRequired,
@@ -75,4 +75,4 @@ DietConsultationForm.propTypes = {
   errors: React.PropTypes.object
 };
 
-export default DietConsultationForm;
+export default ConsultationDetailsForm;
