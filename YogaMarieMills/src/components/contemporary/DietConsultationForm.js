@@ -40,10 +40,18 @@ const DietConsultationForm = ({ updateDescriptionState, updateTitleState, update
 
   return (
     <form>
-      <h1 className="color-white">Aryuvedic Diet Consultation</h1>
-      <h3 className="color-white">{dietConsultation.short}</h3>
+      <h1 className="color-white text-center">Aryuvedic Diet Consultation</h1>
+      <TextInput
+        name="short"
+        label="Title"
+        value={dietConsultation.short}
+        onChange={updateDietConsultationState} />
       <div className="mdl-card mdl-shadow--4dp p-2-em">
-        <h3>Venue: {dietConsultation.venue}</h3>
+          <TextInput
+            name="venue"
+            label="Venue"
+            value={dietConsultation.venue}
+            onChange={updateDietConsultationState} />
         <div id="editor" className="editor" onClick={focus}>
           <p>
             <Editor
@@ -64,10 +72,11 @@ const DietConsultationForm = ({ updateDescriptionState, updateTitleState, update
           errors={errors}
           saving={saving}
           deleteDietConsultationdietConsultation={dietConsultation} />
+        <Link className="text-right" to="" onClick={addRow} >
+          <button type="button" className="btn btn-success btn-circle-lg" title="Add Row"><i className="glyphicon glyphicon-plus"></i></button>
+        </Link>
       </div>
-      <Link className="text-right" to="" onClick={addRow} >
-        <button type="button" className="btn btn-success btn-circle-lg" title="Add Row"><i className="glyphicon glyphicon-plus"></i></button>
-      </Link>
+
     </form>
   );
 };

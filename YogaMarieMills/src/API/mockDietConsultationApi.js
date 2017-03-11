@@ -4,6 +4,7 @@ class DietConsultationApi {
       fetch('http://localhost:3000/api/consultations').then(function (response) {
         return response.json();
       }).then(function (consultations) {
+        debugger;
         resolve(Object.assign([], consultations));
       });
     });

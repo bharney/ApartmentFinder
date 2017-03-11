@@ -130,7 +130,7 @@ class ManageDietConsultationPage extends React.Component {
       <div className="mdl-grid dark-color">
         <div className="ribbon bg-image-landing">
           <div className="container-fluid">
-            <div className="row m-t-30 m-b-30 text-center">
+            <div className="row m-t-30 m-b-30">
               <div className="col-xs-12 col-sm-offset-1 col-sm-10 m-b-30">
                 <Admin saveAction={this.saveDietConsultation} deleteAction={this.deleteDietConsultation} />
                 <br />
@@ -150,7 +150,6 @@ class ManageDietConsultationPage extends React.Component {
                   ref="editor"
                   focus={focus}
                 />
-
               </div>
             </div>
           </div>
@@ -203,8 +202,9 @@ const TokenSpan = (props) => {
   );
 };
 
-function getDietConsultationById(dietConsultationTypes, id) {
-  const dietConsultation = dietConsultationType[0].dietConsultations.filter(dietConsultation => dietConsultation.id == id);
+function getDietConsultationById(dietConsultations, type) {
+  debugger;
+  const dietConsultation = dietConsultations.filter(consultationDetails => consultationDetails.type == type);
   if (dietConsultation.length) {
     return dietConsultation[0];
   }
@@ -213,7 +213,7 @@ function getDietConsultationById(dietConsultationTypes, id) {
 }
 
 function mapStateToProps(state, ownProps) {
-  const dietConsultationId = ownProps.params.id;
+  const dietConsultationType = ownProps.params.id;
 
   let dietConsultation = {
     id: '',
@@ -223,8 +223,8 @@ function mapStateToProps(state, ownProps) {
     description: '',
     venue: '',
     consultationDetails: [{
-      id: dietConsultationId,
-      type: 'diet',
+      id: '',
+      type: '',
       title: '',
       consultation: '',
       consultation_desc: '',
@@ -235,9 +235,10 @@ function mapStateToProps(state, ownProps) {
       iconWidth: '1.8em',
     }]
   };
-
-  if (dietConsultationId && state.dietConsultationTypes.length > 0) {
-    dietConsultation = getDietConsultationByTypeAndId(state.dietConsultationTypes, dietConsultationId);
+debugger;
+  if (dietConsultationType && state.dietConsultations.header) {
+    debugger;
+    dietConsultation = state.dietConsultations;
   }
 
   return {
