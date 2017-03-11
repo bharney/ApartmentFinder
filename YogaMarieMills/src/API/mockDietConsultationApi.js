@@ -4,13 +4,12 @@ class DietConsultationApi {
       fetch('http://localhost:3000/api/consultations').then(function (response) {
         return response.json();
       }).then(function (consultations) {
-        debugger;
         resolve(Object.assign([], consultations));
       });
     });
   }
 
-  static saveCost(consultation) {
+  static saveDietConsultation(consultation) {
     consultation = Object.assign({}, consultation);
     return new Promise((resolve, reject) => {
       if (consultation.id) {
@@ -47,7 +46,7 @@ class DietConsultationApi {
     });
   }
 
-  static deleteCost(consultationId) {
+  static deleteDietConsultation(consultationId) {
     return new Promise((resolve, reject) => {
       if (confirm("Are you sure you want to delete this consultation forever?")) {
         if (consultationId) {

@@ -5,7 +5,7 @@ import TextAreaInput from '../common/TextAreaInput';
 import RemoveRowButton from '../common/RemoveRowButton';
 import Admin from '../common/Admin';
 
-const ConsultationDetailsForm = ({updateTitleState, updateCostState, updateSessionTimeState, updateShortState, updateConsultationDescState, removeRow, saveDietConsultation, dietConsultation, errors, saving, deleteDietConsultation }) => {
+const ConsultationDetailsForm = ({ updateTitleState, updateCostState, updateSessionTimeState, updateShortState, updateConsultationDescState, removeRow, saveDietConsultation, dietConsultation, errors, saving, deleteDietConsultation }) => {
 
   let displayIcon = function (icon, iconWidth, iconHeight) {
     let requireImg = icon ? require(`../../images/${icon}`) : ""
@@ -24,6 +24,9 @@ const ConsultationDetailsForm = ({updateTitleState, updateCostState, updateSessi
           <div className="col-xs-12 col-sm-6">
             <div className="mdl-card mdl-shadow--8dp bright-bg-color m-t-30 p-1-em allow-overflow">
               {displayIcon(consultationDetails.icon, consultationDetails.iconWidth, consultationDetails.iconHeight)}
+              <RemoveRowButton
+                name={dietConsultation.consultationDetails.findIndex(i => i.id == consultationDetails.id)}
+                onClick={removeRow}/>
               <TextInput
                 className="p-t-0 p-b-0"
                 name={dietConsultation.consultationDetails.findIndex(i => i.id == consultationDetails.id)}
@@ -50,7 +53,7 @@ const ConsultationDetailsForm = ({updateTitleState, updateCostState, updateSessi
                 name={dietConsultation.consultationDetails.findIndex(i => i.id == consultationDetails.id)}
                 label="Short Description"
                 placeholder="Short Description"
-                value={consultationDetails.short}
+                value={consultationDetails.consultation}
                 onChange={updateShortState} />
               <TextAreaInput
                 className="p-t-0 p-b-0"

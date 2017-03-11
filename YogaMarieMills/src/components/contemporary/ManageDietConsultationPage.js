@@ -33,8 +33,11 @@ class ManageDietConsultationPage extends React.Component {
       saving: false
     };
     this.updateDietConsultationState = this.updateDietConsultationState.bind(this);
-    this.updateDescriptionState = this.updateDescriptionState.bind(this);
     this.updateTitleState = this.updateTitleState.bind(this);
+    this.updateCostState = this.updateCostState.bind(this);
+    this.updateSessionTimeState = this.updateSessionTimeState.bind(this);
+    this.updateShortState = this.updateShortState.bind(this);
+    this.updateConsultationDescState = this.updateConsultationDescState.bind(this);
     this.saveDietConsultation = this.saveDietConsultation.bind(this);
     this.deleteDietConsultation = this.deleteDietConsultation.bind(this);
     this.removeRow = this.removeRow.bind(this);
@@ -75,14 +78,32 @@ class ManageDietConsultationPage extends React.Component {
   updateTitleState(event) {
     const field = event.target.name;
     let dietConsultation = this.state.dietConsultation;
-    dietConsultation.dietConsultation_details[parseInt(field)].title = event.target.value;
+    dietConsultation.consultationDetails[parseInt(field)].title = event.target.value;
     return this.setState({ dietConsultation });
   }
 
-  updateDescriptionState(event) {
+  updateCostState(event) {
     const field = event.target.name;
     let dietConsultation = this.state.dietConsultation;
-    dietConsultation.dietConsultation_details[parseInt(field)].description = event.target.value;
+    dietConsultation.consultationDetails[parseInt(field)].cost = event.target.value;
+    return this.setState({ dietConsultation });
+  }
+  updateSessionTimeState(event) {
+    const field = event.target.name;
+    let dietConsultation = this.state.dietConsultation;
+    dietConsultation.consultationDetails[parseInt(field)].session_time = event.target.value;
+    return this.setState({ dietConsultation });
+  }
+  updateShortState(event) {
+    const field = event.target.name;
+    let dietConsultation = this.state.dietConsultation;
+    dietConsultation.consultationDetails[parseInt(field)].consultation = event.target.value;
+    return this.setState({ dietConsultation });
+  }
+  updateConsultationDescState(event) {
+    const field = event.target.name;
+    let dietConsultation = this.state.dietConsultation;
+    dietConsultation.consultationDetails[parseInt(field)].consultation_desc = event.target.value;
     return this.setState({ dietConsultation });
   }
 
@@ -114,14 +135,25 @@ class ManageDietConsultationPage extends React.Component {
 
   addRow() {
     let dietConsultation = this.state.dietConsultation;
-    dietConsultation.dietConsultation_details.push({ id: dietConsultation.dietConsultation_details.length, session_time: '', class: '' })
+    dietConsultation.consultationDetails.push({
+      id: dietConsultation.consultationDetails.length,
+      type: 'diet',
+      title: '',
+      consultation: '',
+      consultation_desc: '',
+      session_time: '',
+      cost: '',
+      icon: 'whitearomaoil.png',
+      iconHeight: '3em',
+      iconWidth: '1.8em',
+    })
     this.setState({ dietConsultation });
   }
 
   removeRow(event) {
     const rowNumber = event.currentTarget.name;
     let dietConsultation = this.state.dietConsultation;
-    dietConsultation.dietConsultation_details.splice(parseInt(rowNumber), 1)
+    dietConsultation.consultationDetails.splice(parseInt(rowNumber), 1)
     this.setState({ dietConsultation });
   }
 
@@ -138,7 +170,10 @@ class ManageDietConsultationPage extends React.Component {
 
                 <DietConsultationForm
                   updateTitleState={this.updateTitleState}
-                  updateDescriptionState={this.updateDescriptionState}
+                  updateCostState={this.updateCostState}
+                  updateSessionTimeState={this.updateSessionTimeState}
+                  updateShortState={this.updateShortState}
+                  updateConsultationDescState={this.updateConsultationDescState}
                   updateDietConsultationState={this.updateDietConsultationState}
                   removeRow={this.removeRow}
                   addRow={this.addRow}
@@ -203,7 +238,6 @@ const TokenSpan = (props) => {
 };
 
 function mapStateToProps(state, ownProps) {
-  const dietConsultationType = ownProps.params.id;
 
   let dietConsultation = {
     id: '',
@@ -225,8 +259,8 @@ function mapStateToProps(state, ownProps) {
       iconWidth: '1.8em',
     }]
   };
-  
-  if (dietConsultationType && state.dietConsultations.header) {
+
+  if (state.dietConsultations.header) {
     dietConsultation = state.dietConsultations;
   }
 

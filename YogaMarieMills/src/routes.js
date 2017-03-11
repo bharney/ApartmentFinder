@@ -42,7 +42,7 @@ export default (
         <Route path="Massage/:type" component={ManageMassagePage} />
         <Route path="Ayurveda/Massage/:id" component={MassagePage} />
         <Route path="Ayurveda/DietConsultation" component={DietConsultationPage} />
-        <Route path="DietConsultation/:id" component={ManageDietConsultationPage} />
+        <Route path="DietConsultation" component={ManageDietConsultationPage} />
         <Route path="Ayurveda/Testimonials" component={TestimonialPage} />
         <Route path="Testimonials/:id" component={ManageTestimonialPage} />
         <Route path="Testimonials" component={ManageTestimonialPage} />

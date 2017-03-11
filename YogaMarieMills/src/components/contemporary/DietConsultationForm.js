@@ -36,7 +36,7 @@ const plugins = [inlineToolbarPlugin];
 
 const { InlineToolbar } = inlineToolbarPlugin;
 
-const DietConsultationForm = ({ updateDescriptionState, updateTitleState, updateDietConsultationState, addRow, removeRow, saveDietConsultation, dietConsultation, errors, saving, deleteDietConsultation, onChange, editorState, ref, focus }) => {
+const DietConsultationForm = ({ updateTitleState, updateCostState, updateSessionTimeState, updateShortState, updateConsultationDescState, updateDietConsultationState, addRow, removeRow, saveDietConsultation, dietConsultation, errors, saving, deleteDietConsultation, onChange, editorState, ref, focus }) => {
 
   return (
     <form>
@@ -63,9 +63,13 @@ const DietConsultationForm = ({ updateDescriptionState, updateTitleState, update
             <InlineToolbar />
           </p>
         </div>
-        <ConsultationDetailsForm updateDescriptionState={updateDescriptionState}
+        <ConsultationDetailsForm 
+          removeRow={removeRow}
           updateTitleState={updateTitleState}
-          updateDietConsultationState={updateDietConsultationState}
+          updateCostState={updateCostState}
+          updateSessionTimeState={updateSessionTimeState}
+          updateShortState={updateShortState}
+          updateConsultationDescState={updateConsultationDescState}
           removeRow={removeRow}
           saveDietConsultation={saveDietConsultation}
           dietConsultation={dietConsultation}
