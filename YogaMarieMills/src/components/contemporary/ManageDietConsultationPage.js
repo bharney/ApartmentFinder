@@ -202,16 +202,6 @@ const TokenSpan = (props) => {
   );
 };
 
-function getDietConsultationById(dietConsultations, type) {
-  debugger;
-  const dietConsultation = dietConsultations.filter(consultationDetails => consultationDetails.type == type);
-  if (dietConsultation.length) {
-    return dietConsultation[0];
-  }
-
-  return null;
-}
-
 function mapStateToProps(state, ownProps) {
   const dietConsultationType = ownProps.params.id;
 
@@ -235,9 +225,8 @@ function mapStateToProps(state, ownProps) {
       iconWidth: '1.8em',
     }]
   };
-debugger;
+  
   if (dietConsultationType && state.dietConsultations.header) {
-    debugger;
     dietConsultation = state.dietConsultations;
   }
 

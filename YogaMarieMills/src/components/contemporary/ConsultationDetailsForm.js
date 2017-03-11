@@ -29,35 +29,36 @@ const ConsultationDetailsForm = ({updateTitleState, updateCostState, updateSessi
                 name={dietConsultation.consultationDetails.findIndex(i => i.id == consultationDetails.id)}
                 label="Title"
                 placeholder="Title"
-                value={dietConsultation.title}
+                value={consultationDetails.title}
                 onChange={updateTitleState} />
               <TextInput
                 className="p-t-0 p-b-0"
                 name={dietConsultation.consultationDetails.findIndex(i => i.id == consultationDetails.id)}
                 label="Cost"
                 placeholder="Cost"
-                value={dietConsultation.cost}
+                value={consultationDetails.cost}
                 onChange={updateCostState} />
               <TextInput
                 className="p-t-0 p-b-0"
                 name={dietConsultation.consultationDetails.findIndex(i => i.id == consultationDetails.id)}
                 label="Consultation Duration"
                 placeholder="Consultation Duration"
-                value={dietConsultation.session_time}
+                value={consultationDetails.session_time}
                 onChange={updateSessionTimeState} />
               <TextInput
                 className="p-t-0 p-b-0"
                 name={dietConsultation.consultationDetails.findIndex(i => i.id == consultationDetails.id)}
                 label="Short Description"
                 placeholder="Short Description"
-                value={dietConsultation.short}
+                value={consultationDetails.short}
                 onChange={updateShortState} />
               <TextAreaInput
                 className="p-t-0 p-b-0"
                 name={dietConsultation.consultationDetails.findIndex(i => i.id == consultationDetails.id)}
                 label="Consultation Description"
                 placeholder="Consultation Description"
-                value={dietConsultation.consultation_desc}
+                rows="8"
+                value={consultationDetails.consultation_desc}
                 onChange={updateConsultationDescState} />
             </div>
           </div>
