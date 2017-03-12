@@ -11,8 +11,20 @@ class DietConsultationApi {
 
   static saveDietConsultation(consultation) {
     consultation = Object.assign({}, consultation);
+    function isNewItems(obj) {
+      if (obj.id)
+        return obj
+    }
+    function isExistingItem(obj) {
+      if (!obj.id)
+        return obj
+    }
+    const updateConsulations = consultation.consultationDetails.filter(isNewItems);
+    const insertConsultations = consultation.consultationDetails.filter(isExistingItem);
     return new Promise((resolve, reject) => {
-      if (consultation.id) {
+      if (updateConsulations.length) {
+        consultation.consultationDetails = updateConsulations;
+        debugger;
         fetch('http://localhost:3000/api/consultations', {
           method: 'put',
           headers: {
@@ -27,7 +39,10 @@ class DietConsultationApi {
         }).catch(function (error) {
           console.log('Request failed', error);
         });
-      } else {
+      }
+      if (insertConsultations.length) {
+        consultation.consultationDetails = insertConsultations;
+        debugger;
         fetch('http://localhost:3000/api/consultations', {
           method: 'post',
           headers: {

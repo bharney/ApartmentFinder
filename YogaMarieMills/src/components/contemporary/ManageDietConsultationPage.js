@@ -39,7 +39,6 @@ class ManageDietConsultationPage extends React.Component {
     this.updateShortState = this.updateShortState.bind(this);
     this.updateConsultationDescState = this.updateConsultationDescState.bind(this);
     this.saveDietConsultation = this.saveDietConsultation.bind(this);
-    this.deleteDietConsultation = this.deleteDietConsultation.bind(this);
     this.removeRow = this.removeRow.bind(this);
     this.addRow = this.addRow.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -76,6 +75,7 @@ class ManageDietConsultationPage extends React.Component {
   }
 
   updateTitleState(event) {
+    debugger;
     const field = event.target.name;
     let dietConsultation = this.state.dietConsultation;
     dietConsultation.consultationDetails[parseInt(field)].title = event.target.value;
@@ -83,24 +83,31 @@ class ManageDietConsultationPage extends React.Component {
   }
 
   updateCostState(event) {
+    debugger;
     const field = event.target.name;
     let dietConsultation = this.state.dietConsultation;
     dietConsultation.consultationDetails[parseInt(field)].cost = event.target.value;
     return this.setState({ dietConsultation });
   }
+
   updateSessionTimeState(event) {
+    debugger;
     const field = event.target.name;
     let dietConsultation = this.state.dietConsultation;
     dietConsultation.consultationDetails[parseInt(field)].session_time = event.target.value;
     return this.setState({ dietConsultation });
   }
+
   updateShortState(event) {
+    debugger;
     const field = event.target.name;
     let dietConsultation = this.state.dietConsultation;
     dietConsultation.consultationDetails[parseInt(field)].consultation = event.target.value;
     return this.setState({ dietConsultation });
   }
+
   updateConsultationDescState(event) {
+    debugger;
     const field = event.target.name;
     let dietConsultation = this.state.dietConsultation;
     dietConsultation.consultationDetails[parseInt(field)].consultation_desc = event.target.value;
@@ -118,39 +125,36 @@ class ManageDietConsultationPage extends React.Component {
     event.preventDefault();
     let dietConsultation = this.state.dietConsultation;
     if (!dietConsultation.icon) {
-      dietConsultation.icon = 'whitearomaoil.png';
+      dietConsultation.icon = 'whitehop.png';
       dietConsultation.iconHeight = '3em';
-      dietConsultation.iconWidth = '1.8em';
+      dietConsultation.iconWidth = '3em';
     }
+    dietConsultation.description = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
     this.setState({ dietConsultation });
     this.props.actions.saveDietConsultation(this.state.dietConsultation);
-    this.context.router.push('/Ayurveda/DietConsultation' + dietConsultation.type);
-  }
-
-  deleteDietConsultation(event) {
-    this.props.actions.deleteDietConsultation(this.state.dietConsultation.id);
-    this.props.actions.loadDietConsultation();
-    this.context.router.push('/Ayurveda/DietConsultation/' + this.state.dietConsultation.type);
+    this.context.router.push('/Ayurveda/DietConsultation');
   }
 
   addRow() {
+    debugger;
     let dietConsultation = this.state.dietConsultation;
     dietConsultation.consultationDetails.push({
-      id: dietConsultation.consultationDetails.length,
+      id: Math.max.apply(Math, dietConsultation.consultationDetails.map(i => i.id)) + 1,
       type: 'diet',
       title: '',
       consultation: '',
       consultation_desc: '',
       session_time: '',
       cost: '',
-      icon: 'whitearomaoil.png',
+      icon: 'whitehop.png',
       iconHeight: '3em',
-      iconWidth: '1.8em',
+      iconWidth: '3em',
     })
     this.setState({ dietConsultation });
   }
 
   removeRow(event) {
+    debugger;
     const rowNumber = event.currentTarget.name;
     let dietConsultation = this.state.dietConsultation;
     dietConsultation.consultationDetails.splice(parseInt(rowNumber), 1)
@@ -164,10 +168,9 @@ class ManageDietConsultationPage extends React.Component {
           <div className="container-fluid">
             <div className="row m-t-30 m-b-30">
               <div className="col-xs-12 col-sm-offset-1 col-sm-10 m-b-30">
-                <Admin saveAction={this.saveDietConsultation} deleteAction={this.deleteDietConsultation} />
+                <Admin saveAction={this.saveDietConsultation} />
                 <br />
                 <br />
-
                 <DietConsultationForm
                   updateTitleState={this.updateTitleState}
                   updateCostState={this.updateCostState}

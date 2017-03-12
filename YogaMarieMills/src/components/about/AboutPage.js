@@ -20,7 +20,7 @@ class AboutPage extends React.Component {
     }
 
     render() {
-        const {navbar_items} = this.props;
+        const { navbar_items } = this.props;
 
         return (
             <div className="mdl-grid dark-color">
@@ -62,46 +62,24 @@ class AboutPage extends React.Component {
                                     stress relief for all ages. And also nine years using Ayurveda medicine
                                     with clients and students to find balance in these unbalancing times.</div>
                                     </h4>
+
                                 </div>
                             </div>
                         </div>
-
-
-
-                        <section>
-                            <div className="container m-t-30 m-b-30">
-                                <div className="row dark-color">
-                                    <div className="section-header">
-                                        <h2 className="section-heading text-center">Current Work</h2>
-                                    </div>
-                                    <div className="mdl-card mdl-shadow--4dp col-lg-8">
-                                        <div className="text-center p-t-40 p-b-40">
-                                            <blockquote className="bigquote">
-                                                All of life is an individual manifestation and
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-xs-12">
+                                    <div className="text-center color-white p-t-40 p-b-40">
+                                        <blockquote className="bigquote no-left-border">All of life is an individual manifestation and
                                     combination of the five elements. It really doesn't get
                                     any easier! As a wise friend of mine once said, 'If it's not fun,
                                     it's not Yoga, and if it's not simple, it's not Ayurveda.
                                                         </blockquote>
-                                            <p className="col-lg-offset-6">
-                                                Marie Mills
+                                        <p className="col-lg-offset-6">
+                                            Marie Mills
                                                     </p>
-                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </section>
-
-                        <div className="container">
-                            <div className="row dark-color row-centered">
-                                {navbar_items.map(item =>
-                                    <div className="m-t-15 m-b-15 col-xs-6 col-centered">
-                                        <div className="mdl-card mdl-shadow--4dp text-center">
-                                            <Link key={item.route} to={'/' + item.route} className="dark-color text-center"><img className="img-responsive" src={require("../../images/landing.jpg")} alt="" /></Link>
-
-                                            <h3>{item.name}</h3>
-                                        </div>
-                                    </div>
-                                )}
                             </div>
                         </div>
                         <div className="section-header">
@@ -109,27 +87,22 @@ class AboutPage extends React.Component {
                         </div>
                         <div className="container">
                             <div className="row">
-                                <div className="col-xs-offset-1 col-xs-10">
+                                <div className="col-xs-12">
                                     <div className="mdl-card p-1-em mdl-shadow--4dp">
                                         <div className="featured clearfix text-center">
                                             <div className="row dark-color">
-                                                <div className="col-xs-offset-1 col-xs-10">
-                                                    <div className="col-xs-12">
-                                                        <p>
-                                                            <br />
-                                                            <Link title="Yoga" className="schedule dark-color" to="http://yogamariemills.com/thurles-className-schedule/" target="_blank">
-                                                                Yoga
-                                                            </Link> and
-                                                            <Link title="Ayurveda massage treatments" className="ayurveda dark-color" to="http://yogamariemills.com/ayurveda-massage-treatments/" target="_blank">
-                                                                        Ayurveda's wisdom is in its simplicity
+                                                <div className="col-xs-12">
+                                                    <p>
+                                                        <br />
+                                                        <Link title="Yoga" className="schedule dark-color" to="http://yogamariemills.com/thurles-className-schedule/" target="_blank">Yoga</Link> and <Link title="Ayurveda massage treatments" className="ayurveda dark-color" to="http://yogamariemills.com/ayurveda-massage-treatments/" target="_blank">
+                                                            Ayurveda's wisdom is in its simplicity
                                                             </Link>
-                                                        </p>
-                                                        <ul className="list-unstyled">
-                                                            <li>Contact me for a Yoga className or Ayurvedic consultation or treatment</li>
-                                                            <li>Phone: 086 1778369</li>
-                                                            <li><Link to="mailto:marie@yogamariemills.com">marie@yogamariemills.com</Link></li>
-                                                        </ul>
-                                                    </div>
+                                                    </p>
+                                                    <ul className="list-unstyled">
+                                                        <li>Contact me for a Yoga className or Ayurvedic consultation or treatment</li>
+                                                        <li>Phone: 086 1778369</li>
+                                                        <li><Link to="mailto:marie@yogamariemills.com">marie@yogamariemills.com</Link></li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>

@@ -404,6 +404,10 @@ section.section {
         align-items: center;
     }
 
+.no-left-border {
+    border-left: none;
+}
+
 
 /*=========================
     Home
@@ -1151,6 +1155,10 @@ padding-bottom: 0.5em;
 
 .m-b-5-em {
     margin-bottom: 5em;
+}
+
+.m-t-2-em {
+    margin-top: 2em;
 }
 
 /*---left--*/
