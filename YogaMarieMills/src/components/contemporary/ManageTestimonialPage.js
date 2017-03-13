@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as testimonialActions from '../../actions/testimonialActions';
 import TestimonialForm from './TestimonialForm';
-import Admin from '../common/Admin';
 import TextInput from '../common/TextInput';
 import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
 import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
@@ -12,7 +11,6 @@ import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
 class ManageTestimonialPage extends React.Component {
   constructor(props, context) {
     super(props, context);
-
     const decorator = new CompositeDecorator([
       {
         strategy: getEntityStrategy('MUTABLE'),
@@ -33,13 +31,15 @@ class ManageTestimonialPage extends React.Component {
       errors: {},
       saving: false
     };
-
+    this.updateTestimonialState = this.updateTestimonialState.bind(this);
+    this.updateQuoteState = this.updateQuoteState.bind(this);
+    this.updateNameState = this.updateNameState.bind(this);
+    this.saveTestimonial = this.saveTestimonial.bind(this);
+    this.removeRow = this.removeRow.bind(this);
+    this.addRow = this.addRow.bind(this);
     this.onChange = this.onChange.bind(this);
     this.focus = this.focus.bind(this);
     this.getTextFromEntity = this.getTextFromEntity.bind(this);
-    this.saveTestimonial = this.saveTestimonial.bind(this);
-    this.deleteTestimonial = this.deleteTestimonial.bind(this);
-    this.updateTestimonialState = this.updateTestimonialState.bind(this);
   }
 
 
@@ -77,48 +77,73 @@ class ManageTestimonialPage extends React.Component {
     return this.setState({ testimonial });
   }
 
+  updateQuoteState(event) {
+    debugger;
+    const field = event.target.name;
+    let testimonial = this.state.testimonial;
+    testimonial.testimonial_details[parseInt(field)].testimonial = event.target.value;
+    return this.setState({ testimonial });
+  }
+
+  updateNameState(event) {
+    debugger;
+    const field = event.target.name;
+    let testimonial = this.state.testimonial;
+    testimonial.testimonial_details[parseInt(field)].name = event.target.value;
+    return this.setState({ testimonial });
+  }
+
   saveTestimonial(event) {
     event.preventDefault();
     let testimonial = this.state.testimonial;
-    testimonial.short = this.getTextFromEntity(convertToRaw(this.state.editorState.getCurrentContent()));
+    if (!testimonial.icon) {
+      testimonial.icon = 'whitehop.png';
+      testimonial.iconHeight = '3em';
+      testimonial.iconWidth = '3em';
+    }
     testimonial.description = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
     this.setState({ testimonial });
     this.props.actions.saveTestimonial(this.state.testimonial);
-    this.context.router.push('/YogaThurles/Testimonials');
+    this.context.router.push('/Ayurveda/Testimonial');
   }
 
-  deleteTestimonial(event) {
-    this.props.actions.deleteTestimonial(this.state.testimonial.id);
-    this.props.actions.loadTestimonial();
-    this.context.router.push('/YogaThurles/Testimonials');
+  addRow() {
+    debugger;
+    let testimonial = this.state.testimonial;
+    testimonial.testimonial_details.push({
+      id: Math.max.apply(Math, testimonial.testimonial_details.map(i => i.id)) + 1,
+      type: '',
+      testimonial: '',
+      name: '',
+    })
+    this.setState({ testimonial });
+  }
+
+  removeRow(event) {
+    debugger;
+    const rowNumber = event.currentTarget.name;
+    let testimonial = this.state.testimonial;
+    testimonial.testimonial_details.splice(parseInt(rowNumber), 1)
+    this.setState({ testimonial });
   }
 
   render() {
-    const {testimonial} = this.props;
-    
-    let testimonialImg = testimonial.image != "" ? require(`../../images/${testimonial.image}`) : ""
-
-    const testimonialImage = {
-      backgroundImage: 'url(' + testimonialImg + ')',
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center",
-      backgroundSize: "cover"
-    }
-
     return (
       <TestimonialForm
+        saveTestimonial={this.saveTestimonial} 
         updateTestimonialState={this.updateTestimonialState}
-        onChange={this.onChange}
-        saveTestimonial={this.saveTestimonial}
+        updateQuoteState={this.updateQuoteState}
+        updateNameState={this.updateNameState}
+        removeRow={this.removeRow}
+        addRow={this.addRow}
         testimonial={this.state.testimonial}
-        testimonialImage={testimonialImage}
+        errors={this.state.errors}
+        saving={this.state.saving}
+        onChange={this.onChange}
         editorState={this.state.editorState}
         ref="editor"
         focus={focus}
-        errors={this.state.errors}
-        saving={this.state.saving}
-        deleteTestimonial={this.deleteTestimonial}
-        />
+      />
     );
   }
 }
@@ -126,15 +151,12 @@ class ManageTestimonialPage extends React.Component {
 ManageTestimonialPage.propTypes = {
   testimonial: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
-  editorState: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired,
-  upload: PropTypes.object.isRequired,
-  entityKey: PropTypes.object.isRequired,
 };
 
 ManageTestimonialPage.contextTypes = {
   router: PropTypes.object
 };
+
 
 function getEntityStrategy(mutability) {
   return function (contentBlock, callback, contentState) {
@@ -169,21 +191,24 @@ const TokenSpan = (props) => {
   );
 };
 
-
-function getTestimonialById(testimonials, id) {
-  const testimonial = testimonials.filter(testimonial => testimonial.id == id);
-  if (testimonial.length) {
-    return testimonial[0];
-  }
-
-  return null;
-}
-
 function mapStateToProps(state, ownProps) {
-  const testimonialId = ownProps.params.id;
-  let testimonial = { id: '', title: '', image: '', short: '', description: '', href: '', route: '', component: '' };
-  if (testimonialId && state.testimonials.length > 0) {
-    testimonial = getTestimonialById(state.testimonials, testimonialId);
+
+  let testimonial = {
+    id: '',
+    type: '',
+    header: '',
+    short: '',
+    description: '',
+    testimonial_details: [{
+      id: '',
+      type: '',
+      testimonial: '',
+      name: '',
+    }]
+  };
+
+  if (state.testimonials.header) {
+    testimonial = state.testimonials;
   }
 
   return {
@@ -197,5 +222,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(ManageTestimonialPage);
+
+
+

@@ -9,35 +9,59 @@ let testimonialRoutes = function () {
     testimonialRouter.route('/testimonials')
         .post(function (req, res) {
             let testimonial = (req.body);
-            const sqlInsertTestimonial = new sql.Connection(dbconfig, function (err) {
-                let request = new sql.Request(sqlInsertTestimonial);
-                request.input('type', sql.VarChar, testimonial.type);
-                request.input('testimonial', sql.VarChar, testimonial.testimonial);
-                request.input('name', sql.VarChar, testimonial.name);
-                request.query(
-                    `INSERT INTO Testimonials (type, testimonial, name)
-                     VALUES (@type, @testimonial, @name)`
-                ).then(res.status(201).send(testimonial)).catch(function (err) {
-                    console.log("insert testimonial: " + err);
-                });
-            });
+            for (let prop in testimonial.testimonial_details) {
+                if (testimonial.testimonial_details.hasOwnProperty(prop)) {
+                    const sqlInsertTestimonial = new sql.Connection(dbconfig, function (err) {
+                        let request = new sql.Request(sqlInsertTestimonial);
+                        request.input('type', sql.VarChar, testimonial.type);
+                        request.input('testimonial', sql.VarChar, testimonial.testimonial);
+                        request.input('name', sql.VarChar, testimonial.name);
+                        request.query(
+                            `INSERT INTO Testimonials (type, testimonial, name)
+                             VALUES (@type, @testimonial, @name)`
+                        ).then(res.status(201).send(testimonial)).catch(function (err) {
+                            console.log("insert testimonial: " + err);
+                        });
+                    });
+                }
+            }
         })
         .put(function (req, res) {
             let testimonial = (req.body);
-            const sqlUpdateTestimonial = new sql.Connection(dbconfig, function (err) {
-                let request = new sql.Request(sqlUpdateTestimonial);
-                request.input('id', sql.Int, testimonial.id);
-                request.input('type', sql.VarChar, testimonial.type);
-                request.input('testimonial', sql.VarChar, testimonial.testimonial);
-                request.input('name', sql.VarChar, testimonial.name);
+            const sqlUpdateConsultation = new sql.Connection(dbconfig, function (err) {
+                let request = new sql.Request(sqlUpdateConsultation);
+                request.input('short', sql.VarChar, testimonial.short);
+                request.input('description', sql.VarChar, testimonial.description);
+                request.input('type', sql.VarChar, 'Testimonial');
                 request.query(
-                    `UPDATE Testimonials
-                    SET type = @type
-                    ,testimonial = @testimonial
-                    ,name = @name
-                    WHERE id = @id`
-                ).then(res.status(201).send(testimonial)).catch(function (err) {
-                    console.log("update testimonial: " + err);
+                    `UPDATE Headers 
+                     SET short = @short
+                     ,description = @description
+                     FROM Headers
+                     WHERE type = @type;`
+                ).then(function (recordset) {
+                    for (let prop in testimonial.testimonial_details) {
+                        if (testimonial.testimonial_details.hasOwnProperty(prop)) {
+                            const sqlUpdateTestimonial = new sql.Connection(dbconfig, function (err) {
+                                let request = new sql.Request(sqlUpdateTestimonial);
+                                request.input('id', sql.Int, testimonial.testimonial_details[prop].id);
+                                request.input('testimonial', sql.VarChar, testimonial.testimonial_details[prop].testimonial);
+                                request.input('name', sql.VarChar, testimonial.testimonial_details[prop].name);
+                                request.query(
+                                   `UPDATE Testimonials
+                                    SET testimonial = @testimonial
+                                    ,name = @name
+                                    WHERE id = @id`
+                                ).then(
+                                    console.log(testimonial.testimonial_details[prop])
+                                    ).catch(function (err) {
+                                        console.log("update testimonial: " + err);
+                                    });
+                            });
+                        }
+                    }
+                }).catch(function (err) {
+                    console.log("massageType: " + err);
                 });
             });
         })
@@ -60,7 +84,7 @@ let testimonialRoutes = function () {
                     `SELECT
                         H.id
                         ,H.type
-                        ,H.venue AS venue
+                        ,H.short AS short
                         ,H.header AS header
                         ,H.description AS description
                         ,NULL AS testimonial
@@ -72,7 +96,7 @@ let testimonialRoutes = function () {
 
                         SELECT T.id AS id
                         ,T.type AS type
-                        ,NULL as venue
+                        ,NULL as short
                         ,NULL as header
                         ,NULL as description
                         ,T.testimonial AS testimonial
@@ -81,7 +105,7 @@ let testimonialRoutes = function () {
                 ).then(function (recordset) {
                     let testimonials = {
                         header: recordset[0].header,
-                        venue: recordset[0].venue,
+                        short: recordset[0].short,
                         description: recordset[0].description,
                         testimonial_details: []
                     };
@@ -89,6 +113,8 @@ let testimonialRoutes = function () {
                         if (recordset.hasOwnProperty(testimonialProp)) {
                             if (recordset[testimonialProp].testimonial != null) {
                                 let testimonial = {
+                                    id: recordset[testimonialProp].id,
+                                    type: recordset[testimonialProp].type,
                                     testimonial: recordset[testimonialProp].testimonial,
                                     name: recordset[testimonialProp].name
                                 };

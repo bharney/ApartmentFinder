@@ -21,7 +21,7 @@ class TestimonialPage extends React.Component {
                             <div className="row m-t-30 m-b-30 text-center">
                                 <div className="col-xs-offset-1 col-xs-10 m-b-30">
                                     <h1 className="color-white">{testimonials.header}</h1>
-                                    <hr />
+                                    <h3 className="color-white">{testimonials.short}</h3>
                                     <div className="col-xs-12 m-b-30">
                                         <div className="mdl-card mdl-shadow--4dp p-20">
                                             <h3>{testimonials.description}</h3>

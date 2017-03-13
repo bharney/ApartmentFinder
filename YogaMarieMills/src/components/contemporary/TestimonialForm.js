@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link, IndexLink, browserHistory } from 'react-router';
 import TextInput from '../common/TextInput';
+import TextAreaInput from '../common/TextAreaInput';
+import RemoveRowButton from '../common/RemoveRowButton';
 import Admin from '../common/Admin';
+import TestimonialDetailsForm from './TestimonialDetailsForm';
 import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
 import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
@@ -33,62 +36,64 @@ const plugins = [inlineToolbarPlugin];
 
 const { InlineToolbar } = inlineToolbarPlugin;
 
-const TestimonialForm = ({updateTestimonialState, onChange, saveTestimonial, testimonial, testimonialImage, editorState, ref, focus, errors, saving, deleteTestimonial}) => {
-    
+const TestimonialForm = ({ updateQuoteState, updateNameState, updateTestimonialState, saveTestimonial, addRow, removeRow, testimonial, errors, saving, onChange, editorState, ref, focus }) => {
+
   return (
-    <div className="mdl-grid dark-color">
-      <div className="ribbon b-border">
-        <div className="container">
-          <div className="row m-b-30">
-            <div key={testimonial.id} className="col-xs-12">
-              <h1 className="color-white text-center">{testimonial.title}</h1>
-              <hr />
-              <form>
-                <Admin saveAction={saveTestimonial} deleteAction={deleteTestimonial} />
+    <form>
+      <div className="mdl-grid dark-color">
+        <div className="ribbon bg-image-landing">
+          <div className="container-fluid">
+            <div className="row m-t-30 m-b-30">
+              <div className="col-xs-offset-12 col-sm-offset-1 col-sm-10 m-b-30">
+                <Admin saveAction={saveTestimonial} />
+                <h1 className="color-white text-center">{testimonial.header}</h1>
+                <TextInput
+                  name="short"
+                  label="Title"
+                  value={testimonial.short}
+                  onChange={updateTestimonialState} />
                 <div className="col-xs-12 m-b-30">
-                  <div className="mdl-card mdl-shadow--4dp">
-                    <div className="mdl-card__media v-h-40 image-text-container" style={testimonialImage}>
-                      <div className="col-xs-7 text-left align-bottom m-l-20 m-b-20">
-                          <TextInput
-                            name="title"
-                            label="Title"
-                            value={testimonial.title}
-                            onChange={updateTestimonialState} />
-                      </div>
-                    </div>
-                    <div className="col-xs-12 t-border-thin p-20">
-                      <div id="editor" className="editor" onClick={focus}>
-                        <p>
-                          <Editor
-                            editorState={editorState}
-                            onChange={onChange}
-                            ref={ref}
-                            plugins={plugins}
-                            />
-                          <InlineToolbar />
-                        </p>
-                      </div>
+                  <div className="mdl-card mdl-shadow--4dp p-1-em">
+                    <div id="editor" className="editor" onClick={focus}>
+                      <p>
+                        <Editor
+                          editorState={editorState}
+                          onChange={onChange}
+                          ref={ref}
+                          plugins={plugins}
+                        />
+                        <InlineToolbar />
+                      </p>
                     </div>
                   </div>
                 </div>
-              </form>
+                <div className="col-2-masonry">
+                  <TestimonialDetailsForm
+                    removeRow={removeRow}
+                    updateQuoteState={updateQuoteState}
+                    updateNameState={updateNameState}
+                    removeRow={removeRow}
+                    testimonial={testimonial}
+                    errors={errors}
+                    saving={saving} />
+                </div>
+                <Link className="text-right" to="" onClick={addRow} >
+                  <button type="button" className="btn btn-success btn-circle-lg" title="Add Row"><i className="glyphicon glyphicon-plus"></i></button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 
 TestimonialForm.propTypes = {
   testimonial: React.PropTypes.object.isRequired,
-  editorState: React.PropTypes.object.isRequired,
   updateTestimonialState: React.PropTypes.object.isRequired,
-  focus: React.PropTypes.object.isRequired,
   saving: React.PropTypes.object.isRequired,
-  uploadImage: React.PropTypes.object.isRequired,
   saveTestimonial: React.PropTypes.func.isRequired,
-  onChange: React.PropTypes.func.isRequired,
   errors: React.PropTypes.object
 };
 
