@@ -5,7 +5,7 @@ import TextAreaInput from '../common/TextAreaInput';
 import RemoveRowButton from '../common/RemoveRowButton';
 import Admin from '../common/Admin';
 
-const TestimonialDetailsForm = ({ updateTitleState, updateCostState, removeRow, testimonial, errors, saving }) => {
+const TestimonialDetailsForm = ({ updateQuoteState, updateNameState, removeRow, testimonial, errors, saving }) => {
 
 
   return (
@@ -14,20 +14,21 @@ const TestimonialDetailsForm = ({ updateTitleState, updateCostState, removeRow, 
         <div className="mdl-card mdl-shadow--4dp p-20 m-t-30 tile-masonry bg-color-white">
           <ul className="mdl-list">
             <li>
-              <TextInput
+              <TextAreaInput
                 className="p-t-0 p-b-0"
                 name={testimonial.testimonial_details.findIndex(i => i.id == testimonial_details.id)}
-                label="Title"
-                placeholder="Title"
+                label="Testimonial"
+                placeholder="Testimonial"
+                rows="5"
                 value={testimonial_details.testimonial}
-                onChange={updateTitleState} />
+                onChange={updateQuoteState} />
               <TextInput
                 className="p-t-0 p-b-0"
                 name={testimonial.testimonial_details.findIndex(i => i.id == testimonial_details.id)}
-                label="Cost"
-                placeholder="Cost"
+                label="Name"
+                placeholder="Name"
                 value={testimonial_details.name}
-                onChange={updateCostState} />
+                onChange={updateNameState} />
             </li>
           </ul>
           <RemoveRowButton
