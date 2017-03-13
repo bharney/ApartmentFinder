@@ -180,6 +180,7 @@ h1, h2, h3, h4, h5, h6 {
 .nav a {
     color: $brightColor;
 }
+
 /*-- hover --*/
 
 .nav a:hover {
@@ -285,7 +286,6 @@ section.section {
     padding-left: 20px;
 }
 
-
 .nav-vertical-divider {
     border-left: inset 1px;
     height: 100%;
@@ -305,6 +305,21 @@ section.section {
 
 .indent {
     padding-left:15px;
+}
+
+.brand {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    vertical-align: initial;
+}
+
+.brand-text {
+    display: inline-block;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 100;
+    font-size: 28px;
+    vertical-align: top;
 }
 
 // ul > a:last-child > li.b-border-last {
@@ -822,8 +837,13 @@ Media queries
     }
 
     .container {
-    width: inherit;
-  }
+        width: inherit;
+    }
+
+    .nav-links{
+        height: 52px;
+        line-height: 52px;
+    }
 }
 
 
