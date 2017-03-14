@@ -105,11 +105,11 @@ class Header extends React.Component {
         return (
             <header className="dark-bg-color color-blur mdl-layout__header">
                 <div className="mdl-layout__header-row nav-element-left anchor">
-                    <a className="navbar-brand mdl-layout-title mdl-layout__header-row drawer-header nav-menu-left font-style" onTouchTap={this.handleToggle}><span><i className="glyphicon glyphicon-option-vertical" aria-hidden="true"></i>Menu</span></a>
+                    <a className="navbar-brand mdl-layout-title mdl-layout__header-row drawer-header nav-menu-left font-style" onTouchTap={this.handleToggle}><span className="menu-font"><i className="p-l-03-em p-r-015-em fa fa-ellipsis-v" aria-hidden="true"></i>Menu</span></a>
                     <div className="mdl-layout-spacer nav-vertical-divider">
                         <div className="mdl-layout__header-row drawer-header anchor p-l-0">
                             <IndexLink to="/" className="mdl-layout-title font-style nav-links p-r-1-em">
-                                <img className="m-0 brand img-responsive" src={logoImg}></img><h2 className="brand-text p-t-5 m-0">Yoga Marie Mills</h2>
+                                <img className="m-0 brand img-responsive" src={logoImg}></img><h2 className="brand-text m-0">Yoga Marie Mills</h2>
                             </IndexLink>
                         </div>
                     </div>

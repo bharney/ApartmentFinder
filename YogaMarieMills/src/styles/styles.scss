@@ -308,7 +308,9 @@ section.section {
 }
 
 .brand {
-    padding-left: 1em;
+    padding-left: .75em;
+    padding-right: .25em;
+    padding-top: .25em;
     margin: 0;
     display: inline-block;
     vertical-align: initial;
@@ -318,8 +320,17 @@ section.section {
     display: inline-block;
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 100;
-    font-size: 32px;
+    padding-top: .15em;
+    font-size: 2.25em;
     vertical-align: top;
+}
+
+.menu-font {
+    font-size: .8em;
+}
+
+.fa.fa-ellipsis-v {
+    font-size: .91em;
 }
 
 // ul > a:last-child > li.b-border-last {
@@ -817,11 +828,27 @@ Media queries
     }
 }
 
-@media only screen and (min-device-width : 979px) and (max-device-width : 1024px) {
+@media (max-width: 1154px) {
+    .brand-text {
+        font-size: 1.9em;
+    }
 }
 
+@media (max-width: 1124px) {
+    .mdl-layout__header-row {
+        padding:0;
+    }
+}
 
-@media only screen and (min-width: 768px) and (max-width: 959px) {
+@media (max-width: 1024px) {
+
+}
+
+@media (max-width: 978px) {
+    .brand-text {
+        font-size: 1.75em;
+        padding-top: .2em;
+    }
 }
 
 @media (max-width: 767px) {
@@ -847,14 +874,26 @@ Media queries
 
     .brand {
         padding-left: .25em;
+        padding-top: 0;
         margin: 0;
         display: inline-block;
         vertical-align: initial;
     }
 
+    .brand-text {
+        font-size: 1.75em;
+    }
+
     .nav-menu-left {
         padding-left: 0.15em;
         padding-right: 0.3em;
+    }
+}
+
+@media (max-width: 325px) {
+    
+    .brand-text {
+        font-size: 1.5em
     }
 }
 
@@ -988,7 +1027,7 @@ Media queries
 
 /* bottom */
 .p-b-05-em {
-padding-bottom: 0.5em;
+    padding-bottom: 0.5em;
 }
 
 .p-b-15-em {
@@ -1013,8 +1052,16 @@ padding-bottom: 0.5em;
     padding-left: 0.1em;
 }
 
+.p-l-015-em {
+    padding-left: 0.15em;
+}
+
 .p-l-025-em {
     padding-left: 0.25em;
+}
+
+.p-l-03-em {
+    padding-left: 0.3em;
 }
 
 .p-l-1-em {
@@ -1025,6 +1072,23 @@ padding-bottom: 0.5em;
 .p-r-005-em {
     padding-right: .05em;
 }
+
+.p-r-01-em {
+    padding-right: 0.1em;
+}
+
+.p-r-015-em {
+    padding-right: 0.15em;
+}
+
+.p-r-025-em {
+    padding-right: 0.25em;
+}
+
+.p-r-03-em {
+    padding-right: 0.3em;
+}
+
 
 .p-r-1-em {
     padding-right: 1em;
