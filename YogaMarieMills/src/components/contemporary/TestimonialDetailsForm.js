@@ -11,7 +11,7 @@ const TestimonialDetailsForm = ({ updateQuoteState, updateNameState, removeRow, 
   return (
     <div>
       {testimonial.testimonial_details.map(testimonial_details =>
-        <div className="mdl-card mdl-shadow--4dp p-20 m-t-30 tile-masonry bg-color-white">
+        <div className="mdl-card mdl-shadow--4dp p-20 m-t-1-em tile-masonry bg-color-white">
           <ul className="mdl-list">
             <li>
               <TextAreaInput

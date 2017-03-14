@@ -150,12 +150,12 @@ class BlogPage extends React.Component {
             <div className="mdl-grid dark-color">
                 <div className="ribbon bg-image-landing b-border">
                     <div className="container">
-                        <div className="row m-b-30">
+                        <div className="row m-b-1-em">
                             <div className="col-xs-12">
                                 <h1 className="color-white text-center">{blog.title}</h1>
                                 <hr />
                                 <Admin uploadImage={this.uploadImage} blog={this.state.blog} saveAction={this.saveAction} deleteAction={this.deleteAction} />
-                                <div className="col-xs-12 m-b-30">
+                                <div className="col-xs-12 m-b-1-em">
                                     <div className="mdl-card mdl-shadow--4dp">
                                         <div className="mdl-card__media v-h-40 image-text-container" style={blogImage}>
                                             <div className="col-xs-7 text-left align-bottom m-l-20 m-b-20">

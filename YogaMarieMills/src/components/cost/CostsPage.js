@@ -16,19 +16,19 @@ class CostsPage extends React.Component {
             <div className="mdl-grid dark-color bg-color">
                 <div className="ribbon bg-image-landing b-border">
                     <div className="row">
-                        <div className="col-xs-offset-1 col-xs-10 row-centered">
+                        <div className="col-sm-offset-1 col-sm-10 col-xs-12 row-centered">
                             <h1 className="color-white">Pricing</h1>
                             <Admin addAction="Cost" />
                             <hr/>
                             {costs.map(cost =>
                                 <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-centered">
                                     <Admin editAction={cost.type + "/" + cost.id} />
-                                    <div className="mdl-card mdl-shadow--4dp m-l-30 m-r-30 m-t-15 m-b-15 bg-white color-black cost-tile text-center">
+                                    <div className="mdl-card mdl-shadow--4dp m-t-05-em m-b-05-em bg-white color-black cost-tile text-center">
                                         <div className="inner">
                                             <div className="top">
                                                 <span>{cost.package}</span>
                                             </div>
-                                            <div className="row p-t-40">
+                                            <div className="row p-t-1-em">
                                                 <div className="col-xs-12">
                                                     <h3>{cost.description}</h3>
                                                     <h4>{cost.cost}</h4>
@@ -37,7 +37,7 @@ class CostsPage extends React.Component {
                                             </div>
                                             <div className="mdl-card__actions mdl-card--border">
                                                 <Link to="YogaThurles/ClassTypes">
-                                                    <button className="btn bright-bg-color btn-lg color btn-block color-black">Course Details</button>
+                                                    <button className="btn bright-bg-color btn-lg color btn-block color-black">Courses</button>
                                                 </Link>
                                             </div>
                                         </div>
@@ -49,7 +49,7 @@ class CostsPage extends React.Component {
                     </div>
                     <div className="container">
                         <div className="row">
-                            <div className="col-xs-offset-1 col-xs-10">
+                            <div className="col-sm-offset-1 col-sm-10 col-xs-12">
                                 <h3>
                                     Every class runs for no less than 60 minutes unless stated, ands sometimes
                                         may run over time. Best of all, should you miss a class in the course you paid for,
@@ -58,10 +58,11 @@ class CostsPage extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div id="about" div className="mdl-card container m-b-30 m-t-30 mdl-shadow--4dp">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm-offset-1 col-sm-10 col-xs-12">
+                    <div  className="mdl-card container p-1-em m-b-1-em m-t-1-em mdl-shadow--4dp">
                         <div className="featured clearfix text-center color-black">
-                            <div className="row">
-                                <div className="col-xs-offset-1 col-xs-10">
                                     <h2>Additional Info</h2>
                                     <hr />
                                     <h3>
@@ -75,9 +76,10 @@ class CostsPage extends React.Component {
                                         <br /><br />
                                         contact Marie 086 1778369
                                     </h3>
-                                </div>
-                            </div>
                         </div>
+                    </div>
+                    </div>
+                    </div>
                     </div>
                 </div>
             </div>

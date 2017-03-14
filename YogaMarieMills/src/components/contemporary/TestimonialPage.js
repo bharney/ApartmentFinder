@@ -23,11 +23,11 @@ class TestimonialPage extends React.Component {
             <div className="mdl-grid dark-color">
                 <div className="ribbon bg-image-landing">
                     <div className="container-fluid">
-                        <div className="row m-t-30 m-b-30">
-                            <div className="col-xs-offset-1 col-xs-10 m-b-30">
+                        <div className="row m-t-1-em m-b-1-em">
+                            <div className="col-xs-offset-1 col-xs-10 m-b-1-em">
                                 <h1 className="color-white text-center">{testimonials.header}</h1>
                                 <h3 className="color-white text-center">{testimonials.short}</h3>
-                                <div className="col-xs-12 m-b-30">
+                                <div className="col-xs-12 m-b-1-em">
                                     <div className="mdl-card mdl-shadow--4dp p-20">
                                         <div id="editor" className="editor">
                                             <p>
@@ -46,7 +46,7 @@ class TestimonialPage extends React.Component {
 
                                     <div className="col-2-masonry">
                                         {testimonials.testimonial_details.map(testimonial_details =>
-                                            <div className="mdl-card mdl-shadow--4dp p-20 m-t-30 tile-masonry bg-color-white">
+                                            <div className="mdl-card mdl-shadow--4dp p-20 m-t-1-em tile-masonry bg-color-white">
                                                 <ul className="mdl-list">
                                                     <li>
                                                         <blockquote>{testimonial_details.testimonial}</blockquote>

@@ -22,7 +22,7 @@ const ConsultationDetailsForm = ({ updateTitleState, updateCostState, updateSess
       <div className="col-xs-12 col-sm-offset-1 col-sm-10">
         {dietConsultation.consultationDetails.map(consultationDetails =>
           <div className="col-xs-12 col-sm-6">
-            <div className="mdl-card mdl-shadow--8dp bright-bg-color m-t-30 p-1-em allow-overflow">
+            <div className="mdl-card mdl-shadow--8dp bright-bg-color m-t-1-em p-1-em allow-overflow">
               {displayIcon(consultationDetails.icon, consultationDetails.iconWidth, consultationDetails.iconHeight)}
               <RemoveRowButton
                 name={dietConsultation.consultationDetails.findIndex(i => i.id == consultationDetails.id)}

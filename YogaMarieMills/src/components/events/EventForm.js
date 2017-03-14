@@ -55,12 +55,12 @@ const EventTypeForm = ({
     <div className="mdl-grid dark-color">
       <div className="ribbon bg-image-landing b-border">
         <div className="container">
-          <div className="row m-b-30">
+          <div className="row m-b-1-em">
             <div className="col-xs-12">
               {displayEventType(eventType.header, updateEventState)}
               <hr />
               <Admin addAction={"Events"} />
-              <div className="col-xs-12 m-b-30">
+              <div className="col-xs-12 m-b-1-em">
                 <form>
                   <Admin saveAction={saveEvent} deleteAction={deleteEvent} uploadImage={uploadImage} />
                   <div className="mdl-card mdl-shadow--4dp">

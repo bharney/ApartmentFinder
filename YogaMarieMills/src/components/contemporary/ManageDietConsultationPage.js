@@ -166,8 +166,8 @@ class ManageDietConsultationPage extends React.Component {
       <div className="mdl-grid dark-color">
         <div className="ribbon bg-image-landing">
           <div className="container-fluid">
-            <div className="row m-t-30 m-b-30">
-              <div className="col-xs-12 col-sm-offset-1 col-sm-10 m-b-30">
+            <div className="row m-t-1-em m-b-1-em">
+              <div className="col-xs-12 col-sm-offset-1 col-sm-10 m-b-1-em">
                 <Admin saveAction={this.saveDietConsultation} />
                 <br />
                 <br />

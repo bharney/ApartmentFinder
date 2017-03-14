@@ -37,16 +37,16 @@ class BlogPage extends React.Component {
             <div className="mdl-grid dark-color">
                 <div className="ribbon bg-image-landing">
                     <div className="container-fluid">
-                        <div className="row m-t-30 m-b-30">
-                            <div className="col-xs-offset-1 col-xs-10 m-b-30">
+                        <div className="row m-t-1-em m-b-1-em">
+                            <div className="col-xs-offset-1 col-xs-10 m-b-1-em">
                                 <h1 className="text-center color-white">My Blog</h1>
                                 <Admin objArr={blogs} />
                                 <h2 className="text-center color-white">Read useful information on Yoga and Ayurveda</h2>
                                 <hr />
-                                <div className="col-xs-12 m-b-30">
+                                <div className="col-xs-12 m-b-1-em">
                                     <div className="col-3-masonry">
                                         {blogs.map(blog =>
-                                            <div className="mdl-card mdl-shadow--4dp m-t-30 tile-masonry bg-color-white">
+                                            <div className="mdl-card mdl-shadow--4dp m-t-1-em tile-masonry bg-color-white">
                                                 <div className="mdl-card__title">
                                                     <div className="mdl-card__title-text">
                                                         <section className="text-center">

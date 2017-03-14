@@ -23,7 +23,7 @@ const Blog = ({blog}) => {
             return short.substring(0, 500) + "...";
         }
     return (
-        <div className="mdl-card mdl-shadow--4dp m-t-30 tile-masonry bg-color-white">
+        <div className="mdl-card mdl-shadow--4dp m-t-1-em tile-masonry bg-color-white">
                                                 <div className="mdl-card__title">
                                                     <div className="mdl-card__title-text">
                                                         <section className="text-center">

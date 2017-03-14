@@ -83,12 +83,12 @@ class ManageSchedulePage extends React.Component {
       <div className="mdl-grid dark-color bg-color">
         <div className="ribbon bg-image-landing b-border">
           <div className="container-fluid">
-            <div className="row m-b-30">
-              <div className="col-xs-12 col-sm-offset-1 col-sm-10 m-b-30">
+            <div className="row m-b-1-em">
+              <div className="col-xs-12 col-sm-offset-1 col-sm-10 m-b-1-em">
                 <Admin saveAction={this.saveSchedule} deleteAction={this.deleteSchedule} />
                 <br />
                 <br />
-                <div className="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6 m-b-30">
+                <div className="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6 m-b-1-em">
                   <div className="mdl-card mdl-shadow--4dp p-t-05-em p-l-1-em p-r-1-em p-b-05-em">
                     <ScheduleForm
                       updateClassState={this.updateClassState}

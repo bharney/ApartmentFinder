@@ -33,43 +33,44 @@ class AboutPage extends React.Component {
                                     <h2 className="m-b-0 p-b-0"><strong>Marie Mills Yoga and Ayurveda</strong></h2>
                                     <h4 className="m-t-0 m-b-0 p-t-0">Stress Reduction Specialist</h4>
                                 </div>
-                                <div className="m-t-30 col-xs-12 col-sm-5">
+                                <div className="m-t-1-em col-xs-12 col-sm-5">
                                     <div className="pull-right">
                                         <SocialMediaBar />
-                                        <h4 className="m-b-30 m-t-0 p-t-0 p-r-15 text-right">+086 1778369</h4>
+                                        <h4 className="m-b-1-em m-t-0 p-t-0 p-r-15 text-right">+086 1778369</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div className="p-w-60 mdl-card p-l-0 p-r-0 container m-t-30 m-b-30 mdl-shadow--4dp">
-                            <div className="row m-l-0 m-r-0 lg-vertical-center">
-                                <div className="color-white text-center m-l-0 p-l-0">
-                                    <div className="profile-image max-w-245 xs-profile">
-                                        <img src={profileLarge} className="img-responsive hidden-xs" alt="Marie Mills Yoga Instructor and Owner" />
-                                        <img src={profileSmall} className="img-responsive img-circle visible-xs" alt="Marie Mills Yoga Instructor and Owner" />
-                                        <div className="profile-text text-left align-bottom m-l-10">
-                                            <h3 className="m-t-0 m-b-0">Marie Mills</h3>
-                                            <p className="m-t-0 m-b-5">Owner and Instructor</p>
+                        <div className="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+                            <div className="mdl-card p-l-0 p-r-0 container m-t-1-em m-b-1-em mdl-shadow--4dp">
+                                <div className="row m-l-0 m-r-0 lg-vertical-center">
+                                    <div className="color-white text-center m-l-0 p-l-0">
+                                        <div className="profile-image max-w-245 xs-profile">
+                                            <img src={profileLarge} className="img-responsive hidden-xs" alt="Marie Mills Yoga Instructor and Owner" />
+                                            <img src={profileSmall} className="img-responsive img-circle visible-xs" alt="Marie Mills Yoga Instructor and Owner" />
+                                            <div className="profile-text text-left align-bottom m-l-10">
+                                                <h3 className="m-t-0 m-b-0">Marie Mills</h3>
+                                                <p className="m-t-0 m-b-5">Owner and Instructor</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="col-xs-12 text-center pull-right">
-                                    <h4 className="text-left p-l-30 p-r-30 m-t-5">
-                                        <strong>About Marie:</strong>
-                                        <hr />
-                                        <div className="text-center">Twelve years teaching Hatha Yoga, meditation, mindfulness techniques and
+                                    <div className="col-xs-12 text-center pull-right">
+                                        <h4 className="text-left p-l-30 p-r-30 m-t-5">
+                                            <strong>About Marie:</strong>
+                                            <hr />
+                                            <div className="text-center">Twelve years teaching Hatha Yoga, meditation, mindfulness techniques and
                                     stress relief for all ages. And also nine years using Ayurveda medicine
                                     with clients and students to find balance in these unbalancing times.</div>
-                                    </h4>
+                                        </h4>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div className="container">
                             <div className="row">
                                 <div className="col-xs-12">
-                                    <div className="text-center color-white p-t-40 p-b-40">
+                                    <div className="text-center color-white p-t-1-em p-b-1-em">
                                         <blockquote className="bigquote no-left-border">All of life is an individual manifestation and
                                     combination of the five elements. It really doesn't get
                                     any easier! As a wise friend of mine once said, 'If it's not fun,
@@ -112,13 +113,13 @@ class AboutPage extends React.Component {
                         </div>
                         <br />
                         <section>
-                            <fieldset className="container m-b-30">
+                            <fieldset className="container m-b-1-em">
                                 <div className="row">
                                     <div className="col-lg-10 col-lg-offset-1 col-xs-12 text-center">
                                         <h3 className="text-center">You can also email me using the form below</h3>
                                         <hr />
                                         <form action="/" method="post">
-                                            <div className="col-lg-4 col-sm-4 col-xs-12 m-b-10">
+                                            <div className="col-lg-4 col-sm-4 col-xs-12 m-b-05-em">
                                                 <input required type="text" name="Name" className="form-control form-group" placeholder="Name" />
                                             </div>
                                             <div className="col-lg-4 col-sm-4 col-xs-12">
@@ -133,9 +134,9 @@ class AboutPage extends React.Component {
                                         </form>
                                     </div>
                                 </div>
-                                <div className="col-xs-offset-4 col-xs-4">
+                                <div className="col-sm-offset-4 col-sm-4 col-xs-12">
                                     <div className="btn btn-success btn-lg btn-block center-block">
-                                        <Link to="" className="dark-color m-b-30" activeClassName="active"><span>Send <i className="glyphicon glyphicon-send"></i></span></Link>
+                                        <Link to="" className="dark-color m-b-1-em" activeClassName="active"><span>Send <i className="glyphicon glyphicon-send"></i></span></Link>
                                     </div>
                                 </div>
                             </fieldset>

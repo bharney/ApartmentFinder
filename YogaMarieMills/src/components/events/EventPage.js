@@ -17,11 +17,11 @@ class EventPage extends React.Component {
             <div className="mdl-grid dark-color">
                 <div className="ribbon bg-image-landing b-border">
                     <div className="container">
-                        <div className="row m-b-30">
+                        <div className="row m-b-1-em">
                             <div className="col-xs-12">
                                 <h1 className="color-white text-center">{eventType.header}</h1>
                                 <hr />
-                                <div className="col-xs-12 m-b-30">
+                                <div className="col-xs-12 m-b-1-em">
                                     <div className="mdl-card mdl-shadow--4dp">
                                         <div className="mdl-card__media bg-image-landing v-h-40 image-text-container">
                                             <div className="text-left align-bottom m-l-20 m-b-20">

@@ -41,7 +41,7 @@ class HomePage extends React.Component {
             <div>
                 <section style={landingImg} className="featured">
                     <div className="container-fluid">
-                        <div className="row p-b-30 m-b-30 m-t-20">
+                        <div className="row p-b-30 m-b-1-em m-t-20">
                             <div className="col-md-6 col-md-offset-3 text-center bright-color anchor ">
                                 <h1 className="page-header banner">Yoga with Marie Mills</h1>
                                 <h2 banner>
@@ -152,7 +152,7 @@ class HomePage extends React.Component {
                                     </h4>
                             </div>
 
-                            <div className="row m-t-30 p-t-40 p-b-40 text-center">
+                            <div className="row m-t-1-em p-t-40 p-b-40 text-center">
 
                                 <div className="col-sm-4 col-xs-12 p-l-15 p-r-15">
                                     <Link to="/Ayurveda/Massage/Body">

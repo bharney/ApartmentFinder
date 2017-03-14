@@ -43,8 +43,8 @@ const TestimonialForm = ({ updateQuoteState, updateNameState, updateTestimonialS
       <div className="mdl-grid dark-color">
         <div className="ribbon bg-image-landing">
           <div className="container-fluid">
-            <div className="row m-t-30 m-b-30">
-              <div className="col-xs-offset-12 col-sm-offset-1 col-sm-10 m-b-30">
+            <div className="row m-t-1-em m-b-1-em">
+              <div className="col-xs-offset-12 col-sm-offset-1 col-sm-10 m-b-1-em">
                 <Admin saveAction={saveTestimonial} />
                 <h1 className="color-white text-center">{testimonial.header}</h1>
                 <TextInput
@@ -52,7 +52,7 @@ const TestimonialForm = ({ updateQuoteState, updateNameState, updateTestimonialS
                   label="Title"
                   value={testimonial.short}
                   onChange={updateTestimonialState} />
-                <div className="col-xs-12 m-b-30">
+                <div className="col-xs-12 m-b-1-em">
                   <div className="mdl-card mdl-shadow--4dp p-1-em">
                     <div id="editor" className="editor" onClick={focus}>
                       <p>

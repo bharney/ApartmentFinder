@@ -40,13 +40,13 @@ const ClassTypeForm = ({updateClassTypeState, onChange, saveClassType, classType
     <div className="mdl-grid dark-color">
       <div className="ribbon b-border">
         <div className="container">
-          <div className="row m-b-30">
+          <div className="row m-b-1-em">
             <div key={classType.id} className="col-xs-12">
               <h1 className="color-white text-center">{classType.title}</h1>
               <hr />
               <form>
                 <Admin saveAction={saveClassType} deleteAction={deleteClassType} uploadImage={uploadImage} />
-                <div className="col-xs-12 m-b-30">
+                <div className="col-xs-12 m-b-1-em">
                   <div className="mdl-card mdl-shadow--4dp">
                     <div className="mdl-card__media v-h-40 image-text-container" style={classTypeImage}>
                       <div className="col-xs-7 text-left align-bottom m-l-20 m-b-20">

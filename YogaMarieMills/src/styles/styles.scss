@@ -838,6 +838,10 @@ Media queries
     .mdl-layout__header-row {
         padding:0;
     }
+    .nav-menu-left {
+        padding-left: 0.25em;
+        padding-right: 0.5em;
+    }
 }
 
 @media (max-width: 1024px) {
@@ -861,6 +865,15 @@ Media queries
         margin-top: 40px;
         margin-bottom: 30px;
         display: inline-block;
+    }
+    .profile-text.align-bottom {
+        bottom: 20px;
+        left: 20px;
+        
+    }
+
+    .profile-text > h3 {
+        line-height: 1.1;
     }
 
     .container {
@@ -887,6 +900,10 @@ Media queries
     .nav-menu-left {
         padding-left: 0.15em;
         padding-right: 0.3em;
+    }
+
+    .social-media .fa {
+        font-size: 1.8em;
     }
 }
 
@@ -1270,6 +1287,15 @@ Media queries
     margin-bottom: 5em;
 }
 
+/* --top em -- */
+.m-t-05-em {
+    margin-top: .5em;
+}
+
+.m-t-1-em {
+    margin-top: 1em;
+}
+
 .m-t-2-em {
     margin-top: 2em;
 }
@@ -1332,6 +1358,10 @@ Media queries
 }
 
 /* top */
+.m-t--80 {
+     margin-top: -80px;
+}
+
 .m-t--60 {
      margin-top: -60px;
 }
