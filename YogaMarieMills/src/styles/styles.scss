@@ -293,8 +293,8 @@ section.section {
 
 .nav-menu-left {
     height: 100%;
-    padding-left: 15px;
-    padding-right: 20px;
+    padding-left: 0.25em;
+    padding-right: 0.5em;
     border-right: inset 1px;
 }
 .nav-links{
@@ -308,7 +308,7 @@ section.section {
 }
 
 .brand {
-    padding: 0;
+    padding-left: 1em;
     margin: 0;
     display: inline-block;
     vertical-align: initial;
@@ -318,7 +318,7 @@ section.section {
     display: inline-block;
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 100;
-    font-size: 28px;
+    font-size: 32px;
     vertical-align: top;
 }
 
@@ -844,6 +844,18 @@ Media queries
         height: 52px;
         line-height: 52px;
     }
+
+    .brand {
+        padding-left: .25em;
+        margin: 0;
+        display: inline-block;
+        vertical-align: initial;
+    }
+
+    .nav-menu-left {
+        padding-left: 0.15em;
+        padding-right: 0.3em;
+    }
 }
 
 
@@ -992,11 +1004,28 @@ padding-bottom: 0.5em;
 }
 
  /* left */
+ 
+.p-l-005-em {
+    padding-left: .05em;
+}
+
+.p-l-01-em {
+    padding-left: 0.1em;
+}
+
+.p-l-025-em {
+    padding-left: 0.25em;
+}
+
 .p-l-1-em {
     padding-left: 1em;
 }
 
 /* right */
+.p-r-005-em {
+    padding-right: .05em;
+}
+
 .p-r-1-em {
     padding-right: 1em;
 }

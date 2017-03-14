@@ -87,7 +87,7 @@ class Header extends React.Component {
             if (item.subMenu.length > 0) {
                 return (
                     <div className="hover" id={item.name}>
-                        <Link key={item.route} to="" onClick={that.preventRedirect} className="mdl-tabs__tab nav-links p-l-10 p-r-10 mdl-layout--large-screen-only">
+                        <Link key={item.route} to="" onClick={that.preventRedirect} className="mdl-tabs__tab nav-links p-l-1-em p-r-1-em mdl-layout--large-screen-only">
                             {item.name} &nbsp;<span className="caret" aria-hidden="true"></span>
                         </Link>
                         <ul className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" htmlFor={item.name}>
@@ -98,7 +98,7 @@ class Header extends React.Component {
             }
             else {
                 return (
-                    <Link key={item.route} to={'/' + item.route} className="mdl-tabs__tab nav-links mdl-layout--large-screen-only">{item.name}</Link>
+                    <Link key={item.route} to={'/' + item.route} className="mdl-tabs__tab nav-links p-l-1-em p-r-1-em mdl-layout--large-screen-only">{item.name}</Link>
                 );
             }
         };
@@ -108,8 +108,8 @@ class Header extends React.Component {
                     <a className="navbar-brand mdl-layout-title mdl-layout__header-row drawer-header nav-menu-left font-style" onTouchTap={this.handleToggle}><span><i className="glyphicon glyphicon-option-vertical" aria-hidden="true"></i>Menu</span></a>
                     <div className="mdl-layout-spacer nav-vertical-divider">
                         <div className="mdl-layout__header-row drawer-header anchor p-l-0">
-                            <IndexLink to="/" className="mdl-layout-title font-style nav-links p-l-15 p-r-15">
-                                <img className="p-0 m-0 brand img-responsive" src={logoImg}></img><h2 className="brand-text p-t-5 m-0">Yoga Marie Mills</h2>
+                            <IndexLink to="/" className="mdl-layout-title font-style nav-links p-r-1-em">
+                                <img className="m-0 brand img-responsive" src={logoImg}></img><h2 className="brand-text p-t-5 m-0">Yoga Marie Mills</h2>
                             </IndexLink>
                         </div>
                     </div>
