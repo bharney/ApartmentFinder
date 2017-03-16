@@ -789,6 +789,10 @@ section.section {
     overflow: visible;
 }
 
+.massage-details {
+    min-height: 10em;
+}
+
 /* ========================================
     Events
 ========================================= */
@@ -830,7 +834,7 @@ Editor
 .editor {
   box-sizing: border-box;
   cursor: text;
-  padding: 16px;
+  padding: 0 16px 16px 16px;
   border-radius: 2px;
   margin-bottom: 2em;
 }
@@ -902,7 +906,9 @@ Media queries
 }
 
 @media (max-width: 1024px) {
-
+    .massage-details{
+        min-height: 13em;
+    }
 }
 
 @media (max-width: 978px) {
@@ -961,6 +967,10 @@ Media queries
 
     .social-media .fa {
         font-size: 1.8em;
+    }
+
+    .massage-details{
+        min-height: inherit;
     }
 }
 
@@ -1325,6 +1335,12 @@ Media queries
     margin: 0;
 }
 
+.m-auto-inline {
+    display: inline-block;
+    float:none;
+    margin: 0 auto;
+ }
+
 /* ---- em ---- */
 .m-b-05-em {
     margin-bottom: .5em;
@@ -1340,6 +1356,10 @@ Media queries
 
 .m-b-3-em {
     margin-bottom: 3em;
+}
+
+.m-b-35-em {
+    margin-bottom: 3.5em;
 }
 
 .m-b-4-em {

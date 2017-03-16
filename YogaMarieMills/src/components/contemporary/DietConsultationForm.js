@@ -47,11 +47,6 @@ const DietConsultationForm = ({ updateTitleState, updateCostState, updateSession
         value={dietConsultation.short}
         onChange={updateDietConsultationState} />
       <div className="mdl-card mdl-shadow--4dp p-2-em">
-          <TextInput
-            name="venue"
-            label="Venue"
-            value={dietConsultation.venue}
-            onChange={updateDietConsultationState} />
         <div id="editor" className="editor" onClick={focus}>
           <p>
             <Editor

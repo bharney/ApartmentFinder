@@ -26,6 +26,7 @@ class YogaThurlesPage extends React.Component {
                             <div className="col-xs-12 col-sm-offset-1 col-sm-10 m-b-1-em">
                                 <h1 className="text-center color-white">{schedules.header}</h1>
                                 <h3 className="color-white">Studio: {schedules.venue}</h3>
+                            </div>
                                 <Admin addAction={"Schedule"} />
                                     {schedules.session_dates.map(session_dates =>
                                         <div className="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6 m-b-1-em">
@@ -35,7 +36,6 @@ class YogaThurlesPage extends React.Component {
                                             </div>
                                         </div>)
                                     }
-                            </div>
                         </div>
                     </div>
                     <div className="row m-b-1-em">

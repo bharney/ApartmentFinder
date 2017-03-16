@@ -21,13 +21,13 @@ class MassagePage extends React.Component {
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
             }
-            return (<div className="icon-circle-sm mdl-pos-abs-center bg-color-green mdl-shadow--4dp m-t--40" style={iconImg}></div>)
+            return (<div className="icon-circle-sm mdl-pos-rel bg-color-green mdl-shadow--4dp m-t--60" style={iconImg}></div>)
         }
         let offsetColumns = function (massage, massage_details) {
             if (massage_details.title)
                 if (massage.massage_details.findIndex(i => i.id == massage_details.id) % 2 == 0) {
                     return (
-                        <div className="col-xs-12 col-sm-offset-2 col-sm-4">
+                        <div className="col-xs-12 col-sm-offset-2 col-sm-4 massage-details">
                             <h4><strong>{massage_details.title}</strong></h4>
                             <p>{massage_details.description}</p>
                         </div>
@@ -35,11 +35,9 @@ class MassagePage extends React.Component {
                 }
                 else {
                     return (
-                        <div className="row">
-                            <div className="col-xs-12 col-sm-offset-1 col-sm-4">
-                                <h4><strong>{massage_details.title}</strong></h4>
-                                <p>{massage_details.description}</p>
-                            </div>
+                        <div className="col-xs-12 col-sm-offset-1 col-sm-4 massage-details">
+                            <h4><strong>{massage_details.title}</strong></h4>
+                            <p>{massage_details.description}</p>
                         </div>
                     )
                 }
@@ -53,21 +51,21 @@ class MassagePage extends React.Component {
                             <div className="col-xs-12">
                                 <h1 className="text-center color-white m-0">{massageType.header}</h1>
                                 <h3 className="text-center color-white m-0 m-b-2-em">{massageType.description}
-                                    <br/>Venue: {massageType.venue}</h3>
+                                    <br />Venue: {massageType.venue}</h3>
                                 <Admin addAction={"Massage/" + massageType.type} />
                                 {massageType.massages.map(massage =>
                                     <div className="col-xs-12 m-b-5-em">
                                         <div>
                                             <Admin editAction={"Massage/" + massageType.type + "/" + massage.id} />
                                         </div>
-                                        <div className="mdl-card mdl-shadow--4dp p-b-3-em allow-overflow">
+                                        <div className="mdl-card mdl-shadow--4dp p-b-3-em p-1-em allow-overflow">
                                             {displayIcon(massage.icon, massage.iconWidth, massage.iconHeight)}
                                             <h3 className="p-t-1-em text-center"><strong>{massage.title}</strong></h3>
                                             <hr width="50%" className="center-block" />
                                             <h4 className="m-0 text-center"><strong>{massage.session_time}</strong></h4>
                                             <h4 className="m-0 text-center"><strong>{massage.cost}</strong></h4>
                                             <div className="row">
-                                                <div className="col-xs-12 col-sm-offset-1 col-sm-10">
+                                                <div className="col-xs-12">
                                                     {massage.massage_details.map(massage_details =>
                                                         offsetColumns(massage, massage_details)
                                                     )}

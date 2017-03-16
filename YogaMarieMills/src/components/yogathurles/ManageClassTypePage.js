@@ -111,8 +111,8 @@ class ManageClassTypePage extends React.Component {
   }
 
   render() {
-    const {classType} = this.props;
-    
+    const { classType } = this.props;
+
     let classTypeImg = classType.image != "" ? require(`../../images/${classType.image}`) : ""
 
     const classTypeImage = {
@@ -136,7 +136,7 @@ class ManageClassTypePage extends React.Component {
         saving={this.state.saving}
         uploadImage={this.uploadImage}
         deleteClassType={this.deleteClassType}
-        />
+      />
     );
   }
 }

@@ -36,8 +36,8 @@ class DietConsultationPage extends React.Component {
             <div className="mdl-grid dark-color">
                 <div className="ribbon bg-image-landing">
                     <div className="container-fluid">
-                        <div className="row m-b-2-em m-t-2-em">
-                            <div className="col-xs-12 col-sm-12 col-md-offset-1 col-md-10">
+                        <div className="row">
+                            <div className="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 m-b-1-em">
                                 <h1 className="color-white text-center">Aryuvedic Diet Consultation</h1>
                                 <h3 className="color-white text-center">{dietConsultations.short}</h3>
                                 <div className="mdl-card mdl-shadow--4dp p-1-em">
@@ -56,20 +56,18 @@ class DietConsultationPage extends React.Component {
                                     </div>
 
                                     <div className="row text-center">
-                                        <div className="col-xs-12 col-sm-offset-1 col-sm-10 ">
-                                            {dietConsultations.consultationDetails.map(consultationDetails =>
-                                                <div className="col-xs-12 col-sm-6">
-                                                    <div className="mdl-card mdl-shadow--8dp bg-color-light-orange p-1-em allow-overflow m-b-2-em m-t-2-em">
-                                                        {displayIcon(consultationDetails.icon, consultationDetails.iconWidth, consultationDetails.iconHeight)}
-                                                        <h3>{consultationDetails.title}<br />
-                                                            {consultationDetails.cost}</h3>
-                                                        <p>{consultationDetails.session_time}</p>
-                                                        <p>{consultationDetails.consultation}</p>
-                                                        <p>{consultationDetails.consultation_desc}</p>
-                                                    </div>
+                                        {dietConsultations.consultationDetails.map(consultationDetails =>
+                                            <div className="col-xs-12 col-sm-6 col-md-4 m-auto-inline">
+                                                <div className="mdl-card mdl-shadow--8dp bg-color-light-orange p-1-em allow-overflow m-b-35-em">
+                                                    {displayIcon(consultationDetails.icon, consultationDetails.iconWidth, consultationDetails.iconHeight)}
+                                                    <h3>{consultationDetails.title}<br />
+                                                        {consultationDetails.cost}</h3>
+                                                    <p>{consultationDetails.session_time}</p>
+                                                    <p>{consultationDetails.consultation}</p>
+                                                    <p>{consultationDetails.consultation_desc}</p>
                                                 </div>
-                                            )}
-                                        </div>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
