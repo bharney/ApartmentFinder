@@ -12,7 +12,7 @@ class BlogPage extends React.Component {
     }
 
     render() {
-        const {blogs} = this.props;
+        const { blogs } = this.props;
 
         function blogImage(image) {
             let blogImg = image != "" ? require(`../../images/${image}`) : ""
@@ -37,50 +37,47 @@ class BlogPage extends React.Component {
             <div className="mdl-grid dark-color">
                 <div className="ribbon bg-image-landing">
                     <div className="container-fluid">
-                        <div className="row m-t-1-em m-b-1-em">
-                            <div className="col-xs-offset-1 col-xs-10 m-b-1-em">
+                        <div className="row m-b-1-em">
+                            <div className="col-sm-offset-1 col-sm-10 col-xs-12 m-b-1-em">
                                 <h1 className="text-center color-white">My Blog</h1>
                                 <Admin objArr={blogs} />
                                 <h2 className="text-center color-white">Read useful information on Yoga and Ayurveda</h2>
-                                <hr />
-                                <div className="col-xs-12 m-b-1-em">
-                                    <div className="col-3-masonry">
-                                        {blogs.map(blog =>
-                                            <div className="mdl-card mdl-shadow--4dp m-t-1-em tile-masonry bg-color-white">
-                                                <div className="mdl-card__title">
-                                                    <div className="mdl-card__title-text">
-                                                        <section className="text-center">
-                                                            <h2>{blog.title}</h2>
-                                                        </section>
-                                                    </div>
-                                                </div>
-                                                <div className="mdl-card__media bright-bg-color v-h-25" style={blogImage(blog.image)}>
-                                                </div>
-                                                <div className="row p-2-em">
-                                                    <div className="mdl-card__supporting-text">
-                                                        <div className="mdl-color-text--grey-700">
-                                                            <div className="pull-left">
-                                                                <p><strong>{blog.postDate} by <Link to="/about">Marie Mills</Link></strong></p>
-                                                            </div>
-                                                            <div className="pull-right">
-                                                                <i className="glyphicon glyphicon-heart fa-lg" aria-hidden="true"></i> &nbsp;
-                                                        <i className="glyphicon glyphicon-bookmark fa-lg" aria-hidden="true"></i> &nbsp;
-                                                        <i className="fa fa-share-alt fa-lg" aria-hidden="true"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="mdl-card__supporting-text">
-                                                        <p className="dark-color">
-                                                            <MultilineText multilineText={previewText(blog.short)} />
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div className="mdl-card__actions mdl-card--border">
-                                                    <Link key={blog.id} to={'/' + blog.type + '/' + blog.id} className="dark-color btn btn-default btn-block" activeClassName="active">Read More</Link>
+                                <div className="col-3-masonry">
+                                    {blogs.map(blog =>
+                                        <div className="mdl-card mdl-shadow--4dp m-t-1-em tile-masonry bg-color-white">
+                                            <div className="mdl-card__title">
+                                                <div className="mdl-card__title-text">
+                                                    <section className="text-center">
+                                                        <h2>{blog.title}</h2>
+                                                    </section>
                                                 </div>
                                             </div>
-                                        )}
-                                    </div>
+                                            <div className="mdl-card__media bright-bg-color v-h-25" style={blogImage(blog.image)}>
+                                            </div>
+                                            <div className="row p-2-em">
+                                                <div className="mdl-card__supporting-text">
+                                                    <div className="mdl-color-text--grey-700">
+                                                        <div className="pull-left">
+                                                            <p><strong>{blog.postDate} by <Link to="/about">Marie Mills</Link></strong></p>
+                                                        </div>
+                                                        <div className="pull-right">
+                                                            <i className="glyphicon glyphicon-heart fa-lg" aria-hidden="true"></i> &nbsp;
+                                                        <i className="glyphicon glyphicon-bookmark fa-lg" aria-hidden="true"></i> &nbsp;
+                                                        <i className="fa fa-share-alt fa-lg" aria-hidden="true"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="mdl-card__supporting-text">
+                                                    <p className="dark-color">
+                                                        <MultilineText multilineText={previewText(blog.short)} />
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div className="mdl-card__actions mdl-card--border">
+                                                <Link key={blog.id} to={'/' + blog.type + '/' + blog.id} className="dark-color btn btn-default btn-block" activeClassName="active">Read More</Link>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>

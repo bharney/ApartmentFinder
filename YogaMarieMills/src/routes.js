@@ -21,6 +21,7 @@ import ManageDietConsultationPage from './components/contemporary/ManageDietCons
 import MassagePage from './components/contemporary/MassagePage';
 import ManageMassagePage from './components/contemporary/ManageMassagePage';
 import ManageEventPage from './components/events/ManageEventPage';
+import EventPage from './components/events/EventPage';
 import TestimonialPage from './components/contemporary/TestimonialPage';
 import ManageTestimonialPage from './components/contemporary/ManageTestimonialPage';
 
@@ -45,12 +46,14 @@ export default (
         <Route path="DietConsultation" component={ManageDietConsultationPage} />
         <Route path="Ayurveda/Testimonials" component={TestimonialPage} />
         <Route path="Testimonials" component={ManageTestimonialPage} />
-        <Route path="Events/:id" component={ManageEventPage} />
-        <Route path="Events" component={ManageEventPage} />
+        <Route path="Admin/Events/:id" component={ManageEventPage} />
+        <Route path="Admin/Events" component={ManageEventPage} />
+        <Route path="Events/:id" component={EventPage} />
         <Route path="About" component={AboutPage} />
-        <Route path="Blog/:id" component={BlogPage} />
-        <Route path="Blog" component={ManageBlogPage} />
         <Route path="Blogs" component={BlogsPage} />
+        <Route path="Blog/:id" component={BlogPage} />
+        <Route path="Admin/Blog/:id" component={ManageBlogPage} />
+        <Route path="Admin/Blog" component={ManageBlogPage} />
         <Route path="course" component={ManageCoursePage} />
         <Route path="course/:id" component={ManageCoursePage} />
         <Route path="courses" component={CoursesPage} />

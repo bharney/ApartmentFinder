@@ -153,41 +153,38 @@ class BlogPage extends React.Component {
                         <div className="row m-b-1-em">
                             <div className="col-xs-12">
                                 <h1 className="color-white text-center">{blog.title}</h1>
-                                <hr />
                                 <Admin uploadImage={this.uploadImage} blog={this.state.blog} saveAction={this.saveAction} deleteAction={this.deleteAction} />
-                                <div className="col-xs-12 m-b-1-em">
-                                    <div className="mdl-card mdl-shadow--4dp">
-                                        <div className="mdl-card__media v-h-40 image-text-container" style={blogImage}>
-                                            <div className="col-xs-7 text-left align-bottom m-l-20 m-b-20">
-                                                <TextInput
-                                                    name="title"
-                                                    label="Title"
-                                                    value={blog.title}
-                                                    onChange={this.updateBlogState} />
-                                            </div>
+                                <div className="mdl-card mdl-shadow--4dp">
+                                    <div className="mdl-card__media v-h-40 image-text-container" style={blogImage}>
+                                        <div className="col-xs-7 text-left align-bottom m-l-20 m-b-20">
+                                            <TextInput
+                                                name="title"
+                                                label="Title"
+                                                value={blog.title}
+                                                onChange={this.updateBlogState} />
                                         </div>
-                                        <div className="col-xs-12 t-border-thin p-20">
-                                            <div className="mdl-color-text--grey-700 col-xs-12 m-b-15">
-                                                <div className="pull-left">
-                                                    <p><strong>{blog.postDate} by <Link to="/about">Marie Mills</Link></strong></p>
-                                                </div>
-                                                <div className="pull-right">
-                                                    <i className="glyphicon glyphicon-heart fa-lg" aria-hidden="true"></i> &nbsp;
+                                    </div>
+                                    <div className="col-xs-12 t-border-thin p-20">
+                                        <div className="mdl-color-text--grey-700 col-xs-12 m-b-15">
+                                            <div className="pull-left">
+                                                <p><strong>{blog.postDate} by <Link to="/about">Marie Mills</Link></strong></p>
+                                            </div>
+                                            <div className="pull-right">
+                                                <i className="glyphicon glyphicon-heart fa-lg" aria-hidden="true"></i> &nbsp;
                                                         <i className="glyphicon glyphicon-bookmark fa-lg" aria-hidden="true"></i> &nbsp;
                                                         <i className="fa fa-share-alt fa-lg" aria-hidden="true"></i>
-                                                </div>
                                             </div>
-                                            <div id="editor" className="editor" onClick={this.focus}>
-                                                <p>
-                                                    <Editor
-                                                        editorState={this.state.editorState}
-                                                        onChange={this.onChange}
-                                                        ref="editor"
-                                                        plugins={plugins}
-                                                        />
-                                                    <InlineToolbar />
-                                                </p>
-                                            </div>
+                                        </div>
+                                        <div id="editor" className="editor" onClick={this.focus}>
+                                            <p>
+                                                <Editor
+                                                    editorState={this.state.editorState}
+                                                    onChange={this.onChange}
+                                                    ref="editor"
+                                                    plugins={plugins}
+                                                />
+                                                <InlineToolbar />
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

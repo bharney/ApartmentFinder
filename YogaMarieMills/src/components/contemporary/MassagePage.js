@@ -46,35 +46,36 @@ class MassagePage extends React.Component {
         return (
             <div className="mdl-grid dark-color bg-color">
                 <div className="ribbon bg-image-landing">
-                    <div className="container m-b-5-em">
-                        <div className="row m-b-5-em">
+                    <div className="container">
+                        <div className="row">
                             <div className="col-xs-12">
                                 <h1 className="text-center color-white m-0">{massageType.header}</h1>
                                 <h3 className="text-center color-white m-0 m-b-2-em">{massageType.description}
                                     <br />Venue: {massageType.venue}</h3>
                                 <Admin addAction={"Massage/" + massageType.type} />
-                                {massageType.massages.map(massage =>
-                                    <div className="col-xs-12 m-b-5-em">
-                                        <div>
-                                            <Admin editAction={"Massage/" + massageType.type + "/" + massage.id} />
-                                        </div>
-                                        <div className="mdl-card mdl-shadow--4dp p-b-3-em p-1-em allow-overflow">
-                                            {displayIcon(massage.icon, massage.iconWidth, massage.iconHeight)}
-                                            <h3 className="p-t-1-em text-center"><strong>{massage.title}</strong></h3>
-                                            <hr width="50%" className="center-block" />
-                                            <h4 className="m-0 text-center"><strong>{massage.session_time}</strong></h4>
-                                            <h4 className="m-0 text-center"><strong>{massage.cost}</strong></h4>
-                                            <div className="row">
-                                                <div className="col-xs-12">
-                                                    {massage.massage_details.map(massage_details =>
-                                                        offsetColumns(massage, massage_details)
-                                                    )}
-                                                </div>
+                            </div>
+                            {massageType.massages.map(massage =>
+                                <div className="col-xs-12 m-t-1-em m-b-3-em">
+                                    <div>
+                                        <Admin editAction={"Massage/" + massageType.type + "/" + massage.id} />
+                                    </div>
+                                    <div className="mdl-card mdl-shadow--4dp p-b-3-em p-1-em allow-overflow">
+                                        {displayIcon(massage.icon, massage.iconWidth, massage.iconHeight)}
+                                        <h3 className="p-t-1-em text-center"><strong>{massage.title}</strong></h3>
+                                        <hr width="50%" className="center-block" />
+                                        <h4 className="m-0 text-center"><strong>{massage.session_time}</strong></h4>
+                                        <h4 className="m-0 text-center"><strong>{massage.cost}</strong></h4>
+                                        <div className="row">
+                                            <div className="col-xs-12">
+                                                {massage.massage_details.map(massage_details =>
+                                                    offsetColumns(massage, massage_details)
+                                                )}
                                             </div>
                                         </div>
                                     </div>
-                                )}
-                            </div>
+                                </div>
+                            )}
+
                         </div>
                     </div>
                 </div>
