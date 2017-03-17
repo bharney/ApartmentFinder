@@ -12,22 +12,50 @@ class ManageBlogPage extends React.Component {
   constructor(props, context) {
     super(props, context);
 
+    const decorator = new CompositeDecorator([
+      {
+        strategy: getEntityStrategy('MUTABLE'),
+        component: TokenSpan,
+      },
+    ]);
+
+    let blocks = convertFromRaw(blocks = { blocks: [{ text: '', type: 'unstyled', },], entityMap: { first: { type: 'TOKEN', mutability: 'MUTABLE', }, } });
+    if (props.blog.description != "")
+      blocks = convertFromRaw(JSON.parse(props.blog.description));
+
     this.state = {
       blog: Object.assign({}, props.blog),
-      editorState: EditorState.createEmpty(),
-      errors: {},
-      saving: false
+      editorState: EditorState.createWithContent(
+        blocks,
+        decorator,
+      ),
     };
+
     this.onChange = this.onChange.bind(this);
-    this.saveAction = this.saveAction.bind(this);
-    this.updateBlogState = this.updateBlogState.bind(this);
-    this.getTextFromEntity = this.getTextFromEntity.bind(this);
-    this.uploadImage = this.uploadImage.bind(this);
     this.focus = this.focus.bind(this);
+    this.saveBlog = this.saveBlog.bind(this);
+    this.deleteBlog = this.deleteBlog.bind(this);
+    this.getTextFromEntity = this.getTextFromEntity.bind(this);
+    this.updateBlogState = this.updateBlogState.bind(this);
+    this.uploadImage = this.uploadImage.bind(this);
+    this.displayImage = this.displayImage.bind(this);
+  }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.blog.id != nextProps.blog.id) {
+      this.setState({ blog: Object.assign({}, nextProps.blog) });
+      const blocks = convertFromRaw(JSON.parse(nextProps.blog.description));
+      const editorState = EditorState.push(this.state.editorState, blocks);
+      this.setState({ editorState });
+
+    }
   }
 
   onChange(editorState) {
     this.setState({ editorState });
+  }
+
+  focus() {
+    this.refs.editor.focus();
   }
 
   getTextFromEntity(editorObj) {
@@ -40,20 +68,19 @@ class ManageBlogPage extends React.Component {
     return descriptionBlocks.join("\\n ");
   }
 
-  updateBlogState(event) {
-    const field = event.target.name;
-    let blog = this.state.blog;
-    blog[field] = event.target.value;
-    return this.setState({ blog: blog });
-  }
-
-  saveAction(event) {
+  saveBlog(event) {
     event.preventDefault();
     let blog = this.state.blog;
     blog.short = this.getTextFromEntity(convertToRaw(this.state.editorState.getCurrentContent()));
     blog.description = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
     this.setState({ blog: blog });
     this.props.actions.saveBlog(this.state.blog);
+    this.context.router.push('/blogs');
+  }
+
+  deleteBlog(event) {
+    this.props.actions.deleteBlog(this.state.blog.id);
+    this.props.actions.loadBlog();
     this.context.router.push('/blogs');
   }
 
@@ -72,8 +99,21 @@ class ManageBlogPage extends React.Component {
     reader.readAsDataURL(file)
   }
 
-  focus() {
-    this.refs.editor.focus();
+  updateBlogState(event) {
+    const field = event.target.name;
+    let blog = this.state.blog;
+    blog[field] = event.target.value;
+    return this.setState({ blog: blog });
+  }
+
+  displayImage(image) {
+    image = image ? require(`../../images/${image}`) : '';
+    return ({
+      backgroundImage: 'url(' + image + ')',
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundSize: "cover"
+    })
   }
 
 
@@ -82,7 +122,8 @@ class ManageBlogPage extends React.Component {
       <BlogForm
         updateBlogState={this.updateBlogState}
         onChange={this.onChange}
-        saveAction={this.saveAction}
+        saveBlog={this.saveBlog}
+        deleteBlog={this.deleteBlog}
         blog={this.state.blog}
         editorState={this.state.editorState}
         ref="editor"
@@ -90,7 +131,8 @@ class ManageBlogPage extends React.Component {
         errors={this.state.errors}
         saving={this.state.saving}
         uploadImage={this.uploadImage}
-        />
+        displayImage={this.displayImage}
+      />
     );
   }
 }
@@ -104,8 +146,56 @@ ManageBlogPage.contextTypes = {
   router: PropTypes.object
 };
 
+function getEntityStrategy(mutability) {
+  return function (contentBlock, callback, contentState) {
+    contentBlock.findEntityRanges(
+      (character) => {
+        const entityKey = character.getEntity();
+        if (entityKey === null) {
+          return false;
+        }
+        return contentState.getEntity(entityKey).getMutability() === mutability;
+      },
+      callback
+    );
+  };
+}
+
+function getDecoratedStyle(mutability) {
+  switch (mutability) {
+    case 'MUTABLE': return null;
+    default: return null;
+  }
+}
+
+const TokenSpan = (props) => {
+  const style = getDecoratedStyle(
+    props.contentState.getEntity(props.entityKey).getMutability()
+  );
+  return (
+    <span data-offset-key={props.offsetkey}>
+      {props.children}
+    </span>
+  );
+};
+
+
+function getBlogById(blogs, id) {
+  const blog = blogs.filter(blog => blog.id == id);
+  if (blog.length) {
+    return blog[0];
+  }
+
+  return null;
+}
+
 function mapStateToProps(state, ownProps) {
-  let blog = { id: '', name: '', image: '', short: '', description: '', href: '', route: '', component: '' };
+  const blogId = ownProps.params.id;
+  let blog = { id: '', title: '', image: '', description: '', href: '', route: '', component: '' };
+  if (blogId && state.blogs.length > 0) {
+    blog = getBlogById(state.blogs, blogId);
+  }
+
   return {
     blog: blog
   };
