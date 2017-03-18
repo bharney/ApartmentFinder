@@ -24,10 +24,12 @@ import ManageEventPage from './components/events/ManageEventPage';
 import EventPage from './components/events/EventPage';
 import TestimonialPage from './components/contemporary/TestimonialPage';
 import ManageTestimonialPage from './components/contemporary/ManageTestimonialPage';
+import ManageLoginPage from './components/login/ManageLoginPage';
 
 export default (
     <Route path="/" history={browserHistory} component={App}>
         <IndexRoute component={HomePage} />
+        <Route path="Login" component={ManageLoginPage} />
         <Route path="YogaThurles/Schedule" component={YogaThurlesPage} />
         <Route path="Schedule/:id" component={ManageSchedulePage} />
         <Route path="Schedule" component={ManageSchedulePage} />

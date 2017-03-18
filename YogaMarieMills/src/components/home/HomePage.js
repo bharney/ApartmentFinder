@@ -59,7 +59,7 @@ class HomePage extends React.Component {
                     </div>
                 </section>
                 <section>
-                    <div className="container-fluid light-bg-color color-blur t-border">
+                    <div className="container-fluid light-bg-color color-blur t-border t-shadow">
                         <div className="container">
                             <div className="row text-center p-t-20 p-b-30 m-t-20">
                                 <div className="col-xs-offset-1 col-xs-10">
@@ -135,13 +135,13 @@ class HomePage extends React.Component {
                     </div>
                 </section>
                 <section>
-                    <div className="container-fluid t-border">
+                    <div className="container-fluid t-border t-shadow">
                         <div className="row" style={divider}>
                         </div>
                     </div>
                 </section>
                 <section>
-                    <div className="container-fluid bg-color color-blur t-border">
+                    <div className="container-fluid bg-color color-blur t-border t-shadow">
                         <div className="container">
                             <h2 className="text-center">Specialties</h2>
                             <div className="text-center">
@@ -220,7 +220,7 @@ class HomePage extends React.Component {
                     </div>
                 </section>
                 <section>
-                    <div className="container-fluid dark-bg-color t-border">
+                    <div className="container-fluid dark-bg-color t-border t-shadow">
                         <div className="row p-t-40 p-b-40 row-center color-white">
                             <div className="col-xs-12 col-sm-offset-1 col-sm-10">
                                 <h2 className="text-center">My Blog</h2>

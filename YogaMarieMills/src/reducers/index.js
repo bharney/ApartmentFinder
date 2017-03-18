@@ -11,6 +11,7 @@ import massageTypes from './massageReducer';
 import eventTypes from './eventReducer';
 import testimonials from './testimonialReducer';
 import upload from './uploadReducer';
+import client from './clientReducer';
 
 const rootReducer = combineReducers({
   courses,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   testimonials,
   eventTypes,
   upload,
+  client
 });
 
 export default rootReducer;

@@ -4,141 +4,24 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as blogActions from '../../actions/blogActions';
 import * as uploadActions from '../../actions/uploadActions';
-import Admin from '../common/Admin';
-import TextInput from '../common/TextInput';
-import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
-import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
-import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
-import {
-    ItalicButton,
-    BoldButton,
-    UnderlineButton,
-    HeadlineTwoButton,
-    HeadlineThreeButton,
-    UnorderedListButton,
-    OrderedListButton,
-    BlockquoteButton,
-} from 'draft-js-buttons';
-
-const inlineToolbarPlugin = createInlineToolbarPlugin({
-    structure: [
-        BoldButton,
-        ItalicButton,
-        UnderlineButton,
-        HeadlineTwoButton,
-        HeadlineThreeButton,
-        UnorderedListButton,
-        OrderedListButton,
-        BlockquoteButton,
-    ]
-});
-
-const plugins = [inlineToolbarPlugin];
-
-const { InlineToolbar } = inlineToolbarPlugin;
+import { CompositeDecorator, ContentBlock, ContentState, Editor, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
 
 class BlogPage extends React.Component {
     constructor(props, context) {
         super(props, context);
-
         const decorator = new CompositeDecorator([
             {
                 strategy: getEntityStrategy('MUTABLE'),
                 component: TokenSpan,
             },
         ]);
-
-        let blocks = convertFromRaw(blocks = { blocks: [{ text: '', type: 'unstyled', },], entityMap: { first: { type: 'TOKEN', mutability: 'MUTABLE', }, } });
-        if (props.blog.description != "")
-            blocks = convertFromRaw(JSON.parse(props.blog.description));
-
-        this.state = {
-            blog: Object.assign({}, props.blog),
-            editorState: EditorState.createWithContent(
-                blocks,
-                decorator,
-            ),
-        };
-
-        this.onChange = this.onChange.bind(this);
-        this.focus = this.focus.bind(this);
-        this.saveAction = this.saveAction.bind(this);
-        this.deleteAction = this.deleteAction.bind(this);
-        this.getTextFromEntity = this.getTextFromEntity.bind(this);
-        this.updateBlogState = this.updateBlogState.bind(this);
-        this.uploadImage = this.uploadImage.bind(this);
     }
-
-    componentWillReceiveProps(nextProps) {
-        if (this.props.blog.id != nextProps.blog.id) {
-            this.setState({ blog: Object.assign({}, nextProps.blog) });
-            const blocks = convertFromRaw(JSON.parse(nextProps.blog.description));
-            const editorState = EditorState.push(this.state.editorState, blocks);
-            this.setState({ editorState });
-
-        }
-    }
-
-    onChange(editorState) {
-        this.setState({ editorState });
-    }
-
-    focus() {
-        this.refs.editor.focus();
-    }
-
-    getTextFromEntity(editorObj) {
-        let descriptionBlocks = [];
-        for (let prop in editorObj.blocks) {
-            if (editorObj.blocks.hasOwnProperty(prop)) {
-                descriptionBlocks.push(editorObj.blocks[prop].text)
-            }
-        }
-        return descriptionBlocks.join("\\n ");
-    }
-
-    saveAction(event) {
-        event.preventDefault();
-        let blog = this.state.blog;
-        blog.short = this.getTextFromEntity(convertToRaw(this.state.editorState.getCurrentContent()));
-        blog.description = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
-        this.setState({ blog: blog });
-        this.props.actions.saveBlog(this.state.blog);
-        this.context.router.push('/blogs');
-    }
-
-    deleteAction(event) {
-        this.props.actions.deleteBlog(this.state.blog.id);
-        this.props.actions.loadBlog();
-        this.context.router.push('/blogs');
-    }
-
-    uploadImage(e) {
-        e.preventDefault();
-
-        let reader = new FileReader();
-        let file = e.target.files[0];
-
-        reader.onloadend = () => {
-            let blog = this.state.blog;
-            blog.image = file.name
-            this.props.upload.uploadFile(file);
-            return this.setState({ blog: blog });
-        }
-        reader.readAsDataURL(file)
-    }
-
-    updateBlogState(event) {
-        const field = event.target.name;
-        let blog = this.state.blog;
-        blog[field] = event.target.value;
-        return this.setState({ blog: blog });
-    }
-
 
     render() {
         const { blog } = this.props;
+
         let blogImg = blog.image ? require(`../../images/${blog.image}`) : ""
+
         const blogImage = {
             backgroundImage: 'url(' + blogImg + ')',
             backgroundRepeat: "no-repeat",
@@ -153,15 +36,12 @@ class BlogPage extends React.Component {
                         <div className="row m-b-1-em">
                             <div className="col-xs-12">
                                 <h1 className="color-white text-center">{blog.title}</h1>
-                                <Admin uploadImage={this.uploadImage} blog={this.state.blog} saveAction={this.saveAction} deleteAction={this.deleteAction} />
                                 <div className="mdl-card mdl-shadow--4dp">
                                     <div className="mdl-card__media v-h-40 image-text-container" style={blogImage}>
-                                        <div className="col-xs-7 text-left align-bottom m-l-20 m-b-20">
-                                            <TextInput
-                                                name="title"
-                                                label="Title"
-                                                value={blog.title}
-                                                onChange={this.updateBlogState} />
+                                        <div className="text-left align-bottom m-l-20 m-b-20">
+                                            <header className="color-white">
+                                                <h4 className="m-t-0 m-b-0"><strong>{blog.title}</strong></h4>
+                                            </header>
                                         </div>
                                     </div>
                                     <div className="col-xs-12 t-border-thin p-20">
@@ -175,15 +55,17 @@ class BlogPage extends React.Component {
                                                         <i className="fa fa-share-alt fa-lg" aria-hidden="true"></i>
                                             </div>
                                         </div>
-                                        <div id="editor" className="editor" onClick={this.focus}>
+                                        <div id="editor" className="editor">
                                             <p>
                                                 <Editor
-                                                    editorState={this.state.editorState}
-                                                    onChange={this.onChange}
+                                                    editorState={EditorState.createWithContent(
+                                                        blog.description ? convertFromRaw(JSON.parse(blog.description))
+                                                            : convertFromRaw({ blocks: [{ text: '', type: 'unstyled', },], entityMap: { first: { type: 'TOKEN', mutability: 'MUTABLE', }, } }),
+                                                        this.decorator,
+                                                    )}
+                                                    readOnly={true}
                                                     ref="editor"
-                                                    plugins={plugins}
                                                 />
-                                                <InlineToolbar />
                                             </p>
                                         </div>
                                     </div>
@@ -267,7 +149,6 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(blogActions, dispatch),
-        upload: bindActionCreators(uploadActions, dispatch)
     };
 }
 

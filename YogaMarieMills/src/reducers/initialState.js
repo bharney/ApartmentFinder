@@ -11,4 +11,5 @@ export default {
   testimonials: [],
   eventTypes: [],
   upload: [],
+  client: {}
 }

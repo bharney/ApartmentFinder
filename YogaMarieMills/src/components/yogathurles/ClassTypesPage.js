@@ -107,7 +107,7 @@ class ClassTypesPage extends React.Component {
                                 <Admin addAction={classTypes.type} />
                             </div>
                         </div>
-                        <div className="p-l-0 p-r-0 p-t-1-em row">
+                        <div className="p-l-0 p-r-0 row t-border t-shadow">
                             {classTypes.map(classType => alternateTileSides(classTypes, classType))}
                         </div>
                     </div>
