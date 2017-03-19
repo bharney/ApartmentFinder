@@ -11,5 +11,12 @@ export default {
   testimonials: [],
   eventTypes: [],
   upload: [],
-  client: {}
+  client: {
+    id: null,
+    token: null,
+  },
+  requesting: false,
+  successful: false,
+  messages: [],
+  errors: [],
 }

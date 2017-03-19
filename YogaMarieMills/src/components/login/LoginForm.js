@@ -2,7 +2,7 @@ import React from 'react';
 import PasswordInput from '../common/PasswordInput';
 import EmailInput from '../common/EmailInput';
 
-const LoginForm = ({ login, authenticateLogin, onChange, loading, errors }) => {
+const LoginForm = ({ login, loginRequest, onChange, loading, errors }) => {
   return (
     <div className="mdl-grid dark-color bg-color">
       <div className="ribbon bg-image-landing b-border">
@@ -32,7 +32,7 @@ const LoginForm = ({ login, authenticateLogin, onChange, loading, errors }) => {
                     disabled={loading}
                     value={loading ? 'Logging in...' : 'Log In'}
                     className="btn btn-primary pull-right"
-                    onClick={authenticateLogin}>Log In</button>
+                    onClick={loginRequest}>Log In</button>
                 </form>
               </div>
             </div>
