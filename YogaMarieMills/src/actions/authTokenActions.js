@@ -2,12 +2,12 @@ let storage = window.localStorage;
 let cachedToken;
 let userToken = 'userToken';
 
-export function setTokenSuccess(cachedToken) {
-  return { type: 'IS_AUTHENTICATED', cachedToken };
+export function setTokenSuccess(token) {
+  return { type: 'IS_AUTHENTICATED', token };
 }
 
-export function getTokenSuccess(cachedToken) {
-  return { type: 'IS_AUTHENTICATED', cachedToken };
+export function getTokenSuccess(token) {
+  return { type: 'IS_AUTHENTICATED', token };
 }
 
 export function removeTokenSuccess() {
@@ -15,34 +15,19 @@ export function removeTokenSuccess() {
 }
 
 export function setToken(token) {
-  return function (dispatch, getState) {
-    cachedToken = token;
-    storage.setItem(userToken, token);
-    dispatch(setTokenSuccess(cachedToken)).then(() => {
-    }).catch(error => {
-      throw (error);
-    });
-  };
+  cachedToken = token;
+  storage.setItem(userToken, token);
+  return setTokenSuccess(cachedToken)
 }
 
-export function getToken(blog) {
-  return function (dispatch, getState) {
-    if (!cachedToken)
-      cachedToken = storage.getItem(userToken);
-    dispatch(getTokenSuccess(cachedToken)).then(() => {
-    }).catch(error => {
-      throw (error);
-    });
-  };
+export function getToken() {
+  if (!cachedToken)
+    cachedToken = storage.getItem(userToken);
+  return getTokenSuccess(cachedToken)
 }
 
-export function removeToken(blog) {
-  return function (dispatch, getState) {
-    cachedToken = null;
-    storage.removeItem(userToken);
-    dispatch(removeTokenSuccess()).then(() => {
-    }).catch(error => {
-      throw (error);
-    });
-  };
+export function removeToken() {
+  cachedToken = null;
+  storage.removeItem(userToken);
+  return removeTokenSuccess()
 }

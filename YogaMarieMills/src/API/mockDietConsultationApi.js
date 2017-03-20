@@ -24,7 +24,6 @@ class DietConsultationApi {
     return new Promise((resolve, reject) => {
       if (updateConsulations.length) {
         consultation.consultationDetails = updateConsulations;
-        debugger;
         fetch('http://localhost:3000/api/consultations', {
           method: 'put',
           headers: {
@@ -42,7 +41,6 @@ class DietConsultationApi {
       }
       if (insertConsultations.length) {
         consultation.consultationDetails = insertConsultations;
-        debugger;
         fetch('http://localhost:3000/api/consultations', {
           method: 'post',
           headers: {

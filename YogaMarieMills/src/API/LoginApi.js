@@ -3,9 +3,7 @@ import { setToken, getToken } from '../actions/authTokenActions';
 class LoginApi {
     static loginRequest(login) {
         login = Object.assign({}, login);
-        debugger;
         return new Promise((resolve, reject) => {
-            debugger;
             if (login.emailAddress && login.password) {
                 fetch('http://localhost:3000/api/login', {
                     method: 'post',
@@ -17,10 +15,8 @@ class LoginApi {
                 }).then(function (response) {
                     return response.json();
                 }).then(function (login) {
-                    debugger;
-                    if (login) {
-                        resolve(setToken(login))
-                    }
+                    if (login.token)
+                        resolve(setToken(login));
                 }).catch(function (error) {
                     console.log('Request failed', error);
                 });

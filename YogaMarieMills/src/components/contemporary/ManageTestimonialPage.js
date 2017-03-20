@@ -78,7 +78,6 @@ class ManageTestimonialPage extends React.Component {
   }
 
   updateQuoteState(event) {
-    debugger;
     const field = event.target.name;
     let testimonial = this.state.testimonial;
     testimonial.testimonial_details[parseInt(field)].testimonial = event.target.value;
@@ -86,7 +85,6 @@ class ManageTestimonialPage extends React.Component {
   }
 
   updateNameState(event) {
-    debugger;
     const field = event.target.name;
     let testimonial = this.state.testimonial;
     testimonial.testimonial_details[parseInt(field)].name = event.target.value;
@@ -108,7 +106,6 @@ class ManageTestimonialPage extends React.Component {
   }
 
   addRow() {
-    debugger;
     let testimonial = this.state.testimonial;
     testimonial.testimonial_details.push({
       id: Math.max.apply(Math, testimonial.testimonial_details.map(i => i.id)) + 1,
@@ -120,7 +117,6 @@ class ManageTestimonialPage extends React.Component {
   }
 
   removeRow(event) {
-    debugger;
     const rowNumber = event.currentTarget.name;
     let testimonial = this.state.testimonial;
     testimonial.testimonial_details.splice(parseInt(rowNumber), 1)

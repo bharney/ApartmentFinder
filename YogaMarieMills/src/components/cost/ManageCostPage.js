@@ -17,6 +17,7 @@ class ManageCostPage extends React.Component {
       errors: {},
       saving: false
     };
+    
     this.saveCost = this.saveCost.bind(this);
     this.deleteCost = this.deleteCost.bind(this);
     this.updateCostState = this.updateCostState.bind(this);

@@ -75,7 +75,6 @@ class ManageDietConsultationPage extends React.Component {
   }
 
   updateTitleState(event) {
-    debugger;
     const field = event.target.name;
     let dietConsultation = this.state.dietConsultation;
     dietConsultation.consultationDetails[parseInt(field)].title = event.target.value;
@@ -83,7 +82,6 @@ class ManageDietConsultationPage extends React.Component {
   }
 
   updateCostState(event) {
-    debugger;
     const field = event.target.name;
     let dietConsultation = this.state.dietConsultation;
     dietConsultation.consultationDetails[parseInt(field)].cost = event.target.value;
@@ -91,7 +89,6 @@ class ManageDietConsultationPage extends React.Component {
   }
 
   updateSessionTimeState(event) {
-    debugger;
     const field = event.target.name;
     let dietConsultation = this.state.dietConsultation;
     dietConsultation.consultationDetails[parseInt(field)].session_time = event.target.value;
@@ -99,7 +96,6 @@ class ManageDietConsultationPage extends React.Component {
   }
 
   updateShortState(event) {
-    debugger;
     const field = event.target.name;
     let dietConsultation = this.state.dietConsultation;
     dietConsultation.consultationDetails[parseInt(field)].consultation = event.target.value;
@@ -107,7 +103,6 @@ class ManageDietConsultationPage extends React.Component {
   }
 
   updateConsultationDescState(event) {
-    debugger;
     const field = event.target.name;
     let dietConsultation = this.state.dietConsultation;
     dietConsultation.consultationDetails[parseInt(field)].consultation_desc = event.target.value;
@@ -136,7 +131,6 @@ class ManageDietConsultationPage extends React.Component {
   }
 
   addRow() {
-    debugger;
     let dietConsultation = this.state.dietConsultation;
     dietConsultation.consultationDetails.push({
       id: Math.max.apply(Math, dietConsultation.consultationDetails.map(i => i.id)) + 1,
@@ -154,7 +148,6 @@ class ManageDietConsultationPage extends React.Component {
   }
 
   removeRow(event) {
-    debugger;
     const rowNumber = event.currentTarget.name;
     let dietConsultation = this.state.dietConsultation;
     dietConsultation.consultationDetails.splice(parseInt(rowNumber), 1)

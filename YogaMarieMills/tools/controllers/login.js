@@ -10,16 +10,12 @@ let loginRoutes = function () {
     const dbconfig = "mssql://Application:!Testing123@BPHSERVER/YogaMarieMills";
 
     function createToken(user, res, req) {
-        console.log("user: " + user);
-        console.log("res: " + res);
-        console.log("req: " + req);
+        delete user.password;
         const payload = {
             iss: req.hostname,
             sub: user.emailAddress
         }
-        console.log("payload: " + payload);
         const token = jwt.encode(payload, secret);
-        console.log("token: " + token);
         res.status(200).send({
             user: user,
             token: token
@@ -40,21 +36,15 @@ let loginRoutes = function () {
                                 FROM Users
                                 WHERE emailAddress = @emailAddress`
                 ).then(function (recordset) {
-                    console.log(recordset);
                     if (recordset[0].emailAddress) {
 
                         bcrypt.compare(user.password, recordset[0].password, function (err, isMatch) {
                             if (err) return;
 
-                            console.log("user.password: " + user.password);
-                            console.log("recordset.password " + recordset[0].password);
-                            console.log("isMatch: " + isMatch);
                             if (!isMatch) {
                                 res.status(401).send("Email Address or Password is incorrect.")
                             } else {
-                                console.log("PrecreateToken");
                                 createToken(recordset, res, req)
-                                console.log("PostcreateToken");
                             }
                         });
                     }

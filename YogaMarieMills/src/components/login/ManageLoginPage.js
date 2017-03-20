@@ -27,7 +27,6 @@ class ManageLoginPage extends React.Component {
 
   loginRequest(event){
     event.preventDefault();
-    debugger;
     this.props.actions.loginRequest(this.state.login);
   }
 
