@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as loginActions from '../../actions/loginActions';
-import * as clientActions from '../../actions/clientActions';
 import LoginForm from './LoginForm';
 
 
@@ -16,7 +15,7 @@ class ManageLoginPage extends React.Component {
       saving: false
     };
     this.updateLoginState = this.updateLoginState.bind(this);
-    this.authenticateLogin = this.authenticateLogin.bind(this);
+    this.loginRequest = this.loginRequest.bind(this);
   }
 
   updateLoginState(event){
@@ -28,7 +27,8 @@ class ManageLoginPage extends React.Component {
 
   loginRequest(event){
     event.preventDefault();
-    this.props.actions.loginRequesting(this.state.login);
+    debugger;
+    this.props.actions.loginRequest(this.state.login);
   }
 
   render() {
@@ -55,7 +55,7 @@ ManageLoginPage.contextTypes = {
 
 function mapStateToProps(state) {
   let login = {
-    email: '',
+    emailAddress: '',
     password: ''
   };
 
@@ -67,7 +67,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(loginActions, dispatch),
-    token: bindActionCreators(clientActions, dispatch)
   };
 }
 

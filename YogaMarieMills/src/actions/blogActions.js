@@ -39,7 +39,6 @@ export function deleteBlog(blog) {
   };
 }
 
-
 export function saveBlog(blog) {
   return function (dispatch, getState) {
     return blogApi.saveBlog(blog).then(savedBlog => {

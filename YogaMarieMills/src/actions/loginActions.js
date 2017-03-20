@@ -12,9 +12,9 @@ export function loginError(loginResponse) {
   return { type: 'LOGIN_ERROR', loginResponse };
 }
 
-export function loginReqest(login) {
+export function loginRequest(login) {
   return function (dispatch, getState) {
-    return loginApi.loginReqest(login).then(loginResponse => {
+    return loginApi.loginRequest(login).then(loginResponse => {
       loginResponse.token ? dispatch(loginSuccess(loginResponse)) :
         dispatch(loginError(loginResponse));
     }).catch(error => {

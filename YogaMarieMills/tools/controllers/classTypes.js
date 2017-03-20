@@ -8,6 +8,9 @@ let classTypeRoutes = function () {
 
     classTypeRouter.route('/classTypes')
         .post(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             let classType = (req.body);
             const sqlInsertClassType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlInsertClassType);
@@ -29,6 +32,9 @@ let classTypeRoutes = function () {
             });
         })
         .put(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             let classType = (req.body);
             const sqlUpdateClassType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlUpdateClassType);
@@ -60,6 +66,9 @@ let classTypeRoutes = function () {
             });
         })
         .delete(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             const sqlDeleteClassType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteClassType);
                 request.input('id', sql.Int, req.body.id);
@@ -120,6 +129,9 @@ let classTypeRoutes = function () {
             });
         })
         .delete(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             const sqlDeleteClassType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteClassType);
                 request.input('id', sql.Int, req.params.classTypeId);

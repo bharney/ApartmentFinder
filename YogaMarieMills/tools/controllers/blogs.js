@@ -8,6 +8,9 @@ let blogRoutes = function () {
 
     blogRouter.route('/blogs')
         .post(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             let blog = (req.body);
             const sqlInsertBlog = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlInsertBlog);
@@ -30,6 +33,9 @@ let blogRoutes = function () {
             });
         })
         .put(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             let blog = (req.body);
             const sqlUpdateBlog = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlUpdateBlog);
@@ -58,6 +64,9 @@ let blogRoutes = function () {
             });
         })
         .delete(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             const sqlDeleteBlog = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteBlog);
                 request.input('id', sql.Int, req.body.id);
@@ -120,6 +129,9 @@ let blogRoutes = function () {
             });
         })
         .delete(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             const sqlDeleteBlog = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteBlog);
                 request.input('id', sql.Int, req.params.blogId);

@@ -11,8 +11,8 @@ export default {
   testimonials: [],
   eventTypes: [],
   upload: [],
-  client: {
-    id: null,
+  authToken: {
+    user: null,
     token: null,
   },
   requesting: false,

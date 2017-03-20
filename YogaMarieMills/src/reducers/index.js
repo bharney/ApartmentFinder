@@ -11,7 +11,7 @@ import massageTypes from './massageReducer';
 import eventTypes from './eventReducer';
 import testimonials from './testimonialReducer';
 import upload from './uploadReducer';
-import client from './clientReducer';
+import authToken from './authTokenReducer';
 import login from './loginReducer';
 
 const rootReducer = combineReducers({
@@ -27,7 +27,7 @@ const rootReducer = combineReducers({
   testimonials,
   eventTypes,
   upload,
-  client,
+  authToken,
   login
 });
 

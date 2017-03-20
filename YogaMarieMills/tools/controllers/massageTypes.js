@@ -8,6 +8,9 @@ let massageTypeRoutes = function () {
 
     massageTypeRouter.route('/massages')
         .post(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             let massageType = (req.body);
             const sqlInsertMassageType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlInsertMassageType);
@@ -46,6 +49,9 @@ let massageTypeRoutes = function () {
             });
         })
         .put(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             let massageType = (req.body);
             const sqlUpdateMassageType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlUpdateMassageType);
@@ -94,6 +100,9 @@ let massageTypeRoutes = function () {
             });
         })
         .delete(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             const sqlDeleteMassageType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteMassageType);
                 request.input('id', sql.Int, req.body.id);
@@ -248,6 +257,9 @@ let massageTypeRoutes = function () {
             });
         })
         .delete(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             const sqlDeleteMassageType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteMassageType);
                 request.input('id', sql.Int, req.params.massageTypeId);

@@ -8,6 +8,9 @@ let consultationRoutes = function () {
 
     consultationRouter.route('/consultations')
         .post(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             let consultation = (req.body);
             for (let prop in consultation.consultationDetails) {
                 if (consultation.consultationDetails.hasOwnProperty(prop)) {
@@ -30,6 +33,9 @@ let consultationRoutes = function () {
             }
         })
         .put(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             let consultation = (req.body);
             const sqlUpdateConsultation = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlUpdateConsultation);
@@ -77,6 +83,9 @@ let consultationRoutes = function () {
             });
         })
         .delete(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             const sqlDeleteConsultation = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteConsultation);
                 request.input('id', sql.Int, req.body.id);
@@ -170,6 +179,9 @@ let consultationRoutes = function () {
             });
         })
         .delete(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             const sqlDeleteConsultation = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteConsultation);
                 request.input('id', sql.Int, req.params.consultationId);

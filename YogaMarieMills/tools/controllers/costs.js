@@ -8,6 +8,9 @@ let costRoutes = function () {
 
     costRouter.route('/costs')
         .post(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             let cost = (req.body);
             const sqlInsertCost = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlInsertCost);
@@ -27,6 +30,9 @@ let costRoutes = function () {
             });
         })
         .put(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             let cost = (req.body);
             const sqlUpdateCost = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlUpdateCost);
@@ -54,6 +60,9 @@ let costRoutes = function () {
             });
         })
         .delete(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             const sqlDeleteCost = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteCost);
                 request.input('id', sql.Int, req.body.id);
@@ -118,6 +127,9 @@ let costRoutes = function () {
             });
         })
         .delete(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             const sqlDeleteCost = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteCost);
                 request.input('id', sql.Int, req.params.costId);

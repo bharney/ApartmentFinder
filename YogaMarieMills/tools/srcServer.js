@@ -33,6 +33,8 @@ import scheduleRouter from './controllers/schedules';
 import testimonialRouter from './controllers/testimonials';
 import navbarRouter from './controllers/navbars';
 import uploadRouter from './controllers/uploads';
+import usersRouter from './controllers/users';
+import loginRouter from './controllers/login';
 
 app.use('/api', blogRouter(),
     consultationRouter(),
@@ -43,7 +45,9 @@ app.use('/api', blogRouter(),
     scheduleRouter(),
     testimonialRouter(),
     navbarRouter(),
-    uploadRouter());
+    uploadRouter(),
+    usersRouter(),
+    loginRouter());
 
 app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, '../src/index.html'));

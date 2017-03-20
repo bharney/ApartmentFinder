@@ -8,6 +8,9 @@ let navbarRoutes = function () {
 
     navbarRouter.route('/navbars')
         .post(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             let navbar_item = (req.body);
             const sqlInsertNavbar = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlInsertNavbar);
@@ -25,6 +28,9 @@ let navbarRoutes = function () {
             });
         })
         .put(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             let navbar_item = (req.body);
             const sqlUpdateNavbar = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlUpdateNavbar);
@@ -47,6 +53,9 @@ let navbarRoutes = function () {
             });
         })
         .delete(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             const sqlDeleteNavbar = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteNavbar);
                 request.input('id', sql.Int, req.body.id);
@@ -137,6 +146,9 @@ let navbarRoutes = function () {
             });
         })
         .delete(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             const sqlDeleteNavbar = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteNavbar);
                 request.input('id', sql.Int, req.params.navbarId);

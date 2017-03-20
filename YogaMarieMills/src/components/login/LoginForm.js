@@ -14,9 +14,9 @@ const LoginForm = ({ login, loginRequest, onChange, loading, errors }) => {
               <div className="mdl-card mdl-shadow--4dp p-login">
                 <form>
                   <EmailInput
-                    name="email"
+                    name="emailAddress"
                     label="Email"
-                    value={login.email}
+                    value={login.emailAddress}
                     onChange={onChange}
                     error={errors.email} />
 

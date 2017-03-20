@@ -1,16 +1,16 @@
 import initialState from './initialState';
 
-export default function clientReducer(state = initialState.client, action) {
+export default function authTokenReducer(state = initialState.authToken, action) {
     switch (action.type) {
-        case 'CLIENT_SET':
+        case 'IS_AUTHENTICATED':
             return {
-                id: action.token.userId,
+                user: action.user,
                 token: action.token,
             }
 
-        case 'CLIENT_UNSET':
+        case 'NOT_AUTHENTICATED':
             return {
-                id: null,
+                user: null,
                 token: null,
             }
 

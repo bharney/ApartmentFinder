@@ -9,6 +9,9 @@ let scheduleRoutes = function () {
     scheduleRouter.route('/schedules')
 
         .post(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             let schedule = (req.body);
             const sqlInsertSchedule = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlInsertSchedule);
@@ -44,6 +47,9 @@ let scheduleRoutes = function () {
             });
         })
         .put(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             let schedule = (req.body);
             console.log(schedule);
             const sqlUpdateSchedule = new sql.Connection(dbconfig, function (err) {
@@ -87,6 +93,9 @@ let scheduleRoutes = function () {
             });
         })
         .delete(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             const sqlDeleteSchedule = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteSchedule);
                 request.input('id', sql.Int, req.body.id);
@@ -132,7 +141,6 @@ let scheduleRoutes = function () {
                         FROM Schedules S
                         WHERE session_date >= GETDATE()
                                                 
-
                         UNION ALL
 
                         SELECT 
@@ -252,6 +260,9 @@ let scheduleRoutes = function () {
             });
         })
         .delete(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             const sqlDeleteSchedule = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteSchedule);
                 request.input('id', sql.Int, req.params.scheduleId);

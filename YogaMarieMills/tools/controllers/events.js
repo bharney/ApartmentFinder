@@ -8,6 +8,9 @@ let eventRoutes = function () {
 
     eventRouter.route('/events')
         .post(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             let eventType = (req.body);
             function replaceAll(str, find, replace) {
                 return str.replace(new RegExp(find, 'g'), replace);
@@ -50,6 +53,9 @@ let eventRoutes = function () {
             });
         })
         .put(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             let eventType = (req.body);
             const sqlUpdateEventType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlUpdateEventType);
@@ -104,6 +110,9 @@ let eventRoutes = function () {
             });
         })
         .delete(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             let eventType = (req.body);
             const sqlDeleteEventType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteEventType);
@@ -180,6 +189,9 @@ let eventRoutes = function () {
             });
         })
         .delete(function (req, res) {
+            if(!req.headers.authorization){
+                return res.status(401).send({message: "You are not authorized"})
+            }
             const sqlDeleteEventType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteEventType);
                 request.input('id', sql.Int, req.params.eventId);
