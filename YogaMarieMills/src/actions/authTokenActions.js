@@ -16,14 +16,15 @@ export function removeTokenSuccess() {
 
 export function setToken(token) {
   cachedToken = token;
-  storage.setItem(userToken, token);
+  storage.setItem(userToken, JSON.stringify(token));
   return setTokenSuccess(cachedToken)
 }
 
 export function getToken() {
   if (!cachedToken)
     cachedToken = storage.getItem(userToken);
-  return getTokenSuccess(cachedToken)
+    debugger;
+  return cachedToken
 }
 
 export function removeToken() {

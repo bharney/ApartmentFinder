@@ -1,3 +1,4 @@
+import { getToken } from '../actions/authTokenActions';
 
 class UploadApi {
     static uploadFile(file) {
@@ -6,6 +7,9 @@ class UploadApi {
         return new Promise((resolve, reject) => {
             fetch('http://localhost:3000/api/uploads', {
                 method: 'post',
+                headers: {
+                    'Authorization': 'Bearer ' + getToken()
+                },
                 body: data
             }).then(function (response) {
                 resolve(response)

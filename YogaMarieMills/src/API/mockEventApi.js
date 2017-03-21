@@ -1,10 +1,12 @@
+import { getToken } from '../actions/authTokenActions';
+
 class EventApi {
   static getAllItems() {
     return new Promise((resolve, reject) => {
       fetch('http://localhost:3000/api/events').then(function (response) {
         return response.json();
       }).then(function (eventTypes) {
-        
+
         resolve(Object.assign([], eventTypes));
       });
     });
@@ -18,7 +20,8 @@ class EventApi {
           method: 'put',
           headers: {
             'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + getToken()
           },
           body: JSON.stringify(eventType)
         }).then(function (response) {
@@ -33,7 +36,8 @@ class EventApi {
           method: 'post',
           headers: {
             'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + getToken()
           },
           body: JSON.stringify(eventType)
         }).then(function (response) {
@@ -53,11 +57,12 @@ class EventApi {
         if (eventType.id && eventType.type) {
           fetch('http://localhost:3000/api/events/', {
             method: 'delete',
-          headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(eventType)
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + getToken()
+            },
+            body: JSON.stringify(eventType)
           }).then(function (response) {
             resolve(console.log("event deleted."));
           }).catch(function (error) {

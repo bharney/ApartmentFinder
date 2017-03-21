@@ -1,5 +1,7 @@
 import express from 'express';
 import sql from 'mssql';
+import secret from '../../secrets';
+import jwt from 'jwt-simple';
 
 let testimonialRoutes = function () {
 
@@ -8,8 +10,13 @@ let testimonialRoutes = function () {
 
     testimonialRouter.route('/testimonials')
         .post(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             let testimonial = (req.body);
             for (let prop in testimonial.testimonial_details) {
@@ -30,8 +37,13 @@ let testimonialRoutes = function () {
             }
         })
         .put(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             let testimonial = (req.body);
             const sqlUpdateConsultation = new sql.Connection(dbconfig, function (err) {
@@ -54,7 +66,7 @@ let testimonialRoutes = function () {
                                 request.input('testimonial', sql.VarChar, testimonial.testimonial_details[prop].testimonial);
                                 request.input('name', sql.VarChar, testimonial.testimonial_details[prop].name);
                                 request.query(
-                                   `UPDATE Testimonials
+                                    `UPDATE Testimonials
                                     SET testimonial = @testimonial
                                     ,name = @name
                                     WHERE id = @id`
@@ -72,8 +84,13 @@ let testimonialRoutes = function () {
             });
         })
         .delete(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             const sqlDeleteTestimonial = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteTestimonial);
@@ -156,8 +173,13 @@ let testimonialRoutes = function () {
             });
         })
         .delete(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             const sqlDeleteTestimonial = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteTestimonial);

@@ -1,3 +1,5 @@
+import { getToken } from '../actions/authTokenActions';
+
 class DietConsultationApi {
   static getAllItems() {
     return new Promise((resolve, reject) => {
@@ -28,7 +30,8 @@ class DietConsultationApi {
           method: 'put',
           headers: {
             'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + getToken()
           },
           body: JSON.stringify(consultation)
         }).then(function (response) {
@@ -45,7 +48,8 @@ class DietConsultationApi {
           method: 'post',
           headers: {
             'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + getToken()
           },
           body: JSON.stringify(consultation)
         }).then(function (response) {
@@ -64,7 +68,12 @@ class DietConsultationApi {
       if (confirm("Are you sure you want to delete this consultation forever?")) {
         if (consultationId) {
           fetch('http://localhost:3000/api/consultations/' + consultationId, {
-            method: 'delete'
+            method: 'delete',
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + getToken()
+            }
           }).then(function (response) {
             resolve(console.log("consultation deleted."));
           }).catch(function (error) {

@@ -225,7 +225,7 @@ class HomePage extends React.Component {
                             <div className="col-xs-12 col-sm-offset-1 col-sm-10">
                                 <h2 className="text-center">My Blog</h2>
                                 <p className="text-center">Read useful information on Yoga and Ayurveda</p>
-                                <div className="col-3-masonry">
+                                <div className="responsive-col-masonry">
                                     {blogs.map(blog =>
                                         <BlogTile blog={blog} />)
                                     }

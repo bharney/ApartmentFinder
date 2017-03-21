@@ -1,3 +1,4 @@
+import { getToken } from '../actions/authTokenActions';
 
 class TestimonialApi {
   static getAllItems() {
@@ -29,7 +30,8 @@ class TestimonialApi {
           method: 'put',
           headers: {
             'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + getToken()
           },
           body: JSON.stringify(testimonial)
         }).then(function (response) {
@@ -46,7 +48,8 @@ class TestimonialApi {
           method: 'post',
           headers: {
             'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + getToken()
           },
           body: JSON.stringify(testimonial)
         }).then(function (response) {
@@ -65,7 +68,12 @@ class TestimonialApi {
       if (confirm("Are you sure you want to delete this testimonial forever?")) {
         if (testimonialId) {
           fetch('http://localhost:3000/api/testimonials/' + testimonialId, {
-            method: 'delete'
+            method: 'delete',
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + getToken()
+            }
           }).then(function (response) {
             resolve(console.log("testimonial deleted."));
           }).catch(function (error) {

@@ -44,7 +44,7 @@ let loginRoutes = function () {
                             if (!isMatch) {
                                 res.status(401).send("Email Address or Password is incorrect.")
                             } else {
-                                createToken(recordset, res, req)
+                                createToken(recordset[0], res, req)
                             }
                         });
                     }

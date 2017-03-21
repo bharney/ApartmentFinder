@@ -1,5 +1,7 @@
 import express from 'express';
 import sql from 'mssql';
+import secret from '../../secrets';
+import jwt from 'jwt-simple';
 
 let eventRoutes = function () {
 
@@ -8,8 +10,13 @@ let eventRoutes = function () {
 
     eventRouter.route('/events')
         .post(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             let eventType = (req.body);
             function replaceAll(str, find, replace) {
@@ -39,7 +46,7 @@ let eventRoutes = function () {
                 request.input('href', sql.VarChar, 'http://www.yogamariemills/Events');
                 request.input('parent_id', sql.Int, 20);
                 request.query(
-                   `INSERT INTO Navbar_Items (type, name, route, href, parent_id)
+                    `INSERT INTO Navbar_Items (type, name, route, href, parent_id)
                     VALUES (@navbar_type, @name, @route, @href, @parent_id);
 
                     INSERT INTO Headers (type, header, venue)
@@ -53,8 +60,8 @@ let eventRoutes = function () {
             });
         })
         .put(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             let eventType = (req.body);
             const sqlUpdateEventType = new sql.Connection(dbconfig, function (err) {
@@ -110,8 +117,13 @@ let eventRoutes = function () {
             });
         })
         .delete(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             let eventType = (req.body);
             const sqlDeleteEventType = new sql.Connection(dbconfig, function (err) {
@@ -189,8 +201,13 @@ let eventRoutes = function () {
             });
         })
         .delete(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             const sqlDeleteEventType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteEventType);

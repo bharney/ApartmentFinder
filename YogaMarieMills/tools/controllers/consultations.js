@@ -1,5 +1,7 @@
 import express from 'express';
 import sql from 'mssql';
+import secret from '../../secrets';
+import jwt from 'jwt-simple';
 
 let consultationRoutes = function () {
 
@@ -8,8 +10,13 @@ let consultationRoutes = function () {
 
     consultationRouter.route('/consultations')
         .post(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             let consultation = (req.body);
             for (let prop in consultation.consultationDetails) {
@@ -33,8 +40,13 @@ let consultationRoutes = function () {
             }
         })
         .put(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             let consultation = (req.body);
             const sqlUpdateConsultation = new sql.Connection(dbconfig, function (err) {
@@ -83,8 +95,13 @@ let consultationRoutes = function () {
             });
         })
         .delete(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             const sqlDeleteConsultation = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteConsultation);
@@ -179,8 +196,13 @@ let consultationRoutes = function () {
             });
         })
         .delete(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             const sqlDeleteConsultation = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteConsultation);

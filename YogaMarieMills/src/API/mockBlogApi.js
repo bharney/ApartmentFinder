@@ -1,3 +1,5 @@
+import { getToken } from '../actions/authTokenActions';
+
 function replaceAll(str, find, replace) {
     return str.replace(new RegExp(find, 'g'), replace);
 }
@@ -31,7 +33,8 @@ class BlogApi {
                     method: 'put',
                     headers: {
                         'Accept': 'application/json, text/plain, */*',
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + getToken()
                     },
                     body: JSON.stringify(blog)
                 }).then(function (response) {
@@ -46,7 +49,8 @@ class BlogApi {
                     method: 'post',
                     headers: {
                         'Accept': 'application/json, text/plain, */*',
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + getToken()
                     },
                     body: JSON.stringify(blog)
                 }).then(function (response) {
@@ -65,7 +69,12 @@ class BlogApi {
             if (confirm("Are you sure you want to delete this blog forever?")) {
                 if (blogId) {
                     fetch('http://localhost:3000/api/blogs/' + blogId, {
-                        method: 'delete'
+                        method: 'delete',
+                        headers: {
+                            'Accept': 'application/json, text/plain, */*',
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + getToken()
+                        }
                     }).then(function (response) {
                         resolve(console.log("blog deleted."));
                     }).catch(function (error) {

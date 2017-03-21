@@ -1,3 +1,5 @@
+import { getToken } from '../actions/authTokenActions';
+
 class ScheduleApi {
   static getAllItems() {
     return new Promise((resolve, reject) => {
@@ -29,7 +31,8 @@ class ScheduleApi {
           method: 'put',
           headers: {
             'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + getToken()
           },
           body: JSON.stringify(schedule)
         }).then(function (response) {
@@ -44,7 +47,8 @@ class ScheduleApi {
           method: 'post',
           headers: {
             'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + getToken()
           },
           body: JSON.stringify(schedule)
         }).then(function (response) {
@@ -63,7 +67,12 @@ class ScheduleApi {
       if (confirm("Are you sure you want to delete this schedule forever?")) {
         if (scheduleId) {
           fetch('http://localhost:3000/api/schedules/' + scheduleId, {
-            method: 'delete'
+            method: 'delete',
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + getToken()
+            }
           }).then(function (response) {
             resolve(console.log("schedule deleted."));
           }).catch(function (error) {

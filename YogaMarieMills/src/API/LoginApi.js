@@ -1,4 +1,4 @@
-import { setToken, getToken } from '../actions/authTokenActions';
+import { setToken } from '../actions/authTokenActions';
 
 class LoginApi {
     static loginRequest(login) {

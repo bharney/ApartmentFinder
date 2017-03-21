@@ -1,5 +1,7 @@
 import express from 'express';
 import sql from 'mssql';
+import secret from '../../secrets';
+import jwt from 'jwt-simple';
 
 let massageTypeRoutes = function () {
 
@@ -8,8 +10,13 @@ let massageTypeRoutes = function () {
 
     massageTypeRouter.route('/massages')
         .post(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             let massageType = (req.body);
             const sqlInsertMassageType = new sql.Connection(dbconfig, function (err) {
@@ -49,8 +56,13 @@ let massageTypeRoutes = function () {
             });
         })
         .put(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             let massageType = (req.body);
             const sqlUpdateMassageType = new sql.Connection(dbconfig, function (err) {
@@ -62,7 +74,7 @@ let massageTypeRoutes = function () {
                 request.input('description', sql.VarChar, massageType.description);
                 request.input('cost', sql.VarChar, massageType.cost);
                 request.query(
-                      `UPDATE MassageTypes 
+                    `UPDATE MassageTypes 
                         SET type = @type
                         ,title = @title
                         , session_time = @session_time
@@ -80,7 +92,7 @@ let massageTypeRoutes = function () {
                                 request.input('title', sql.VarChar, massageType.massage_details[prop].title);
                                 request.input('description', sql.VarChar, massageType.massage_details[prop].description);
                                 request.query(
-                                        `UPDATE MassageDetails 
+                                    `UPDATE MassageDetails 
                                         SET type = @type
                                         ,title = @title
                                         , description = @description
@@ -100,8 +112,13 @@ let massageTypeRoutes = function () {
             });
         })
         .delete(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             const sqlDeleteMassageType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteMassageType);
@@ -257,8 +274,13 @@ let massageTypeRoutes = function () {
             });
         })
         .delete(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             const sqlDeleteMassageType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteMassageType);

@@ -1,5 +1,7 @@
 import express from 'express';
 import sql from 'mssql';
+import secret from '../../secrets';
+import jwt from 'jwt-simple';
 
 let scheduleRoutes = function () {
 
@@ -9,8 +11,13 @@ let scheduleRoutes = function () {
     scheduleRouter.route('/schedules')
 
         .post(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             let schedule = (req.body);
             const sqlInsertSchedule = new sql.Connection(dbconfig, function (err) {
@@ -47,8 +54,13 @@ let scheduleRoutes = function () {
             });
         })
         .put(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             let schedule = (req.body);
             console.log(schedule);
@@ -93,8 +105,13 @@ let scheduleRoutes = function () {
             });
         })
         .delete(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             const sqlDeleteSchedule = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteSchedule);
@@ -260,8 +277,13 @@ let scheduleRoutes = function () {
             });
         })
         .delete(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             const sqlDeleteSchedule = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteSchedule);

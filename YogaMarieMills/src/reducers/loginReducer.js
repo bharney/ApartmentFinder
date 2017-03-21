@@ -11,6 +11,7 @@ export default function MassageReducer(state = initialState.massageTypes, action
             }
 
         case 'LOGIN_SUCCESS':
+            debugger;
             return {
                 errors: [],
                 messages: [],

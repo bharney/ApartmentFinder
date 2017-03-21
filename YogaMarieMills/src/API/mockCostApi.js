@@ -1,3 +1,5 @@
+import { getToken } from '../actions/authTokenActions';
+
 class CostApi {
   static getAllItems() {
     return new Promise((resolve, reject) => {
@@ -17,7 +19,8 @@ class CostApi {
           method: 'put',
           headers: {
             'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + getToken()
           },
           body: JSON.stringify(cost)
         }).then(function (response) {
@@ -32,7 +35,8 @@ class CostApi {
           method: 'post',
           headers: {
             'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + getToken()
           },
           body: JSON.stringify(cost)
         }).then(function (response) {
@@ -51,7 +55,12 @@ class CostApi {
       if (confirm("Are you sure you want to delete this cost forever?")) {
         if (costId) {
           fetch('http://localhost:3000/api/costs/' + costId, {
-            method: 'delete'
+            method: 'delete',
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + getToken()
+            }
           }).then(function (response) {
             resolve(console.log("cost deleted."));
           }).catch(function (error) {

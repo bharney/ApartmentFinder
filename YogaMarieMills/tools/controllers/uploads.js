@@ -2,6 +2,8 @@ import express from 'express';
 import path from 'path';
 import fs from 'fs';
 import multer from 'multer'
+import secret from '../../secrets';
+import jwt from 'jwt-simple';
 
 let upload = multer({ dest: '/temp/' });
 
@@ -10,9 +12,14 @@ let uploadRoute = function () {
     const uploadRouter = express.Router();
 
     uploadRouter.post('/uploads', upload.single('file'), function (req, res, next) {
-        if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
-            }
+        if (!req.headers.authorization) {
+            return res.status(401).send({ message: "You are not authorized" })
+        }
+        const authorization = JSON.parse(req.headers.authorization.slice(7));
+        const payload = jwt.decode(authorization.token, secret);
+        if (!payload.sub) {
+            return res.status(401).send({ message: "You are not authorized" })
+        }
         var file = __dirname + "/temp/" + req.file.originalname;
         let response;
         if (path.extname(req.file.originalname).toLowerCase() === '.png' ||

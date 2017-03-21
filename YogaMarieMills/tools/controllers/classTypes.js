@@ -1,5 +1,7 @@
 import express from 'express';
 import sql from 'mssql';
+import secret from '../../secrets';
+import jwt from 'jwt-simple';
 
 let classTypeRoutes = function () {
 
@@ -8,8 +10,13 @@ let classTypeRoutes = function () {
 
     classTypeRouter.route('/classTypes')
         .post(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             let classType = (req.body);
             const sqlInsertClassType = new sql.Connection(dbconfig, function (err) {
@@ -32,8 +39,13 @@ let classTypeRoutes = function () {
             });
         })
         .put(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             let classType = (req.body);
             const sqlUpdateClassType = new sql.Connection(dbconfig, function (err) {
@@ -49,7 +61,7 @@ let classTypeRoutes = function () {
                 request.input('detail', sql.VarChar, classType.detail);
                 request.input('route', sql.VarChar, classType.route);
                 request.query(
-                   `UPDATE ClassTypes
+                    `UPDATE ClassTypes
                     SET title = @title
                     ,short = @short
                     ,description = @description
@@ -66,8 +78,13 @@ let classTypeRoutes = function () {
             });
         })
         .delete(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             const sqlDeleteClassType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteClassType);
@@ -94,10 +111,10 @@ let classTypeRoutes = function () {
                                 ,detail
                                 ,route
                                 FROM ClassTypes`).then(function (recordset) {
-                    res.json(recordset);
-                }).catch(function (err) {
-                    console.log("get classTypes: " + err);
-                });
+                        res.json(recordset);
+                    }).catch(function (err) {
+                        console.log("get classTypes: " + err);
+                    });
             });
         });
 
@@ -129,8 +146,13 @@ let classTypeRoutes = function () {
             });
         })
         .delete(function (req, res) {
-            if(!req.headers.authorization){
-                return res.status(401).send({message: "You are not authorized"})
+            if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
             }
             const sqlDeleteClassType = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlDeleteClassType);

@@ -42,7 +42,7 @@ class BlogPage extends React.Component {
                                 <h1 className="text-center color-white">My Blog</h1>
                                 <Admin objArr={blogs} />
                                 <h2 className="text-center color-white">Read useful information on Yoga and Ayurveda</h2>
-                                <div className="col-3-masonry">
+                                <div className="responsive-col-masonry">
                                     {blogs.map(blog =>
                                         <div className="mdl-card mdl-shadow--4dp m-t-1-em tile-masonry bg-color-white">
                                             <div className="mdl-card__title">
