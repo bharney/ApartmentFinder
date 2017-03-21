@@ -12,11 +12,7 @@ export default {
   eventTypes: [],
   upload: [],
   authToken: {
-    user: null,
     token: null,
-  },
-  requesting: false,
-  successful: false,
-  messages: [],
-  errors: [],
+    user: null
+  }
 }

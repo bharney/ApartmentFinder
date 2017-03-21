@@ -12,7 +12,6 @@ import eventTypes from './eventReducer';
 import testimonials from './testimonialReducer';
 import upload from './uploadReducer';
 import authToken from './authTokenReducer';
-import login from './loginReducer';
 
 const rootReducer = combineReducers({
   courses,
@@ -27,8 +26,7 @@ const rootReducer = combineReducers({
   testimonials,
   eventTypes,
   upload,
-  authToken,
-  login
+  authToken
 });
 
 export default rootReducer;

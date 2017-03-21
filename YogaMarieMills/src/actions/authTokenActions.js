@@ -1,34 +1,54 @@
+import loginApi from '../API/LoginApi';
+
 let storage = window.localStorage;
 let cachedToken;
 let userToken = 'userToken';
 
-export function setTokenSuccess(token) {
-  return { type: 'IS_AUTHENTICATED', token };
+export function loginSuccess(authToken) {
+  cachedToken = authToken;
+  storage.setItem(userToken, JSON.stringify(authToken));
+  return { type: 'IS_AUTHENTICATED', authToken };
 }
 
-export function getTokenSuccess(token) {
-  return { type: 'IS_AUTHENTICATED', token };
+export function loginError(error) {
+  return { type: 'NOT_AUTHENTICATED', error };
 }
 
-export function removeTokenSuccess() {
+export function logOutSuccess() {
+  cachedToken = null;
+  storage.removeItem(userToken);
   return { type: 'NOT_AUTHENTICATED' };
 }
 
-export function setToken(token) {
-  cachedToken = token;
-  storage.setItem(userToken, JSON.stringify(token));
-  return setTokenSuccess(cachedToken)
+export function loginRequest(login) {
+  return function (dispatch, getState) {
+    return loginApi.loginRequest(login).then(loginResponse => {
+      loginResponse.token ? dispatch(loginSuccess(loginResponse)) :
+        dispatch(loginError(loginResponse));
+    }).catch(error => {
+      throw (error);
+    });
+  };
+}
+
+export function authenticate() {
+  return function (dispatch) {
+    if (!cachedToken)
+      cachedToken = storage.getItem(userToken);
+
+    cachedToken.token ? dispatch(loginSuccess(cachedToken)) : dispatch(loginError(''));
+  };
 }
 
 export function getToken() {
-  if (!cachedToken)
-    cachedToken = storage.getItem(userToken);
-    debugger;
-  return cachedToken
+    if (!cachedToken)
+      cachedToken = storage.getItem(userToken);
+    
+    return cachedToken;
 }
 
-export function removeToken() {
-  cachedToken = null;
-  storage.removeItem(userToken);
-  return removeTokenSuccess()
+export function logOut() {
+  return function (dispatch, getState) {
+    return dispatch(logOutSuccess())
+  };
 }

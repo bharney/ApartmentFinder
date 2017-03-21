@@ -15,8 +15,7 @@ class LoginApi {
                 }).then(function (response) {
                     return response.json();
                 }).then(function (login) {
-                    if (login.token)
-                        resolve(setToken(login));
+                    resolve(login);
                 }).catch(function (error) {
                     console.log('Request failed', error);
                 });
