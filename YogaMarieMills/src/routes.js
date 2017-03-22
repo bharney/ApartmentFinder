@@ -25,50 +25,53 @@ import EventPage from './components/events/EventPage';
 import TestimonialPage from './components/contemporary/TestimonialPage';
 import ManageTestimonialPage from './components/contemporary/ManageTestimonialPage';
 import ManageLoginPage from './components/login/ManageLoginPage';
+import { authenticate } from './actions/authTokenActions';
 
-export default getRoutes = (store) => (
-  const authRequired = (nextState, replaceState) => {
-    // Now you can access the store object here.
-    const state = store.getState();
-
-    if (!state.user.isAuthenticated) {
-      // Not authenticated, redirect to login.
-      replaceState({ nextPathname: nextState.location.pathname }, '/login');
-    }
+export const getRoutes = (store) => {
+  const authRequired = (nextState, replaceState, callback) => {
+    store.dispatch(authenticate()).then(() => {
+      const state = store.getState();
+      if (!!state.authToken) {
+        replaceState({ nextPathname: nextState.location.pathname }, 'Login');
+      }
+      callback();
+    });
   };
-   return (
+  return (
     <Route path="/" history={browserHistory} component={App}>
-        <IndexRoute component={HomePage} />
-        <Route path="Login" component={ManageLoginPage} />
-        <Route path="YogaThurles/Schedule" component={YogaThurlesPage} />
-        <Route path="Schedule/:id" component={ManageSchedulePage} />
-        <Route path="Schedule" component={ManageSchedulePage} />
-        <Route path="Cost/:id" component={ManageCostPage} />
-        <Route path="Cost" component={ManageCostPage} />
-        <Route path="YogaThurles/Costs" component={CostsPage} />
-        <Route path="YogaThurles/WhatToBring" component={WhatToBringPage} />
-        <Route path="YogaThurles/ClassType/:id" component={ClassTypePage} />
-        <Route path="ClassType/:id" component={ManageClassTypePage} />
-        <Route path="ClassType" component={ManageClassTypePage} />
-        <Route path="YogaThurles/ClassTypes" component={ClassTypesPage} />
-        <Route path="Massage/:type/:id" component={ManageMassagePage} />
-        <Route path="Massage/:type" component={ManageMassagePage} />
-        <Route path="Ayurveda/Massage/:id" component={MassagePage} />
-        <Route path="Ayurveda/DietConsultation" component={DietConsultationPage} />
-        <Route path="DietConsultation" component={ManageDietConsultationPage} />
-        <Route path="Ayurveda/Testimonials" component={TestimonialPage} />
-        <Route path="Testimonials" component={ManageTestimonialPage} />
-        <Route path="Admin/Events/:id" component={ManageEventPage} />
-        <Route path="Admin/Events" component={ManageEventPage} />
-        <Route path="Events/:id" component={EventPage} />
-        <Route path="About" component={AboutPage} />
-        <Route path="Blogs" component={BlogsPage} />
-        <Route path="Blog/:id" component={BlogPage} />
-        <Route path="Admin/Blog/:id" component={ManageBlogPage} />
-        <Route path="Admin/Blog" component={ManageBlogPage} />
-        <Route path="course" component={ManageCoursePage} />
-        <Route path="course/:id" component={ManageCoursePage} />
-        <Route path="courses" component={CoursesPage} />
+      <IndexRoute component={HomePage} />
+      <Route path="Login" component={ManageLoginPage} />
+      <Route path="YogaThurles/Schedule" component={YogaThurlesPage} />
+      <Route path="Schedule/:id" component={ManageSchedulePage} onEnter={authRequired} />
+      <Route path="Schedule" component={ManageSchedulePage} onEnter={authRequired} />
+      <Route path="Cost/:id" component={ManageCostPage} onEnter={authRequired} />
+      <Route path="Cost" component={ManageCostPage} onEnter={authRequired} />
+      <Route path="YogaThurles/Costs" component={CostsPage} />
+      <Route path="YogaThurles/WhatToBring" component={WhatToBringPage} />
+      <Route path="YogaThurles/ClassType/:id" component={ClassTypePage} />
+      <Route path="ClassType/:id" component={ManageClassTypePage} onEnter={authRequired} />
+      <Route path="ClassType" component={ManageClassTypePage} onEnter={authRequired} />
+      <Route path="YogaThurles/ClassTypes" component={ClassTypesPage} />
+      <Route path="Massage/:type/:id" component={ManageMassagePage} onEnter={authRequired} />
+      <Route path="Massage/:type" component={ManageMassagePage} onEnter={authRequired} />
+      <Route path="Ayurveda/Massage/:id" component={MassagePage} />
+      <Route path="Ayurveda/DietConsultation" component={DietConsultationPage} />
+      <Route path="DietConsultation" component={ManageDietConsultationPage} onEnter={authRequired} />
+      <Route path="Ayurveda/Testimonials" component={TestimonialPage} />
+      <Route path="Testimonials" component={ManageTestimonialPage} onEnter={authRequired} />
+      <Route path="Admin/Events/:id" component={ManageEventPage} onEnter={authRequired} />
+      <Route path="Admin/Events" component={ManageEventPage} onEnter={authRequired} />
+      <Route path="Events/:id" component={EventPage} />
+      <Route path="About" component={AboutPage} />
+      <Route path="Blogs" component={BlogsPage} />
+      <Route path="Blog/:id" component={BlogPage} />
+      <Route path="Admin/Blog/:id" component={ManageBlogPage} onEnter={authRequired} />
+      <Route path="Admin/Blog" component={ManageBlogPage} onEnter={authRequired} />
+      <Route path="course" component={ManageCoursePage} onEnter={authRequired} />
+      <Route path="course/:id" component={ManageCoursePage} onEnter={authRequired} />
+      <Route path="courses" component={CoursesPage} />
     </Route>
-);
-)
+  );
+}
+
+export default getRoutes;

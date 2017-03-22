@@ -7,6 +7,7 @@ let userToken = 'userToken';
 export function loginSuccess(authToken) {
   cachedToken = authToken;
   storage.setItem(userToken, JSON.stringify(authToken));
+  debugger;
   return { type: 'IS_AUTHENTICATED', authToken };
 }
 
@@ -35,16 +36,24 @@ export function authenticate() {
   return function (dispatch) {
     if (!cachedToken)
       cachedToken = storage.getItem(userToken);
-
-    cachedToken.token ? dispatch(loginSuccess(cachedToken)) : dispatch(loginError(''));
+    return new Promise((resolve, reject) => {
+      if (cachedToken) {
+        dispatch(loginSuccess(cachedToken))
+        resolve(cachedToken);
+      }
+      else {
+        dispatch(loginError(''));
+        resolve('Access not Authorized');
+      }
+    });
   };
 }
 
 export function getToken() {
-    if (!cachedToken)
-      cachedToken = storage.getItem(userToken);
-    
-    return cachedToken;
+  if (!cachedToken)
+    cachedToken = storage.getItem(userToken);
+
+  return cachedToken;
 }
 
 export function logOut() {
