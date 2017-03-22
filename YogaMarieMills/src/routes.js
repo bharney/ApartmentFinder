@@ -26,7 +26,17 @@ import TestimonialPage from './components/contemporary/TestimonialPage';
 import ManageTestimonialPage from './components/contemporary/ManageTestimonialPage';
 import ManageLoginPage from './components/login/ManageLoginPage';
 
-export default (
+export default getRoutes = (store) => (
+  const authRequired = (nextState, replaceState) => {
+    // Now you can access the store object here.
+    const state = store.getState();
+
+    if (!state.user.isAuthenticated) {
+      // Not authenticated, redirect to login.
+      replaceState({ nextPathname: nextState.location.pathname }, '/login');
+    }
+  };
+   return (
     <Route path="/" history={browserHistory} component={App}>
         <IndexRoute component={HomePage} />
         <Route path="Login" component={ManageLoginPage} />
@@ -61,3 +71,4 @@ export default (
         <Route path="courses" component={CoursesPage} />
     </Route>
 );
+)

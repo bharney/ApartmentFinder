@@ -2,6 +2,7 @@ import express from 'express';
 import sql from 'mssql';
 import secret from '../../secrets';
 import jwt from 'jwt-simple';
+import moment from 'moment';
 
 let eventRoutes = function () {
 
@@ -16,6 +17,9 @@ let eventRoutes = function () {
             const authorization = JSON.parse(req.headers.authorization.slice(7));
             const payload = jwt.decode(authorization.token, secret);
             if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             let eventType = (req.body);
@@ -61,6 +65,9 @@ let eventRoutes = function () {
         })
         .put(function (req, res) {
             if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             let eventType = (req.body);
@@ -123,6 +130,9 @@ let eventRoutes = function () {
             const authorization = JSON.parse(req.headers.authorization.slice(7));
             const payload = jwt.decode(authorization.token, secret);
             if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             let eventType = (req.body);
@@ -207,6 +217,9 @@ let eventRoutes = function () {
             const authorization = JSON.parse(req.headers.authorization.slice(7));
             const payload = jwt.decode(authorization.token, secret);
             if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             const sqlDeleteEventType = new sql.Connection(dbconfig, function (err) {

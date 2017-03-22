@@ -1,12 +1,11 @@
 /*eslint-disable import/default */
 import 'babel-polyfill';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { render } from 'react-dom';
+import { ReactDOM, render } from 'react-dom';
 import {Provider} from 'react-redux';
 import configureStore from './store/configureStore';
 import { Router, browserHistory } from 'react-router';
-import routes from './routes';
+import getRoutes from './routes';
 import {loadCourses} from './actions/courseActions';
 import {loadAuthors} from './actions/authorActions';
 import {loadNavbar} from './actions/navbarActions';
@@ -18,7 +17,6 @@ import {loadDietConsultation} from './actions/dietConsultationActions';
 import {loadMassage} from './actions/massageActions';
 import {loadEvent} from './actions/eventActions';
 import {loadTestimonial} from './actions/testimonialActions';
-import {authenticate} from './actions/authTokenActions';
 import MuiThemeProvider from '../node_modules/material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import '../node_modules/draft-js-inline-toolbar-plugin/lib/plugin.css';
@@ -43,12 +41,13 @@ store.dispatch(loadMassage());
 store.dispatch(loadTestimonial());
 store.dispatch(loadEvent());
 store.dispatch(loadCourses());
-store.dispatch(authenticate());
 
 render(
     <MuiThemeProvider>
         <Provider store={store}>
-            <Router history={browserHistory} routes={routes} />
+            <Router history={browserHistory}>
+                {getRoutes(store)}
+            </Router>
         </Provider>
    </MuiThemeProvider>,
   document.getElementById('app')

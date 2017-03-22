@@ -3,6 +3,7 @@ import sql from 'mssql';
 import secret from '../../secrets';
 import jwt from 'jwt-simple';
 import bcrypt from 'bcrypt-nodejs';
+import moment from 'moment';
 
 let loginRoutes = function () {
 
@@ -13,7 +14,8 @@ let loginRoutes = function () {
         delete user.password;
         const payload = {
             iss: req.hostname,
-            sub: user.emailAddress
+            sub: user.emailAddress,
+            exp: moment().add(15, 'days').unix()
         }
         const token = jwt.encode(payload, secret);
         res.status(200).send({
