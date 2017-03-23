@@ -17,6 +17,7 @@ import {loadDietConsultation} from './actions/dietConsultationActions';
 import {loadMassage} from './actions/massageActions';
 import {loadEvent} from './actions/eventActions';
 import {loadTestimonial} from './actions/testimonialActions';
+import {authenticate} from './actions/authTokenActions';
 import MuiThemeProvider from '../node_modules/material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import '../node_modules/draft-js-inline-toolbar-plugin/lib/plugin.css';
@@ -41,6 +42,7 @@ store.dispatch(loadMassage());
 store.dispatch(loadTestimonial());
 store.dispatch(loadEvent());
 store.dispatch(loadCourses());
+store.dispatch(authenticate());
 
 render(
     <MuiThemeProvider>

@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as loginActions from '../../actions/authTokenActions';
 import LoginForm from './LoginForm';
 
@@ -18,14 +18,14 @@ class ManageLoginPage extends React.Component {
     this.loginRequest = this.loginRequest.bind(this);
   }
 
-  updateLoginState(event){
+  updateLoginState(event) {
     const field = event.target.name;
     let login = this.state.login;
     login[field] = event.target.value;
-    return this.setState({login: login});
+    return this.setState({ login: login });
   }
 
-  loginRequest(event){
+  loginRequest(event) {
     event.preventDefault();
     this.props.actions.loginRequest(this.state.login);
   }

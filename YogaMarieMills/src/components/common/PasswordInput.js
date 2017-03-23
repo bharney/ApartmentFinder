@@ -13,6 +13,7 @@ const TextInput = ({name, label, onChange, placeholder, value, error}) => {
         <input
           type="password"
           name={name}
+          required
           className="form-control"
           placeholder={placeholder}
           value={value}

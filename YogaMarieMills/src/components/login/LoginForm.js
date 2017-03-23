@@ -16,6 +16,7 @@ const LoginForm = ({ login, loginRequest, onChange, loading, errors }) => {
                   <EmailInput
                     name="emailAddress"
                     label="Email"
+                    placeholder="Email"
                     value={login.emailAddress}
                     onChange={onChange}
                     error={errors.email} />
@@ -23,6 +24,7 @@ const LoginForm = ({ login, loginRequest, onChange, loading, errors }) => {
                   <PasswordInput
                     name="password"
                     label="Password"
+                    placeholder="Password"
                     value={login.password}
                     onChange={onChange}
                     error={errors.password} />

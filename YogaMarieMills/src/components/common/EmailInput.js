@@ -12,6 +12,7 @@ const TextInput = ({name, label, onChange, placeholder, value, error}) => {
       <div className="field">
         <input
           type="email"
+          required
           name={name}
           className="form-control"
           placeholder={placeholder}

@@ -7,7 +7,6 @@ let userToken = 'userToken';
 export function loginSuccess(authToken) {
   cachedToken = authToken;
   storage.setItem(userToken, authToken);
-  debugger;
   return { type: 'IS_AUTHENTICATED', authToken };
 }
 

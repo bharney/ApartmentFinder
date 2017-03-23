@@ -8,17 +8,29 @@ class Login extends React.Component {
     constructor(props, context) {
         super(props, context);
 
-        this.state = {
-            login: "Login",
-        };
-        debugger;
+        this.Logout = this.Logout.bind(this);
+    }
+
+    Logout() {
+        this.props.actions.logOut();
     }
 
     render() {
         const { login } = this.props;
-        debugger;
+        let that = this;
+        function LoginOut(login) {
+            if (!login.authToken) {
+                return (
+                    <Link to={`/Login`}>Login</Link>
+                );
+            } else {
+                return (
+                    <Link to="" onClick={that.Logout}>Logout</Link>
+                );
+            }
+        }
         return (
-            <span><Link to={`/${login}`}>{login}</Link></span>
+            <span>{LoginOut(login)}</span>
         );
     }
 }
@@ -32,11 +44,9 @@ Login.contextTypes = {
     router: PropTypes.object
 };
 
-function mapStateToProps(state) {
-    let login = "Login"
-
+function mapStateToProps(state, ownProps) {
     return {
-        login: login
+        login: state.authToken
     };
 }
 

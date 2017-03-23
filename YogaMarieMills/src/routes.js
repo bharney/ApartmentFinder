@@ -28,13 +28,11 @@ import ManageLoginPage from './components/login/ManageLoginPage';
 import { authenticate } from './actions/authTokenActions';
 
 export const getRoutes = (store) => {
-  const authRequired = (nextState, replaceState, callback) => {
+  const authRequired = (nextState, replace, callback) => {
     store.dispatch(authenticate()).then(() => {
       const state = store.getState();
-      debugger;
       if (!state.authToken) {
-        debugger;
-        replaceState({ nextPathname: nextState.location.pathname }, 'Login');
+        replace({ nextPathname: nextState.location.pathname }, 'Login');
       }
       callback();
     });

@@ -1,5 +1,3 @@
-import { setToken } from '../actions/authTokenActions';
-
 class LoginApi {
     static loginRequest(login) {
         login = Object.assign({}, login);
@@ -16,6 +14,7 @@ class LoginApi {
                     return response.json();
                 }).then(function (login) {
                     resolve(login);
+                    debugger;
                 }).catch(function (error) {
                     console.log('Request failed', error);
                 });
