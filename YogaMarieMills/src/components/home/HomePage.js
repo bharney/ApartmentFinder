@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as blogActions from '../../actions/blogActions';
 import BlogTile from '../blog/BlogTile';
 import SocialMediaBar from '../common/SocialMediaBar';
+import Footer from '../common/Footer';
 import landing from '../../images/landing.jpg';
 import yogaImg1 from '../../images/yogaImg1.jpg';
 import yogaImg2 from '../../images/yogaImg2.jpg';
@@ -35,7 +36,7 @@ class HomePage extends React.Component {
     }
 
     render() {
-        const {blogs} = this.props;
+        const { blogs } = this.props;
 
         return (
             <div>
@@ -156,7 +157,7 @@ class HomePage extends React.Component {
 
                                 <div className="col-sm-4 col-xs-12 p-l-15 p-r-15">
                                     <Link to="/Ayurveda/Massage/Body">
-                                        <img className="img-circle img-responsive mdl-shadow--4dp" src={yogaImg1} />
+                                        <img className="img-circle img-responsive center-block mdl-shadow--4dp" src={yogaImg1} />
                                     </Link>
                                     <div className="row">
                                         <div className="col-xs-12">
@@ -177,7 +178,7 @@ class HomePage extends React.Component {
                                 </div>
                                 <div className="col-sm-4 col-xs-12 p-l-15 p-r-15">
                                     <Link to="/YogaThurles/Schedule">
-                                        <img className="img-circle img-responsive mdl-shadow--4dp" src={yogaImg2} />
+                                        <img className="img-circle img-responsive center-block mdl-shadow--4dp" src={yogaImg2} />
                                     </Link>
                                     <div className="row">
                                         <div className="col-xs-12">
@@ -197,7 +198,7 @@ class HomePage extends React.Component {
                                 </div>
                                 <div className="col-sm-4 col-xs-12 p-l-15 p-r-15">
                                     <Link to="/Ayurveda/DietConsultation">
-                                        <img className="img-circle img-responsive mdl-shadow--4dp" src={yogaImg3} />
+                                        <img className="img-circle img-responsive center-block mdl-shadow--4dp" src={yogaImg3} />
                                     </Link>
                                     <div className="row">
                                         <div className="col-xs-12">
@@ -238,7 +239,8 @@ class HomePage extends React.Component {
                     <p className="footer text-center">Share, Like, and Heart my Story!</p>
                     <SocialMediaBar />
                 </div>
-            </div >
+                <Footer />
+            </div>
         );
     }
 }

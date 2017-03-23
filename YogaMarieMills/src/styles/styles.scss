@@ -638,6 +638,10 @@ section.section {
     background-size:cover;
 }
 
+.wtb-items {
+    min-height: 12em;
+}
+
 /*=========================
     Cost
 =========================*/
@@ -948,6 +952,14 @@ Media queries
     .massage-details{
         min-height: 13em;
     }
+
+    .responsive-col-masonry {
+        column-count: 1;
+        column-gap: 30px;
+        width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
 }
 
 @media (max-width: 978px) {
@@ -955,6 +967,11 @@ Media queries
         font-size: 1.75em;
         padding-top: .2em;
     }
+
+    .wtb-items {
+        min-height: 13.5em;
+    }
+    
 }
 
 @media (max-width: 767px) {
@@ -1013,6 +1030,9 @@ Media queries
 
     .massage-details{
         min-height: inherit;
+    }
+    .wtb-items {
+        min-height: auto;
     }
 }
 

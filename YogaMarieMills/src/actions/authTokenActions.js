@@ -6,7 +6,7 @@ let userToken = 'userToken';
 
 export function loginSuccess(authToken) {
   cachedToken = authToken;
-  storage.setItem(userToken, JSON.stringify(authToken));
+  storage.setItem(userToken, authToken);
   debugger;
   return { type: 'IS_AUTHENTICATED', authToken };
 }
@@ -24,7 +24,7 @@ export function logOutSuccess() {
 export function loginRequest(login) {
   return function (dispatch, getState) {
     return loginApi.loginRequest(login).then(loginResponse => {
-      loginResponse.token ? dispatch(loginSuccess(loginResponse)) :
+      loginResponse.token ? dispatch(loginSuccess(JSON.stringify(loginResponse))) :
         dispatch(loginError(loginResponse));
     }).catch(error => {
       throw (error);

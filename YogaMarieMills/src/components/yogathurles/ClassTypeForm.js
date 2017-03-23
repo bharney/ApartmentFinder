@@ -38,7 +38,7 @@ const ClassTypeForm = ({updateClassTypeState, onChange, saveClassType, classType
     
   return (
     <div className="mdl-grid dark-color">
-      <div className="ribbon b-border">
+      <div className="ribbon bg-image-landing b-border">
         <div className="container">
           <div className="row m-b-1-em">
             <div key={classType.id} className="col-xs-12">

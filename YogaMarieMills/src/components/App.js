@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import Header from './common/Header';
-import Footer from './common/Footer';
 
 class App extends React.Component {
     constructor(props) {
@@ -12,7 +11,6 @@ class App extends React.Component {
                 <Header />
                 <main className="mdl-layout__content color-blur">
                     {this.props.children}
-                    <Footer />
                 </main>
             </div>
         );
