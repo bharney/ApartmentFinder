@@ -13,21 +13,17 @@ class Login extends React.Component {
 
     Logout() {
         this.props.actions.logOut();
+        this.setState();
     }
 
     render() {
         const { login } = this.props;
         let that = this;
         function LoginOut(login) {
-            if (!login.authToken) {
-                return (
-                    <Link to={`/Login`}>Login</Link>
-                );
-            } else {
-                return (
-                    <Link to="" onClick={that.Logout}>Logout</Link>
-                );
-            }
+            if (!login.authToken) 
+                return <Link to={`/Login`}>Login</Link>
+
+                return <Link to="" onClick={that.Logout}>Logout</Link>
         }
         return (
             <span>{LoginOut(login)}</span>

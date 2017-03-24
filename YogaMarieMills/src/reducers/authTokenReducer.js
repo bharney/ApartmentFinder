@@ -5,11 +5,13 @@ export default function authTokenReducer(state = initialState.authToken, action)
         
         case 'IS_AUTHENTICATED':
             return {
+                message: action.message,
                 authToken: action.authToken,
             }
 
         case 'NOT_AUTHENTICATED':
             return {
+                message: action.error.message,
                 authToken: null,
             }
 

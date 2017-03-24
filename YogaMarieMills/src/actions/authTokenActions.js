@@ -17,14 +17,20 @@ export function loginError(error) {
 export function logOutSuccess() {
   cachedToken = null;
   storage.removeItem(userToken);
-  return { type: 'NOT_AUTHENTICATED' };
+  const error = {message: "logged out sucessfully."};
+  return { type: 'NOT_AUTHENTICATED', error };
 }
 
 export function loginRequest(login) {
   return function (dispatch, getState) {
     return loginApi.loginRequest(login).then(loginResponse => {
-      loginResponse.token ? dispatch(loginSuccess(JSON.stringify(loginResponse))) :
+      if (loginResponse.token) {
+        dispatch(loginSuccess(JSON.stringify(loginResponse)))
+        this.context.router.push('/');
+      }
+      else {
         dispatch(loginError(loginResponse));
+      }
     }).catch(error => {
       throw (error);
     });

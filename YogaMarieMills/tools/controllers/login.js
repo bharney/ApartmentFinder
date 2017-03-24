@@ -44,14 +44,14 @@ let loginRoutes = function () {
                             if (err) return;
 
                             if (!isMatch) {
-                                res.status(401).send("Email Address or Password is incorrect.")
+                                res.send(401, { message: "Email Address or Password is incorrect."})
                             } else {
                                 createToken(recordset[0], res, req)
                             }
                         });
                     }
                     else {
-                        res.status(401).send("Email Address or Password is incorrect.");
+                        res.send(401, { message: "Email Address or Password is incorrect."});
                     }
                 }).catch(function (err) {
                     console.log("login: " + err);

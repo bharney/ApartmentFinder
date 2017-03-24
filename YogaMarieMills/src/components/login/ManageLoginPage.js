@@ -2,18 +2,20 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as loginActions from '../../actions/authTokenActions';
+import authTokenReducer from '../../reducers/authTokenReducer';
 import LoginForm from './LoginForm';
 
 
 class ManageLoginPage extends React.Component {
   constructor(props, context) {
     super(props, context);
-
+    debugger;
     this.state = {
       login: Object.assign({}, props.login),
       errors: {},
       saving: false
     };
+    debugger;
     this.updateLoginState = this.updateLoginState.bind(this);
     this.loginRequest = this.loginRequest.bind(this);
   }
@@ -31,8 +33,11 @@ class ManageLoginPage extends React.Component {
   }
 
   render() {
+    let {errorMessage} = this.props
+    debugger;
     return (
       <LoginForm
+        errorMessage={errorMessage}
         onChange={this.updateLoginState}
         loginRequest={this.loginRequest}
         login={this.state.login}
@@ -45,6 +50,7 @@ class ManageLoginPage extends React.Component {
 
 ManageLoginPage.propTypes = {
   login: PropTypes.object.isRequired,
+  errorMessage: PropTypes.object,
   actions: PropTypes.object.isRequired
 };
 
@@ -55,11 +61,12 @@ ManageLoginPage.contextTypes = {
 function mapStateToProps(state) {
   let login = {
     emailAddress: '',
-    password: ''
+    password: '',
   };
-
+  debugger;
   return {
-    login: login
+    login: login,
+    errorMessage: state.authToken.message,
   };
 }
 

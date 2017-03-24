@@ -1,8 +1,10 @@
 import React from 'react';
 import PasswordInput from '../common/PasswordInput';
 import EmailInput from '../common/EmailInput';
+import ErrorMessages from '../common/ErrorMessages';
 
-const LoginForm = ({ login, loginRequest, onChange, loading, errors }) => {
+const LoginForm = ({ login, loginRequest, onChange, loading, errors, errorMessage }) => {
+  debugger;
   return (
     <div className="mdl-grid dark-color bg-color">
       <div className="ribbon bg-image-landing b-border">
@@ -13,6 +15,7 @@ const LoginForm = ({ login, loginRequest, onChange, loading, errors }) => {
             <div className="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4 m-b-1-em m-t-1-em">
               <div className="mdl-card mdl-shadow--4dp p-login">
                 <form>
+                  <ErrorMessages errorMessage={errorMessage} />
                   <EmailInput
                     name="emailAddress"
                     label="Email"
@@ -20,7 +23,6 @@ const LoginForm = ({ login, loginRequest, onChange, loading, errors }) => {
                     value={login.emailAddress}
                     onChange={onChange}
                     error={errors.email} />
-
                   <PasswordInput
                     name="password"
                     label="Password"
@@ -28,7 +30,6 @@ const LoginForm = ({ login, loginRequest, onChange, loading, errors }) => {
                     value={login.password}
                     onChange={onChange}
                     error={errors.password} />
-
                   <button
                     type="submit"
                     disabled={loading}

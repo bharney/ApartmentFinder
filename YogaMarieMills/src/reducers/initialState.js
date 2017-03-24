@@ -14,5 +14,6 @@ export default {
   authToken: {
     token: null,
     user: null
-  }
+  },
+  error: ""
 }
