@@ -3,7 +3,6 @@ import { Link, IndexLink, browserHistory } from 'react-router';
 import TextInput from '../common/TextInput';
 import TextAreaInput from '../common/TextAreaInput';
 import RemoveRowButton from '../common/RemoveRowButton';
-import Admin from '../common/Admin';
 
 const TestimonialDetailsForm = ({ updateQuoteState, updateNameState, removeRow, testimonial, errors, saving }) => {
 

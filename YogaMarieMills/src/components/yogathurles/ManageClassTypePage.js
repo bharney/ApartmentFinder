@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import * as classTypesActions from '../../actions/classTypesActions';
 import * as uploadActions from '../../actions/uploadActions';
 import ClassTypeForm from './ClassTypeForm';
-import Admin from '../common/Admin';
 import TextInput from '../common/TextInput';
 import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
 import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
@@ -112,7 +111,7 @@ class ManageClassTypePage extends React.Component {
 
   render() {
     const { classType } = this.props;
-
+    const { authorized } = this.props;
     let classTypeImg = classType.image != "" ? require(`../../images/${classType.image}`) : ""
 
     const classTypeImage = {
@@ -124,6 +123,7 @@ class ManageClassTypePage extends React.Component {
 
     return (
       <ClassTypeForm
+        authorized={authorized}
         updateClassTypeState={this.updateClassTypeState}
         onChange={this.onChange}
         saveClassType={this.saveClassType}
@@ -205,7 +205,8 @@ function mapStateToProps(state, ownProps) {
   }
 
   return {
-    classType: classType
+    classType: classType,
+    authorized: state.authToken
   };
 }
 

@@ -12,17 +12,18 @@ class CostsPage extends React.Component {
 
     render() {
         const {costs} = this.props;
+        const {authorized} = this.props;
         return (
             <div className="mdl-grid dark-color bg-color">
                 <div className="ribbon bg-image-landing b-border">
                     <div className="row">
                         <div className="col-sm-offset-1 col-sm-10 col-xs-12 row-centered">
                             <h1 className="color-white">Pricing</h1>
-                            <Admin addAction="Cost" />
+                            <Admin addAction="Cost" authorized={authorized} />
                             <hr/>
                             {costs.map(cost =>
                                 <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-centered">
-                                    <Admin editAction={cost.type + "/" + cost.id} />
+                                    <Admin editAction={cost.type + "/" + cost.id} authorized={authorized} />
                                     <div className="mdl-card mdl-shadow--4dp m-t-05-em m-b-05-em bg-white color-black cost-tile text-center">
                                         <div className="inner">
                                             <div className="top">
@@ -95,7 +96,8 @@ CostsPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
     return {
-        costs: state.costs
+        costs: state.costs,
+        authorized: state.authToken
     };
 }
 function mapDispatchToProps(dispatch) {

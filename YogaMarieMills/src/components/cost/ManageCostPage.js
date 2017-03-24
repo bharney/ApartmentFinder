@@ -68,8 +68,10 @@ class ManageCostPage extends React.Component {
 
 
   render() {
+    const {authorized} = this.props;
     return (
       <CostForm
+        authorized={authorized}
         updateCostState={this.updateCostState}
         saveCost={this.saveCost}
         deleteCost={this.deleteCost}
@@ -108,7 +110,8 @@ function mapStateToProps(state, ownProps) {
     }
 
     return {
-        cost: cost
+        cost: cost,
+        authorized: state.authToken
     };
 }
 

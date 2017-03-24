@@ -168,7 +168,7 @@ let eventRoutes = function () {
                     ,E.short AS short
                     ,E.description AS description
                     ,CASE WHEN ISNUMERIC(E.cost) = 1 
-                                 THEN FORMAT(TRY_PARSE(E.cost AS decimal), 'C', 'de-de') 
+                                 THEN FORMAT(TRY_PARSE(E.cost AS money), 'C', 'de-de') 
                                  ELSE E.cost END AS cost
                     ,E.image AS image
                     ,E.start_date AS start_date

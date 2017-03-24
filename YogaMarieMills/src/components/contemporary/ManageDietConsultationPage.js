@@ -155,13 +155,14 @@ class ManageDietConsultationPage extends React.Component {
   }
 
   render() {
+    const {authorized} = this.props;
     return (
       <div className="mdl-grid dark-color">
         <div className="ribbon bg-image-landing">
           <div className="container-fluid">
             <div className="row">
               <div className="col-xs-12 col-sm-offset-1 col-sm-10 m-b-1-em">
-                <Admin saveAction={this.saveDietConsultation} />
+                <Admin saveAction={this.saveDietConsultation} authorized={authorized} />
                 <br />
                 <br />
                 <DietConsultationForm
@@ -261,7 +262,8 @@ function mapStateToProps(state, ownProps) {
   }
 
   return {
-    dietConsultation: dietConsultation
+    dietConsultation: dietConsultation,
+    authorized: state.authToken
   };
 }
 

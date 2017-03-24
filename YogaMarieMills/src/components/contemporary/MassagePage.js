@@ -12,7 +12,7 @@ class MassagePage extends React.Component {
 
     render() {
         const { massageType } = this.props;
-
+        const {authorized} = this.props;
         let displayIcon = function (icon, iconWidth, iconHeight) {
             let requireImg = icon ? require(`../../images/${icon}`) : ""
             const iconImg = {
@@ -52,12 +52,12 @@ class MassagePage extends React.Component {
                                 <h1 className="text-center color-white m-0">{massageType.header}</h1>
                                 <h3 className="text-center color-white m-0 m-b-2-em">{massageType.description}
                                     <br />Venue: {massageType.venue}</h3>
-                                <Admin addAction={"Massage/" + massageType.type} />
+                                <Admin addAction={"Massage/" + massageType.type} authorized={authorized} />
                             </div>
                             {massageType.massages.map(massage =>
                                 <div className="col-xs-12 m-t-1-em m-b-3-em">
                                     <div>
-                                        <Admin editAction={"Massage/" + massageType.type + "/" + massage.id} />
+                                        <Admin editAction={"Massage/" + massageType.type + "/" + massage.id} authorized={authorized} />
                                     </div>
                                     <div className="mdl-card mdl-shadow--4dp p-b-3-em p-1-em allow-overflow">
                                         {displayIcon(massage.icon, massage.iconWidth, massage.iconHeight)}
@@ -107,7 +107,8 @@ function mapStateToProps(state, ownProps) {
     }
 
     return {
-        massageType: massageType
+        massageType: massageType,
+        authorized: state.authToken
     };
 }
 

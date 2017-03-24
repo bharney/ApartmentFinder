@@ -36,7 +36,7 @@ const plugins = [inlineToolbarPlugin];
 
 const { InlineToolbar } = inlineToolbarPlugin;
 
-const TestimonialForm = ({ updateQuoteState, updateNameState, updateTestimonialState, saveTestimonial, addRow, removeRow, testimonial, errors, saving, onChange, editorState, ref, focus }) => {
+const TestimonialForm = ({ authorized, updateQuoteState, updateNameState, updateTestimonialState, saveTestimonial, addRow, removeRow, testimonial, errors, saving, onChange, editorState, ref, focus }) => {
 
   return (
     <form>
@@ -45,7 +45,7 @@ const TestimonialForm = ({ updateQuoteState, updateNameState, updateTestimonialS
           <div className="container-fluid">
             <div className="row m-t-1-em m-b-1-em">
               <div className="col-xs-offset-12 col-sm-offset-1 col-sm-10 m-b-1-em">
-                <Admin saveAction={saveTestimonial} />
+                <Admin saveAction={saveTestimonial} authorized={authorized} />
                 <h1 className="color-white text-center">{testimonial.header}</h1>
                 <TextInput
                   name="short"

@@ -139,7 +139,7 @@ let consultationRoutes = function () {
                     ,C.short AS consultation
                     ,C.description AS consultation_desc
                     ,CASE WHEN ISNUMERIC(C.cost) = 1 
-                                 THEN FORMAT(TRY_PARSE(C.cost AS decimal), 'C', 'de-de') 
+                                 THEN FORMAT(TRY_PARSE(C.cost AS money), 'C', 'de-de') 
                                  ELSE C.cost END AS cost
                     ,C.icon AS icon
                     ,C.iconHeight AS iconHeight

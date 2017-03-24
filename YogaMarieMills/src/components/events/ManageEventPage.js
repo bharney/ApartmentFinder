@@ -166,9 +166,10 @@ class ManageEventPage extends React.Component {
 
   render() {
     const { eventType } = this.props;
-
+    const {authorized} = this.props;
     return (
       <EventForm
+        authorized={authorized}
         updateEventState={this.updateEventState}
         onChange={this.onChange}
         saveEvent={this.saveEvent}
@@ -254,7 +255,8 @@ function mapStateToProps(state, ownProps) {
   }
 
   return {
-    eventType: eventType
+    eventType: eventType,
+    authorized: state.authToken
   };
 }
 

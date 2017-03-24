@@ -108,7 +108,7 @@ let costRoutes = function () {
                                 ,type
                                 ,course
                                 ,CASE WHEN ISNUMERIC(cost) = 1 
-                                 THEN FORMAT(TRY_PARSE(cost AS decimal), 'C', 'de-de') 
+                                 THEN FORMAT(TRY_PARSE(cost AS money), 'C', 'de-de') 
                                  ELSE cost END AS cost
                                 ,duration
                                 ,description
@@ -133,7 +133,7 @@ let costRoutes = function () {
                                 ,type
                                 ,course
                                 ,CASE WHEN ISNUMERIC(cost) = 1 
-                                 THEN FORMAT(TRY_PARSE(cost AS decimal), 'C', 'de-de') 
+                                 THEN FORMAT(TRY_PARSE(cost AS money), 'C', 'de-de') 
                                  ELSE cost END AS cost 
                                 ,duration
                                 ,description

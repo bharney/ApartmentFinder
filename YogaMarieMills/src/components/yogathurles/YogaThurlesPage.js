@@ -17,7 +17,7 @@ class YogaThurlesPage extends React.Component {
 
     render() {
         const {schedules} = this.props;
-
+        const {authorized} = this.props;
         return (
             <div className="mdl-grid dark-color bg-color">
                 <div className="ribbon bg-image-landing b-border">
@@ -27,12 +27,12 @@ class YogaThurlesPage extends React.Component {
                                 <h1 className="text-center color-white">{schedules.header}</h1>
                                 <h3 className="color-white">Studio: {schedules.venue}</h3>
                             </div>
-                                <Admin addAction={"Schedule"} />
+                                <Admin addAction={"Schedule"} authorized={authorized}/>
                                     {schedules.session_dates.map(session_dates =>
                                         <div className="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6 m-b-1-em">
                                             <div className="mdl-card mdl-shadow--4dp p-t-05-em p-l-1-em p-r-1-em p-b-05-em">
-                                                <Admin editAction={"Schedule/"+ session_dates.id} />
-                                                <Schedule schedule={session_dates} />
+                                                <Admin editAction={"Schedule/"+ session_dates.id} authorized={authorized} />
+                                                <Schedule schedule={session_dates}/>
                                             </div>
                                         </div>)
                                     }
@@ -57,7 +57,8 @@ YogaThurlesPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
     return {
-        schedules: state.schedules
+        schedules: state.schedules,
+        authorized: state.authToken
     };
 }
 function mapDispatchToProps(dispatch) {

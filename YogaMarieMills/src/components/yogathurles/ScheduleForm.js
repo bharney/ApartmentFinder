@@ -3,7 +3,6 @@ import { Link, IndexLink, browserHistory } from 'react-router';
 import DatePicker from 'material-ui/DatePicker';
 import TextInput from '../common/TextInput';
 import RemoveRowButton from '../common/RemoveRowButton';
-import Admin from '../common/Admin';
 
 const ScheduleForm = ({updateClassState, updateDateState, updateScheduleTimeState, removeRow, saveSchedule, schedule, errors, saving, deleteSchedule}) => {
 

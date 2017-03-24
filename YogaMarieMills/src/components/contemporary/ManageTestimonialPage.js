@@ -124,8 +124,10 @@ class ManageTestimonialPage extends React.Component {
   }
 
   render() {
+    const {authorized} = this.props;
     return (
       <TestimonialForm
+        authorized={authorized}
         saveTestimonial={this.saveTestimonial} 
         updateTestimonialState={this.updateTestimonialState}
         updateQuoteState={this.updateQuoteState}
@@ -208,7 +210,8 @@ function mapStateToProps(state, ownProps) {
   }
 
   return {
-    testimonial: testimonial
+    testimonial: testimonial,
+    authorized: state.authToken
   };
 }
 

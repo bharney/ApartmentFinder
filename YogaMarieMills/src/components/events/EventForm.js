@@ -35,6 +35,7 @@ const plugins = [inlineToolbarPlugin];
 const { InlineToolbar } = inlineToolbarPlugin;
 
 const EventTypeForm = ({
+  authorized,
   updateEventState,
   onChange,
   saveEvent,
@@ -59,10 +60,10 @@ const EventTypeForm = ({
             <div className="col-xs-12">
               {displayEventType(eventType.header, updateEventState)}
               <hr />
-              <Admin addAction={"Events"} />
+              <Admin addAction={"Events"} authorized={authorized}/>
               <div className="col-xs-12 m-b-1-em">
                 <form>
-                  <Admin saveAction={saveEvent} deleteAction={deleteEvent} uploadImage={uploadImage} />
+                  <Admin saveAction={saveEvent} deleteAction={deleteEvent} uploadImage={uploadImage} authorized={authorized}/>
                   <div className="mdl-card mdl-shadow--4dp">
                     <div className="mdl-card__media image-text-container" style={displayImage(eventType.image)}>
                       <img src={"../" + eventType.image} className="img-responsive hdn" />

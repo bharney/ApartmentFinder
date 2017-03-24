@@ -34,7 +34,7 @@ const plugins = [inlineToolbarPlugin];
 
 const { InlineToolbar } = inlineToolbarPlugin;
 
-const BlogForm = ({ updateBlogState, onChange, deleteBlog, saveBlog, blog, editorState, ref, focus, errors, saving, uploadImage, displayImage }) => {
+const BlogForm = ({authorized, updateBlogState, onChange, deleteBlog, saveBlog, blog, editorState, ref, focus, errors, saving, uploadImage, displayImage }) => {
 
   return (
     <div className="mdl-grid dark-color">
@@ -43,7 +43,7 @@ const BlogForm = ({ updateBlogState, onChange, deleteBlog, saveBlog, blog, edito
           <div className="row m-b-1-em">
             <div className="col-xs-12">
               <h1 className="color-white text-center">{blog.title}</h1>
-              <Admin uploadImage={uploadImage} blog={blog} saveAction={saveBlog} deleteAction={deleteBlog} />
+              <Admin uploadImage={uploadImage} blog={blog} saveAction={saveBlog} deleteAction={deleteBlog} authorized={authorized} />
               <div className="mdl-card mdl-shadow--4dp">
                 <div className="mdl-card__media v-h-40 image-text-container" style={displayImage(blog.image)}>
                   <div className="col-xs-7 text-left align-bottom m-l-20 m-b-20">

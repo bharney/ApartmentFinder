@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ImageUpload from './ImageUpload';
 
-const Admin = ({uploadImage, saveAction, deleteAction, addAction, editAction}) => {
+const Admin = ({uploadImage, saveAction, deleteAction, addAction, editAction, authorized}) => {
     function setAdminButtons(uploadImage, saveAction, deleteAction, addAction, editAction) {
         let adminButtons = [];
         if (uploadImage)
@@ -47,13 +47,23 @@ const Admin = ({uploadImage, saveAction, deleteAction, addAction, editAction}) =
 
     let adminButtons = setAdminButtons(uploadImage, saveAction, deleteAction, addAction, editAction);
 
+    function authorizeAdminButtons(authorized) {
+        if (authorized.authToken)
+        return (
+            <div className="absolute top-15-right-1">
+                {adminButtons.map(adminButton =>
+                    <div className="relative m-t-5">
+                        {displayAdminButtons(adminButton)}
+                    </div>
+                )}
+            </div>
+        );
+     return ""
+    }
+
     return (
-        <div className="absolute top-15-right-1">
-            {adminButtons.map(adminButton =>
-                <div className="relative m-t-5">
-                    {displayAdminButtons(adminButton)}
-                </div>
-            )}
+        <div>
+            {authorizeAdminButtons(authorized)}
         </div>
     );
 }

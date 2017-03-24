@@ -79,13 +79,15 @@ class ManageSchedulePage extends React.Component {
   }
 
   render() {
+    const {authorized} = this.props;
+
     return (
       <div className="mdl-grid dark-color bg-color">
         <div className="ribbon bg-image-landing b-border">
           <div className="container-fluid">
             <div className="row m-b-1-em">
               <div className="col-xs-12 col-sm-offset-1 col-sm-10 m-b-1-em">
-                <Admin saveAction={this.saveSchedule} deleteAction={this.deleteSchedule} />
+                <Admin saveAction={this.saveSchedule} deleteAction={this.deleteSchedule} authorized={authorized} />
                 <br />
                 <br />
                 <div className="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6 m-b-1-em">
@@ -139,7 +141,8 @@ function mapStateToProps(state, ownProps) {
   }
 
   return {
-    schedule: schedule
+    schedule: schedule,
+    authorized: state.authToken
   };
 }
 

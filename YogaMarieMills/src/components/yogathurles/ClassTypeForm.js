@@ -33,8 +33,7 @@ const plugins = [inlineToolbarPlugin];
 
 const { InlineToolbar } = inlineToolbarPlugin;
 
-const ClassTypeForm = ({updateClassTypeState, onChange, saveClassType, classType, classTypeImage, editorState, ref, focus, errors, saving, uploadImage, deleteClassType}) => {
-
+const ClassTypeForm = ({authorized, updateClassTypeState, onChange, saveClassType, classType, classTypeImage, editorState, ref, focus, errors, saving, uploadImage, deleteClassType}) => {
     
   return (
     <div className="mdl-grid dark-color">
@@ -45,7 +44,7 @@ const ClassTypeForm = ({updateClassTypeState, onChange, saveClassType, classType
               <h1 className="color-white text-center">{classType.title}</h1>
               <hr />
               <form>
-                <Admin saveAction={saveClassType} deleteAction={deleteClassType} uploadImage={uploadImage} />
+                <Admin saveAction={saveClassType} deleteAction={deleteClassType} uploadImage={uploadImage} authorized={authorized}/>
                 <div className="col-xs-12 m-b-1-em">
                   <div className="mdl-card mdl-shadow--4dp">
                     <div className="mdl-card__media v-h-40 image-text-container" style={classTypeImage}>

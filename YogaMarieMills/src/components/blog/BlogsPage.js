@@ -13,7 +13,7 @@ class BlogPage extends React.Component {
 
     render() {
         const { blogs } = this.props;
-
+        const {authorized} = this.props;
         function blogImage(image) {
             let blogImg = image != "" ? require(`../../images/${image}`) : ""
             const styles = {
@@ -40,7 +40,7 @@ class BlogPage extends React.Component {
                         <div className="row m-b-1-em">
                             <div className="col-sm-offset-1 col-sm-10 col-xs-12 m-b-1-em">
                                 <h1 className="text-center color-white">My Blog</h1>
-                                <Admin objArr={blogs} />
+                                <Admin objArr={blogs} authorized={authorized} />
                                 <h2 className="text-center color-white">Read useful information on Yoga and Ayurveda</h2>
                                 <div className="responsive-col-masonry">
                                     {blogs.map(blog =>
@@ -96,7 +96,8 @@ BlogPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
     return {
-        blogs: state.blogs
+        blogs: state.blogs,
+        authorized: state.authToken
     };
 }
 function mapDispatchToProps(dispatch) {

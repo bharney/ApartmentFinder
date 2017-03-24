@@ -118,8 +118,10 @@ class ManageBlogPage extends React.Component {
 
 
   render() {
+    const {authorized} = this.props;
     return (
       <BlogForm
+      authorized={authorized}
         updateBlogState={this.updateBlogState}
         onChange={this.onChange}
         saveBlog={this.saveBlog}
@@ -197,7 +199,8 @@ function mapStateToProps(state, ownProps) {
   }
 
   return {
-    blog: blog
+    blog: blog,
+    authorized: state.authToken
   };
 }
 

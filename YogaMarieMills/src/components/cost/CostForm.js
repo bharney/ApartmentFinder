@@ -4,7 +4,7 @@ import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 import Admin from '../common/Admin';
 
-const CostForm = ({updateCostState, onChange, saveCost, cost, errors, saving, uploadImage, deleteCost}) => {
+const CostForm = ({updateCostState, onChange, saveCost, cost, errors, saving, uploadImage, deleteCost, authorized}) => {
 
   return (
     <div className="mdl-grid dark-color bg-color">
@@ -14,7 +14,7 @@ const CostForm = ({updateCostState, onChange, saveCost, cost, errors, saving, up
             <h1 className="color-white">Pricing</h1>
             <hr />
             <form>
-              <Admin saveAction={saveCost} deleteAction={deleteCost} />
+              <Admin saveAction={saveCost} deleteAction={deleteCost} authorized={authorized} />
               <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-centered">
                 <div className="mdl-card mdl-shadow--4dp m-l-30 m-r-30 m-t-15 m-b-15 bg-white color-black cost-tile text-center">
                   <div className="inner">

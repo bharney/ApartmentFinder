@@ -3,7 +3,6 @@ import { Link, IndexLink, browserHistory } from 'react-router';
 import TextInput from '../common/TextInput';
 import TextAreaInput from '../common/TextAreaInput';
 import RemoveRowButton from '../common/RemoveRowButton';
-import Admin from '../common/Admin';
 import ConsultationDetailsForm from './ConsultationDetailsForm';
 import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
 import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
