@@ -4,7 +4,6 @@ import EmailInput from '../common/EmailInput';
 import ErrorMessages from '../common/ErrorMessages';
 
 const LoginForm = ({ login, loginRequest, onChange, loading, errors, errorMessage }) => {
-  debugger;
   return (
     <div className="mdl-grid dark-color bg-color">
       <div className="ribbon bg-image-landing b-border">

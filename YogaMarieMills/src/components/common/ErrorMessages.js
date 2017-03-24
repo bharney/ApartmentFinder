@@ -2,9 +2,7 @@ import React, { PropTypes } from 'react';
 
 const ErrorMessages = ({ errorMessage }) => {
   
-debugger;
   function displayError(error) {
-    debugger;
     if (errorMessage)
     return error
 

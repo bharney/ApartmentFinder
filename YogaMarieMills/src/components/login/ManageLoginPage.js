@@ -9,13 +9,11 @@ import LoginForm from './LoginForm';
 class ManageLoginPage extends React.Component {
   constructor(props, context) {
     super(props, context);
-    debugger;
     this.state = {
       login: Object.assign({}, props.login),
       errors: {},
       saving: false
     };
-    debugger;
     this.updateLoginState = this.updateLoginState.bind(this);
     this.loginRequest = this.loginRequest.bind(this);
   }
@@ -34,7 +32,6 @@ class ManageLoginPage extends React.Component {
 
   render() {
     let {errorMessage} = this.props
-    debugger;
     return (
       <LoginForm
         errorMessage={errorMessage}
@@ -63,7 +60,6 @@ function mapStateToProps(state) {
     emailAddress: '',
     password: '',
   };
-  debugger;
   return {
     login: login,
     errorMessage: state.authToken.message,

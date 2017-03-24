@@ -1,4 +1,5 @@
 import loginApi from '../API/LoginApi';
+import { browserHistory } from 'react-router';
 
 let storage = window.localStorage;
 let cachedToken;
@@ -26,7 +27,7 @@ export function loginRequest(login) {
     return loginApi.loginRequest(login).then(loginResponse => {
       if (loginResponse.token) {
         dispatch(loginSuccess(JSON.stringify(loginResponse)))
-        this.context.router.push('/');
+        browserHistory.push('/')
       }
       else {
         dispatch(loginError(loginResponse));

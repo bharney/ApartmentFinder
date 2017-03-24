@@ -31,8 +31,8 @@ export const getRoutes = (store) => {
   const authRequired = (nextState, replace, callback) => {
     store.dispatch(authenticate()).then(() => {
       const state = store.getState();
-      if (!state.authToken) {
-        replace({ nextPathname: nextState.location.pathname }, 'Login');
+      if (!state.authToken.authToken) {
+        replace({ nextPathname: nextState.location.pathname }, '/Login');
       }
       callback();
     });

@@ -11,7 +11,8 @@ class Login extends React.Component {
         this.Logout = this.Logout.bind(this);
     }
 
-    Logout() {
+    Logout(event) {
+        event.preventDefault();
         this.props.actions.logOut();
         this.setState();
     }
@@ -23,7 +24,7 @@ class Login extends React.Component {
             if (!login.authToken) 
                 return <Link to={`/Login`}>Login</Link>
 
-                return <Link to="" onClick={that.Logout}>Logout</Link>
+                return <Link to="" className="hover" onClick={that.Logout}>Logout</Link>
         }
         return (
             <span>{LoginOut(login)}</span>
