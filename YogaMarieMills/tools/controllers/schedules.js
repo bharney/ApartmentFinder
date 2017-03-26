@@ -81,7 +81,6 @@ let scheduleRoutes = function () {
                     ,type = @type
                     WHERE id = @id;`
                 ).then(function () {
-                    console.log("Keep: " + schedule.session_details.filter(session_details => session_details.id).map(function(obj){return obj.id;}).join(','))
                         const sqlDeleteScheduleDetails = new sql.Connection(dbconfig, function (err) {
                         let request = new sql.Request(sqlDeleteScheduleDetails);
                         request.input('parent_id', sql.Int, schedule.id);

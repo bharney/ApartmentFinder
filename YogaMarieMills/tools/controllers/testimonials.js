@@ -64,32 +64,58 @@ let testimonialRoutes = function () {
                      ,description = @description
                      FROM Headers
                      WHERE type = @type;`
-                ).then(function (recordset) {
-                    for (let prop in testimonial.testimonial_details) {
-                        if (testimonial.testimonial_details.hasOwnProperty(prop)) {
-                            const sqlUpdateTestimonial = new sql.Connection(dbconfig, function (err) {
-                                let request = new sql.Request(sqlUpdateTestimonial);
-                                request.input('id', sql.Int, testimonial.testimonial_details[prop].id);
-                                request.input('testimonial', sql.VarChar, testimonial.testimonial_details[prop].testimonial);
-                                request.input('name', sql.VarChar, testimonial.testimonial_details[prop].name);
-                                request.query(
-                                    `UPDATE Testimonials
-                                    SET testimonial = @testimonial
-                                    ,name = @name
-                                    WHERE id = @id`
-                                ).then(
-                                    console.log(testimonial.testimonial_details[prop])
-                                    ).catch(function (err) {
-                                        console.log("update testimonial: " + err);
-                                    });
-                            });
-                        }
-                    }
+                ).then(function () {
+                        const sqlDeleteTestimonials = new sql.Connection(dbconfig, function (err) {
+                        let request = new sql.Request(sqlDeleteTestimonials);
+                        request.query(
+                            `DELETE FROM Testimonials
+                            WHERE id NOT IN (${testimonial.testimonial_details.filter(testimonial_details => testimonial_details.id).map(function(obj){return obj.id;}).join(',')})`
+                        ).then(function () {
+                               for (let prop in testimonial.testimonial_details) {
+                                    if (testimonial.testimonial_details.hasOwnProperty(prop)) {
+                                        if (testimonial.testimonial_details[prop].id) {
+                                           const sqlUpdateTestimonial = new sql.Connection(dbconfig, function (err) {
+                                                let request = new sql.Request(sqlUpdateTestimonial);
+                                                request.input('id', sql.Int, testimonial.testimonial_details[prop].id);
+                                                request.input('testimonial', sql.VarChar, testimonial.testimonial_details[prop].testimonial);
+                                                request.input('name', sql.VarChar, testimonial.testimonial_details[prop].name);
+                                                request.query(
+                                                    `UPDATE Testimonials
+                                                    SET testimonial = @testimonial
+                                                    ,name = @name
+                                                    WHERE id = @id`
+                                                ).then(console.log("TestimonialDetails Updated")
+                                                ).catch(function (err) {
+                                                    console.log("update TestimonialDetails: " + err);
+                                                });
+                                            });
+                                        } 
+                                        else {
+                                        const sqlInsertTestimonial = new sql.Connection(dbconfig, function (err) {
+                                            let request = new sql.Request(sqlInsertTestimonial);
+                                            request.input('type', sql.VarChar, testimonial.type);
+                                            request.input('testimonial', sql.VarChar, testimonial.testimonial);
+                                            request.input('name', sql.VarChar, testimonial.name);
+                                            request.query(
+                                                `INSERT INTO Testimonials (type, testimonial, name)
+                                                VALUES (@type, @testimonial, @name)`
+                                            ).then(console.log("TestimonialDetails Inserted")
+                                            ).catch(function (err) {
+                                                console.log("insert TestimonialDetails: " + err);
+                                            });
+                                        });
+                                    }
+                                }
+                            }          
+                        }).catch(function (err) {
+                            console.log("Testimonial delete" + err);
+                        });
+                    });
                 }).catch(function (err) {
-                    console.log("massageType: " + err);
+                        console.log("Testimonial Header: " + err);
                 });
-            });
-        })
+            })
+        })    
         .delete(function (req, res) {
             if (!req.headers.authorization) {
                 return res.status(401).send({ message: "You are not authorized" })

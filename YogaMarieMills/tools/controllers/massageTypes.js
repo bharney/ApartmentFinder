@@ -88,36 +88,65 @@ let massageTypeRoutes = function () {
                         , description = @description
                         , cost = @cost
                         WHERE id = @id;`
-                ).then(function (recordset) {
-                    for (let prop in massageType.massage_details) {
-                        if (massageType.massage_details.hasOwnProperty(prop)) {
-                            const sqlUpdateMassageDetails = new sql.Connection(dbconfig, function (err) {
-                                let request = new sql.Request(sqlUpdateMassageDetails);
-                                request.input('id', sql.Int, massageType.massage_details[prop].id);
-                                request.input('parent_id', sql.Int, massageType.id);
-                                request.input('type', sql.VarChar, 'MassageDetail');
-                                request.input('title', sql.VarChar, massageType.massage_details[prop].title);
-                                request.input('description', sql.VarChar, massageType.massage_details[prop].description);
-                                request.query(
-                                    `UPDATE MassageDetails 
-                                        SET type = @type
-                                        ,title = @title
-                                        , description = @description
-                                        , parent_id = @parent_id
-                                        WHERE id = @id;`
-                                ).then(
-                                    console.log(massageType.massage_details[prop])
-                                    ).catch(function (err) {
-                                        console.log("massageDetails: " + err);
-                                    });
-                            });
-                        }
-                    }
+                ).then(function () {
+                        const sqlDeleteMassageDetails = new sql.Connection(dbconfig, function (err) {
+                        let request = new sql.Request(sqlDeleteMassageDetails);
+                        request.input('parent_id', sql.Int, massageType.id);
+                        request.query(
+                            `DELETE FROM MassageDetails
+                            WHERE id NOT IN (${massageType.massage_details.filter(massage_details => massage_details.id).map(function(obj){return obj.id;}).join(',')})
+                            AND parent_id = @parent_id;`
+                        ).then(function () {
+                                for (let prop in massageType.massage_details) {
+                                    if (massageType.massage_details.hasOwnProperty(prop)) {
+                                        if (massageType.massage_details[prop].id) {
+                                           const sqlUpdateMassageDetails = new sql.Connection(dbconfig, function (err) {
+                                                let request = new sql.Request(sqlUpdateMassageDetails);
+                                                request.input('id', sql.Int, massageType.massage_details[prop].id);
+                                                request.input('parent_id', sql.Int, massageType.id);
+                                                request.input('type', sql.VarChar, 'MassageDetail');
+                                                request.input('title', sql.VarChar, massageType.massage_details[prop].title);
+                                                request.input('description', sql.VarChar, massageType.massage_details[prop].description);
+                                                request.query(
+                                                    `UPDATE MassageDetails 
+                                                        SET type = @type
+                                                        ,title = @title
+                                                        , description = @description
+                                                        , parent_id = @parent_id
+                                                        WHERE id = @id;`
+                                                ).then(console.log("MassageDetails Updated")
+                                                ).catch(function (err) {
+                                                    console.log("update MassageDetails: " + err);
+                                                });
+                                            });
+                                        } 
+                                        else {
+                                        const sqlInsertMassageDetails = new sql.Connection(dbconfig, function (err) {
+                                            let request = new sql.Request(sqlInsertMassageDetails);
+                                            request.input('parent_id', sql.Int, massageType.id);
+                                            request.input('type', sql.VarChar, 'MassageDetail');
+                                            request.input('title', sql.VarChar, massageType.massage_details[prop].title);
+                                            request.input('description', sql.VarChar, massageType.massage_details[prop].description);
+                                            request.query(
+                                                `INSERT INTO MassageDetails (type, title, description, parent_id)
+                                                VALUES (@type, @title, @description, @parent_id);`
+                                            ).then(console.log("MassageDetails Inserted")
+                                            ).catch(function (err) {
+                                                console.log("insert MassageDetails: " + err);
+                                            });
+                                        });
+                                    }
+                                }
+                            }          
+                        }).catch(function (err) {
+                            console.log("MassageDetails delete" + err);
+                        });
+                    });
                 }).catch(function (err) {
-                    console.log("massageType: " + err);
+                        console.log("MassageType " + err);
                 });
-            });
-        })
+            })
+        })    
         .delete(function (req, res) {
             if (!req.headers.authorization) {
                 return res.status(401).send({ message: "You are not authorized" })
