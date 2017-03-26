@@ -29,18 +29,18 @@ const ScheduleForm = ({updateClassState, updateDateState, updateScheduleTimeStat
             </th>
           </tr>
         </thead>
-        {schedule.session_details.map(session_details =>
+        {schedule.session_details.map((session_details, index) =>
           <tbody>
             <tr>
               <td style={vertAlign} className="text-center">
                 <RemoveRowButton
-                  name={schedule.session_details.findIndex(i => i.id == session_details.id)}
+                  name={index}
                   onClick={removeRow} />
               </td>
               <td>
                 <TextInput
                   className="p-t-0 p-b-0"
-                  name={schedule.session_details.findIndex(i => i.id == session_details.id)}
+                  name={index}
                   label="Time"
                   placeholder="Time"
                   value={session_details.session_time}
@@ -49,7 +49,7 @@ const ScheduleForm = ({updateClassState, updateDateState, updateScheduleTimeStat
               <td>
                 <TextInput
                   className="p-t-0 p-b-0"
-                  name={schedule.session_details.findIndex(i => i.id == session_details.id)}
+                  name={index}
                   label="Class"
                   placeholder="Class"
                   value={session_details.class}

@@ -67,7 +67,7 @@ class ManageSchedulePage extends React.Component {
 
   addRow() {
     let schedule = this.state.schedule;
-    schedule.session_details.push({ id: schedule.session_details.length, session_time: '', class: '' })
+    schedule.session_details.push({ id: '', session_time: '', class: '' })
     this.setState({ schedule });
   }
 

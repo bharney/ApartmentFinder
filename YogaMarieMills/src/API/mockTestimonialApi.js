@@ -13,19 +13,8 @@ class TestimonialApi {
 
   static saveTestimonial(testimonial) {
     testimonial = Object.assign({}, testimonial);
-    function isNewItems(obj) {
-      if (obj.id)
-        return obj
-    }
-    function isExistingItem(obj) {
-      if (!obj.id)
-        return obj
-    }
-    const updateTestimonials = testimonial.testimonial_details.filter(isNewItems);
-    const insertTestimonials = testimonial.testimonial_details.filter(isExistingItem);
     return new Promise((resolve, reject) => {
-      if (updateTestimonials.length) {
-        testimonial.testimonial_details = updateTestimonials;
+      if (testimonial.id) {
         fetch('http://localhost:3000/api/testimonials', {
           method: 'put',
           headers: {
@@ -42,8 +31,7 @@ class TestimonialApi {
           console.log('Request failed', error);
         });
       }
-      if (insertTestimonials.length) {
-        testimonial.testimonial_details = insertTestimonials;
+      else {
         fetch('http://localhost:3000/api/testimonials', {
           method: 'post',
           headers: {

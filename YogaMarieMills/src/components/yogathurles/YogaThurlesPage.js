@@ -17,6 +17,9 @@ class YogaThurlesPage extends React.Component {
 
     render() {
         const {schedules} = this.props;
+        if(!schedules.session_dates)
+            schedules.session_dates = [];
+            
         const {authorized} = this.props;
         return (
             <div className="mdl-grid dark-color bg-color">

@@ -13,15 +13,15 @@ let scheduleRoutes = function () {
 
         .post(function (req, res) {
             if (!req.headers.authorization) {
-                return res.status(401).send({ message: "You are not authorized" })
+                return res.status(401).send({ message: "You are not authorized" });
             }
             const authorization = JSON.parse(req.headers.authorization.slice(7));
             const payload = jwt.decode(authorization.token, secret);
             if (!payload.sub) {
-                return res.status(401).send({ message: "You are not authorized" })
+                return res.status(401).send({ message: "You are not authorized" });
             }
             if (moment().unix() > payload.exp) {
-                return res.status(401).send({ message: "You are not authorized" })
+                return res.status(401).send({ message: "You are not authorized" });
             }
             let schedule = (req.body);
             const sqlInsertSchedule = new sql.Connection(dbconfig, function (err) {
@@ -70,7 +70,6 @@ let scheduleRoutes = function () {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             let schedule = (req.body);
-            console.log(schedule);
             const sqlUpdateSchedule = new sql.Connection(dbconfig, function (err) {
                 let request = new sql.Request(sqlUpdateSchedule);
                 request.input('id', sql.Int, schedule.id);
@@ -82,34 +81,64 @@ let scheduleRoutes = function () {
                     ,type = @type
                     WHERE id = @id;`
                 ).then(function () {
-                    console.log(schedule + "2");
-                    for (let prop in schedule.session_details) {
-                        if (schedule.session_details.hasOwnProperty(prop)) {
-                            console.log(schedule.session_details[prop]);
-                            const sqlInsertScheduleDetails = new sql.Connection(dbconfig, function (err) {
-                                let request = new sql.Request(sqlInsertScheduleDetails);
-                                request.input('id', sql.Int, schedule.session_details[prop].id);
-                                request.input('session_time', sql.VarChar, schedule.session_details[prop].session_time);
-                                request.input('type', sql.VarChar, 'ScheduleDetail');
-                                request.input('class', sql.VarChar, schedule.session_details[prop].class);
-                                request.input('parent_id', sql.Int, schedule.id);
-                                request.query(
-                                    `UPDATE ScheduleDetails
-                                     SET session_time = @session_time
-                                     ,type = @type
-                                     ,class = @class
-                                     ,parent_id = @parent_id
-                                     WHERE id = @id;`
-                                ).then(console.log(schedule.session_details[prop])).catch(function (err) {
-                                    console.log("scheduleDetails: " + err);
-                                });
-                            });
-                        }
-                    }
+                    console.log("Keep: " + schedule.session_details.filter(session_details => session_details.id).map(function(obj){return obj.id;}).join(','))
+                        const sqlDeleteScheduleDetails = new sql.Connection(dbconfig, function (err) {
+                        let request = new sql.Request(sqlDeleteScheduleDetails);
+                        request.input('parent_id', sql.Int, schedule.id);
+                        request.query(
+                            `DELETE FROM ScheduleDetails
+                            WHERE id NOT IN (${schedule.session_details.filter(session_details => session_details.id).map(function(obj){return obj.id;}).join(',')})
+                            AND parent_id = @parent_id;`
+                        ).then(function () {
+                                for (let prop in schedule.session_details) {
+                                    if (schedule.session_details.hasOwnProperty(prop)) {
+                                        if (schedule.session_details[prop].id) {
+                                            const sqlInsertScheduleDetails = new sql.Connection(dbconfig, function (err) {
+                                                let request = new sql.Request(sqlInsertScheduleDetails);
+                                                request.input('id', sql.Int, schedule.session_details[prop].id);
+                                                request.input('session_time', sql.VarChar, schedule.session_details[prop].session_time);
+                                                request.input('type', sql.VarChar, 'ScheduleDetail');
+                                                request.input('class', sql.VarChar, schedule.session_details[prop].class);
+                                                request.input('parent_id', sql.Int, schedule.id);
+                                                request.query(
+                                                    `UPDATE ScheduleDetails
+                                                    SET session_time = @session_time
+                                                    ,type = @type
+                                                    ,class = @class
+                                                    ,parent_id = @parent_id
+                                                    WHERE id = @id;`
+                                                ).then(console.log("ScheduleDetails Updated")
+                                                ).catch(function (err) {
+                                                    console.log("update scheduleDetails: " + err);
+                                                });
+                                            });
+                                        } 
+                                        else {
+                                        const sqlInsertScheduleDetails = new sql.Connection(dbconfig, function (err) {
+                                            let request = new sql.Request(sqlInsertScheduleDetails);
+                                            request.input('parent_id', sql.Int, schedule.id);
+                                            request.input('type', sql.VarChar, 'ScheduleDetail');
+                                            request.input('session_time', sql.VarChar, schedule.session_details[prop].session_time);
+                                            request.input('class', sql.VarChar, schedule.session_details[prop].class);
+                                            request.query(
+                                                `INSERT INTO ScheduleDetails (type, session_time, class, parent_id)
+                                                VALUES (@type, @session_time, @class, @parent_id);`
+                                            ).then(console.log("ScheduleDetails Inserted")
+                                            ).catch(function (err) {
+                                                console.log("insert scheduleDetails: " + err);
+                                            });
+                                        });
+                                    }
+                                }
+                            }          
+                        }).catch(function (err) {
+                            console.log("schedule delete" + err);
+                        });
+                    });
                 }).catch(function (err) {
-                    console.log("schedules: " + err);
+                        console.log("schedule " + err);
                 });
-            });
+            })
         })
         .delete(function (req, res) {
             if (!req.headers.authorization) {
@@ -129,7 +158,8 @@ let scheduleRoutes = function () {
                 request.query(
                     `DELETE FROM Schedules
                      WHERE id = @id`
-                ).then(res.status(201).send("Schedule has been deleted.")).catch(function (err) {
+                ).then(res.status(201).send("Schedule has been deleted.")
+                ).catch(function (err) {
                     console.log("delete schedule: " + err);
                 });
             });
@@ -166,7 +196,7 @@ let scheduleRoutes = function () {
                         ,NULL AS class
                         ,NULL AS parent_id
                         FROM Schedules S
-                        WHERE session_date >= GETDATE()
+                        WHERE session_date >= DATEADD(day, DATEDIFF(day, 0, GETDATE()), 0)
                                                 
                         UNION ALL
 
