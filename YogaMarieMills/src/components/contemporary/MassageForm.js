@@ -47,21 +47,21 @@ const MassageForm = ({updateDescriptionState, updateTitleState, updateMassageSta
         </div>
         <div className="row">
             <div className="col-xs-12 col-sm-offset-1 col-sm-10">
-                {massage.massage_details.map(massage_details =>
+                {massage.massage_details.map((massage_details, index) =>
                   <div className="col-xs-6">
                     <RemoveRowButton
-                      name={massage.massage_details.findIndex(i => i.id == massage_details.id)}
+                      name={index}
                       onClick={removeRow} />
                     <TextInput
                       className="p-t-0 p-b-0"
-                      name={massage.massage_details.findIndex(i => i.id == massage_details.id)}
+                      name={index}
                       label="Title"
                       placeholder="Title"
                       value={massage_details.title}
                       onChange={updateTitleState} />
                     <TextAreaInput
                       className="p-t-0 p-b-0"
-                      name={massage.massage_details.findIndex(i => i.id == massage_details.id)}
+                      name={index}
                       label="Description"
                       placeholder="Description"
                       rows="4"

@@ -93,9 +93,9 @@ let testimonialRoutes = function () {
                                         else {
                                         const sqlInsertTestimonial = new sql.Connection(dbconfig, function (err) {
                                             let request = new sql.Request(sqlInsertTestimonial);
-                                            request.input('type', sql.VarChar, testimonial.type);
-                                            request.input('testimonial', sql.VarChar, testimonial.testimonial);
-                                            request.input('name', sql.VarChar, testimonial.name);
+                                            request.input('type', sql.VarChar, 'Testimonial');
+                                            request.input('testimonial', sql.VarChar, testimonial.testimonial_details[prop].testimonial);
+                                            request.input('name', sql.VarChar, testimonial.testimonial_details[prop].name);
                                             request.query(
                                                 `INSERT INTO Testimonials (type, testimonial, name)
                                                 VALUES (@type, @testimonial, @name)`

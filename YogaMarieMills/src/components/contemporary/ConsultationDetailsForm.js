@@ -19,44 +19,44 @@ const ConsultationDetailsForm = ({ updateTitleState, updateCostState, updateSess
   return (
     <div className="row">
       <div className="col-xs-12 col-sm-offset-1 col-sm-10">
-        {dietConsultation.consultationDetails.map(consultationDetails =>
+        {dietConsultation.consultationDetails.map((consultationDetails, index) =>
           <div className="col-xs-12 col-sm-6">
             <div className="mdl-card mdl-shadow--8dp bright-bg-color m-t-1-em p-1-em allow-overflow">
               {displayIcon(consultationDetails.icon, consultationDetails.iconWidth, consultationDetails.iconHeight)}
               <RemoveRowButton
-                name={dietConsultation.consultationDetails.findIndex(i => i.id == consultationDetails.id)}
+                name={index}
                 onClick={removeRow}/>
               <TextInput
                 className="p-t-0 p-b-0"
-                name={dietConsultation.consultationDetails.findIndex(i => i.id == consultationDetails.id)}
+                name={index}
                 label="Title"
                 placeholder="Title"
                 value={consultationDetails.title}
                 onChange={updateTitleState} />
               <TextInput
                 className="p-t-0 p-b-0"
-                name={dietConsultation.consultationDetails.findIndex(i => i.id == consultationDetails.id)}
+                name={index}
                 label="Cost"
                 placeholder="Cost"
                 value={consultationDetails.cost}
                 onChange={updateCostState} />
               <TextInput
                 className="p-t-0 p-b-0"
-                name={dietConsultation.consultationDetails.findIndex(i => i.id == consultationDetails.id)}
+                name={index}
                 label="Consultation Duration"
                 placeholder="Consultation Duration"
                 value={consultationDetails.session_time}
                 onChange={updateSessionTimeState} />
               <TextInput
                 className="p-t-0 p-b-0"
-                name={dietConsultation.consultationDetails.findIndex(i => i.id == consultationDetails.id)}
+                name={index}
                 label="Short Description"
                 placeholder="Short Description"
                 value={consultationDetails.consultation}
                 onChange={updateShortState} />
               <TextAreaInput
                 className="p-t-0 p-b-0"
-                name={dietConsultation.consultationDetails.findIndex(i => i.id == consultationDetails.id)}
+                name={index}
                 label="Consultation Description"
                 placeholder="Consultation Description"
                 rows="8"

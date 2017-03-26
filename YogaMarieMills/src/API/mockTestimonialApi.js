@@ -14,7 +14,6 @@ class TestimonialApi {
   static saveTestimonial(testimonial) {
     testimonial = Object.assign({}, testimonial);
     return new Promise((resolve, reject) => {
-      if (testimonial.id) {
         fetch('http://localhost:3000/api/testimonials', {
           method: 'put',
           headers: {
@@ -30,24 +29,6 @@ class TestimonialApi {
         }).catch(function (error) {
           console.log('Request failed', error);
         });
-      }
-      else {
-        fetch('http://localhost:3000/api/testimonials', {
-          method: 'post',
-          headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + getToken()
-          },
-          body: JSON.stringify(testimonial)
-        }).then(function (response) {
-          return response.json();
-        }).then(function (testimonial) {
-          resolve(testimonial)
-        }).catch(function (error) {
-          console.log('Request failed', error);
-        });
-      }
     });
   }
 

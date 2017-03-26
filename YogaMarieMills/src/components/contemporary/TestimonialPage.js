@@ -18,7 +18,8 @@ class TestimonialPage extends React.Component {
 
     render() {
         const { testimonials } = this.props;
-
+        if(!testimonials.testimonial_details)
+            testimonials.testimonial_details = [];
         return (
             <div className="mdl-grid dark-color">
                 <div className="ribbon bg-image-landing">

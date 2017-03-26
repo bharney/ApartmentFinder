@@ -63,7 +63,7 @@ class ManageMassagePage extends React.Component {
     }
     this.setState({ massage });
     this.props.actions.saveMassage(this.state.massage);
-    this.context.router.push('/Ayurveda/Massage' + massage.type);
+    this.context.router.push('/Ayurveda/Massage/' + massage.type);
   }
 
   deleteMassage(event) {
@@ -74,7 +74,7 @@ class ManageMassagePage extends React.Component {
 
   addRow() {
     let massage = this.state.massage;
-    massage.massage_details.push({ id: massage.massage_details.length, session_time: '', class: '' })
+    massage.massage_details.push({ id:'', title: '', description: '' })
     this.setState({ massage });
   }
 

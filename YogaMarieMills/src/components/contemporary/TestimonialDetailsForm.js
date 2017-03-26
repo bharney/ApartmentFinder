@@ -9,13 +9,13 @@ const TestimonialDetailsForm = ({ updateQuoteState, updateNameState, removeRow, 
 
   return (
     <div>
-      {testimonial.testimonial_details.map(testimonial_details =>
+      {testimonial.testimonial_details.map((testimonial_details, index) =>
         <div className="mdl-card mdl-shadow--4dp p-20 m-t-1-em tile-masonry bg-color-white">
           <ul className="mdl-list">
             <li>
               <TextAreaInput
                 className="p-t-0 p-b-0"
-                name={testimonial.testimonial_details.findIndex(i => i.id == testimonial_details.id)}
+                name={index}
                 label="Testimonial"
                 placeholder="Testimonial"
                 rows="5"
@@ -23,7 +23,7 @@ const TestimonialDetailsForm = ({ updateQuoteState, updateNameState, removeRow, 
                 onChange={updateQuoteState} />
               <TextInput
                 className="p-t-0 p-b-0"
-                name={testimonial.testimonial_details.findIndex(i => i.id == testimonial_details.id)}
+                name={index}
                 label="Name"
                 placeholder="Name"
                 value={testimonial_details.name}
@@ -31,7 +31,7 @@ const TestimonialDetailsForm = ({ updateQuoteState, updateNameState, removeRow, 
             </li>
           </ul>
           <RemoveRowButton
-            name={testimonial.testimonial_details.findIndex(i => i.id == testimonial_details.id)}
+            name={index}
             onClick={removeRow} />
         </div>
       )}

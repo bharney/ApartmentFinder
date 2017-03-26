@@ -36,7 +36,7 @@ let consultationRoutes = function () {
                         request.query(
                             `INSERT INTO Consultations (type, title, session_time, short, description, cost)
                              VALUES (@type, @title, @session_time, @consultation, @consultation_desc, @cost);`
-                        ).then(res.status(201).send(consultation)).catch(function (err) {
+                        ).then(console.log("post insert: " + consultation)).catch(function (err) {
                             console.log("insert Consultations: " + err);
                         });
                     });
@@ -69,37 +69,66 @@ let consultationRoutes = function () {
                      , description = @description
                      FROM Headers
                      WHERE type = @type;`
-                ).then(function (recordset) {
-                    for (let prop in consultation.consultationDetails) {
-                        if (consultation.consultationDetails.hasOwnProperty(prop)) {
-                            const sqlUpdateConsultationDetails = new sql.Connection(dbconfig, function (err) {
-                                let request = new sql.Request(sqlUpdateConsultationDetails);
-                                request.input('id', sql.Int, consultation.consultationDetails[prop].id);
-                                request.input('title', sql.VarChar, consultation.consultationDetails[prop].title);
-                                request.input('session_time', sql.VarChar, consultation.consultationDetails[prop].session_time);
-                                request.input('consultation', sql.VarChar, consultation.consultationDetails[prop].consultation);
-                                request.input('consultation_desc', sql.VarChar, consultation.consultationDetails[prop].consultation_desc);
-                                request.input('cost', sql.VarChar, consultation.consultationDetails[prop].cost);
-                                request.query(
-                                    `UPDATE Consultations 
-                                    SET title = @title
-                                    , session_time = @session_time
-                                    , short = @consultation
-                                    , description = @consultation_desc
-                                    , cost = @cost
-                                    WHERE id = @id;`
-                                ).then(
-                                    console.log(consultation.consultationDetails[prop])
-                                    ).catch(function (err) {
-                                        console.log("massageDetails: " + err);
-                                    });
-                            });
-                        }
-                    }
+                ).then(function () {
+                        const sqlDeleteConsultationDetails = new sql.Connection(dbconfig, function (err) {
+                        let request = new sql.Request(sqlDeleteConsultationDetails);
+                        request.query(
+                            `DELETE FROM Consultations
+                            WHERE id NOT IN (${consultation.consultationDetails.filter(consultationDetails => consultationDetails.id).map(function(obj){return obj.id;}).join(',')})`
+                        ).then(function () {
+                                for (let prop in consultation.consultationDetails) {
+                                    if (consultation.consultationDetails.hasOwnProperty(prop)) {
+                                        if (consultation.consultationDetails[prop].id) {
+                                             const sqlUpdateConsultationDetails = new sql.Connection(dbconfig, function (err) {
+                                                let request = new sql.Request(sqlUpdateConsultationDetails);
+                                                request.input('id', sql.Int, consultation.consultationDetails[prop].id);
+                                                request.input('title', sql.VarChar, consultation.consultationDetails[prop].title);
+                                                request.input('session_time', sql.VarChar, consultation.consultationDetails[prop].session_time);
+                                                request.input('consultation', sql.VarChar, consultation.consultationDetails[prop].consultation);
+                                                request.input('consultation_desc', sql.VarChar, consultation.consultationDetails[prop].consultation_desc);
+                                                request.input('cost', sql.VarChar, consultation.consultationDetails[prop].cost);
+                                                request.query(
+                                                    `UPDATE Consultations 
+                                                    SET title = @title
+                                                    , session_time = @session_time
+                                                    , short = @consultation
+                                                    , description = @consultation_desc
+                                                    , cost = @cost
+                                                    WHERE id = @id;`
+                                                ).then(console.log("ConsultationDetails Updated")
+                                                ).catch(function (err) {
+                                                    console.log("update ConsultationDetails: " + err);
+                                                });
+                                            });
+                                        } 
+                                        else {
+                                        const sqlInsertConsultationDetails = new sql.Connection(dbconfig, function (err) {
+                                            let request = new sql.Request(sqlInsertConsultationDetails);
+                                            request.input('type', sql.VarChar, 'diet');
+                                            request.input('title', sql.VarChar, consultation.consultationDetails[prop].title);
+                                            request.input('session_time', sql.VarChar, consultation.consultationDetails[prop].session_time);
+                                            request.input('consultation', sql.VarChar, consultation.consultationDetails[prop].consultation);
+                                            request.input('consultation_desc', sql.VarChar, consultation.consultationDetails[prop].consultation_desc);
+                                            request.input('cost', sql.VarChar, consultation.consultationDetails[prop].cost);
+                                            request.query(
+                                                `INSERT INTO Consultations (type, title, session_time, short, description, cost)
+                                                VALUES (@type, @title, @session_time, @consultation, @consultation_desc, @cost);`
+                                            ).then(console.log("ConsultationDetails Inserted")
+                                            ).catch(function (err) {
+                                                console.log("insert ConsultationDetails: " + err);
+                                            });
+                                        });
+                                    }
+                                }
+                            }          
+                        }).catch(function (err) {
+                            console.log("ConsultationDetails delete" + err);
+                        });
+                    });
                 }).catch(function (err) {
-                    console.log("massageType: " + err);
+                        console.log("ConsultationDetails " + err);
                 });
-            });
+            })
         })
         .delete(function (req, res) {
             if (!req.headers.authorization) {

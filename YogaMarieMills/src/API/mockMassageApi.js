@@ -13,6 +13,7 @@ class MassageApi {
 
   static saveMassage(massage) {
     massage = Object.assign({}, massage);
+    debugger;
     return new Promise((resolve, reject) => {
       if (massage.id) {
         fetch('http://localhost:3000/api/massages', {

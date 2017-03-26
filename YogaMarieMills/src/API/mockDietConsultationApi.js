@@ -14,7 +14,6 @@ class DietConsultationApi {
   static saveDietConsultation(consultation) {
     consultation = Object.assign({}, consultation);
     return new Promise((resolve, reject) => {
-      if (consultation.id) {
         fetch('http://localhost:3000/api/consultations', {
           method: 'put',
           headers: {
@@ -30,24 +29,6 @@ class DietConsultationApi {
         }).catch(function (error) {
           console.log('Request failed', error);
         });
-      }
-      else {
-        fetch('http://localhost:3000/api/consultations', {
-          method: 'post',
-          headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + getToken()
-          },
-          body: JSON.stringify(consultation)
-        }).then(function (response) {
-          return response.json();
-        }).then(function (consultation) {
-          resolve(consultation)
-        }).catch(function (error) {
-          console.log('Request failed', error);
-        });
-      }
     });
   }
 

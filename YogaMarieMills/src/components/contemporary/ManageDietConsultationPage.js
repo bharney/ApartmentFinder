@@ -133,7 +133,7 @@ class ManageDietConsultationPage extends React.Component {
   addRow() {
     let dietConsultation = this.state.dietConsultation;
     dietConsultation.consultationDetails.push({
-      id: Math.max.apply(Math, dietConsultation.consultationDetails.map(i => i.id)) + 1,
+      id: '',
       type: 'diet',
       title: '',
       consultation: '',

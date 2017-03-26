@@ -108,7 +108,7 @@ class ManageTestimonialPage extends React.Component {
   addRow() {
     let testimonial = this.state.testimonial;
     testimonial.testimonial_details.push({
-      id: Math.max.apply(Math, testimonial.testimonial_details.map(i => i.id)) + 1,
+      id: '',
       type: '',
       testimonial: '',
       name: '',

@@ -60,6 +60,11 @@ let userRoutes = function () {
             if (!req.headers.authorization) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
             if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
@@ -89,6 +94,11 @@ let userRoutes = function () {
         })
         .delete(function (req, res) {
             if (!req.headers.authorization) {
+                return res.status(401).send({ message: "You are not authorized" })
+            }
+            const authorization = JSON.parse(req.headers.authorization.slice(7));
+            const payload = jwt.decode(authorization.token, secret);
+            if (!payload.sub) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             if (moment().unix() > payload.exp) {
