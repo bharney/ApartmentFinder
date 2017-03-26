@@ -24,7 +24,7 @@ let uploadRoute = function () {
         if (moment().unix() > payload.exp) {
             return res.status(401).send({ message: "You are not authorized" })
         }
-        var file = __dirname + "/temp/" + req.file.originalname;
+        let file = __dirname + "/temp/" + req.file.originalname;
         let response;
         if (path.extname(req.file.originalname).toLowerCase() === '.png' ||
             path.extname(req.file.originalname).toLowerCase() === '.jpg' ||

@@ -882,6 +882,18 @@ Blog
         margin-right: -5px;
     }
 
+.align-bottom-left {
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+
+.align-bottom-right {
+    position:absolute;
+    bottom:0;
+    right:0;
+}
+
 /* ========================================
 Login
 ========================================= */
@@ -1240,7 +1252,6 @@ Media queries
 .p-r-03-em {
     padding-right: 0.3em;
 }
-
 
 .p-r-1-em {
     padding-right: 1em;

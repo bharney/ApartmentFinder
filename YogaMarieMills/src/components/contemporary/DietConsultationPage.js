@@ -2,6 +2,7 @@
 import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Admin from '../common/Admin';
 import * as dietConsultationActions from '../../actions/dietConsultationActions';
 import { CompositeDecorator, ContentBlock, ContentState, Editor, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
 
@@ -19,7 +20,7 @@ class DietConsultationPage extends React.Component {
     render() {
 
         const { dietConsultations } = this.props;
-
+        const { authorized } = this.props;
         let displayIcon = function (icon, iconWidth, iconHeight) {
 
             let requireImg = icon ? require(`../../images/${icon}`) : ""
@@ -41,6 +42,7 @@ class DietConsultationPage extends React.Component {
                                 <h1 className="color-white text-center">Aryuvedic Diet Consultation</h1>
                                 <h3 className="color-white text-center">{dietConsultations.short}</h3>
                                 <div className="mdl-card mdl-shadow--4dp p-1-em">
+                                    <Admin editAction={"DietConsultation"} authorized={authorized} />
                                     <div id="editor" className="editor">
                                         <p>
                                             <Editor
@@ -120,7 +122,8 @@ DietConsultationPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
     return {
-        dietConsultations: state.dietConsultations
+        dietConsultations: state.dietConsultations,
+        authorized: state.authToken
     };
 }
 function mapDispatchToProps(dispatch) {

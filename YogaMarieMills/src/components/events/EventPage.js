@@ -2,6 +2,7 @@
 import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Admin from '../common/Admin';
 import * as eventActions from '../../actions/eventActions';
 import { CompositeDecorator, ContentBlock, ContentState, Editor, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
 
@@ -19,7 +20,7 @@ class EventPage extends React.Component {
 
     render() {
         const { eventType } = this.props;
-
+        const {authorized} = this.props;
         function displayImage(image) {
             image = image ? require(`../../images/${image}`) : '';
             return ({
@@ -37,8 +38,10 @@ class EventPage extends React.Component {
                         <div className="row m-b-1-em">
                             <div className="col-xs-12">
                                 <h1 className="color-white text-center">{eventType.header}</h1>
+                                <Admin addAction={"Admin/Events"} authorized={authorized}/>
                                 <div className="col-xs-12 m-b-1-em">
                                     <div className="mdl-card mdl-shadow--4dp">
+                                        <Admin editAction={"Admin/Events/" + eventType.type} authorized={authorized}/>
                                         <div className="mdl-card__media image-text-container" style={displayImage(eventType.image)}>
                                             <img src={"../" + eventType.image} className="img-responsive hdn" />
                                             <div className="text-left align-bottom m-l-20 m-b-20">
@@ -139,7 +142,8 @@ function mapStateToProps(state, ownProps) {
     }
 
     return {
-        eventType: eventType
+        eventType: eventType,
+        authorized: state.authToken
     };
 }
 
@@ -150,31 +154,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventPage);
-
-/*
-
- <div className="col-xs-6 text-right p-r-30">
-                        <DatePicker
-                          formatDate={new Intl.DateTimeFormat('en-US', {
-                            weekday: 'long',
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric',
-                          }).format}
-                          floatingLabelText="Start Date"
-                          value={new Date(eventType.start_date)}
-                          name="start_date"
-                          onChange={updateStartDateState} />
-                        <DatePicker
-                          formatDate={new Intl.DateTimeFormat('en-US', {
-                            weekday: 'long',
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric',
-                          }).format}
-                          floatingLabelText="End Date"
-                          value={new Date(eventType.end_date)}
-                          name="end_date"
-                          onChange={updateEndDateState} />
-                      </div>*/
-

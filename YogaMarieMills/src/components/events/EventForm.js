@@ -60,7 +60,7 @@ const EventTypeForm = ({
             <div className="col-xs-12">
               {displayEventType(eventType.header, updateEventState)}
               <hr />
-              <Admin addAction={"Events"} authorized={authorized}/>
+              <Admin addAction={"Admin/Events"} authorized={authorized}/>
               <div className="col-xs-12 m-b-1-em">
                 <form>
                   <Admin saveAction={saveEvent} deleteAction={deleteEvent} uploadImage={uploadImage} authorized={authorized}/>

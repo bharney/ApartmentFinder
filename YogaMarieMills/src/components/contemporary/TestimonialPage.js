@@ -2,6 +2,7 @@
 import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Admin from '../common/Admin';
 import * as testimonialActions from '../../actions/testimonialActions';
 import { CompositeDecorator, ContentBlock, ContentState, Editor, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
 
@@ -20,6 +21,7 @@ class TestimonialPage extends React.Component {
         const { testimonials } = this.props;
         if(!testimonials.testimonial_details)
             testimonials.testimonial_details = [];
+        const { authorized } = this.props;
         return (
             <div className="mdl-grid dark-color">
                 <div className="ribbon bg-image-landing">
@@ -29,6 +31,7 @@ class TestimonialPage extends React.Component {
                                 <h1 className="color-white text-center">{testimonials.header}</h1>
                                 <h3 className="color-white text-center">{testimonials.short}</h3>
                                 <div className="mdl-card mdl-shadow--4dp p-20">
+                                    <Admin editAction={"Testimonials"} authorized={authorized} />
                                     <div id="editor" className="editor">
                                         <p>
                                             <Editor
@@ -104,7 +107,8 @@ TestimonialPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
     return {
-        testimonials: state.testimonials
+        testimonials: state.testimonials,
+        authorized: state.authToken
     };
 }
 function mapDispatchToProps(dispatch) {
