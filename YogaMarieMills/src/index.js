@@ -44,10 +44,12 @@ store.dispatch(loadEvent());
 store.dispatch(loadCourses());
 store.dispatch(authenticate());
 
+let onUpdate = () => { window.scrollTo(0, 0); };
+
 render(
     <MuiThemeProvider>
         <Provider store={store}>
-            <Router history={browserHistory}>
+            <Router history={browserHistory} onUpdate={onUpdate} >
                 {getRoutes(store)}
             </Router>
         </Provider>

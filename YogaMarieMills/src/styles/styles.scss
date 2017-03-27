@@ -93,12 +93,29 @@ h4 {
     @include font-size($h4-font-sizes);
 }
 
+html {
+    overflow-x: visible;
+    overflow-y: visible;
+}
+
 body {
+    overflow-x: visible;
+    overflow-y: visible;
     color: $color;
     background: $lightBgColor;
     text-shadow: none;
     font-family:'Open Sans', sans-serif;
 
+}
+
+.mdl-layout {
+    overflow-x: visible;
+    overflow-y: visible;
+}
+
+.mdl-layout__content {
+    overflow-x: visible;
+    overflow-y: visible;
 }
 
 .dark-color {

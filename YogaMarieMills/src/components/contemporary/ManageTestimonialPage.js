@@ -102,7 +102,7 @@ class ManageTestimonialPage extends React.Component {
     testimonial.description = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
     this.setState({ testimonial });
     this.props.actions.saveTestimonial(this.state.testimonial);
-    this.context.router.push('/Ayurveda/Testimonial');
+    this.context.router.push('/Ayurveda/Testimonials');
   }
 
   addRow() {

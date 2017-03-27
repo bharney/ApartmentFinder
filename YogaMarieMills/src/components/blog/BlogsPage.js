@@ -40,7 +40,7 @@ class BlogPage extends React.Component {
                         <div className="row m-b-1-em">
                             <div className="col-sm-offset-1 col-sm-10 col-xs-12 m-b-1-em">
                                 <h1 className="text-center color-white">My Blog</h1>
-                                <Admin addAction={blogs} authorized={authorized} />
+                                <Admin addAction={"Admin/Blog"} authorized={authorized} />
                                 <h2 className="text-center color-white">Read useful information on Yoga and Ayurveda</h2>
                                 <div className="responsive-col-masonry">
                                     {blogs.map(blog =>

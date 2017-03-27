@@ -42,7 +42,7 @@ const ClassTypeForm = ({authorized, updateClassTypeState, onChange, saveClassTyp
           <div className="row m-b-1-em">
             <div key={classType.id} className="col-xs-12">
               <h1 className="color-white text-center">{classType.title}</h1>
-              <hr />
+              <hr width="50%" className="center-block" />
               <form>
                 <Admin saveAction={saveClassType} deleteAction={deleteClassType} uploadImage={uploadImage} authorized={authorized}/>
                 <div className="col-xs-12 m-b-1-em">

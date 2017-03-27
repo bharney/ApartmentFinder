@@ -12,7 +12,7 @@ const CostForm = ({updateCostState, onChange, saveCost, cost, errors, saving, up
         <div className="row">
           <div className="col-xs-offset-1 col-xs-10 row-centered">
             <h1 className="color-white">Pricing</h1>
-            <hr />
+            <hr width="50%" className="center-block" />
             <form>
               <Admin saveAction={saveCost} deleteAction={deleteCost} authorized={authorized} />
               <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-centered">

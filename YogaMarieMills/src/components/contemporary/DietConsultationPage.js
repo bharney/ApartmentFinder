@@ -20,6 +20,9 @@ class DietConsultationPage extends React.Component {
     render() {
 
         const { dietConsultations } = this.props;
+        if(!dietConsultations.consultationDetails)
+            dietConsultations.consultationDetails = [];
+
         const { authorized } = this.props;
         let displayIcon = function (icon, iconWidth, iconHeight) {
 

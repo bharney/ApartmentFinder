@@ -103,8 +103,8 @@ class Header extends React.Component {
             }
         };
         return (
-            <header className="dark-bg-color color-blur mdl-layout__header">
-                <div className="mdl-layout__header-row nav-element-left anchor">
+            <header className="mdl-layout__header">
+                <div className="mdl-layout__header-row nav-element-left anchor dark-bg-color color-blur navbar-fixed-top">
                     <a className="navbar-brand mdl-layout-title mdl-layout__header-row drawer-header nav-menu-left font-style" onTouchTap={this.handleToggle}><span className="menu-font"><i className="p-l-03-em p-r-015-em fa fa-ellipsis-v" aria-hidden="true"></i>Menu</span></a>
                     <div className="mdl-layout-spacer nav-vertical-divider">
                         <div className="mdl-layout__header-row drawer-header anchor p-l-0">

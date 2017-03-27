@@ -59,14 +59,14 @@ const EventTypeForm = ({
           <div className="row m-b-1-em">
             <div className="col-xs-12">
               {displayEventType(eventType.header, updateEventState)}
-              <hr />
+              <hr width="50%" className="center-block" />
               <Admin addAction={"Admin/Events"} authorized={authorized}/>
               <div className="col-xs-12 m-b-1-em">
                 <form>
                   <Admin saveAction={saveEvent} deleteAction={deleteEvent} uploadImage={uploadImage} authorized={authorized}/>
                   <div className="mdl-card mdl-shadow--4dp">
                     <div className="mdl-card__media image-text-container" style={displayImage(eventType.image)}>
-                      <img src={"../" + eventType.image} className="img-responsive hdn" />
+                      <img src={"/" + eventType.image} className="img-responsive hdn" />
                       <div className="col-xs-7 text-left align-bottom m-l-20 m-b-20">
                         <TextInput
                           name="title"

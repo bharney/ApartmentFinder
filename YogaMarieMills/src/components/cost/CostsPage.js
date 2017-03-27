@@ -20,7 +20,7 @@ class CostsPage extends React.Component {
                         <div className="col-sm-offset-1 col-sm-10 col-xs-12 row-centered">
                             <h1 className="color-white">Pricing</h1>
                             <Admin addAction="Cost" authorized={authorized} />
-                            <hr/>
+                            <hr width="50%" className="center-block m-t-0" />
                             {costs.map(cost =>
                                 <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-centered">
                                     <Admin editAction={cost.type + "/" + cost.id} authorized={authorized} />
@@ -65,7 +65,7 @@ class CostsPage extends React.Component {
                     <div  className="mdl-card container p-1-em m-b-1-em m-t-1-em mdl-shadow--4dp">
                         <div className="featured clearfix text-center color-black">
                                     <h2>Additional Info</h2>
-                                    <hr />
+                                    <hr width="50%" className="center-block" />
                                     <h3>
                                         Deposits of €20 for new students is required. Please leave your name, your phone number and the class you are booking for on the envelop.
                                         All deposits to the Angel Room, Baker Street, Thurles.

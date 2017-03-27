@@ -158,8 +158,6 @@ class ManageEventPage extends React.Component {
     image = image ? require(`../../images/${image}`) : '';
     return ({
       backgroundImage: 'url(' + image + ')',
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center",
       backgroundSize: "contain"
     })
   }
