@@ -9,6 +9,18 @@ let eventRoutes = function () {
     const eventRouter = express.Router();
     const dbconfig = "mssql://Application:!Testing123@BPHSERVER/YogaMarieMills";
 
+    function tryParseCurrency(str) {
+        if (typeof (str) !== "undefined" && str) {
+            let parsed = str.match(/[\s-\d\,\.]+/g);
+            if (isNaN(parseFloat(parsed)))
+                return str
+
+            if (parsed)
+                return parseFloat(+parsed[0].replace(/\./g, '').replace(/,/g, '.').replace(/\s/g, '')).toFixed(2);
+        }
+        return ''
+    }
+
     eventRouter.route('/events')
         .post(function (req, res) {
             if (!req.headers.authorization) {
@@ -40,7 +52,7 @@ let eventRoutes = function () {
                 request.input('session_time', sql.VarChar, eventType.session_time);
                 request.input('title', sql.VarChar, eventType.title);
                 request.input('description', sql.VarChar, eventType.description);
-                request.input('cost', sql.VarChar, eventType.cost);
+                request.input('cost', sql.VarChar, tryParseCurrency(eventType.cost));
                 request.input('image', sql.VarChar, eventType.image);
                 request.input('start_date', sql.Date, eventType.start_date);
                 request.input('end_date', sql.Date, eventType.end_date);
@@ -86,7 +98,7 @@ let eventRoutes = function () {
                 request.input('session_time', sql.VarChar, eventType.session_time);
                 request.input('title', sql.VarChar, eventType.title);
                 request.input('description', sql.VarChar, eventType.description);
-                request.input('cost', sql.VarChar, eventType.cost);
+                request.input('cost', sql.VarChar, tryParseCurrency(eventType.cost));
                 request.input('image', sql.VarChar, eventType.image);
                 request.input('start_date', sql.Date, eventType.start_date);
                 request.input('end_date', sql.Date, eventType.end_date);

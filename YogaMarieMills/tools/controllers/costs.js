@@ -9,6 +9,18 @@ let costRoutes = function () {
     const costRouter = express.Router();
     const dbconfig = "mssql://Application:!Testing123@BPHSERVER/YogaMarieMills";
 
+    function tryParseCurrency(str) {
+        if (typeof (str) !== "undefined" && str) {
+            let parsed = str.match(/[\s-\d\,\.]+/g);
+            if (isNaN(parseFloat(parsed)))
+                return str
+
+            if (parsed)
+                return parseFloat(+parsed[0].replace(/\./g, '').replace(/,/g, '.').replace(/\s/g, '')).toFixed(2);
+        }
+        return ''
+    }
+
     costRouter.route('/costs')
         .post(function (req, res) {
             if (!req.headers.authorization) {
@@ -27,7 +39,7 @@ let costRoutes = function () {
                 let request = new sql.Request(sqlInsertCost);
                 request.input('type', sql.VarChar, cost.type);
                 request.input('course', sql.VarChar, cost.course);
-                request.input('cost', sql.VarChar, cost.cost);
+                request.input('cost', sql.VarChar, tryParseCurrency(cost.cost));
                 request.input('duration', sql.VarChar, cost.duration);
                 request.input('description', sql.VarChar, cost.description);
                 request.input('package', sql.VarChar, cost.package);
@@ -58,7 +70,7 @@ let costRoutes = function () {
                 request.input('id', sql.Int, cost.id);
                 request.input('type', sql.VarChar, cost.type);
                 request.input('course', sql.VarChar, cost.course);
-                request.input('cost', sql.VarChar, cost.cost);
+                request.input('cost', sql.VarChar, tryParseCurrency(cost.cost));
                 request.input('duration', sql.VarChar, cost.duration);
                 request.input('description', sql.VarChar, cost.description);
                 request.input('package', sql.VarChar, cost.package);

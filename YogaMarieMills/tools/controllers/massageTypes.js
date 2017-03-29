@@ -9,6 +9,18 @@ let massageTypeRoutes = function () {
     const massageTypeRouter = express.Router();
     const dbconfig = "mssql://Application:!Testing123@BPHSERVER/YogaMarieMills";
 
+    function tryParseCurrency(str) {
+        if (typeof (str) !== "undefined" && str) {
+            let parsed = str.match(/[\s-\d\,\.]+/g);
+            if (isNaN(parseFloat(parsed)))
+                return str
+
+            if (parsed)
+                return parseFloat(+parsed[0].replace(/\./g, '').replace(/,/g, '.').replace(/\s/g, '')).toFixed(2);
+        }
+        return ''
+    }
+
     massageTypeRouter.route('/massages')
         .post(function (req, res) {
             if (!req.headers.authorization) {
@@ -29,7 +41,7 @@ let massageTypeRoutes = function () {
                 request.input('title', sql.VarChar, massageType.title);
                 request.input('session_time', sql.VarChar, massageType.session_time);
                 request.input('description', sql.VarChar, massageType.description);
-                request.input('cost', sql.VarChar, massageType.cost);
+                request.input('cost', sql.VarChar, tryParseCurrency(massageType.cost));
                 request.query(
                     `INSERT INTO MassageTypes (type, title, session_time, description, cost)
                      VALUES (@type, @title, @session_time, @description, @cost); 
@@ -79,7 +91,7 @@ let massageTypeRoutes = function () {
                 request.input('title', sql.VarChar, massageType.title);
                 request.input('session_time', sql.VarChar, massageType.session_time);
                 request.input('description', sql.VarChar, massageType.description);
-                request.input('cost', sql.VarChar, massageType.cost);
+                request.input('cost', sql.VarChar, tryParseCurrency(massageType.cost));
                 request.query(
                     `UPDATE MassageTypes 
                         SET type = @type

@@ -9,6 +9,18 @@ let consultationRoutes = function () {
     const consultationRouter = express.Router();
     const dbconfig = "mssql://Application:!Testing123@BPHSERVER/YogaMarieMills";
 
+    function tryParseCurrency(str) {
+        if (typeof (str) !== "undefined" && str) {
+            let parsed = str.match(/[\s-\d\,\.]+/g);
+            if (isNaN(parseFloat(parsed)))
+                return str
+
+            if (parsed)
+                return parseFloat(+parsed[0].replace(/\./g, '').replace(/,/g, '.').replace(/\s/g, '')).toFixed(2);
+        }
+        return ''
+    }
+
     consultationRouter.route('/consultations')
         .post(function (req, res) {
             if (!req.headers.authorization) {
@@ -32,7 +44,7 @@ let consultationRoutes = function () {
                         request.input('session_time', sql.VarChar, consultation.consultationDetails[prop].session_time);
                         request.input('consultation', sql.VarChar, consultation.consultationDetails[prop].consultation);
                         request.input('consultation_desc', sql.VarChar, consultation.consultationDetails[prop].consultation_desc);
-                        request.input('cost', sql.VarChar, consultation.consultationDetails[prop].cost);
+                        request.input('cost', sql.VarChar, tryParseCurrency(consultation.consultationDetails[prop].cost));
                         request.query(
                             `INSERT INTO Consultations (type, title, session_time, short, description, cost)
                              VALUES (@type, @title, @session_time, @consultation, @consultation_desc, @cost);`
@@ -86,7 +98,7 @@ let consultationRoutes = function () {
                                                 request.input('session_time', sql.VarChar, consultation.consultationDetails[prop].session_time);
                                                 request.input('consultation', sql.VarChar, consultation.consultationDetails[prop].consultation);
                                                 request.input('consultation_desc', sql.VarChar, consultation.consultationDetails[prop].consultation_desc);
-                                                request.input('cost', sql.VarChar, consultation.consultationDetails[prop].cost);
+                                                request.input('cost', sql.VarChar, tryParseCurrency(consultation.consultationDetails[prop].cost));
                                                 request.query(
                                                     `UPDATE Consultations 
                                                     SET title = @title
@@ -109,7 +121,7 @@ let consultationRoutes = function () {
                                             request.input('session_time', sql.VarChar, consultation.consultationDetails[prop].session_time);
                                             request.input('consultation', sql.VarChar, consultation.consultationDetails[prop].consultation);
                                             request.input('consultation_desc', sql.VarChar, consultation.consultationDetails[prop].consultation_desc);
-                                            request.input('cost', sql.VarChar, consultation.consultationDetails[prop].cost);
+                                            request.input('cost', sql.VarChar, tryParseCurrency(consultation.consultationDetails[prop].cost));
                                             request.query(
                                                 `INSERT INTO Consultations (type, title, session_time, short, description, cost)
                                                 VALUES (@type, @title, @session_time, @consultation, @consultation_desc, @cost);`
