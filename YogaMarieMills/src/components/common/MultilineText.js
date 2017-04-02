@@ -5,7 +5,7 @@ const MultilineText = ({multilineText}) => {
   return (
     <div>
       {multilineText.split("\\n").map(lineText => {
-        return <div>{lineText}&nbsp;</div>;
+        return <p className="dark-color">{lineText}&nbsp;</p>;
       })}
     </div>
   );

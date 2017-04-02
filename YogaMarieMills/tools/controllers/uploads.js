@@ -12,7 +12,7 @@ let uploadRoute = function () {
 
     const uploadRouter = express.Router();
 
-    uploadRouter.post('/uploads', upload.single('file'), function (req, res, next) {
+    uploadRouter.post('/uploads', upload.single('file'), function (req, res) {
         if (!req.headers.authorization) {
             return res.status(401).send({ message: "You are not authorized" })
         }

@@ -1,10 +1,8 @@
 import React from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
 import TextInput from '../common/TextInput';
-import SelectInput from '../common/SelectInput';
 import Admin from '../common/Admin';
 
-const CostForm = ({updateCostState, onChange, saveCost, cost, errors, saving, uploadImage, deleteCost, authorized}) => {
+const CostForm = ({updateCostState, saveCost, cost, deleteCost, authorized}) => {
 
   return (
     <div className="mdl-grid dark-color bg-color">

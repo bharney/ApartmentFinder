@@ -1,20 +1,13 @@
 ﻿import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Admin from '../common/Admin';
 import * as dietConsultationActions from '../../actions/dietConsultationActions';
-import { CompositeDecorator, ContentBlock, ContentState, Editor, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
+import { Editor, EditorState, convertFromRaw } from 'draft-js';
 
 class DietConsultationPage extends React.Component {
     constructor(props, context) {
         super(props, context);
-        const decorator = new CompositeDecorator([
-            {
-                strategy: getEntityStrategy('MUTABLE'),
-                component: TokenSpan,
-            },
-        ]);
     }
 
     render() {
@@ -84,46 +77,12 @@ class DietConsultationPage extends React.Component {
     }
 }
 
-
-function getEntityStrategy(mutability) {
-    return function (contentBlock, callback, contentState) {
-        contentBlock.findEntityRanges(
-            (character) => {
-                const entityKey = character.getEntity();
-                if (entityKey === null) {
-                    return false;
-                }
-                return contentState.getEntity(entityKey).getMutability() === mutability;
-            },
-            callback
-        );
-    };
-}
-
-function getDecoratedStyle(mutability) {
-    switch (mutability) {
-        case 'MUTABLE': return null;
-        default: return null;
-    }
-}
-
-const TokenSpan = (props) => {
-    const style = getDecoratedStyle(
-        props.contentState.getEntity(props.entityKey).getMutability()
-    );
-    return (
-        <span data-offset-key={props.offsetkey}>
-            {props.children}
-        </span>
-    );
-};
-
 DietConsultationPage.propTypes = {
     dietConsultations: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
     return {
         dietConsultations: state.dietConsultations,
         authorized: state.authToken

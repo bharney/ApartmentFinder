@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
 import DatePicker from 'material-ui/DatePicker';
 import TextInput from '../common/TextInput';
 import RemoveRowButton from '../common/RemoveRowButton';
 
-const ScheduleForm = ({updateClassState, updateDateState, updateScheduleTimeState, removeRow, saveSchedule, schedule, errors, saving, deleteSchedule}) => {
+const ScheduleForm = ({updateClassState, updateDateState, updateScheduleTimeState, removeRow, schedule}) => {
 
   const vertAlign = {
     verticalAlign: "middle"

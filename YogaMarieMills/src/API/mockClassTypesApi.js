@@ -2,7 +2,7 @@ import { getToken } from '../actions/authTokenActions';
 
 class ClassTypesApi {
   static getAllClassTypes() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       fetch('http://localhost:3000/api/classTypes').then(function (response) {
         return response.json();
       }).then(function (classTypes) {
@@ -13,7 +13,7 @@ class ClassTypesApi {
 
   static saveClassType(classType) {
     classType = Object.assign({}, classType);
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (classType.id) {
         fetch('http://localhost:3000/api/classTypes', {
           method: 'put',
@@ -51,7 +51,7 @@ class ClassTypesApi {
   }
 
   static deleteClassType(classTypeId) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (confirm("Are you sure you want to delete this classType forever?")) {
         if (classTypeId) {
           fetch('http://localhost:3000/api/classTypes/' + classTypeId, {
@@ -61,7 +61,7 @@ class ClassTypesApi {
               'Content-Type': 'application/json',
               'Authorization': 'Bearer ' + getToken()
             }
-          }).then(function (response) {
+          }).then(function () {
             resolve(console.log("classType deleted."));
           }).catch(function (error) {
             console.log('Delete failed', error);

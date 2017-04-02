@@ -1,10 +1,8 @@
 import React from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
 import TextInput from '../common/TextInput';
 import Admin from '../common/Admin';
 import DatePicker from 'material-ui/DatePicker';
-import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
-import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
+import Editor from 'draft-js-plugins-editor';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
 import {
   ItalicButton,
@@ -43,8 +41,6 @@ const EventTypeForm = ({
   editorState,
   ref,
   focus,
-  errors,
-  saving,
   uploadImage,
   deleteEvent,
   updateStartDateState,

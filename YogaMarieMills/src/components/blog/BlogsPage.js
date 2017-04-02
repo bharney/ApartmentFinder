@@ -1,5 +1,5 @@
 ﻿import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import MultilineText from '../common/MultilineText';
 import { bindActionCreators } from 'redux';
@@ -64,9 +64,7 @@ class BlogPage extends React.Component {
                                                 </div>
                                             </div>
                                             <div className="mdl-card__supporting-text p-l-1-em p-r-1-em">
-                                                <p className="dark-color">
-                                                    <MultilineText multilineText={previewText(blog.short)} />
-                                                </p>
+                                                <MultilineText multilineText={previewText(blog.short)} />
                                             </div>
                                             <div className="mdl-card__actions mdl-card--border">
                                                 <Link key={blog.id} to={'/' + blog.type + '/' + blog.id} className="dark-color btn btn-default btn-block" activeClassName="active">Read More</Link>
@@ -89,7 +87,7 @@ BlogPage.propTypes = {
     actions: PropTypes.object.isRequired
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
     return {
         blogs: state.blogs,
         authorized: state.authToken

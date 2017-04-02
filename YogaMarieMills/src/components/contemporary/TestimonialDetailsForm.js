@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
 import TextInput from '../common/TextInput';
 import TextAreaInput from '../common/TextAreaInput';
 import RemoveRowButton from '../common/RemoveRowButton';
 
-const TestimonialDetailsForm = ({ updateQuoteState, updateNameState, removeRow, testimonial, errors, saving }) => {
+const TestimonialDetailsForm = ({ updateQuoteState, updateNameState, removeRow, testimonial }) => {
 
 
   return (

@@ -41,7 +41,7 @@ export function loadScheduleById(scheduleId) {
 }
 
 export function deleteSchedule(schedule) {
-    return function (dispatch, getState) {
+    return function (dispatch) {
         return scheduleApi.deleteSchedule(schedule).then(() => {
             dispatch(deleteScheduleSuccess());
             return scheduleApi.getAllSchedule().then(schedule => {
@@ -54,7 +54,7 @@ export function deleteSchedule(schedule) {
 }
 
 export function saveSchedule(schedule) {
-    return function (dispatch, getState) {
+    return function (dispatch) {
         return scheduleApi.saveSchedule(schedule).then(savedSchedule => {
             schedule.id ? dispatch(updateScheduleSuccess(savedSchedule)) :
                 dispatch(createScheduleSuccess(savedSchedule));

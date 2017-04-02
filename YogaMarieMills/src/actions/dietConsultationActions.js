@@ -27,7 +27,7 @@ export function loadDietConsultation() {
 }
 
 export function deleteDietConsultation(dietConsultation) {
-  return function (dispatch, getState) {
+  return function (dispatch) {
     return dietConsultationApi.deleteDietConsultation(dietConsultation).then(() => {
       dispatch(deleteDietConsultationSuccess());
       return dietConsultationApi.getAllDietConsultations().then(dietConsultations => {
@@ -41,7 +41,7 @@ export function deleteDietConsultation(dietConsultation) {
 
 
 export function saveDietConsultation(dietConsultation) {
-  return function (dispatch, getState) {
+  return function (dispatch) {
     return dietConsultationApi.saveDietConsultation(dietConsultation).then(savedDietConsultation => {
       dietConsultation.id ? dispatch(updateDietConsultationSuccess(savedDietConsultation)) :
         dispatch(createDietConsultationSuccess(savedDietConsultation));

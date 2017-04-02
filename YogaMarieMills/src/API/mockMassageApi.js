@@ -2,7 +2,7 @@ import { getToken } from '../actions/authTokenActions';
 
 class MassageApi {
   static getAllItems() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       fetch('http://localhost:3000/api/massages').then(function (response) {
         return response.json();
       }).then(function (massageTypes) {
@@ -14,7 +14,7 @@ class MassageApi {
   static saveMassage(massage) {
     massage = Object.assign({}, massage);
     debugger;
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (massage.id) {
         fetch('http://localhost:3000/api/massages', {
           method: 'put',
@@ -52,7 +52,7 @@ class MassageApi {
   }
 
   static deleteMassage(massageId) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (confirm("Are you sure you want to delete this massage forever?")) {
         if (massageId) {
           fetch('http://localhost:3000/api/massages/' + massageId, {
@@ -62,7 +62,7 @@ class MassageApi {
               'Content-Type': 'application/json',
               'Authorization': 'Bearer ' + getToken()
             }
-          }).then(function (response) {
+          }).then(function () {
             resolve(console.log("massage deleted."));
           }).catch(function (error) {
             console.log('Delete failed', error);

@@ -35,7 +35,7 @@ let massageTypeRoutes = function () {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             let massageType = (req.body);
-            const sqlInsertMassageType = new sql.Connection(dbconfig, function (err) {
+            const sqlInsertMassageType = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlInsertMassageType);
                 request.input('type', sql.VarChar, massageType.type);
                 request.input('title', sql.VarChar, massageType.title);
@@ -49,7 +49,7 @@ let massageTypeRoutes = function () {
                 ).then(function (recordset) {
                     for (let prop in massageType.massage_details) {
                         if (massageType.massage_details.hasOwnProperty(prop)) {
-                            const sqlInsertMassageDetails = new sql.Connection(dbconfig, function (err) {
+                            const sqlInsertMassageDetails = new sql.Connection(dbconfig, function () {
                                 let request = new sql.Request(sqlInsertMassageDetails);
                                 request.input('parent_id', sql.Int, recordset[0].parent_id);
                                 request.input('type', sql.VarChar, 'MassageDetail');
@@ -84,7 +84,7 @@ let massageTypeRoutes = function () {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             let massageType = (req.body);
-            const sqlUpdateMassageType = new sql.Connection(dbconfig, function (err) {
+            const sqlUpdateMassageType = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlUpdateMassageType);
                 request.input('id', sql.Int, massageType.id);
                 request.input('type', sql.VarChar, massageType.type);
@@ -101,7 +101,7 @@ let massageTypeRoutes = function () {
                         , cost = @cost
                         WHERE id = @id;`
                 ).then(function () {
-                        const sqlDeleteMassageDetails = new sql.Connection(dbconfig, function (err) {
+                        const sqlDeleteMassageDetails = new sql.Connection(dbconfig, function () {
                         let request = new sql.Request(sqlDeleteMassageDetails);
                         request.input('parent_id', sql.Int, massageType.id);
                         request.query(
@@ -112,7 +112,7 @@ let massageTypeRoutes = function () {
                                 for (let prop in massageType.massage_details) {
                                     if (massageType.massage_details.hasOwnProperty(prop)) {
                                         if (massageType.massage_details[prop].id) {
-                                           const sqlUpdateMassageDetails = new sql.Connection(dbconfig, function (err) {
+                                           const sqlUpdateMassageDetails = new sql.Connection(dbconfig, function () {
                                                 let request = new sql.Request(sqlUpdateMassageDetails);
                                                 request.input('id', sql.Int, massageType.massage_details[prop].id);
                                                 request.input('parent_id', sql.Int, massageType.id);
@@ -133,7 +133,7 @@ let massageTypeRoutes = function () {
                                             });
                                         } 
                                         else {
-                                        const sqlInsertMassageDetails = new sql.Connection(dbconfig, function (err) {
+                                        const sqlInsertMassageDetails = new sql.Connection(dbconfig, function () {
                                             let request = new sql.Request(sqlInsertMassageDetails);
                                             request.input('parent_id', sql.Int, massageType.id);
                                             request.input('type', sql.VarChar, 'MassageDetail');
@@ -171,7 +171,7 @@ let massageTypeRoutes = function () {
             if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
-            const sqlDeleteMassageType = new sql.Connection(dbconfig, function (err) {
+            const sqlDeleteMassageType = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlDeleteMassageType);
                 request.input('id', sql.Int, req.body.id);
                 request.query(
@@ -183,7 +183,7 @@ let massageTypeRoutes = function () {
             });
         })
         .get(function (req, res) {
-            const sqlMassageTypes = new sql.Connection(dbconfig, function (err) {
+            const sqlMassageTypes = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlMassageTypes);
                 request.query(
                     `SELECT H.id AS id
@@ -298,7 +298,7 @@ let massageTypeRoutes = function () {
 
     massageTypeRouter.route('/massages/:massageTypeId')
         .get(function (req, res) {
-            const sqlMassageType = new sql.Connection(dbconfig, function (err) {
+            const sqlMassageType = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlMassageType);
                 request.input('id', sql.Int, req.params.massageTypeId);
                 request.query(`SELECT id
@@ -336,7 +336,7 @@ let massageTypeRoutes = function () {
             if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
-            const sqlDeleteMassageType = new sql.Connection(dbconfig, function (err) {
+            const sqlDeleteMassageType = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlDeleteMassageType);
                 request.input('id', sql.Int, req.params.massageTypeId);
                 request.query(

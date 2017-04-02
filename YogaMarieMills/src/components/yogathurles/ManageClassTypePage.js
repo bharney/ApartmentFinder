@@ -1,13 +1,10 @@
 import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as classTypesActions from '../../actions/classTypesActions';
 import * as uploadActions from '../../actions/uploadActions';
 import ClassTypeForm from './ClassTypeForm';
-import TextInput from '../common/TextInput';
-import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
-import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
+import { CompositeDecorator, EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 
 class ManageClassTypePage extends React.Component {
   constructor(props, context) {
@@ -88,7 +85,7 @@ class ManageClassTypePage extends React.Component {
     this.context.router.push('/YogaThurles/ClassTypes');
   }
 
-  deleteClassType(event) {
+  deleteClassType() {
     this.props.actions.deleteClassType(this.state.classType.id);
     this.props.actions.loadClassType();
     this.context.router.push('/YogaThurles/ClassTypes');
@@ -145,7 +142,6 @@ ManageClassTypePage.propTypes = {
   classType: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   editorState: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired,
   upload: PropTypes.object.isRequired,
   entityKey: PropTypes.object.isRequired,
 };
@@ -169,17 +165,7 @@ function getEntityStrategy(mutability) {
   };
 }
 
-function getDecoratedStyle(mutability) {
-  switch (mutability) {
-    case 'MUTABLE': return null;
-    default: return null;
-  }
-}
-
 const TokenSpan = (props) => {
-  const style = getDecoratedStyle(
-    props.contentState.getEntity(props.entityKey).getMutability()
-  );
   return (
     <span data-offset-key={props.offsetkey}>
       {props.children}

@@ -1,7 +1,7 @@
 /*eslint-disable import/default */
 import 'babel-polyfill';
 import React from 'react';
-import { ReactDOM, render } from 'react-dom';
+import { render } from 'react-dom';
 import {Provider} from 'react-redux';
 import configureStore from './store/configureStore';
 import { Router, browserHistory } from 'react-router';
@@ -20,13 +20,13 @@ import {loadTestimonial} from './actions/testimonialActions';
 import {authenticate} from './actions/authTokenActions';
 import MuiThemeProvider from '../node_modules/material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import '../node_modules/draft-js-inline-toolbar-plugin/lib/plugin.css';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import '../node_modules/font-awesome/css/font-awesome.min.css';
-import '../node_modules/material-design-lite/material.js';
-import '../node_modules/material-design-lite/material.css';
+import 'draft-js-inline-toolbar-plugin/lib/plugin.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
+import 'material-design-lite/material.js';
+import 'material-design-lite/material.css';
 import './styles/styles.scss';
-
+        
 injectTapEventPlugin();
 
 const store = configureStore();

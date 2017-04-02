@@ -27,7 +27,7 @@ export function loadClassTypes() {
 }
 
 export function deleteClassType(classType) {
-  return function (dispatch, getState) {
+  return function (dispatch) {
     return classTypesApi.deleteClassType(classType).then(() => {
       dispatch(deleteClassTypesSuccess());
       return classTypesApi.getAllClassTypes().then(classTypes => {
@@ -40,7 +40,7 @@ export function deleteClassType(classType) {
 }
 
 export function saveClassType(classType) {
-  return function (dispatch, getState) {
+  return function (dispatch) {
     return classTypesApi.saveClassType(classType).then(savedClassType => {
       classType.id ? dispatch(updateClassTypesSuccess(savedClassType)) :
         dispatch(createClassTypesSuccess(savedClassType));

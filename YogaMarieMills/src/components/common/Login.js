@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as authTokenActions from '../../actions/authTokenActions';
@@ -41,7 +41,7 @@ Login.contextTypes = {
     router: PropTypes.object
 };
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
     return {
         login: state.authToken
     };

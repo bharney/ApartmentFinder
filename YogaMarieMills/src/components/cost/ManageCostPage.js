@@ -1,12 +1,9 @@
 import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as costActions from '../../actions/costActions';
 import * as uploadActions from '../../actions/uploadActions';
 import CostForm from './CostForm';
-import Admin from '../common/Admin';
-import TextInput from '../common/TextInput';
 
 class ManageCostPage extends React.Component {
   constructor(props, context) {
@@ -45,7 +42,7 @@ class ManageCostPage extends React.Component {
     this.context.router.push('/YogaThurles/Costs');
   }
 
-  deleteCost(event) {
+  deleteCost() {
         this.props.actions.deleteCost(this.state.cost.id);
         this.props.actions.loadCost();
         this.context.router.push('/YogaThurles/Costs');

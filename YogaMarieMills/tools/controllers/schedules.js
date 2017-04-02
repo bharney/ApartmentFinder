@@ -24,7 +24,7 @@ let scheduleRoutes = function () {
                 return res.status(401).send({ message: "You are not authorized" });
             }
             let schedule = (req.body);
-            const sqlInsertSchedule = new sql.Connection(dbconfig, function (err) {
+            const sqlInsertSchedule = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlInsertSchedule);
                 request.input('type', sql.VarChar, 'Schedule');
                 request.input('session_date', sql.Date, schedule.session_date);
@@ -35,7 +35,7 @@ let scheduleRoutes = function () {
                 ).then(function (recordset) {
                     for (let prop in schedule.session_details) {
                         if (schedule.session_details.hasOwnProperty(prop)) {
-                            const sqlInsertScheduleDetails = new sql.Connection(dbconfig, function (err) {
+                            const sqlInsertScheduleDetails = new sql.Connection(dbconfig, function () {
                                 let request = new sql.Request(sqlInsertScheduleDetails);
                                 request.input('parent_id', sql.Int, recordset[0].parent_id);
                                 request.input('type', sql.VarChar, 'ScheduleDetail');
@@ -70,7 +70,7 @@ let scheduleRoutes = function () {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             let schedule = (req.body);
-            const sqlUpdateSchedule = new sql.Connection(dbconfig, function (err) {
+            const sqlUpdateSchedule = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlUpdateSchedule);
                 request.input('id', sql.Int, schedule.id);
                 request.input('type', sql.VarChar, 'Schedule');
@@ -81,7 +81,7 @@ let scheduleRoutes = function () {
                     ,type = @type
                     WHERE id = @id;`
                 ).then(function () {
-                        const sqlDeleteScheduleDetails = new sql.Connection(dbconfig, function (err) {
+                        const sqlDeleteScheduleDetails = new sql.Connection(dbconfig, function () {
                         let request = new sql.Request(sqlDeleteScheduleDetails);
                         request.input('parent_id', sql.Int, schedule.id);
                         request.query(
@@ -92,7 +92,7 @@ let scheduleRoutes = function () {
                                 for (let prop in schedule.session_details) {
                                     if (schedule.session_details.hasOwnProperty(prop)) {
                                         if (schedule.session_details[prop].id) {
-                                            const sqlInsertScheduleDetails = new sql.Connection(dbconfig, function (err) {
+                                            const sqlInsertScheduleDetails = new sql.Connection(dbconfig, function () {
                                                 let request = new sql.Request(sqlInsertScheduleDetails);
                                                 request.input('id', sql.Int, schedule.session_details[prop].id);
                                                 request.input('session_time', sql.VarChar, schedule.session_details[prop].session_time);
@@ -113,7 +113,7 @@ let scheduleRoutes = function () {
                                             });
                                         } 
                                         else {
-                                        const sqlInsertScheduleDetails = new sql.Connection(dbconfig, function (err) {
+                                        const sqlInsertScheduleDetails = new sql.Connection(dbconfig, function () {
                                             let request = new sql.Request(sqlInsertScheduleDetails);
                                             request.input('parent_id', sql.Int, schedule.id);
                                             request.input('type', sql.VarChar, 'ScheduleDetail');
@@ -151,7 +151,7 @@ let scheduleRoutes = function () {
             if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
-            const sqlDeleteSchedule = new sql.Connection(dbconfig, function (err) {
+            const sqlDeleteSchedule = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlDeleteSchedule);
                 request.input('id', sql.Int, req.body.id);
                 request.query(
@@ -164,7 +164,7 @@ let scheduleRoutes = function () {
             });
         })
         .get(function (req, res) {
-            const sqlSchedules = new sql.Connection(dbconfig, function (err) {
+            const sqlSchedules = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlSchedules);
                 request.query(
                     `SELECT
@@ -261,7 +261,7 @@ let scheduleRoutes = function () {
 
     scheduleRouter.route('/schedules/:scheduleId')
         .get(function (req, res) {
-            const sqlSchedule = new sql.Connection(dbconfig, function (err) {
+            const sqlSchedule = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlSchedule);
                 request.input('id', sql.Int, req.params.scheduleId);
                 request.query(`SELECT
@@ -327,7 +327,7 @@ let scheduleRoutes = function () {
             if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
-            const sqlDeleteSchedule = new sql.Connection(dbconfig, function (err) {
+            const sqlDeleteSchedule = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlDeleteSchedule);
                 request.input('id', sql.Int, req.params.scheduleId);
                 request.query(

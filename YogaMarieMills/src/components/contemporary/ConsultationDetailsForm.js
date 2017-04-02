@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
 import TextInput from '../common/TextInput';
 import TextAreaInput from '../common/TextAreaInput';
 import RemoveRowButton from '../common/RemoveRowButton';
 
-const ConsultationDetailsForm = ({ updateTitleState, updateCostState, updateSessionTimeState, updateShortState, updateConsultationDescState, removeRow, saveDietConsultation, dietConsultation, errors, saving, deleteDietConsultation }) => {
+const ConsultationDetailsForm = ({ updateTitleState, updateCostState, updateSessionTimeState, updateShortState, updateConsultationDescState, removeRow, dietConsultation }) => {
 
   let displayIcon = function (icon, iconWidth, iconHeight) {
     let requireImg = icon ? require(`../../images/${icon}`) : ""

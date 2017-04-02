@@ -2,7 +2,7 @@ import { getToken } from '../actions/authTokenActions';
 
 class CostApi {
   static getAllItems() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       fetch('http://localhost:3000/api/costs').then(function (response) {
         return response.json();
       }).then(function (costs) {
@@ -13,7 +13,7 @@ class CostApi {
 
   static saveCost(cost) {
     cost = Object.assign({}, cost);
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (cost.id) {
         fetch('http://localhost:3000/api/costs', {
           method: 'put',
@@ -51,7 +51,7 @@ class CostApi {
   }
 
   static deleteCost(costId) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (confirm("Are you sure you want to delete this cost forever?")) {
         if (costId) {
           fetch('http://localhost:3000/api/costs/' + costId, {
@@ -61,7 +61,7 @@ class CostApi {
               'Content-Type': 'application/json',
               'Authorization': 'Bearer ' + getToken()
             }
-          }).then(function (response) {
+          }).then(function () {
             resolve(console.log("cost deleted."));
           }).catch(function (error) {
             console.log('Delete failed', error);

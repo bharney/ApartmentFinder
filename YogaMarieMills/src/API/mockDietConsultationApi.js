@@ -2,7 +2,7 @@ import { getToken } from '../actions/authTokenActions';
 
 class DietConsultationApi {
   static getAllItems() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       fetch('http://localhost:3000/api/consultations').then(function (response) {
         return response.json();
       }).then(function (consultations) {
@@ -13,7 +13,7 @@ class DietConsultationApi {
 
   static saveDietConsultation(consultation) {
     consultation = Object.assign({}, consultation);
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         fetch('http://localhost:3000/api/consultations', {
           method: 'put',
           headers: {
@@ -33,7 +33,7 @@ class DietConsultationApi {
   }
 
   static deleteDietConsultation(consultationId) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (confirm("Are you sure you want to delete this consultation forever?")) {
         if (consultationId) {
           fetch('http://localhost:3000/api/consultations/' + consultationId, {
@@ -43,7 +43,7 @@ class DietConsultationApi {
               'Content-Type': 'application/json',
               'Authorization': 'Bearer ' + getToken()
             }
-          }).then(function (response) {
+          }).then(function () {
             resolve(console.log("consultation deleted."));
           }).catch(function (error) {
             console.log('Delete failed', error);

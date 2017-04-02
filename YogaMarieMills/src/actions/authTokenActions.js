@@ -23,7 +23,7 @@ export function logOutSuccess() {
 }
 
 export function loginRequest(login) {
-  return function (dispatch, getState) {
+  return function (dispatch) {
     return loginApi.loginRequest(login).then(loginResponse => {
       if (loginResponse.token) {
         dispatch(loginSuccess(JSON.stringify(loginResponse)))
@@ -42,7 +42,7 @@ export function authenticate() {
   return function (dispatch) {
     if (!cachedToken)
       cachedToken = storage.getItem(userToken);
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (cachedToken) {
         dispatch(loginSuccess(cachedToken))
         resolve(cachedToken);
@@ -63,7 +63,7 @@ export function getToken() {
 }
 
 export function logOut() {
-  return function (dispatch, getState) {
+  return function (dispatch) {
     return dispatch(logOutSuccess())
   };
 }

@@ -1,17 +1,8 @@
 import { getToken } from '../actions/authTokenActions';
 
-function replaceAll(str, find, replace) {
-    return str.replace(new RegExp(find, 'g'), replace);
-}
-
-const generateId = (blog) => {
-    return replaceAll(blog.name, ' ', '-');
-};
-
-
 class BlogApi {
     static getAllBlogs() {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             fetch('http://localhost:3000/api/blogs').then(function (response) {
                 return response.json();
             }).then(function (blogs) {
@@ -65,7 +56,7 @@ class BlogApi {
     }
 
     static deleteBlog(blogId) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             if (confirm("Are you sure you want to delete this blog forever?")) {
                 if (blogId) {
                     fetch('http://localhost:3000/api/blogs/' + blogId, {
@@ -75,7 +66,7 @@ class BlogApi {
                             'Content-Type': 'application/json',
                             'Authorization': 'Bearer ' + getToken()
                         }
-                    }).then(function (response) {
+                    }).then(function () {
                         resolve(console.log("blog deleted."));
                     }).catch(function (error) {
                         console.log('Delete failed', error);

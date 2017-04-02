@@ -3,13 +3,9 @@ import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as navbarActions from '../../actions/navbarActions';
-import Navbar from './Navbar';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
-import { ToolbarGroup, Toolbar } from 'material-ui/Toolbar';
 import Drawer from 'material-ui/Drawer';
-import { List, ListItem } from 'material-ui/List';
+import { ListItem } from 'material-ui/List';
 import logoImg from '../../images/mobileLogo.png';
 
 class Header extends React.Component {
@@ -104,7 +100,7 @@ class Header extends React.Component {
         };
         return (
             <header className="mdl-layout__header">
-                <div className="mdl-layout__header-row nav-element-left anchor dark-bg-color color-blur navbar-fixed-top">
+                <div className="mdl-layout__header-row nav-element-left anchor dark-bg-color color-blur navbar-fixed-top mdl-shadow--4dp">
                     <a className="navbar-brand mdl-layout-title mdl-layout__header-row drawer-header nav-menu-left font-style" onTouchTap={this.handleToggle}><span className="menu-font"><i className="p-l-03-em p-r-015-em fa fa-ellipsis-v" aria-hidden="true"></i>Menu</span></a>
                     <div className="mdl-layout-spacer nav-vertical-divider">
                         <div className="mdl-layout__header-row drawer-header anchor p-l-0">
@@ -149,7 +145,7 @@ Header.propTypes = {
 };
 
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
     return {
         navbar_items: state.navbar_items
     };

@@ -27,7 +27,7 @@ export function loadBlog() {
 }
 
 export function deleteBlog(blog) {
-  return function (dispatch, getState) {
+  return function (dispatch) {
     return blogApi.deleteBlog(blog).then(() => {
       dispatch(deleteBlogSuccess());
       return blogApi.getAllBlogs().then(blogs => {
@@ -40,7 +40,7 @@ export function deleteBlog(blog) {
 }
 
 export function saveBlog(blog) {
-  return function (dispatch, getState) {
+  return function (dispatch) {
     return blogApi.saveBlog(blog).then(savedBlog => {
       blog.id ? dispatch(updateBlogSuccess(savedBlog)) :
         dispatch(createBlogSuccess(savedBlog));

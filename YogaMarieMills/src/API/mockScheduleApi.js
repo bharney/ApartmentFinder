@@ -2,7 +2,7 @@ import { getToken } from '../actions/authTokenActions';
 
 class ScheduleApi {
   static getAllItems() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       fetch('http://localhost:3000/api/schedules').then(function (response) {
         return response.json();
       }).then(function (schedules) {
@@ -12,7 +12,7 @@ class ScheduleApi {
   }
 
   static getItem(scheduleId) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (scheduleId) {
         fetch('http://localhost:3000/api/schedules/' + scheduleId).then(function (response) {
           return response.json();
@@ -25,7 +25,7 @@ class ScheduleApi {
 
   static saveSchedule(schedule) {
     schedule = Object.assign({}, schedule);
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (schedule.id) {
         fetch('http://localhost:3000/api/schedules', {
           method: 'put',
@@ -63,7 +63,7 @@ class ScheduleApi {
   }
 
   static deleteSchedule(scheduleId) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (confirm("Are you sure you want to delete this schedule forever?")) {
         if (scheduleId) {
           fetch('http://localhost:3000/api/schedules/' + scheduleId, {
@@ -73,7 +73,7 @@ class ScheduleApi {
               'Content-Type': 'application/json',
               'Authorization': 'Bearer ' + getToken()
             }
-          }).then(function (response) {
+          }).then(function () {
             resolve(console.log("schedule deleted."));
           }).catch(function (error) {
             console.log('Delete failed', error);

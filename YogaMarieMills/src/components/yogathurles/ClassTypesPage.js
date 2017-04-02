@@ -1,12 +1,10 @@
 ﻿import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as classTypesActions from '../../actions/classTypesActions';
 import Admin from '../common/Admin';
 import MultilineText from '../common/MultilineText';
-import landing from '../../images/landing.jpg';
-
 
 class ClassTypesPage extends React.Component {
     constructor(props, context) {
@@ -46,7 +44,7 @@ class ClassTypesPage extends React.Component {
                             <div className="flex-col tile-col col-xs-12 col-sm-6 p-l-0 p-r-0">
                                 <div className="v-align-flex p-2-em">
                                     <Admin editAction={classType.type + "/" + classType.id} authorized={authorized} />
-                                    <h2 className="page-header banner">{classType.title}</h2>
+                                    <h2 className="page-header">{classType.title}</h2>
                                     <p>
                                         <MultilineText multilineText={previewText(classType.short)} />
                                     </p>
@@ -70,7 +68,7 @@ class ClassTypesPage extends React.Component {
                             <div className="flex-col tile-col col-xs-12 col-sm-6 p-l-0 p-r-0">
                                 <div className="v-align-flex p-2-em">
                                     <Admin editAction={classType.type + "/" + classType.id} authorized={authorized} />
-                                    <h2 className="page-header banner">{classType.title}</h2>
+                                    <h2 className="page-header">{classType.title}</h2>
                                     <p>
                                         <MultilineText multilineText={previewText(classType.short)} />
                                     </p>
@@ -123,7 +121,7 @@ ClassTypesPage.propTypes = {
 };
 
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
     return {
         classTypes: state.classTypes,
         authorized: state.authToken

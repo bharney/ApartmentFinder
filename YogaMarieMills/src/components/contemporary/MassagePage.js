@@ -1,5 +1,4 @@
 ﻿import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Admin from '../common/Admin';

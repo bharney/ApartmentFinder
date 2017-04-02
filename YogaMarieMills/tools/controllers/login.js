@@ -27,7 +27,7 @@ let loginRoutes = function () {
     loginRouter.route('/login')
         .post(function (req, res) {
             let user = (req.body);
-            const sqlAuthorize = new sql.Connection(dbconfig, function (err) {
+            const sqlAuthorize = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlAuthorize);
                 request.input('emailAddress', sql.VarChar, user.emailAddress);
                 request.query(`SELECT top 1 id

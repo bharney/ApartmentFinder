@@ -27,7 +27,7 @@ export function loadCost() {
 }
 
 export function deleteCost(cost) {
-  return function (dispatch, getState) {
+  return function (dispatch) {
     return costApi.deleteCost(cost).then(() => {
       dispatch(deleteCostSuccess());
       return costApi.getAllCosts().then(costs => {
@@ -41,7 +41,7 @@ export function deleteCost(cost) {
 
 
 export function saveCost(cost) {
-  return function (dispatch, getState) {
+  return function (dispatch) {
     return costApi.saveCost(cost).then(savedCost => {
       cost.id ? dispatch(updateCostSuccess(savedCost)) :
         dispatch(createCostSuccess(savedCost));

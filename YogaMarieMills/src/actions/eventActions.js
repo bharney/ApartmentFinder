@@ -27,7 +27,7 @@ export function loadEvent() {
 }
 
 export function deleteEvent(eventType) {
-  return function (dispatch, getState) {
+  return function (dispatch) {
     return eventApi.deleteEvent(eventType).then(() => {
       dispatch(deleteEventSuccess());
       return eventApi.getAllEvent().then(eventTypes => {
@@ -40,7 +40,7 @@ export function deleteEvent(eventType) {
 }
 
 export function saveEvent(eventType) {
-  return function (dispatch, getState) {
+  return function (dispatch) {
     return eventApi.saveEvent(eventType).then(savedEvent => {
       eventType.id ? dispatch(updateEventSuccess(savedEvent)) :
         dispatch(createEventSuccess(savedEvent));

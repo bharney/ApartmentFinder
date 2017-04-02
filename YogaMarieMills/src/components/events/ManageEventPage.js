@@ -1,14 +1,11 @@
 import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as eventActions from '../../actions/eventActions';
 import * as uploadActions from '../../actions/uploadActions';
 import EventForm from './EventForm';
-import Admin from '../common/Admin';
 import TextInput from '../common/TextInput';
-import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
-import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
+import { CompositeDecorator, EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 
 class ManageEventPage extends React.Component {
   constructor(props, context) {
@@ -119,7 +116,7 @@ class ManageEventPage extends React.Component {
     this.context.router.push('/Events/' + eventType.type);
   }
 
-  deleteEvent(event) {
+  deleteEvent() {
     this.props.actions.deleteEvent(this.state.eventType);
     this.props.actions.loadEvent();
     this.context.router.push('/');
@@ -163,7 +160,6 @@ class ManageEventPage extends React.Component {
   }
 
   render() {
-    const { eventType } = this.props;
     const {authorized} = this.props;
     return (
       <EventForm
@@ -192,7 +188,6 @@ ManageEventPage.propTypes = {
   eventType: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   editorState: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired,
   upload: PropTypes.object.isRequired,
   entityKey: PropTypes.object.isRequired,
 };
@@ -216,17 +211,7 @@ function getEntityStrategy(mutability) {
   };
 }
 
-function getDecoratedStyle(mutability) {
-  switch (mutability) {
-    case 'MUTABLE': return null;
-    default: return null;
-  }
-}
-
 const TokenSpan = (props) => {
-  const style = getDecoratedStyle(
-    props.contentState.getEntity(props.entityKey).getMutability()
-  );
   return (
     <span data-offset-key={props.offsetkey}>
       {props.children}

@@ -1,12 +1,9 @@
 import React from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import TextInput from '../common/TextInput';
-import TextAreaInput from '../common/TextAreaInput';
-import RemoveRowButton from '../common/RemoveRowButton';
 import Admin from '../common/Admin';
 import TestimonialDetailsForm from './TestimonialDetailsForm';
-import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
-import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
+import Editor from 'draft-js-plugins-editor';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
 import {
   ItalicButton,

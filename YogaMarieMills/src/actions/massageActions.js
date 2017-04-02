@@ -27,7 +27,7 @@ export function loadMassage() {
 }
 
 export function deleteMassage(massage) {
-  return function (dispatch, getState) {
+  return function (dispatch) {
     return massageApi.deleteMassage(massage).then(() => {
       dispatch(deleteMassageSuccess());
       return massageApi.getAllMassages().then(massages => {
@@ -41,7 +41,7 @@ export function deleteMassage(massage) {
 
 
 export function saveMassage(massage) {
-  return function (dispatch, getState) {
+  return function (dispatch) {
     return massageApi.saveMassage(massage).then(savedMassage => {
       massage.id ? dispatch(updateMassageSuccess(savedMassage)) :
         dispatch(createMassageSuccess(savedMassage));

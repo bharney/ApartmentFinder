@@ -25,7 +25,7 @@ let testimonialRoutes = function () {
             let testimonial = (req.body);
             for (let prop in testimonial.testimonial_details) {
                 if (testimonial.testimonial_details.hasOwnProperty(prop)) {
-                    const sqlInsertTestimonial = new sql.Connection(dbconfig, function (err) {
+                    const sqlInsertTestimonial = new sql.Connection(dbconfig, function () {
                         let request = new sql.Request(sqlInsertTestimonial);
                         request.input('type', sql.VarChar, testimonial.type);
                         request.input('testimonial', sql.VarChar, testimonial.testimonial);
@@ -53,7 +53,7 @@ let testimonialRoutes = function () {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             let testimonial = (req.body);
-            const sqlUpdateConsultation = new sql.Connection(dbconfig, function (err) {
+            const sqlUpdateConsultation = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlUpdateConsultation);
                 request.input('short', sql.VarChar, testimonial.short);
                 request.input('description', sql.VarChar, testimonial.description);
@@ -65,7 +65,7 @@ let testimonialRoutes = function () {
                      FROM Headers
                      WHERE type = @type;`
                 ).then(function () {
-                        const sqlDeleteTestimonials = new sql.Connection(dbconfig, function (err) {
+                        const sqlDeleteTestimonials = new sql.Connection(dbconfig, function () {
                         let request = new sql.Request(sqlDeleteTestimonials);
                         request.query(
                             `DELETE FROM Testimonials
@@ -74,7 +74,7 @@ let testimonialRoutes = function () {
                                for (let prop in testimonial.testimonial_details) {
                                     if (testimonial.testimonial_details.hasOwnProperty(prop)) {
                                         if (testimonial.testimonial_details[prop].id) {
-                                           const sqlUpdateTestimonial = new sql.Connection(dbconfig, function (err) {
+                                           const sqlUpdateTestimonial = new sql.Connection(dbconfig, function () {
                                                 let request = new sql.Request(sqlUpdateTestimonial);
                                                 request.input('id', sql.Int, testimonial.testimonial_details[prop].id);
                                                 request.input('testimonial', sql.VarChar, testimonial.testimonial_details[prop].testimonial);
@@ -91,7 +91,7 @@ let testimonialRoutes = function () {
                                             });
                                         } 
                                         else {
-                                        const sqlInsertTestimonial = new sql.Connection(dbconfig, function (err) {
+                                        const sqlInsertTestimonial = new sql.Connection(dbconfig, function () {
                                             let request = new sql.Request(sqlInsertTestimonial);
                                             request.input('type', sql.VarChar, 'Testimonial');
                                             request.input('testimonial', sql.VarChar, testimonial.testimonial_details[prop].testimonial);
@@ -128,7 +128,7 @@ let testimonialRoutes = function () {
             if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
-            const sqlDeleteTestimonial = new sql.Connection(dbconfig, function (err) {
+            const sqlDeleteTestimonial = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlDeleteTestimonial);
                 request.input('id', sql.Int, req.body.id);
                 request.query(
@@ -140,7 +140,7 @@ let testimonialRoutes = function () {
             });
         })
         .get(function (req, res) {
-            const sqlTestimonials = new sql.Connection(dbconfig, function (err) {
+            const sqlTestimonials = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlTestimonials);
                 request.query(
                     `SELECT
@@ -193,7 +193,7 @@ let testimonialRoutes = function () {
 
     testimonialRouter.route('/testimonials/:testimonialId')
         .get(function (req, res) {
-            const sqlTestimonials = new sql.Connection(dbconfig, function (err) {
+            const sqlTestimonials = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlTestimonials);
                 request.query(
                     `SELECT id
@@ -220,7 +220,7 @@ let testimonialRoutes = function () {
             if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
-            const sqlDeleteTestimonial = new sql.Connection(dbconfig, function (err) {
+            const sqlDeleteTestimonial = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlDeleteTestimonial);
                 request.input('id', sql.Int, req.params.testimonialId);
                 request.query(

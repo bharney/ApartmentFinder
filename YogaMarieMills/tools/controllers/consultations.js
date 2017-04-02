@@ -37,7 +37,7 @@ let consultationRoutes = function () {
             let consultation = (req.body);
             for (let prop in consultation.consultationDetails) {
                 if (consultation.consultationDetails.hasOwnProperty(prop)) {
-                    const sqlInsertConsultation = new sql.Connection(dbconfig, function (err) {
+                    const sqlInsertConsultation = new sql.Connection(dbconfig, function () {
                         let request = new sql.Request(sqlInsertConsultation);
                         request.input('type', sql.VarChar, 'diet');
                         request.input('title', sql.VarChar, consultation.consultationDetails[prop].title);
@@ -68,7 +68,7 @@ let consultationRoutes = function () {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             let consultation = (req.body);
-            const sqlUpdateConsultation = new sql.Connection(dbconfig, function (err) {
+            const sqlUpdateConsultation = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlUpdateConsultation);
                 request.input('venue', sql.VarChar, consultation.venue);
                 request.input('short', sql.VarChar, consultation.short);
@@ -82,7 +82,7 @@ let consultationRoutes = function () {
                      FROM Headers
                      WHERE type = @type;`
                 ).then(function () {
-                        const sqlDeleteConsultationDetails = new sql.Connection(dbconfig, function (err) {
+                        const sqlDeleteConsultationDetails = new sql.Connection(dbconfig, function () {
                         let request = new sql.Request(sqlDeleteConsultationDetails);
                         request.query(
                             `DELETE FROM Consultations
@@ -91,7 +91,7 @@ let consultationRoutes = function () {
                                 for (let prop in consultation.consultationDetails) {
                                     if (consultation.consultationDetails.hasOwnProperty(prop)) {
                                         if (consultation.consultationDetails[prop].id) {
-                                             const sqlUpdateConsultationDetails = new sql.Connection(dbconfig, function (err) {
+                                             const sqlUpdateConsultationDetails = new sql.Connection(dbconfig, function () {
                                                 let request = new sql.Request(sqlUpdateConsultationDetails);
                                                 request.input('id', sql.Int, consultation.consultationDetails[prop].id);
                                                 request.input('title', sql.VarChar, consultation.consultationDetails[prop].title);
@@ -114,7 +114,7 @@ let consultationRoutes = function () {
                                             });
                                         } 
                                         else {
-                                        const sqlInsertConsultationDetails = new sql.Connection(dbconfig, function (err) {
+                                        const sqlInsertConsultationDetails = new sql.Connection(dbconfig, function () {
                                             let request = new sql.Request(sqlInsertConsultationDetails);
                                             request.input('type', sql.VarChar, 'diet');
                                             request.input('title', sql.VarChar, consultation.consultationDetails[prop].title);
@@ -154,7 +154,7 @@ let consultationRoutes = function () {
             if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
-            const sqlDeleteConsultation = new sql.Connection(dbconfig, function (err) {
+            const sqlDeleteConsultation = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlDeleteConsultation);
                 request.input('id', sql.Int, req.body.id);
                 request.query(
@@ -166,7 +166,7 @@ let consultationRoutes = function () {
             });
         })
         .get(function (req, res) {
-            const sqlConsultations = new sql.Connection(dbconfig, function (err) {
+            const sqlConsultations = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlConsultations);
                 request.query(
                     `SELECT C.id AS id
@@ -222,7 +222,7 @@ let consultationRoutes = function () {
 
     consultationRouter.route('/consultations/:consultationId')
         .get(function (req, res) {
-            const sqlConsultation = new sql.Connection(dbconfig, function (err) {
+            const sqlConsultation = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlConsultation);
                 request.input('id', sql.Int, req.params.consultationId);
                 request.query(`SELECT id
@@ -258,7 +258,7 @@ let consultationRoutes = function () {
             if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
-            const sqlDeleteConsultation = new sql.Connection(dbconfig, function (err) {
+            const sqlDeleteConsultation = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlDeleteConsultation);
                 request.input('id', sql.Int, req.params.consultationId);
                 request.query(

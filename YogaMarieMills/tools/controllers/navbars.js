@@ -23,7 +23,7 @@ let navbarRoutes = function () {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             let navbar_item = (req.body);
-            const sqlInsertNavbar = new sql.Connection(dbconfig, function (err) {
+            const sqlInsertNavbar = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlInsertNavbar);
                 request.input('type', sql.VarChar, navbar_item.type);
                 request.input('name', sql.VarChar, navbar_item.name);
@@ -51,7 +51,7 @@ let navbarRoutes = function () {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             let navbar_item = (req.body);
-            const sqlUpdateNavbar = new sql.Connection(dbconfig, function (err) {
+            const sqlUpdateNavbar = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlUpdateNavbar);
                 request.input('id', sql.Int, navbar_item.id);
                 request.input('type', sql.VarChar, navbar_item.type);
@@ -83,7 +83,7 @@ let navbarRoutes = function () {
             if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
-            const sqlDeleteNavbar = new sql.Connection(dbconfig, function (err) {
+            const sqlDeleteNavbar = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlDeleteNavbar);
                 request.input('id', sql.Int, req.body.id);
                 request.query(
@@ -95,7 +95,7 @@ let navbarRoutes = function () {
             });
         })
         .get(function (req, res) {
-            const sqlNavbars = new sql.Connection(dbconfig, function (err) {
+            const sqlNavbars = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlNavbars);
                 request.query(
                     `SELECT id
@@ -146,7 +146,7 @@ let navbarRoutes = function () {
 
     navbarRouter.route('/navbars/:navbarId')
         .get(function (req, res) {
-            const sqlNavbar = new sql.Connection(dbconfig, function (err) {
+            const sqlNavbar = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlNavbar);
                 request.input('id', sql.Int, req.params.navbarId);
                 request.query(`SELECT id
@@ -184,7 +184,7 @@ let navbarRoutes = function () {
             if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
-            const sqlDeleteNavbar = new sql.Connection(dbconfig, function (err) {
+            const sqlDeleteNavbar = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlDeleteNavbar);
                 request.input('id', sql.Int, req.params.navbarId);
                 request.query(

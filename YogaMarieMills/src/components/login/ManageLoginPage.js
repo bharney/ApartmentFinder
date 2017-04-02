@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as loginActions from '../../actions/authTokenActions';
-import authTokenReducer from '../../reducers/authTokenReducer';
 import LoginForm from './LoginForm';
 
 

@@ -1,13 +1,10 @@
 import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as dietConsultationActions from '../../actions/dietConsultationActions';
 import DietConsultationForm from './DietConsultationForm';
 import Admin from '../common/Admin';
-import TextInput from '../common/TextInput';
-import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
-import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
+import { CompositeDecorator, EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 
 class ManageDietConsultationPage extends React.Component {
   constructor(props, context) {
@@ -216,17 +213,7 @@ function getEntityStrategy(mutability) {
   };
 }
 
-function getDecoratedStyle(mutability) {
-  switch (mutability) {
-    case 'MUTABLE': return null;
-    default: return null;
-  }
-}
-
 const TokenSpan = (props) => {
-  const style = getDecoratedStyle(
-    props.contentState.getEntity(props.entityKey).getMutability()
-  );
   return (
     <span data-offset-key={props.offsetkey}>
       {props.children}
@@ -234,7 +221,7 @@ const TokenSpan = (props) => {
   );
 };
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
 
   let dietConsultation = {
     id: '',

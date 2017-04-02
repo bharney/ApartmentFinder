@@ -1,6 +1,4 @@
-import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
-import { bindActionCreators } from 'redux';
+import React from 'react';
 import Login from '../common/Login';
 
 class Footer extends React.Component {

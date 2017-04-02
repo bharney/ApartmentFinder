@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as blogActions from '../../actions/blogActions';
@@ -44,7 +44,7 @@ class HomePage extends React.Component {
                     <div className="container-fluid">
                         <div className="row p-b-30 m-b-1-em m-t-20">
                             <div className="col-md-6 col-md-offset-3 text-center bright-color anchor ">
-                                <h1 className="page-header banner">Yoga with Marie Mills</h1>
+                                <h1 className="page-header">Yoga with Marie Mills</h1>
                                 <h2 banner>
                                     Stress Reduction Specialist
                                     </h2>
@@ -251,7 +251,7 @@ HomePage.propTypes = {
     actions: PropTypes.object.isRequired
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
     return {
         blogs: state.blogs
     };

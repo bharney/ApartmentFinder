@@ -5,7 +5,7 @@ export function uploadFileSuccess(file) {
 }
 
 export function uploadFile(file) {
-    return function (dispatch, getState) {
+    return function (dispatch) {
       return uploadApi.uploadFile(file).then(fileUploaded => {
         dispatch(uploadFileSuccess(fileUploaded));
     }).catch(error => {

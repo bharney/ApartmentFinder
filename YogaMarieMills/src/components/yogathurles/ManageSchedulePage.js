@@ -1,11 +1,10 @@
 import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as scheduleActions from '../../actions/scheduleActions';
 import ScheduleForm from './ScheduleForm';
 import Admin from '../common/Admin';
-import TextInput from '../common/TextInput';
 
 class ManageSchedulePage extends React.Component {
   constructor(props, context) {
@@ -59,7 +58,7 @@ class ManageSchedulePage extends React.Component {
     this.context.router.push('/YogaThurles/Schedule');
   }
 
-  deleteSchedule(event) {
+  deleteSchedule() {
     this.props.actions.deleteSchedule(this.state.schedule.id);
     this.props.actions.loadSchedule();
     this.context.router.push('/YogaThurles/Schedule');

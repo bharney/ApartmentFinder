@@ -27,7 +27,7 @@ export function loadTestimonial() {
 }
 
 export function deleteTestimonial(testimonial) {
-  return function (dispatch, getState) {
+  return function (dispatch) {
     return testimonialApi.deleteTestimonial(testimonial).then(() => {
       dispatch(deleteTestimonialSuccess());
       return testimonialApi.getAllTestimonials().then(testimonials => {
@@ -40,7 +40,7 @@ export function deleteTestimonial(testimonial) {
 }
 
 export function saveTestimonial(testimonial) {
-  return function (dispatch, getState) {
+  return function (dispatch) {
     return testimonialApi.saveTestimonial(testimonial).then(savedTestimonial => {
       testimonial.id ? dispatch(updateTestimonialSuccess(savedTestimonial)) :
         dispatch(createTestimonialSuccess(savedTestimonial));

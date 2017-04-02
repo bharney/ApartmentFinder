@@ -1,5 +1,4 @@
-﻿import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
+﻿import React from 'react';
 
 class WhatToBringPage extends React.Component {
     constructor(props, context) {

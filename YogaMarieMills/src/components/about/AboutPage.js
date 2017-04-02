@@ -1,16 +1,8 @@
-import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as navbarActions from '../../actions/navbarActions';
+import React from 'react';
+import { Link } from 'react-router';
 import profileSmall from '../../images/Profile204x300.jpg';
 import profileLarge from '../../images/Profile400x589.jpg';
 import SocialMediaBar from '../common/SocialMediaBar';
-
-const styles = {
-
-}
-
 
 
 class AboutPage extends React.Component {
@@ -20,7 +12,6 @@ class AboutPage extends React.Component {
     }
 
     render() {
-        const { navbar_items } = this.props;
 
         return (
             <div className="mdl-grid dark-color">
@@ -129,7 +120,7 @@ class AboutPage extends React.Component {
                                                 <input type="text" name="Phone" className="form-control form-group" placeholder="Phone" />
                                             </div>
                                             <div className="col-lg-12 col-xs-12">
-                                                <textarea style={styles.Message} name="Message" spellcheck="true" className="form-control form-group" rows="8" placeholder="Your message here..."></textarea>
+                                                <textarea name="Message" spellcheck="true" className="form-control form-group" rows="8" placeholder="Your message here..."></textarea>
                                             </div>
                                         </form>
                                     </div>
@@ -148,29 +139,4 @@ class AboutPage extends React.Component {
     }
 }
 
-AboutPage.propTypes = {
-    navbar_items: PropTypes.array.isRequired
-};
-
-
-function mapStateToProps(state, ownProps) {
-    return {
-        navbar_items: state.navbar_items
-    };
-}
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(navbarActions, dispatch)
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AboutPage);
-
-
-
-// color-white text-center m-l-0 p-l-0
-// position: relative;
-//     /* left: 15%; */
-//     padding-top: 30px;
-//     border-radius: 50%;
-//     display: inline-block;
+export default AboutPage;

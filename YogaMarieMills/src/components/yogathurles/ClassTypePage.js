@@ -1,21 +1,14 @@
 ﻿import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as classTypesActions from '../../actions/classTypesActions';
-import { CompositeDecorator, ContentBlock, ContentState, Editor, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
+import { Editor, EditorState, convertFromRaw } from 'draft-js';
 
 
 
 class ClassTypePage extends React.Component {
     constructor(props, context) {
         super(props, context);
-        const decorator = new CompositeDecorator([
-            {
-                strategy: getEntityStrategy('MUTABLE'),
-                component: TokenSpan,
-            },
-        ]);
     }
 
     render() {
@@ -76,40 +69,6 @@ class ClassTypePage extends React.Component {
 ClassTypePage.propTypes = {
     classType: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
-};
-
-
-function getEntityStrategy(mutability) {
-    return function (contentBlock, callback, contentState) {
-        contentBlock.findEntityRanges(
-            (character) => {
-                const entityKey = character.getEntity();
-                if (entityKey === null) {
-                    return false;
-                }
-                return contentState.getEntity(entityKey).getMutability() === mutability;
-            },
-            callback
-        );
-    };
-}
-
-function getDecoratedStyle(mutability) {
-    switch (mutability) {
-        case 'MUTABLE': return null;
-        default: return null;
-    }
-}
-
-const TokenSpan = (props) => {
-    const style = getDecoratedStyle(
-        props.contentState.getEntity(props.entityKey).getMutability()
-    );
-    return (
-        <span data-offset-key={props.offsetkey}>
-            {props.children}
-        </span>
-    );
 };
 
 function getClassTypeById(classTypes, id) {

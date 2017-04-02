@@ -1,10 +1,8 @@
 import React from 'react';
 import TextInput from '../common/TextInput';
-import SelectInput from '../common/SelectInput';
 import Admin from '../common/Admin';
-import { Link, IndexLink, browserHistory } from 'react-router';
-import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
-import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
+import { Link } from 'react-router';
+import Editor from 'draft-js-plugins-editor';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
 import {
   ItalicButton,
@@ -34,7 +32,7 @@ const plugins = [inlineToolbarPlugin];
 
 const { InlineToolbar } = inlineToolbarPlugin;
 
-const BlogForm = ({authorized, updateBlogState, onChange, deleteBlog, saveBlog, blog, editorState, ref, focus, errors, saving, uploadImage, displayImage }) => {
+const BlogForm = ({authorized, updateBlogState, onChange, deleteBlog, saveBlog, blog, editorState, ref, focus, uploadImage, displayImage }) => {
 
   return (
     <div className="mdl-grid dark-color">

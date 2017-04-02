@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Admin from '../common/Admin';
@@ -94,7 +94,7 @@ CostsPage.propTypes = {
     actions: PropTypes.object.isRequired
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
     return {
         costs: state.costs,
         authorized: state.authToken

@@ -35,7 +35,7 @@ let costRoutes = function () {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             let cost = (req.body);
-            const sqlInsertCost = new sql.Connection(dbconfig, function (err) {
+            const sqlInsertCost = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlInsertCost);
                 request.input('type', sql.VarChar, cost.type);
                 request.input('course', sql.VarChar, cost.course);
@@ -65,7 +65,7 @@ let costRoutes = function () {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             let cost = (req.body);
-            const sqlUpdateCost = new sql.Connection(dbconfig, function (err) {
+            const sqlUpdateCost = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlUpdateCost);
                 request.input('id', sql.Int, cost.id);
                 request.input('type', sql.VarChar, cost.type);
@@ -102,7 +102,7 @@ let costRoutes = function () {
             if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
-            const sqlDeleteCost = new sql.Connection(dbconfig, function (err) {
+            const sqlDeleteCost = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlDeleteCost);
                 request.input('id', sql.Int, req.body.id);
                 request.query(
@@ -114,7 +114,7 @@ let costRoutes = function () {
             });
         })
         .get(function (req, res) {
-            const sqlCosts = new sql.Connection(dbconfig, function (err) {
+            const sqlCosts = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlCosts);
                 request.query(`SELECT id
                                 ,type
@@ -138,7 +138,7 @@ let costRoutes = function () {
 
     costRouter.route('/costs/:costId')
         .get(function (req, res) {
-            const sqlCost = new sql.Connection(dbconfig, function (err) {
+            const sqlCost = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlCost);
                 request.input('id', sql.Int, req.params.costId);
                 request.query(`SELECT id
@@ -177,7 +177,7 @@ let costRoutes = function () {
             if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
-            const sqlDeleteCost = new sql.Connection(dbconfig, function (err) {
+            const sqlDeleteCost = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlDeleteCost);
                 request.input('id', sql.Int, req.params.costId);
                 request.query(

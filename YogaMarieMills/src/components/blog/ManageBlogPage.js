@@ -1,12 +1,10 @@
 import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as blogActions from '../../actions/blogActions';
 import * as uploadActions from '../../actions/uploadActions';
 import BlogForm from './BlogForm';
-import { CompositeDecorator, ContentBlock, ContentState, EditorState, convertFromRaw, convertToRaw, RichUtils } from 'draft-js';
-import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
+import { CompositeDecorator, EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 
 class ManageBlogPage extends React.Component {
   constructor(props, context) {
@@ -78,7 +76,7 @@ class ManageBlogPage extends React.Component {
     this.context.router.push('/blogs');
   }
 
-  deleteBlog(event) {
+  deleteBlog() {
     this.props.actions.deleteBlog(this.state.blog.id);
     this.props.actions.loadBlog();
     this.context.router.push('/blogs');
@@ -163,17 +161,7 @@ function getEntityStrategy(mutability) {
   };
 }
 
-function getDecoratedStyle(mutability) {
-  switch (mutability) {
-    case 'MUTABLE': return null;
-    default: return null;
-  }
-}
-
 const TokenSpan = (props) => {
-  const style = getDecoratedStyle(
-    props.contentState.getEntity(props.entityKey).getMutability()
-  );
   return (
     <span data-offset-key={props.offsetkey}>
       {props.children}

@@ -3,6 +3,7 @@
 // In this case, the transformation is useful since we only use a separate css file in prod.
 import fs from 'fs';
 import cheerio from 'cheerio';
+/*eslint-disable no-unused-vars */
 import colors from 'colors';
 
 /*eslint-disable no-console */

@@ -1,7 +1,7 @@
 class LoginApi {
     static loginRequest(login) {
         login = Object.assign({}, login);
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             if (login.emailAddress && login.password) {
                 fetch('http://localhost:3000/api/login', {
                     method: 'post',

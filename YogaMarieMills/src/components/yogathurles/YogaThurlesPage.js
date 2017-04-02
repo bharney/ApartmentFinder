@@ -1,5 +1,4 @@
 ﻿import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as scheduleActions from '../../actions/scheduleActions';
@@ -58,7 +57,7 @@ YogaThurlesPage.propTypes = {
     actions: PropTypes.object.isRequired
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
     return {
         schedules: state.schedules,
         authorized: state.authToken

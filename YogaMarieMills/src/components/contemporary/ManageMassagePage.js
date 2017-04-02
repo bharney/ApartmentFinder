@@ -1,11 +1,10 @@
 import React, { PropTypes } from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as massageActions from '../../actions/massageActions';
 import MassageForm from './MassageForm';
 import Admin from '../common/Admin';
-import TextInput from '../common/TextInput';
 
 class ManageMassagePage extends React.Component {
   constructor(props, context) {
@@ -66,7 +65,7 @@ class ManageMassagePage extends React.Component {
     this.context.router.push('/Ayurveda/Massage/' + massage.type);
   }
 
-  deleteMassage(event) {
+  deleteMassage() {
     this.props.actions.deleteMassage(this.state.massage.id);
     this.props.actions.loadMassage();
     this.context.router.push('/Ayurveda/Massage/' + this.state.massage.type);

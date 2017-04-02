@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link, IndexLink, browserHistory } from 'react-router';
 import TextInput from '../common/TextInput';
 import TextAreaInput from '../common/TextAreaInput';
 import RemoveRowButton from '../common/RemoveRowButton';
 
-const MassageForm = ({updateDescriptionState, updateTitleState, updateMassageState, removeRow, saveMassage, massage, errors, saving, deleteMassage}) => {
+const MassageForm = ({updateDescriptionState, updateTitleState, updateMassageState, removeRow, massage }) => {
 
   let displayIcon = function (icon, iconWidth, iconHeight) {
             let requireImg = icon ? require(`../../images/${icon}`) : ""

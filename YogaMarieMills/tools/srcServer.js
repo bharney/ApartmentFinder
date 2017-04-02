@@ -3,7 +3,6 @@ import webpack from 'webpack';
 import path from 'path';
 import config from '../webpack.config.dev';
 import open from 'open';
-import sql from 'mssql';
 import bodyParser from 'body-parser';
 
 /* eslint-disable no-console */
@@ -11,7 +10,6 @@ import bodyParser from 'body-parser';
 const port = 3000;
 const app = express();
 const compiler = webpack(config);
-const dbconfig = "mssql://Application:!Testing123@BPHSERVER/YogaMarieMills";
 
 app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,

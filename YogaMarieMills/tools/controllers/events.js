@@ -43,7 +43,7 @@ let eventRoutes = function () {
             };
             eventType.type = generateType(eventType);
 
-            const sqlInsertEventType = new sql.Connection(dbconfig, function (err) {
+            const sqlInsertEventType = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlInsertEventType);
                 request.input('type', sql.VarChar, eventType.type);
                 request.input('header', sql.VarChar, eventType.header);
@@ -88,7 +88,7 @@ let eventRoutes = function () {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             let eventType = (req.body);
-            const sqlUpdateEventType = new sql.Connection(dbconfig, function (err) {
+            const sqlUpdateEventType = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlUpdateEventType);
                 request.input('id', sql.Int, eventType.id);
                 request.input('type', sql.VarChar, eventType.type);
@@ -153,7 +153,7 @@ let eventRoutes = function () {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             let eventType = (req.body);
-            const sqlDeleteEventType = new sql.Connection(dbconfig, function (err) {
+            const sqlDeleteEventType = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlDeleteEventType);
                 request.input('id', sql.Int, eventType.id);
                 request.input('type', sql.VarChar, eventType.type);
@@ -173,7 +173,7 @@ let eventRoutes = function () {
             });
         })
         .get(function (req, res) {
-            const sqlEventTypes = new sql.Connection(dbconfig, function (err) {
+            const sqlEventTypes = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlEventTypes);
                 request.query(
                     `SELECT E.id AS id
@@ -203,7 +203,7 @@ let eventRoutes = function () {
 
     eventRouter.route('/events/:eventId')
         .get(function (req, res) {
-            const sqlEventType = new sql.Connection(dbconfig, function (err) {
+            const sqlEventType = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlEventType);
                 request.input('id', sql.Int, req.params.eventId);
                 request.query(`SELECT id
@@ -239,7 +239,7 @@ let eventRoutes = function () {
             if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
-            const sqlDeleteEventType = new sql.Connection(dbconfig, function (err) {
+            const sqlDeleteEventType = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlDeleteEventType);
                 request.input('id', sql.Int, req.params.eventId);
                 request.query(

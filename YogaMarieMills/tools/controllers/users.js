@@ -38,7 +38,7 @@ let userRoutes = function () {
                 password = hash;
             });
             console.log("user.password: " + password);
-            const sqlInsertLogin = new sql.Connection(dbconfig, function (err) {
+            const sqlInsertLogin = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlInsertLogin);
                 request.input('emailAddress', sql.VarChar, user.emailAddress);
                 request.input('firstName', sql.VarChar, user.firstName);
@@ -48,7 +48,7 @@ let userRoutes = function () {
                 request.query(
                     `INSERT INTO Users (emailAddress, firstName, lastName, password, createdDate)
                      VALUES (@emailAddress, @firstName, @lastName, @password, GETDATE());`
-                ).then(function (recordset) {
+                ).then(function () {
                     delete user.password;
                     res.status(201).send(user);
                 }).catch(function (err) {
@@ -69,7 +69,7 @@ let userRoutes = function () {
                 return res.status(401).send({ message: "You are not authorized" })
             }
             let user = (req.body);
-            const sqlUpdateLogin = new sql.Connection(dbconfig, function (err) {
+            const sqlUpdateLogin = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlUpdateLogin);
                 request.input('id', sql.Int, user.id);
                 request.input('emailAddress', sql.VarChar, user.emailAddress);
@@ -84,7 +84,7 @@ let userRoutes = function () {
                     ,password = @password
                     ,changedDate = GETDATE()
                     WHERE id = @id`
-                ).then(function (recordset) {
+                ).then(function () {
                     delete user.password;
                     res.status(201).send(user);
                 }).catch(function (err) {
@@ -104,7 +104,7 @@ let userRoutes = function () {
             if (moment().unix() > payload.exp) {
                 return res.status(401).send({ message: "You are not authorized" })
             }
-            const sqlDeleteLogin = new sql.Connection(dbconfig, function (err) {
+            const sqlDeleteLogin = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlDeleteLogin);
                 request.input('id', sql.Int, req.body.id);
                 request.query(
@@ -116,7 +116,7 @@ let userRoutes = function () {
             });
         })
         .get(function (req, res) {
-            const sqlLogins = new sql.Connection(dbconfig, function (err) {
+            const sqlLogins = new sql.Connection(dbconfig, function () {
                 let request = new sql.Request(sqlLogins);
                 request.query(`SELECT id
                             ,emailAddress
