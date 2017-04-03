@@ -31,10 +31,10 @@
     <Compile Include="src\reducers\navbarReducer.js" />
     <Compile Include="webpack.config.dev.js" />
     <Compile Include="webpack.config.prod.js" />
-    <Content Include="dist\index.html" />
-    <Content Include="dist\styles.css" />
-    <Content Include="dist\89889688147bd7575d6327160d64e760.svg" />
-    <Compile Include="dist\bundle.js" />
+    <Content Include="dist-server\index.html" />
+    <Content Include="dist-server\styles.css" />
+    <Content Include="dist-server\89889688147bd7575d6327160d64e760.svg" />
+    <Compile Include="dist-server\bundle.js" />
     <Content Include="src\images\ChicagoInABoxAfter.jpg" />
     <Content Include="src\images\CircleHead.png" />
     <Content Include="src\images\ColetteMillsAfter.jpg" />
