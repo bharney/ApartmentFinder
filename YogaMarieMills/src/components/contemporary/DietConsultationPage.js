@@ -32,7 +32,7 @@ class DietConsultationPage extends React.Component {
         return (
             <div className="mdl-grid dark-color">
                 <div className="ribbon bg-image-landing">
-                    <div className="container-fluid">
+                    <div className="container-fluid p-t-4-em">
                         <div className="row">
                             <div className="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 m-b-1-em">
                                 <h1 className="color-white text-center">Aryuvedic Diet Consultation</h1>

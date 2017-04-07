@@ -99,7 +99,7 @@ class ClassTypesPage extends React.Component {
             <div className="mdl-grid dark-color bg-color">
                 <div className="ribbon bg-image-landing">
                     <div className="container-fluid">
-                        <div className="row p-t-2-em p-b-2-em">
+                        <div className="row p-t-4-em p-b-2-em">
                             <div className="col-xs-offset-1 col-xs-10">
                                 <h1 className="text-center color-white">Yoga Thurles Class Types</h1>
                                 <Admin addAction={classTypes.type} authorized={authorized} />

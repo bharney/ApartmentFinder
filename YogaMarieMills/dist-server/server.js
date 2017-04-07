@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 
 /*eslint-disable no-console */
 
-var port = process.env.port || 3000;
+var port = process.env.port || 80;
 var app = express();
 
 app.use(compression());

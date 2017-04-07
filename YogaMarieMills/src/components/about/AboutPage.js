@@ -17,8 +17,7 @@ class AboutPage extends React.Component {
             <div className="mdl-grid dark-color">
                 <div className="container-fluid p-l-0 p-r-0">
                     <div className="ribbon bg-image-landing b-border">
-
-                        <div className="container">
+                        <div className="container p-3-em p-t-5-em">
                             <div className="row color-white">
                                 <div className="col-xs-12 col-sm-7">
                                     <h2 className="m-b-0 p-b-0"><strong>Marie Mills Yoga and Ayurveda</strong></h2>
@@ -58,44 +57,40 @@ class AboutPage extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-xs-12">
-                                    <div className="text-center color-white p-t-1-em p-b-1-em">
-                                        <blockquote className="bigquote no-left-border">All of life is an individual manifestation and
+                        <div className="row">
+                            <div className="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+                                <div className="text-center color-white p-t-1-em p-b-1-em">
+                                    <blockquote className="bigquote no-left-border">All of life is an individual manifestation and
                                     combination of the five elements. It really doesn't get
                                     any easier! As a wise friend of mine once said, 'If it's not fun,
                                     it's not Yoga, and if it's not simple, it's not Ayurveda.
                                                         </blockquote>
-                                        <p className="col-lg-offset-6">
-                                            Marie Mills
+                                    <p className="col-lg-offset-6">
+                                        Marie Mills
                                                     </p>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div className="section-header">
                             <h2 className="text-center">Contact Marie Mills</h2>
                         </div>
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-xs-12">
-                                    <div className="mdl-card p-1-em mdl-shadow--4dp">
-                                        <div className="featured clearfix text-center">
-                                            <div className="row dark-color">
-                                                <div className="col-xs-12">
-                                                    <p>
-                                                        <br />
-                                                        <Link title="Yoga" className="schedule dark-color" to="http://yogamariemills.com/thurles-className-schedule/" target="_blank">Yoga</Link> and <Link title="Ayurveda massage treatments" className="ayurveda dark-color" to="http://yogamariemills.com/ayurveda-massage-treatments/" target="_blank">
-                                                            Ayurveda's wisdom is in its simplicity
+                        <div className="row">
+                            <div className="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+                                <div className="mdl-card p-1-em mdl-shadow--4dp">
+                                    <div className="featured clearfix text-center">
+                                        <div className="row dark-color">
+                                            <div className="col-xs-12">
+                                                <p>
+                                                    <br />
+                                                    <Link title="Yoga" className="schedule dark-color" to="http://yogamariemills.com/thurles-className-schedule/" target="_blank">Yoga</Link> and <Link title="Ayurveda massage treatments" className="ayurveda dark-color" to="http://yogamariemills.com/ayurveda-massage-treatments/" target="_blank">
+                                                        Ayurveda's wisdom is in its simplicity
                                                             </Link>
-                                                    </p>
-                                                    <ul className="list-unstyled">
-                                                        <li>Contact me for a Yoga className or Ayurvedic consultation or treatment</li>
-                                                        <li>Phone: 086 1778369</li>
-                                                        <li><Link to="mailto:marie@yogamariemills.com">marie@yogamariemills.com</Link></li>
-                                                    </ul>
-                                                </div>
+                                                </p>
+                                                <ul className="list-unstyled">
+                                                    <li>Contact me for a Yoga className or Ayurvedic consultation or treatment</li>
+                                                    <li>Phone: 086 1778369</li>
+                                                    <li><Link to="mailto:marie@yogamariemills.com">marie@yogamariemills.com</Link></li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -126,7 +121,7 @@ class AboutPage extends React.Component {
                                     </div>
                                 </div>
                                 <div className="col-sm-offset-4 col-sm-4 col-xs-12">
-                                    <div className="btn btn-success btn-lg btn-block center-block">
+                                    <div className="btn btn-success btn-lg btn-block center-block mdl-shadow--4dp">
                                         <Link to="" className="dark-color m-b-1-em" activeClassName="active"><span>Send <i className="glyphicon glyphicon-send"></i></span></Link>
                                     </div>
                                 </div>

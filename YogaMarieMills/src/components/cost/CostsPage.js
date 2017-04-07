@@ -16,7 +16,7 @@ class CostsPage extends React.Component {
         return (
             <div className="mdl-grid dark-color bg-color">
                 <div className="ribbon bg-image-landing b-border">
-                    <div className="row">
+                    <div className="row p-t-3-em">
                         <div className="col-sm-offset-1 col-sm-10 col-xs-12 row-centered">
                             <h1 className="color-white">Pricing</h1>
                             <Admin addAction="Cost" authorized={authorized} />

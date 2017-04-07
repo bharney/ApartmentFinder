@@ -126,28 +126,11 @@ h4 {
     @include font-size($h4-font-sizes);
 }
 
-html {
-    overflow-x: visible;
-    overflow-y: visible;
-}
-
 body {
-    overflow-x: visible;
-    overflow-y: visible;
     color: $color;
-    background: $lightBgColor;
     text-shadow: none;
     font-family:'Open Sans', sans-serif;
 
-}
-
-.mdl-layout {
-    overflow-x: visible;
-    overflow-y: visible;
-}
-
-.mdl-layout__content {
-    overflow-y: visible;
 }
 
 .dark-color {
@@ -327,7 +310,9 @@ section.section {
 /*===========================
   --- Header & Nav ----
 =========================== */
-
+header {
+    padding-top: 1em;
+}
 .title {
     cursor: pointer;
 }
@@ -1191,6 +1176,10 @@ Media queries
 }
 
 /* ---- padding ---- */
+.p-0 {
+    padding: 0;
+}
+
 ///need to remove. Requires refactor of this class.
 .p-20 {
     padding: 1em;
@@ -1222,11 +1211,27 @@ Media queries
     padding-top: 1em;
 }
 
+.p-t-3-em {
+    padding-top: 3em;
+}
+
+.p-t-4-em {
+    padding-top: 4em;
+}
+
+.p-t-5-em {
+    padding-top: 5em;
+}
+
 .p-t-15-em {
     padding-top: 1.5em;
 }
 
 /* bottom */
+.p-b-025-em {
+    padding-bottom: 0.25em;
+}
+
 .p-b-05-em {
     padding-bottom: 0.5em;
 }

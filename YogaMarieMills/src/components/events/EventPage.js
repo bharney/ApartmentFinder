@@ -26,7 +26,7 @@ class EventPage extends React.Component {
         return (
             <div className="mdl-grid dark-color">
                 <div className="ribbon bg-image-landing b-border">
-                    <div className="container">
+                    <div className="container p-t-4-em">
                         <div className="row m-b-1-em">
                             <div className="col-xs-12">
                                 <h1 className="color-white text-center">{eventType.header}</h1>

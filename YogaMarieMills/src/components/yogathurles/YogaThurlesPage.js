@@ -23,10 +23,11 @@ class YogaThurlesPage extends React.Component {
         return (
             <div className="mdl-grid dark-color bg-color">
                 <div className="ribbon bg-image-landing b-border">
-                    <div className="container-fluid">
+                    <div className="container-fluid p-t-4-em">
                         <div className="row m-b-1-em">
                             <div className="col-xs-12 col-sm-offset-1 col-sm-10 m-b-1-em">
                                 <h1 className="text-center color-white">{schedules.header}</h1>
+                                <hr width="50%" className="center-block m-t-0" />
                                 <h3 className="color-white">Studio: {schedules.venue}</h3>
                                 <Admin addAction={"Schedule"} authorized={authorized}/>
                             </div>

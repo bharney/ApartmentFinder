@@ -45,7 +45,7 @@ class MassagePage extends React.Component {
         return (
             <div className="mdl-grid dark-color bg-color">
                 <div className="ribbon bg-image-landing">
-                    <div className="container">
+                    <div className="container p-t-4-em">
                         <div className="row">
                             <div className="col-xs-12">
                                 <h1 className="text-center color-white m-0">{massageType.header}</h1>
