@@ -1,44 +1,4 @@
-
-/* latin-ext */
-@font-face {
-  font-family: 'Josefin Sans';
-  font-style: normal;
-  font-weight: 100;
-  src: local('Josefin Sans Thin'), local('JosefinSans-Thin'), url(https://fonts.gstatic.com/s/josefinsans/v9/q9w3H4aeBxj0hZ8Osfi3dyU-eqv6n8lOlIZB5nq_8UM.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Josefin Sans';
-  font-style: normal;
-  font-weight: 100;
-  src: local('Josefin Sans Thin'), local('JosefinSans-Thin'), url(https://fonts.gstatic.com/s/josefinsans/v9/q9w3H4aeBxj0hZ8Osfi3d1dBB84BqlWy1BjOnCrU9PY.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Josefin Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Josefin Sans'), local('JosefinSans'), url(https://fonts.gstatic.com/s/josefinsans/v9/xgzbb53t8j-Mo-vYa23n5j0LW-43aMEzIO6XUTLjad8.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Josefin Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Josefin Sans'), local('JosefinSans'), url(https://fonts.gstatic.com/s/josefinsans/v9/xgzbb53t8j-Mo-vYa23n5ugdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
-}
-
-@font-face {
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 300;
-    src: local("Open Sans Light"), local("OpenSans-Light"), url(//fonts.gstatic.com/s/opensans/v13/DXI1ORHCpsQm3Vp6mXoaTegdm0LZdjqr5-oayXSOefg.woff2) format("woff2");
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-}
+@import url('https://fonts.googleapis.com/css?family=Raleway:100,300');
 
 $color: #212121;
 $bgColor: #607D8B;
@@ -129,8 +89,8 @@ h4 {
 body {
     color: $color;
     text-shadow: none;
-    font-family:'Open Sans', sans-serif;
-
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
 }
 
 .dark-color {
@@ -202,11 +162,13 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family:'Open Sans', sans-serif;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
 }
 
 .font-style{
-    font-family:'Open Sans', sans-serif;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
 }
 
 
@@ -310,9 +272,6 @@ section.section {
 /*===========================
   --- Header & Nav ----
 =========================== */
-header {
-    padding-top: 1em;
-}
 .title {
     cursor: pointer;
 }
@@ -358,7 +317,7 @@ header {
 
 .brand-text {
     display: inline-block;
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Raleway', sans-serif;
     font-weight: 100;
     padding-top: .15em;
     font-size: 2.25em;

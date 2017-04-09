@@ -42,6 +42,9 @@ class Header extends React.Component {
     }
 
     render() {
+        const styles = {
+            fontWeight: 300
+        }
         const {navbar_items} = this.props;
 
         let that = this;
@@ -58,6 +61,7 @@ class Header extends React.Component {
                     <ListItem
                         primaryText={item.name}
                         initiallyOpen={false}
+                        style={styles}
                         primaryTogglesNestedList
                         nestedItems={[
                             item.subMenu.map(subMenu => listItems(subMenu))
@@ -67,7 +71,7 @@ class Header extends React.Component {
             else {
                 return (
                     <Link key={item.route} to={'/' + item.route} >
-                        <MenuItem className="font-style" onTouchTap={that.handleToggle} key={item.route}>{item.name}</MenuItem>
+                        <MenuItem onTouchTap={that.handleToggle} key={item.route}>{item.name}</MenuItem>
                     </Link>
                 );
             }
@@ -101,10 +105,10 @@ class Header extends React.Component {
         return (
             <header>
                 <div className="mdl-layout__header-row nav-element-left anchor dark-bg-color color-blur navbar-fixed-top mdl-shadow--4dp">
-                    <a className="navbar-brand mdl-layout-title mdl-layout__header-row drawer-header nav-menu-left font-style" onTouchTap={this.handleToggle}><span className="menu-font"><i className="p-l-03-em p-r-015-em fa fa-ellipsis-v" aria-hidden="true"></i>Menu</span></a>
+                    <a className="navbar-brand mdl-layout-title mdl-layout__header-row drawer-header nav-menu-left" onTouchTap={this.handleToggle}><span className="menu-font"><i className="p-l-03-em p-r-015-em fa fa-ellipsis-v" aria-hidden="true"></i>Menu</span></a>
                     <div className="mdl-layout-spacer nav-vertical-divider">
                         <div className="mdl-layout__header-row drawer-header anchor p-l-0">
-                            <IndexLink to="/" className="mdl-layout-title font-style nav-links p-r-1-em">
+                            <IndexLink to="/" className="mdl-layout-title nav-links p-r-1-em">
                                 <img className="m-0 brand img-responsive" src={logoImg}></img><h2 className="brand-text m-0">Yoga Marie Mills</h2>
                             </IndexLink>
                         </div>
@@ -117,16 +121,19 @@ class Header extends React.Component {
                     docked={false}
                     open={this.state.open}
                     onRequestChange={this.handleToggle}>
-                    <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-                        <header className="mdl-layout__header">
+                    <div className="navbar-fixed-top">
+                        <header>
                             <div className="mdl-layout__header-row drawer-header color-blur anchor">
-                                <IndexLink to="/"><span onTouchTap={this.handleToggle}
-                                    className="mdl-layout-title font-style">
-                                    Yoga with Marie Mills
-                                </span></IndexLink>
+                                <IndexLink to="/">
+                                    <span onTouchTap={this.handleToggle}>
+                                        <h4 className="m-0 p-t-05-em p-b-05-em">
+                                        Yoga with Marie Mills
+                                        </h4>
+                                    </span>
+                                </IndexLink>
                             </div>
                         </header>
-                        <main className="nav mdl-layout__content">
+                        <main className="nav">
                             {navbar_items.map(item =>
                                 drawerItems(item)
                             )}

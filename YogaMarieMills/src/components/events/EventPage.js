@@ -24,12 +24,13 @@ class EventPage extends React.Component {
         }
 
         return (
-            <div className="mdl-grid dark-color">
+            <div className="container-fluid p-l-0 p-r-0 color-blur p-t-4-em">
                 <div className="ribbon bg-image-landing b-border">
-                    <div className="container p-t-4-em">
-                        <div className="row m-b-1-em">
+                    <div className="container">
+                        <div className="row">
                             <div className="col-xs-12">
                                 <h1 className="color-white text-center">{eventType.header}</h1>
+                                <hr width="50%" className="center-block m-t-0 m-b-1-em" />
                                 <Admin addAction={"Admin/Events"} authorized={authorized}/>
                                 <div className="col-xs-12 m-b-1-em">
                                     <div className="mdl-card mdl-shadow--4dp">

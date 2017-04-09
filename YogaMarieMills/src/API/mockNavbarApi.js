@@ -1,3 +1,4 @@
+import 'whatwg-fetch'
 class NavbarApi {
   static getAllItems() {
     return new Promise((resolve) => {

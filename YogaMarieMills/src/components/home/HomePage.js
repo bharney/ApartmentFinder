@@ -55,7 +55,7 @@ class HomePage extends React.Component {
                         </div>
                     </div>
                 </section>
-                <section className="t-border t-shadow row text-center p-3-em">
+                <section className="t-border t-shadow row text-center p-3-em color-blur">
                     <div className="col-xs-offset-1 col-xs-10">
                         <h2>Marie is a Yoga practitioner in Thurles.</h2>
                         <div className="line-thru"><span>
@@ -127,7 +127,7 @@ class HomePage extends React.Component {
                 </section>
                 <section className="t-border t-shadow row" style={divider}>
                 </section>
-                <section className="row bg-color-transparent t-border t-shadow p-3-em">
+                <section className="row bg-color-transparent t-border t-shadow p-3-em color-blur">
                     <div className="col-xs-12 col-sm-10 col-sm-offset-1">
                         <h2 className="text-center">Specialties</h2>
                         <div className="text-center">
@@ -202,7 +202,7 @@ class HomePage extends React.Component {
                         </div>
                     </div>
                 </section>
-                <section className="row p-t-40 p-b-40 row-center color-white t-border t-shadow">
+                <section className="row p-t-40 p-b-40 row-center bg-color color-white t-border t-shadow">
                     <div className="col-xs-12 col-sm-offset-1 col-sm-10">
                         <h2 className="text-center">My Blog</h2>
                         <p className="text-center">Read useful information on Yoga and Ayurveda</p>

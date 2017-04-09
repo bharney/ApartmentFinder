@@ -11,7 +11,7 @@ class MassagePage extends React.Component {
 
     render() {
         const { massageType } = this.props;
-        const {authorized} = this.props;
+        const { authorized } = this.props;
         let displayIcon = function (icon, iconWidth, iconHeight) {
             let requireImg = icon ? require(`../../images/${icon}`) : ""
             const iconImg = {
@@ -43,7 +43,7 @@ class MassagePage extends React.Component {
         }
 
         return (
-            <div className="mdl-grid dark-color bg-color">
+            <div className="container-fluid p-l-0 p-r-0 color-blur">
                 <div className="ribbon bg-image-landing">
                     <div className="container p-t-4-em">
                         <div className="row">

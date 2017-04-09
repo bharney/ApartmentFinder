@@ -1,3 +1,5 @@
+import 'whatwg-fetch'
+
 class LoginApi {
     static loginRequest(login) {
         login = Object.assign({}, login);

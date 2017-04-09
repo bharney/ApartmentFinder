@@ -16,10 +16,10 @@ class TestimonialPage extends React.Component {
             testimonials.testimonial_details = [];
         const { authorized } = this.props;
         return (
-            <div className="mdl-grid dark-color">
+            <div className="container-fluid p-l-0 p-r-0 p-t-4-em color-blur">
                 <div className="ribbon bg-image-landing">
-                    <div className="container-fluid p-t-4-em">
-                        <div className="row m-t-1-em m-b-1-em">
+                    <div className="container-fluid">
+                        <div className="row m-t-1-em">
                             <div className="col-sm-offset-1 col-sm-10 col-xs-12 m-b-1-em">
                                 <h1 className="color-white text-center">{testimonials.header}</h1>
                                 <h3 className="color-white text-center">{testimonials.short}</h3>

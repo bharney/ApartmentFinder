@@ -61,7 +61,7 @@ export default {
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false,
-      noInfo: false, // set to false to see a list of every file being bundled.
+      noInfo: true, // set to false to see a list of every file being bundled.
       options: {
         sassLoader: {
           includePaths: [path.resolve(__dirname, 'src', 'scss')]
@@ -78,7 +78,7 @@ export default {
       { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
       { test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream' },
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml' },
-      { test: /\.(jpe?g|png|gif)$/i, loader: 'file-loader?name=[name].[ext]' },
+      { test: /\.(jpe?g|png|gif)$/i, loaders: ['file-loader?name=[name].[ext]','image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false' ]},
       { test: /\.ico$/, loader: 'file-loader?name=[name].[ext]' },
       { test: /(\.css|\.scss|\.sass)$/, loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'] },
       { test: /\.(woff|ttf|eot|svg)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/, loader: 'url-loader?limit=100000' },
