@@ -5,6 +5,8 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
+import PurifyCSSPlugin from 'purifycss-webpack';
+import glob from 'glob';
 import path from 'path';
 
 const GLOBALS = {
@@ -17,7 +19,7 @@ export default {
     extensions: ['*', '.js', '.jsx', '.json']
   },
   devtool: 'source-map', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
-  entry: path.resolve(__dirname, 'src/index'),
+  entry: [path.resolve(__dirname, 'src/index'),'whatwg-fetch'],
   target: 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   output: {
     path: path.resolve(__dirname, 'dist-server'),
@@ -69,6 +71,10 @@ export default {
         context: '/',
         postcss: () => [autoprefixer],
       }
+    }),
+    new PurifyCSSPlugin({
+      // Give paths to parse for rules. These should be absolute!
+      paths: glob.sync(path.join(__dirname, 'app/*.html')),
     })
   ],
   module: {

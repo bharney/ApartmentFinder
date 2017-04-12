@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:100,300');
-
 $color: #212121;
 $bgColor: #607D8B;
 
@@ -161,6 +159,10 @@ body {
     color: #ffffff;
 }
 
+.container-fluid {
+    width: 100%;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Raleway', sans-serif;
     font-weight: 300;
@@ -239,9 +241,7 @@ h1, h2, h3, h4, h5, h6 {
 .ribbon{
   width: 100%;
   height: 25em;
-  -webkit-flex-shrink: 0;
-      -ms-flex-negative: 0;
-          flex-shrink: 0;
+  flex-shrink: 0;
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
   border-bottom: .5px solid #ffffff;
 //   background-image: url("../images/landing.jpg");
@@ -272,6 +272,16 @@ section.section {
 /*===========================
   --- Header & Nav ----
 =========================== */
+.scrollable{
+    overflow-y: hidden;
+}
+
+.logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
 .title {
     cursor: pointer;
 }
@@ -480,20 +490,12 @@ section.section {
     line-height: 9em;
     margin: 0 auto;
     text-align: center;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
     border-radius: 50%;
-
-
-    -webkit-transition: background 0.5s;
-    -moz-transition: background 0.5s;
     transition: background 0.5s;
 }
 
 .icon-circle:hover {
     background-color: $lightBgColor;
-    -webkit-transition: background 0.5s;
-    -moz-transition: background 0.5s;
     transition: background 0.5s;
 }
 
@@ -502,8 +504,6 @@ section.section {
     background-size: 5em 5em;
     background-repeat: no-repeat;
     background-position: center;
-    -webkit-transition: background 0.5s;
-    -moz-transition: background 0.5s;
     transition: background 0.5s;
 }
 
@@ -512,8 +512,6 @@ section.section {
     background-size: 6em 6em;
     background-repeat: no-repeat;
     background-position: center;
-    -webkit-transition: background 0.5s;
-    -moz-transition: background 0.5s;
     transition: background 0.5s;
 }
 
@@ -523,8 +521,6 @@ section.section {
     background-size: 7em 4em;
     background-repeat: no-repeat;
     background-position: center;
-    -webkit-transition: background 0.5s;
-    -moz-transition: background 0.5s;
     transition: background 0.5s;
 }
 
@@ -532,9 +528,6 @@ section.section {
     background-image: url('../images/blueom.png');
     background-size: 5em 5em;
     background-repeat: no-repeat;
-    background-position: center;
-    -webkit-transition: background 0.5s;
-    -moz-transition: background 0.5s;
     transition: background 0.5s;
 }
 
@@ -544,8 +537,6 @@ section.section {
     background-size: 6em 6em;
     background-repeat: no-repeat;
     background-position: center;
-    -webkit-transition: background 0.5s;
-    -moz-transition: background 0.5s;
     transition: background 0.5s;
 }
 
@@ -554,8 +545,6 @@ section.section {
     background-size: 7em 4em;
     background-repeat: no-repeat;
     background-position: center;
-    -webkit-transition: background 0.5s;
-    -moz-transition: background 0.5s;
     transition: background 0.5s;
 }
 
@@ -574,8 +563,6 @@ section.section {
     line-height: 6em;
     margin: 15px;
     text-align: center;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
     border-radius: 50%;
 } 
 
@@ -736,18 +723,12 @@ section.section {
 }
 
 .row .half {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
 }
 
 .half {
     position: relative;
-    -webkit-transition: 1s height;
-    -o-transition: 1s height;
     transition: 1s height;
     width: 50%;
     float: left;
@@ -773,12 +754,7 @@ section.section {
     line-height: 4em;
     margin: 0 auto;
     text-align: center;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
     border-radius: 50%;
-
-    -webkit-transition: background 0.5s;
-    -moz-transition: background 0.5s;
     transition: background 0.5s;
 }
 

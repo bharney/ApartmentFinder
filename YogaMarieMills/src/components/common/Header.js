@@ -45,7 +45,7 @@ class Header extends React.Component {
         const styles = {
             fontWeight: 300
         }
-        const {navbar_items} = this.props;
+        const { navbar_items } = this.props;
 
         let that = this;
         let listItems = function (item) {
@@ -105,11 +105,15 @@ class Header extends React.Component {
         return (
             <header>
                 <div className="mdl-layout__header-row nav-element-left anchor dark-bg-color color-blur navbar-fixed-top mdl-shadow--4dp">
-                    <a className="navbar-brand mdl-layout-title mdl-layout__header-row drawer-header nav-menu-left" onTouchTap={this.handleToggle}><span className="menu-font"><i className="p-l-03-em p-r-015-em fa fa-ellipsis-v" aria-hidden="true"></i>Menu</span></a>
+                    <a className="navbar-brand mdl-layout-title mdl-layout__header-row drawer-header nav-menu-left" onTouchTap={this.handleToggle}>
+                        <span className="menu-font">
+                            <i className="p-l-03-em p-t-40 p-r-015-em fa fa-ellipsis-v" aria-hidden="true"></i>Menu
+                            <img className="m-0 logo brand img-responsive" src={logoImg}></img>
+                        </span></a>
                     <div className="mdl-layout-spacer nav-vertical-divider">
                         <div className="mdl-layout__header-row drawer-header anchor p-l-0">
-                            <IndexLink to="/" className="mdl-layout-title nav-links p-r-1-em">
-                                <img className="m-0 brand img-responsive" src={logoImg}></img><h2 className="brand-text m-0">Yoga Marie Mills</h2>
+                            <IndexLink to="/" className="mdl-layout-title nav-links p-r-1-em p-l-10">
+                                <h2 className="brand-text m-0">Yoga Marie Mills</h2>
                             </IndexLink>
                         </div>
                     </div>
@@ -121,24 +125,22 @@ class Header extends React.Component {
                     docked={false}
                     open={this.state.open}
                     onRequestChange={this.handleToggle}>
-                    <div className="navbar-fixed-top">
-                        <header>
-                            <div className="mdl-layout__header-row drawer-header color-blur anchor">
-                                <IndexLink to="/">
-                                    <span onTouchTap={this.handleToggle}>
-                                        <h4 className="m-0 p-t-05-em p-b-05-em">
+                    <header>
+                        <div className="mdl-layout__header-row drawer-header color-blur anchor">
+                            <IndexLink to="/">
+                                <span onTouchTap={this.handleToggle}>
+                                    <h4 className="m-0 p-t-05-em p-b-05-em">
                                         Yoga with Marie Mills
                                         </h4>
-                                    </span>
-                                </IndexLink>
-                            </div>
-                        </header>
-                        <main className="nav">
-                            {navbar_items.map(item =>
-                                drawerItems(item)
-                            )}
-                        </main>
-                    </div>
+                                </span>
+                            </IndexLink>
+                        </div>
+                    </header>
+                    <main className="nav">
+                        {navbar_items.map(item =>
+                            drawerItems(item)
+                        )}
+                    </main>
                 </Drawer>
             </header>
 
