@@ -27,7 +27,10 @@ build/Release
 node_modules
 
 #dist folder
-dist
+dist-server
+
+#deployed folder
+deployed
 
 # IDEA/Webstorm project files
 .idea
@@ -38,3 +41,15 @@ dist
 
 # Mac files
 .DS_Store
+
+# key file
+
+node_modules/
+bin/
+obj/
+.vs/
+typings/
+YogaMarieMills.njsproj
+YogamarieMills.sln
+desktop.ini
+secrets.js
